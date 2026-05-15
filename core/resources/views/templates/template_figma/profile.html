@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thông tin cá nhân | Quảng Phát Logistic</title>
+
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="mobile.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+</head>
+
+<body>
+    <!-- MOBILE HEADER -->
+    <header class="mobile-header">
+        <div class="container mobile-header-inner">
+            <div class="mobile-logo">
+                <a href="index.html">
+                    <img src="assets/logo-black.png" alt="Logo" />
+                </a>
+            </div>
+            <div class="mobile-tools">
+                <div class="mobile-tool-item search-trigger">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <div class="mobile-tool-item" onclick="window.location.href='profile.html'">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100&auto=format&fit=crop"
+                        alt="User" class="mobile-avatar" />
+                </div>
+                <div class="mobile-tool-item cart-btn">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="mobile-cart-count">2</span>
+                </div>
+                <div class="mobile-tool-item" id="openMobileMenu">
+                    <i class="fa-solid fa-bars-staggered"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- TOP BAR (PC ONLY) -->
+    <div class="top-bar pc-only">
+        <div class="container top-bar-inner">
+            <div class="top-bar-left">
+                <span><i class="fa-solid fa-phone"></i> Hotline: 0987.xxx.xxx</span>
+                <span><i class="fa-solid fa-location-dot"></i> Địa chỉ: Hà Nội, Việt Nam</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="#">Hướng dẫn mua hàng</a>
+                <a href="#">Chính sách giao hàng</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- PC HEADER -->
+    <header class="pc-only">
+        <div class="container header-inner">
+            <div class="logo-container" style="display: flex; align-items: center">
+                <a href="index.html"><img src="assets/logo-white.png" alt="QUẢNG PHÁT"
+                        style="height: 60px; display: block; object-fit: contain" /></a>
+            </div>
+
+            <div class="header-nav-items">
+                <a href="index.html" class="header-nav-link">Trang chủ</a>
+                <a href="about.html" class="header-nav-link">Quảng Phát Logistics</a>
+                <div class="has-mega-menu">
+                    <a href="products.html" class="header-nav-link">Quảng Phát Mall</a>
+                    <div class="mega-menu">
+                        <div class="mega-container">
+                            <ul class="mega-list">
+                                <li class="mega-title">Thực phẩm</li>
+                                <li><a href="products.html">Thực phẩm tươi sống</a></li>
+                                <li><a href="products.html">Thực phẩm khô</a></li>
+                                <li><a href="products.html">Đồ uống & Giải khát</a></li>
+                                <li><a href="products.html">Gia vị & Phụ gia</a></li>
+                            </ul>
+                            <ul class="mega-list">
+                                <li class="mega-title">Công nghiệp</li>
+                                <li><a href="products.html">Máy móc công nghiệp</a></li>
+                                <li><a href="products.html">Thiết bị điện tử</a></li>
+                                <li><a href="products.html">Linh kiện & Phụ tùng</a></li>
+                                <li><a href="products.html">Dụng cụ cầm tay</a></li>
+                            </ul>
+                            <ul class="mega-list">
+                                <li class="mega-title">Thời trang</li>
+                                <li><a href="products.html">Thời trang nam</a></li>
+                                <li><a href="products.html">Thời trang nữ</a></li>
+                                <li><a href="products.html">Phụ kiện cao cấp</a></li>
+                                <li><a href="products.html">Mỹ phẩm & Làm đẹp</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <a href="lien-he.html" class="header-nav-link">Liên hệ</a>
+            </div>
+
+            <div class="header-tools">
+                <!-- Search Trigger & Dropdown -->
+                <div class="search-container">
+                    <div class="search-trigger">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <div class="search-dropdown">
+                        <div class="search-input-group">
+                            <input type="text" placeholder="Tìm kiếm sản phẩm..." />
+                            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Profile -->
+                <div class="user-profile is-logged-in" id="userProfile">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100&auto=format&fit=crop"
+                        alt="User" class="avatar" />
+                    <div class="profile-menu">
+                        <div class="user-info-brief">
+                            <span class="user-name">Nguyễn Văn Nam</span>
+                            <span class="user-role">Người bán (Seller)</span>
+                        </div>
+                        <a href="profile.html" class="menu-item"><i class="fa-regular fa-user"></i> Thông tin cá
+                            nhân</a>
+                        <a href="change-password.html" class="menu-item"><i class="fa-solid fa-lock"></i> Đổi mật
+                            khẩu</a>
+                        <div class="seller-menu-section">
+                            <div class="menu-label">Kênh người bán</div>
+                            <a href="seller-dashboard.html" class="menu-item"><i class="fa-solid fa-chart-line"></i>
+                                Dashboard thống
+                                kê</a>
+                            <a href="seller-products.html" class="menu-item"><i class="fa-solid fa-boxes-stacked"></i>
+                                Quản lý sản
+                                phẩm</a>
+                            <a href="seller-orders.html" class="menu-item"><i class="fa-solid fa-clipboard-list"></i>
+                                Đơn hàng đã
+                                nhận</a>
+                            <a href="seller-payments.html" class="menu-item"><i class="fa-solid fa-wallet"></i> Lịch sử
+                                thanh toán</a>
+                            <a href="shop-config.html" class="menu-item"><i class="fa-solid fa-gear"></i> Cài đặt
+                                Shop</a>
+                        </div>
+                        <a href="#" class="menu-item logout-item"><i class="fa-solid fa-right-from-bracket"></i> Đăng
+                            xuất</a>
+                    </div>
+                </div>
+
+                <a href="cart.html" class="cart-btn" style="font-size: 18px; color: var(--primary);">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-count">2</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="breadcrumb-section"
+        style="background-color: #f8f9fa; padding: 20px 0; border-bottom: 1px solid #eaeaea;">
+        <div class="container">
+            <a href="index.html" style="color: #666; font-size: 14px">Trang chủ</a>
+            <span style="margin: 0 10px; color: #ccc">/</span>
+            <span style="color: var(--primary); font-weight: 600; font-size: 14px">Hồ sơ cá nhân</span>
+        </div>
+    </div>
+
+    <!-- PROFILE SECTION -->
+    <section class="profile-section py-lg-5 py-4">
+        <div class="container">
+            <div class="profile-container">
+                <!-- Sidebar -->
+                <aside class="profile-sidebar">
+                    <div class="sidebar-user-info">
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100&auto=format&fit=crop"
+                            alt="Avatar" class="sidebar-avatar">
+                        <div style="text-align: center; margin-top: 10px;">
+                            <h3 style="margin-bottom: 5px;">Nguyễn Văn Nam</h3>
+                            <span style="font-size: 13px; color: var(--accent); font-weight: 700; display: block;">Quảng
+                                Phát Official Store</span>
+                            <span class="user-status-active">Đang hoạt động</span>
+                        </div>
+                    </div>
+                    <nav class="sidebar-menu">
+                        <a href="profile.html" class="sidebar-link active">
+                            <i class="fa-regular fa-user"></i> Thông tin cá nhân
+                        </a>
+                        <a href="orders.html" class="sidebar-link">
+                            <i class="fa-solid fa-box"></i> Lịch sử đơn hàng
+                        </a>
+                        <a href="change-password.html" class="sidebar-link">
+                            <i class="fa-solid fa-lock"></i> Đổi mật khẩu
+                        </a>
+                    </nav>
+                    <div class="sidebar-footer"
+                        style="padding: 20px; border-top: 1px solid #eee; display: flex; flex-direction: column; gap: 10px;">
+                        <a href="javascript:void(0)" onclick="showSellerRegistration()" class="btn btn-reg-seller w-100"
+                            style="font-weight: 700; font-size: 12px;">
+                            <i class="fa-solid fa-store" style="margin-right: 8px;"></i> TRỞ THÀNH NGƯỜI BÁN
+                        </a>
+                        <a href="seller-dashboard.html" class="btn btn-dark w-100"
+                            style="padding: 10px; font-weight: 700; font-size: 12px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <i class="fa-solid fa-chart-line"></i> QUẢN LÝ SHOP
+                        </a>
+                    </div>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="profile-main-content">
+                    <div class="content-header">
+                        <h2>Thông tin cá nhân</h2>
+                        <p style="color: var(--text-muted); font-size: 14px;">Quản lý thông tin hồ sơ để bảo mật tài
+                            khoản</p>
+                    </div>
+
+                    <form class="profile-form">
+                        <!-- Avatar Upload Section -->
+                        <div class="avatar-upload-wrapper" style="text-align: center; margin-bottom: 40px;">
+                            <div class="avatar-preview-container" style="position: relative; display: inline-block;">
+                                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=150&auto=format&fit=crop"
+                                    id="avatarPreview" alt="Avatar"
+                                    style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid white; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                                <label for="avatarInput"
+                                    style="position: absolute; bottom: 5px; right: 5px; width: 35px; height: 35px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid white; transition: var(--transition);">
+                                    <i class="fa-solid fa-camera" style="font-size: 14px;"></i>
+                                </label>
+                                <input type="file" id="avatarInput" accept="image/*" style="display: none;">
+                            </div>
+                            <p style="margin-top: 10px; font-size: 13px; color: var(--text-muted);">Hỗ trợ định dạng
+                                JPG, PNG. Tối đa 2MB.</p>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Họ và tên</label>
+                                    <input type="text" class="form-control" value="Nguyễn Văn Nam">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Số điện thoại</label>
+                                    <input type="tel" class="form-control" value="0987xxx654">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" value="nam.nguyen@example.com">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Ngày sinh</label>
+                                    <input type="date" class="form-control" value="1995-05-20">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label">Tỉnh / Thành phố</label>
+                                    <select class="form-control">
+                                        <option value="">Chọn Tỉnh/Thành phố</option>
+                                        <option value="hn" selected>Hà Nội</option>
+                                        <option value="hcm">TP. Hồ Chí Minh</option>
+                                        <option value="dn">Đà Nẵng</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label">Quận / Huyện</label>
+                                    <select class="form-control">
+                                        <option value="">Chọn Quận/Huyện</option>
+                                        <option value="q1" selected>Quận Ba Đình</option>
+                                        <option value="q2">Quận Cầu Giấy</option>
+                                        <option value="q3">Quận Đống Đa</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label">Phường / Xã</label>
+                                    <select class="form-control">
+                                        <option value="">Chọn Phường/Xã</option>
+                                        <option value="p1" selected>Phường Quán Thánh</option>
+                                        <option value="p2">Phường Trúc Bạch</option>
+                                        <option value="p3">Phường Điện Biên</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="form-label">Địa chỉ chi tiết (Số nhà, tên đường...)</label>
+                                    <input type="text" class="form-control" value="Số 123, Đường ABC">
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <button type="submit" class="btn btn-primary" style="padding: 12px 30px;">Lưu thay
+                                đổi</button>
+                        </div>
+                    </form>
+
+                    </form>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER (Simplified for demo) -->
+    <footer style="background: var(--primary); color: white; padding: 60px 0; margin-top: 60px;">
+        <div class="container text-center">
+            <img src="assets/logo-white.png" alt="Logo" style="height: 50px; margin-bottom: 20px;">
+            <p style="opacity: 0.7; font-size: 14px;">© 2026 Quảng Phát Logistic. Bảo lưu mọi quyền.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Avatar Preview Logic
+        document.getElementById('avatarInput').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    document.getElementById('avatarPreview').src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-col"
+                    style="grid-column: span 1.5; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                    <img src="assets/logo-white.png" alt="QUẢNG PHÁT" style="height: 90px; margin-bottom: 20px" />
+                    <p style="color: #999; font-size: 13px; margin-bottom: 20px; text-align: justify;">
+                        Cầu nối giao thương toàn cầu. Quảng Phát Logistic mang đến giải pháp vận chuyển và thương mại
+                        điện tử trọn gói cho doanh nghiệp.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4 style="color: white; margin-bottom: 20px; font-size: 14px">GIỚI THIỆU</h4>
+                    <a href="#" class="footer-link">Về chúng tôi</a>
+                    <a href="#" class="footer-link">Hướng dẫn mua hàng</a>
+                    <a href="#" class="footer-link">Quy trình xử lý khiếu nại</a>
+                    <a href="#" class="footer-link">Chính sách & Điều khoản</a>
+                </div>
+                <div class="footer-col">
+                    <h4 style="color: white; margin-bottom: 20px; font-size: 14px">CHÍNH SÁCH</h4>
+                    <a href="#" class="footer-link">Chính sách giao hàng</a>
+                    <a href="#" class="footer-link">Chính sách bảo mật</a>
+                    <a href="#" class="footer-link">Chính sách thanh toán</a>
+                    <a href="#" class="footer-link">Đối tác vận chuyển</a>
+                </div>
+                <div class="footer-col" style="grid-column: span 1.5">
+                    <h4 style="color: white; margin-bottom: 20px; font-size: 14px">LIÊN HỆ</h4>
+                    <p style="color: #999; font-size: 13px; margin-bottom: 10px">
+                        <i class="fa-solid fa-location-dot" style="margin-right: 10px"></i> Địa chỉ: Hà Nội, Việt Nam
+                    </p>
+                    <p style="color: #999; font-size: 13px; margin-bottom: 10px">
+                        <i class="fa-solid fa-phone" style="margin-right: 10px"></i> Hotline: 0987.xxx.xxx
+                    </p>
+                    <p style="color: #999; font-size: 13px; margin-bottom: 10px">
+                        <i class="fa-solid fa-envelope" style="margin-right: 10px"></i> Email: contact@quangphat.com
+                    </p>
+                </div>
+            </div>
+            <div
+                style="height: 40px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #666;">
+                <p>&copy; 2026 Quảng Phát Logistic. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function showSellerRegistration() {
+            document.getElementById('sellerModal').classList.add('active');
+        }
+
+        function closeSellerModal() {
+            document.getElementById('sellerModal').classList.remove('active');
+        }
+
+        function submitSellerRegistration() {
+            const address = document.getElementById('biz-address').value;
+            const id = document.getElementById('biz-id').value;
+            const bank = document.getElementById('biz-bank').value;
+
+            if (!address || !id || !bank) {
+                alert('Vui lòng nhập đầy đủ thông tin');
+                return;
+            }
+
+            // Close Modal
+            closeSellerModal();
+
+            // Show Custom Toast
+            const toast = document.getElementById('qpToast');
+            toast.classList.add('active');
+
+            setTimeout(() => {
+                toast.classList.remove('active');
+            }, 4000);
+        }
+
+        // Avatar preview logic
+        const avatarInput = document.getElementById('avatarInput');
+        const avatarPreview = document.getElementById('avatarPreview');
+
+        if (avatarInput) {
+            avatarInput.addEventListener('change', function () {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        avatarPreview.src = e.target.result;
+                    }
+                    reader.readAsDataURL(file);
+
+                    // Show success toast
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true
+                    });
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Đã tải ảnh lên thành công!'
+                    });
+                }
+            });
+        }
+    </script>
+    <!-- CUSTOM MODAL: SELLER REGISTRATION -->
+    <div class="qp-modal-overlay" id="sellerModal">
+        <div class="qp-modal-container">
+            <div class="qp-modal-header">
+                <h3 class="qp-modal-title">Đăng Ký Trở Thành Người Bán</h3>
+                <div class="qp-modal-close" onclick="closeSellerModal()">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
+            <div class="qp-modal-body">
+                <div class="mb-4">
+                    <label class="form-label"
+                        style="font-weight: 700; font-size: 12px; text-transform: uppercase; color: #64748b; margin-bottom: 8px; display: block;">Địa
+                        chỉ kinh doanh</label>
+                    <input type="text" id="biz-address" class="form-control" style="padding: 12px 15px;"
+                        placeholder="Nhập địa chỉ chi tiết">
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <label class="form-label"
+                            style="font-weight: 700; font-size: 12px; text-transform: uppercase; color: #64748b; margin-bottom: 8px; display: block;">Số
+                            CCCD / Định danh</label>
+                        <input type="text" id="biz-id" class="form-control" style="padding: 12px 15px;"
+                            placeholder="Số căn cước công dân">
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label class="form-label"
+                            style="font-weight: 700; font-size: 12px; text-transform: uppercase; color: #64748b; margin-bottom: 8px; display: block;">Số
+                            tài khoản ngân hàng</label>
+                        <input type="text" id="biz-bank" class="form-control" style="padding: 12px 15px;"
+                            placeholder="Số tài khoản & Tên ngân hàng">
+                    </div>
+                </div>
+            </div>
+            <div class="qp-modal-footer">
+                <button class="btn btn-light" style="font-weight: 600; color: #64748b; border: 1px solid #e2e8f0;"
+                    onclick="closeSellerModal()">Hủy bỏ</button>
+                <button class="btn btn-primary"
+                    style="background: var(--primary); border: none; padding: 10px 25px; font-weight: 700;"
+                    onclick="submitSellerRegistration()">ĐĂNG KÝ NGAY</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CUSTOM TOAST -->
+    <div class="qp-toast" id="qpToast">
+        <div class="qp-toast-icon">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <div class="qp-toast-content">
+            Yêu cầu của bạn đã được gửi. Đang chờ phê duyệt!
+        </div>
+    </div>
+
+    <!-- MOBILE BOTTOM NAV -->
+    <div class="mobile-bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>Trang chủ</span>
+        </a>
+        <a href="products.html" class="nav-item">
+            <i class="fa-solid fa-layer-group"></i>
+            <span>Sản phẩm</span>
+        </a>
+        <a href="cart.html" class="nav-item">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>Giỏ hàng</span>
+        </a>
+        <a href="profile.html" class="nav-item active">
+            <i class="fa-solid fa-user"></i>
+            <span>Tài khoản</span>
+        </a>
+    </div>
+
+    <!-- MOBILE DRAWER -->
+    <div class="mobile-drawer-overlay" id="mobileOverlay"></div>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-header">
+            <img src="assets/logo-black.png" alt="Logo" class="drawer-logo" />
+            <div class="close-drawer" id="closeMobileMenu">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+        <div class="drawer-content">
+            <div class="drawer-menu">
+                <a href="index.html" class="menu-item"><i class="fa-solid fa-house"></i> Trang chủ</a>
+                <a href="about.html" class="menu-item"><i class="fa-solid fa-circle-info"></i> Quảng Phát Logistics</a>
+                <a href="products.html" class="menu-item"><i class="fa-solid fa-store"></i> Quảng Phát Mall</a>
+                <a href="lien-he.html" class="menu-item"><i class="fa-solid fa-envelope"></i> Liên hệ</a>
+            </div>
+
+            <div class="drawer-divider"></div>
+
+            <div class="drawer-menu">
+                <div class="menu-label">Tài khoản của tôi</div>
+                <a href="profile.html" class="menu-item active"><i class="fa-regular fa-user"></i> Thông tin cá nhân</a>
+                <a href="orders.html" class="menu-item"><i class="fa-solid fa-clipboard-list"></i> Đơn hàng của tôi</a>
+                <a href="cart.html" class="menu-item"><i class="fa-solid fa-cart-shopping"></i> Giỏ hàng</a>
+            </div>
+
+            <div class="drawer-divider"></div>
+
+            <!-- Seller Only Section -->
+            <div class="seller-menu-section">
+                <div class="menu-label">Kênh người bán</div>
+                <a href="seller-dashboard.html" class="menu-item"><i class="fa-solid fa-chart-line"></i> Dashboard thống
+                    kê</a>
+                <a href="seller-products.html" class="menu-item"><i class="fa-solid fa-boxes-stacked"></i> Quản lý sản
+                    phẩm</a>
+                <a href="seller-orders.html" class="menu-item"><i class="fa-solid fa-clipboard-list"></i> Đơn hàng đã
+                    nhận</a>
+                <a href="seller-payments.html" class="menu-item"><i class="fa-solid fa-wallet"></i> Lịch sử thanh
+                    toán</a>
+                <a href="shop-config.html" class="menu-item"><i class="fa-solid fa-gear"></i> Cài đặt Shop</a>
+            </div>
+
+            <div class="drawer-divider"></div>
+
+            <div class="drawer-menu">
+                <a href="#" class="menu-item logout-item"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="mobile.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

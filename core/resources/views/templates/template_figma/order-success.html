@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt Hàng Thành Công | Quảng Phát Logistic</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .success-page {
+            background: #f8fafc;
+            min-height: calc(100vh - 400px);
+        }
+
+        .success-card {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative top border */
+        .success-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #10b981, #059669);
+        }
+
+        .success-icon {
+            width: 90px;
+            height: 90px;
+            background: #d1fae5;
+            color: #10b981;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 45px;
+            margin: 0 auto 25px;
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .success-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .success-desc {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .order-details-box {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: left;
+            margin-bottom: 30px;
+            border: 1px solid var(--border);
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .detail-row:last-child {
+            margin-bottom: 0;
+            padding-top: 12px;
+            border-top: 1px dashed #cbd5e1;
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--primary);
+        }
+
+        .detail-label {
+            color: var(--text-muted);
+        }
+
+        .detail-value {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn-action {
+            padding: 14px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: 2px solid var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: #1e293b;
+            border-color: #1e293b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            background: #f8fafc;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <div class="container top-bar-inner">
+            <div class="top-bar-left">
+                <span><i class="fa-solid fa-phone"></i> Hotline: 0987.xxx.xxx</span>
+                <span><i class="fa-solid fa-location-dot"></i> Địa chỉ: Hà Nội, Việt Nam</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="#">Hướng dẫn mua hàng</a>
+                <a href="#">Chính sách giao hàng</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header style="background: white; border-bottom: 1px solid var(--border);">
+        <div class="container header-inner">
+            <div class="logo-container" style="display: flex; align-items: center">
+                <a href="index.html"><img src="assets/logo-white.png" alt="QUẢNG PHÁT"
+                        style="height: 60px; display: block; object-fit: contain" /></a>
+            </div>
+
+            <div class="header-nav-items">
+                <a href="index.html" class="header-nav-link">Trang chủ</a>
+                <a href="about.html" class="header-nav-link">Quảng Phát Logistics</a>
+                <a href="products.html" class="header-nav-link">Quảng Phát Mall</a>
+                <a href="lien-he.html" class="header-nav-link">Liên hệ</a>
+            </div>
+
+            <div class="header-tools">
+                <!-- Search Trigger & Dropdown -->
+                <div class="search-container">
+                    <div class="search-trigger">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <div class="search-dropdown">
+                        <div class="search-input-group">
+                            <input type="text" placeholder="Tìm kiếm sản phẩm..." />
+                            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Profile (Logged In State) -->
+                <div class="user-profile is-logged-in" id="userProfile">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100&auto=format&fit=crop"
+                        alt="User" class="avatar" />
+                    <div class="profile-menu">
+                        <div class="user-info-brief">
+                            <span class="user-name">Nguyễn Văn Nam</span>
+                            <span class="user-role">Người bán (Seller)</span>
+                        </div>
+
+                        <!-- General Items -->
+                        <a href="profile.html" class="menu-item"><i class="fa-regular fa-user"></i> Thông tin cá
+                            nhân</a>
+                        <a href="change-password.html" class="menu-item"><i class="fa-solid fa-lock"></i> Đổi mật
+                            khẩu</a>
+
+                        <!-- Seller Only Section -->
+                        <div class="seller-menu-section">
+                            <div class="menu-label">Kênh người bán</div>
+                            <a href="seller-dashboard.html" class="menu-item"><i class="fa-solid fa-chart-line"></i>
+                                Dashboard thống kê</a>
+                            <a href="seller-products.html" class="menu-item"><i class="fa-solid fa-boxes-stacked"></i>
+                                Quản lý sản phẩm</a>
+                            <a href="seller-orders.html" class="menu-item"><i class="fa-solid fa-clipboard-list"></i>
+                                Đơn hàng đã nhận</a>
+                            <a href="seller-payments.html" class="menu-item"><i class="fa-solid fa-wallet"></i> Lịch sử
+                                thanh toán</a>
+                            <a href="shop-config.html" class="menu-item"><i class="fa-solid fa-gear"></i> Cài đặt
+                                Shop</a>
+                        </div>
+
+                        <a href="#" class="menu-item logout-item"><i class="fa-solid fa-right-from-bracket"></i> Đăng
+                            xuất</a>
+                    </div>
+                </div>
+
+                <a href="cart.html" class="cart-btn" style="font-size: 18px; color: var(--primary);">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-count">2</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="success-page py-lg-5 py-4">
+        <div class="container">
+            <div class="success-card mx-auto">
+                <div class="success-icon">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h1 class="success-title">Đặt Hàng Thành Công!</h1>
+                <p class="success-desc">
+                    Cảm ơn bạn đã mua sắm tại Quảng Phát Logistic.<br>
+                    Đơn hàng của bạn đã được ghi nhận và đang trong quá trình xử lý.
+                </p>
+
+                <div class="order-details-box">
+                    <div class="detail-row">
+                        <span class="detail-label">Mã đơn hàng:</span>
+                        <span class="detail-value" style="color: var(--accent);">#QPL-982435</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Ngày đặt:</span>
+                        <span class="detail-value">06/05/2026</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Phương thức thanh toán:</span>
+                        <span class="detail-value">Chuyển khoản ngân hàng</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Dự kiến giao hàng:</span>
+                        <span class="detail-value">08/05/2026 - 10/05/2026</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Tổng thanh toán:</span>
+                        <span class="detail-value" style="color: var(--accent); font-size: 18px;">5.185.000đ</span>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <a href="index.html" class="btn-action btn-outline">
+                        <i class="fa-solid fa-arrow-left"></i> Về trang chủ
+                    </a>
+                    <a href="#" class="btn-action btn-primary">
+                        <i class="fa-solid fa-box-open"></i> Xem đơn hàng
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-col"
+                    style="grid-column: span 1.5; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                    <img src="assets/logo-white.png" alt="QUẢNG PHÁT" style="height: 90px; margin-bottom: 20px" />
+                    <p style="color: #999; font-size: 13px; margin-bottom: 20px; text-align: justify;">
+                        Cầu nối giao thương toàn cầu. Quảng Phát Logistic mang đến giải pháp vận chuyển và thương mại
+                        điện tử trọn gói cho doanh nghiệp.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4 style="color: white; margin-bottom: 20px; font-size: 14px">GIỚI THIỆU</h4>
+                    <a href="#" class="footer-link">Về chúng tôi</a>
+                    <a href="#" class="footer-link">Hướng dẫn mua hàng</a>
+                    <a href="#" class="footer-link">Quy trình xử lý khiếu nại</a>
+                    <a href="#" class="footer-link">Chính sách & Điều khoản</a>
+                </div>
+                <div class="footer-col">
+                    <h4 style="color: white; margin-bottom: 20px; font-size: 14px">CHÍNH SÁCH</h4>
+                    <a href="#" class="footer-link">Chính sách giao hàng</a>
+                    <a href="#" class="footer-link">Chính sách bảo mật</a>
+                    <a href="#" class="footer-link">Chính sách thanh toán</a>
+                    <a href="#" class="footer-link">Đối tác vận chuyển</a>
+                </div>
+                <div class="footer-col" style="grid-column: span 1.5">
+                    <h4 style="color: white; margin-bottom: 20px; font-size: 14px">LIÊN HỆ</h4>
+                    <p style="color: #999; font-size: 13px; margin-bottom: 10px">
+                        <i class="fa-solid fa-location-dot" style="margin-right: 10px"></i> Địa chỉ: Hà Nội, Việt Nam
+                    </p>
+                    <p style="color: #999; font-size: 13px; margin-bottom: 10px">
+                        <i class="fa-solid fa-phone" style="margin-right: 10px"></i> Hotline: 0987.xxx.xxx
+                    </p>
+                    <p style="color: #999; font-size: 13px; margin-bottom: 10px">
+                        <i class="fa-solid fa-envelope" style="margin-right: 10px"></i> Email: contact@quangphat.com
+                    </p>
+                </div>
+            </div>
+            <div
+                style="height: 40px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #666;">
+                <p>&copy; 2026 Quảng Phát Logistic. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

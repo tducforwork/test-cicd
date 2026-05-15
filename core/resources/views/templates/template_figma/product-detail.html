@@ -1,0 +1,1186 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chi tiết sản phẩm | Quang Phat Logistic</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="mobile.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <!-- Fancybox CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
+  <!-- MOBILE FIXES: Product Detail -->
+  <style>
+    @media (max-width: 991px) {
+
+      /* === GALLERY: Fix white gap & dark veil === */
+      .p-detail-section>.container {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        max-width: 100% !important;
+      }
+
+      .p-gallery-column,
+      .p-gallery,
+      .main-img-box {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+      }
+
+      /* Remove any gradient/dark overlay */
+      .main-img-box::after,
+      .main-img-box::before,
+      .gallery-scroll-track::after,
+      .gallery-scroll-track::before,
+      .p-gallery::after,
+      .p-gallery::before {
+        display: none !important;
+        content: none !important;
+        background: none !important;
+      }
+
+      .gallery-scroll-track {
+        display: flex !important;
+        flex-direction: row !important;
+        width: 100% !important;
+        height: 260px !important;
+        overflow-x: scroll !important;
+        overflow-y: hidden !important;
+        scroll-snap-type: x mandatory !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        background: #000 !important;
+      }
+
+      /* KEY FIX: Override aspect-ratio that causes white gap */
+      .gallery-slide {
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        height: 260px !important;
+        aspect-ratio: unset !important;
+        object-fit: cover !important;
+        scroll-snap-align: start !important;
+        display: block !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+      }
+
+      /* Gallery counter stays at bottom inside image */
+      .gallery-counter {
+        position: absolute !important;
+        bottom: 12px !important;
+        right: 12px !important;
+        z-index: 5 !important;
+      }
+
+      /* === SHOP CARD: Row layout with both buttons === */
+      .shop-info-card {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 10px 16px !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        border-left: none !important;
+        border-right: none !important;
+        overflow: visible !important;
+        gap: 10px !important;
+      }
+
+      .shop-main {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        overflow: hidden !important;
+      }
+
+      .shop-actions-right {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 8px !important;
+        flex: 0 0 auto !important;
+        flex-shrink: 0 !important;
+        overflow: visible !important;
+        min-width: fit-content !important;
+      }
+
+      /* Both Zalo and Phone buttons must be fully visible */
+      .shop-icon-btn {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 36px !important;
+        height: 36px !important;
+        min-width: 36px !important;
+        flex-shrink: 0 !important;
+        overflow: visible !important;
+        border-radius: 50% !important;
+        background: #f1f5f9 !important;
+        border: 1px solid #e2e8f0 !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+
+      /* Ensure Zalo img visible */
+      .shop-icon-btn.zalo-btn img {
+        width: 22px !important;
+        height: 22px !important;
+        display: block !important;
+        filter: none !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+
+      .gallery-scroll-track,
+      .gallery-slide {
+        height: 220px !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- MOBILE HEADER -->
+  <div class="mobile-header">
+    <div class="mobile-logo">
+      <a href="index.html">
+        <img src="assets/logo-black.png" alt="QUẢNG PHÁT" />
+      </a>
+    </div>
+    <div class="mobile-tools">
+      <div class="mobile-tool-item search-trigger">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+      <div class="mobile-tool-item" onclick="window.location.href='profile.html'">
+        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100&auto=format&fit=crop"
+          alt="User" class="mobile-avatar" />
+      </div>
+      <div class="mobile-tool-item cart-btn">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="badge">2</span>
+      </div>
+      <div class="mobile-tool-item" id="openMobileMenu">
+        <i class="fa-solid fa-bars-staggered"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOBILE SEARCH BAR (Toggled) -->
+  <div class="mobile-search-bar" id="mobileSearchBar">
+    <div class="container">
+      <div class="search-input-wrapper">
+        <input type="text" placeholder="Bạn muốn tìm gì hôm nay?" id="mobileSearchInput" />
+        <button type="button" class="mobile-search-btn">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
+      <!-- Hot Keywords -->
+      <div class="mobile-search-hot">
+        <span>Xu hướng:</span>
+        <div class="hot-tags">
+          <a href="#">iPhone 15</a>
+          <a href="#">Giao hàng 24h</a>
+          <a href="#">Máy khoan Bosch</a>
+          <a href="#">Thời trang Mall</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP BAR (CLEAN) -->
+  <div class="top-bar">
+    <div class="container top-bar-inner d-flex justify-content-between align-items-center">
+      <div class="top-bar-left d-flex gap-3">
+        <a href="#" class="text-decoration-none">Kênh Người Bán</a>
+        <div class="vr" style="width: 1px; height: 14px; align-self: center;"></div>
+        <a href="#" class="text-decoration-none">Vận chuyển Logistics</a>
+        <div class="vr" style="width: 1px; height: 14px; align-self: center;"></div>
+        <a href="#" class="text-decoration-none">Tải ứng dụng</a>
+        <div class="vr" style="width: 1px; height: 14px; align-self: center;"></div>
+        <div class="d-flex align-items-center gap-2">
+          <span>Kết nối</span>
+          <a href="#"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="top-bar-right d-flex gap-3 align-items-center">
+        <a href="tel:1900633605" class="text-decoration-none fw-bold"><i class="fa-solid fa-phone me-1"></i> Hotline:
+          1900 633 605</a>
+        <a href="#" class="text-decoration-none"><i class="fa-regular fa-circle-question me-1"></i> Hỗ trợ</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER (SHOPEE-STYLE QP MALL) -->
+  <header>
+    <div class="container header-inner">
+      <!-- Logo Section: Two Separate Logos Side-by-Side -->
+      <div class="dual-logo-container">
+        <a href="index.html" class="logo-link">
+          <img src="assets/logo-mall-black.png" alt="QP MALL" style="height: 60px;" />
+        </a>
+        <div class="logo-divider-v"></div>
+        <a href="about.html" class="logo-link">
+          <img src="assets/logo-black.png" alt="QP LOGISTICS" style="height: 60px;" />
+        </a>
+      </div>
+
+      <!-- Centered Search Area -->
+      <div class="search-area-wrapper">
+        <div class="shopee-search-bar">
+          <input type="text" placeholder="Tìm kiếm sản phẩm, thương hiệu hoặc dịch vụ Logistics..." />
+          <button class="shopee-search-btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+
+        <!-- Suggestions Box -->
+        <div class="search-suggestions-box">
+          <div class="suggestion-section">
+            <div class="suggestion-section-title">
+              <span>SẢN PHẨM VỪA TÌM KIẾM</span>
+              <a href="#">Xóa lịch sử</a>
+            </div>
+            <div class="recent-products-grid">
+              <a href="product-detail.html" class="recent-p-item">
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=100&auto=format&fit=crop"
+                  class="recent-p-img" alt="Product">
+                <div class="recent-p-info">
+                  <p class="recent-p-name">Giày Nike Air Max</p>
+                  <p class="recent-p-price">2.100.000đ</p>
+                </div>
+              </a>
+              <a href="product-detail.html" class="recent-p-item">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=100&auto=format&fit=crop"
+                  class="recent-p-img" alt="Product">
+                <div class="recent-p-info">
+                  <p class="recent-p-name">Tai nghe Sony WH</p>
+                  <p class="recent-p-price">850.000đ</p>
+                </div>
+              </a>
+              <a href="product-detail.html" class="recent-p-item">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=100&auto=format&fit=crop"
+                  class="recent-p-img" alt="Product">
+                <div class="recent-p-info">
+                  <p class="recent-p-name">Apple Watch Series 8</p>
+                  <p class="recent-p-price">450.000đ</p>
+                </div>
+              </a>
+              <a href="product-detail.html" class="recent-p-item">
+                <img src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=100&auto=format&fit=crop"
+                  class="recent-p-img" alt="Product">
+                <div class="recent-p-info">
+                  <p class="recent-p-name">Nước hoa Bleu Chanel</p>
+                  <p class="recent-p-price">1.850.000đ</p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <hr class="my-3 opacity-10">
+
+          <div class="suggestion-section">
+            <div class="suggestion-section-title">
+              <span>XU HƯỚNG TÌM KIẾM</span>
+              <a href="#">Xóa tất cả</a>
+            </div>
+            <div class="suggestion-tags">
+              <a href="#" class="suggestion-tag">iPhone 15 Pro Max</a>
+              <a href="#" class="suggestion-tag">Vận chuyển Trung Việt</a>
+              <a href="#" class="suggestion-tag">Phụ kiện Mall</a>
+              <a href="#" class="suggestion-tag">Ốp lưng iPhone</a>
+              <a href="#" class="suggestion-tag">Sạc dự phòng 20W</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hot Hints Below -->
+        <div class="search-hints">
+          <a href="#">iPhone 15</a>
+          <a href="#">Dịch vụ Vận Chuyển</a>
+          <a href="#">Hàng Chính Hãng</a>
+          <a href="#">Deal 1K</a>
+          <a href="#">Flash Sale</a>
+        </div>
+      </div>
+
+      <!-- Tools Section -->
+      <div class="header-right-tools">
+        <!-- Guest -->
+        <div class="header-auth" id="headerAuth">
+          <div class="user-profile guest-profile">
+            <img src="https://ui-avatars.com/api/?name=Guest&background=e2e8f0&color=64748b&size=80&bold=true"
+              alt="Guest" class="avatar" />
+            <span class="user-name-mall" style="color:#64748b;">Tài khoản</span>
+            <div class="profile-menu">
+              <a href="login.html" class="menu-item"><i class="fa-solid fa-right-to-bracket"></i> Đăng nhập</a>
+              <a href="register.html" class="menu-item"><i class="fa-solid fa-user-plus"></i> Đăng ký</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Logged-in -->
+        <div class="user-profile is-logged-in" id="userProfile">
+          <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100&auto=format&fit=crop"
+            alt="User" class="avatar" />
+          <span class="user-name-mall">Nam Nguyễn</span>
+          <div class="profile-menu">
+            <a href="profile.html" class="menu-item"><i class="fa-regular fa-user"></i> Hồ sơ</a>
+            <hr class="dropdown-divider">
+            <a href="#" class="menu-item logout-item" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i>
+              Thoát</a>
+          </div>
+        </div>
+
+        <div class="header-cart-shopee">
+          <a href="#" class="cart-btn">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-count">2</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb-area">
+    <div class="container">
+      <ul class="breadcrumb">
+        <li><a href="index.html">Trang chủ</a></li>
+        <li><a href="products.html">Sản phẩm</a></li>
+        <li class="active">Máy Pha Cà Phê DeLonghi Dedica EC685</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PRODUCT DETAIL SECTION -->
+  <section class="p-detail-section">
+    <div class="container">
+      <div class="p-detail-layout">
+        <!-- Left: Images & Shop Info -->
+        <div class="p-gallery-column">
+          <div class="p-gallery">
+            <div class="main-img-box">
+              <div class="gallery-scroll-track" id="galleryScrollTrack">
+                <img src="https://images.unsplash.com/photo-1510972527921-ce03766a1cf1?q=80&w=800&auto=format&fit=crop"
+                  class="gallery-slide" alt="Slide 1" />
+                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=800&auto=format&fit=crop"
+                  class="gallery-slide" alt="Slide 2" />
+                <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop"
+                  class="gallery-slide" alt="Slide 3" />
+                <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?q=80&w=800&auto=format&fit=crop"
+                  class="gallery-slide" alt="Slide 4" />
+                <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?q=80&w=800&auto=format&fit=crop"
+                  class="gallery-slide" alt="Slide 5" />
+              </div>
+              <!-- Counter & View All -->
+              <div class="gallery-counter">
+                <span class="count-text" id="galleryCountText">1/5</span>
+                <span class="view-all-text">Xem tất cả</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Shop Info Card (Under Image) -->
+          <div class="shop-info-card">
+            <div class="shop-main">
+              <img src="assets/logo-black.png" alt="Shop Logo" class="shop-logo" />
+              <div class="shop-details">
+                <h3 class="shop-name">Quảng Phát Mall</h3>
+                <div class="shop-rating"><i class="fa-solid fa-star" style="color: #f59e0b;"></i> 5.0 <span
+                    style="color: #64748b; font-weight: normal; margin-left: 5px;">Đánh giá 15k</span></div>
+              </div>
+            </div>
+            <div class="shop-actions-right">
+              <a href="#" class="shop-icon-btn zalo-btn" title="Chat Zalo"><img
+                  src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo"
+                  style="width: 20px;"></a>
+              <a href="#" class="shop-icon-btn phone-btn" title="Gọi điện"><i class="fa-solid fa-phone"
+                  style="color: #64748b;"></i></a>
+              <!-- <a href="products.html" class="btn-shop-outline">Ghé thăm Shop</a> -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Info -->
+        <div class="p-detail-info">
+          <div class="p-badge-new">Hàng mới về</div>
+          <h1 class="p-detail-name">Máy Pha Cà Phê DeLonghi Dedica EC685</h1>
+          <div class="p-meta-subtitle">Điện gia dụng • 1 tuần trước</div>
+
+          <div class="p-detail-rating-row">
+            <div class="stat-group">
+              <strong>1.2k</strong> Đã bán
+            </div>
+            <div class="divider-v"></div>
+            <div class="stat-group rating-stars">
+              <i class="fa-solid fa-star"></i> <strong>5.0</strong>
+            </div>
+            <div class="divider-v"></div>
+            <div class="stat-group">
+              <strong>1.5k</strong> Đánh giá
+            </div>
+            <div class="status-badge stock-in">Còn hàng</div>
+          </div>
+
+          <div class="p-detail-price-box">
+            <div class="p-detail-price">6.800.000đ</div>
+            <div class="p-detail-old-price" style="margin-top: 5px;">
+              <span class="old"
+                style="text-decoration: line-through; color: #94a3b8; font-size: 16px;">7.500.000đ</span>
+              <span class="discount"
+                style="background: #ef4444; color: white; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: 700;">-9%
+                GIẢM</span>
+            </div>
+          </div>
+
+          <table class="p-meta-table">
+            <tr>
+              <td class="meta-label">Mã SKU</td>
+              <td class="meta-value">: QP-DLG-685</td>
+            </tr>
+            <tr>
+              <td class="meta-label">Danh mục</td>
+              <td class="meta-value">: Điện gia dụng</td>
+            </tr>
+            <tr>
+              <td class="meta-label">Thẻ</td>
+              <td class="meta-value">: máy pha cà phê, delonghi</td>
+            </tr>
+            <tr>
+              <td class="meta-label">Chia sẻ</td>
+              <td class="meta-value social-shares">
+                :
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+              </td>
+            </tr>
+          </table>
+
+          <div class="p-condition-text">tình trạng mới 100%</div>
+
+          <div class="p-qty-row">
+            <div class="qty-input">
+              <button class="qty-btn" onclick="updateQty(-1)">-</button>
+              <input type="text" class="qty-val" id="qtyVal" value="1" readonly />
+              <button class="qty-btn" onclick="updateQty(1)">+</button>
+            </div>
+          </div>
+
+          <div class="p-actions-row">
+            <button class="btn-p-action btn-add-cart-outline">Thêm vào giỏ hàng</button>
+            <button class="btn-p-action btn-buy-now-full">Mua ngay</button>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- TABS -->
+      <div class="p-detail-tabs">
+        <div class="tab-nav">
+          <div class="tab-nav-item active" onclick="switchTab(this, 'desc')">
+            Mô tả sản phẩm
+          </div>
+          <div class="tab-nav-item" onclick="switchTab(this, 'reviews')">
+            Đánh giá
+          </div>
+        </div>
+        <div class="tab-content" id="tabContent">
+          <div id="desc">
+            <p>
+              Máy pha cà phê DeLonghi Dedica EC685 là sự kết hợp hoàn hảo giữa
+              thiết kế mỏng nhẹ tinh tế và hiệu suất pha chế chuyên nghiệp.
+              Với bề rộng chỉ 15cm, máy dễ dàng phù hợp với mọi không gian bếp
+              hoặc văn phòng.
+            </p>
+            <p>
+              Hệ thống Thermoblock giúp máy đạt đến nhiệt độ lý tưởng chỉ
+              trong 40 giây. Áp suất 15 bar đảm bảo chiết xuất trọn vẹn hương
+              vị và tạo lớp crema mịn màng cho tách Espresso hoàn hảo.
+            </p>
+            <ul style="margin-top: 15px; padding-left: 20px">
+              <li>
+                Hệ thống đánh sữa thủ công linh hoạt cho lớp bọt sữa dày mịn.
+              </li>
+              <li>Sử dụng cả cà phê bột và cà phê pods tiện lợi.</li>
+              <li>
+                Khay nhỏ giọt có thể tháo rời để sử dụng ly cao đến 12cm.
+              </li>
+              <li>Thân máy hoàn thiện bằng thép không gỉ cao cấp, bền bỉ.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIMILAR PRODUCTS -->
+      <div style="margin-top: 80px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+          <h2 class="section-title">Sản phẩm tương tự</h2>
+          <a href="products.html"
+            style="color: var(--primary); font-weight: 600; text-decoration: none; font-size: 15px;">Xem thêm <i
+              class="fa-solid fa-arrow-right" style="margin-left: 5px;"></i></a>
+        </div>
+        <div class="product-grid-5" id="similarTrack">
+          <!-- JS generated products -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-main">
+        <div class="footer-col" style="
+              grid-column: span 1.5;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              text-align: center;
+            ">
+          <img src="assets/logo-white.png" alt="QUẢNG PHÁT" style="height: 90px; margin-bottom: 20px" />
+          <p style="
+                color: #999;
+                font-size: 13px;
+                margin-bottom: 20px;
+                text-align: justify;
+              ">
+            Cầu nối giao thương toàn cầu. Quảng Phát Logistic mang đến giải
+            pháp vận chuyển và thương mại điện tử trọn gói cho doanh nghiệp.
+          </p>
+          <div class="footer-social">
+            <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" class="social-icon"><i class="fa-brands fa-tiktok"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4 style="color: white; margin-bottom: 20px; font-size: 14px">
+            GIỚI THIỆU
+          </h4>
+          <a href="about.html" class="footer-link">Về chúng tôi</a>
+          <a href="#" class="footer-link">Hướng dẫn mua hàng</a>
+          <a href="#" class="footer-link">Quy trình xử lý khiếu nại</a>
+          <a href="#" class="footer-link">Chính sách & Điều khoản</a>
+        </div>
+        <div class="footer-col">
+          <h4 style="color: white; margin-bottom: 20px; font-size: 14px">
+            CHÍNH SÁCH
+          </h4>
+          <a href="#" class="footer-link">Chính sách giao hàng</a>
+          <a href="#" class="footer-link">Chính sách bảo mật</a>
+          <a href="#" class="footer-link">Chính sách thanh toán</a>
+          <a href="#" class="footer-link">Đối tác vận chuyển</a>
+        </div>
+        <div class="footer-col" style="grid-column: span 1.5">
+          <h4 style="color: white; margin-bottom: 20px; font-size: 14px">
+            LIÊN HỆ
+          </h4>
+          <p style="color: #999; font-size: 13px; margin-bottom: 10px">
+            <i class="fa-solid fa-location-dot" style="margin-right: 10px"></i>
+            Địa chỉ: Số 123, Đường ABC, Quận XYZ, TP. Hồ Chí Minh
+          </p>
+          <p style="color: #999; font-size: 13px; margin-bottom: 10px">
+            <i class="fa-solid fa-phone" style="margin-right: 10px"></i>
+            Hotline: 0987.xxx.xxx
+          </p>
+          <p style="color: #999; font-size: 13px; margin-bottom: 10px">
+            <i class="fa-solid fa-envelope" style="margin-right: 10px"></i>
+            Email: contact@quangphat.com
+          </p>
+        </div>
+      </div>
+      <div style="
+            height: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #666;
+          ">
+        <p>&copy; 2026 Quảng Phát Logistic. Tất cả quyền được bảo lưu.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MOBILE STICKY BOTTOM BAR -->
+  <div class="mobile-sticky-bar" id="mobileStickyBar">
+    <button class="mobile-sticky-btn mobile-sticky-cart" onclick="toggleCart()">
+      <i class="fa-solid fa-cart-plus"></i>
+      <span>Thêm vào giỏ</span>
+    </button>
+    <button class="mobile-sticky-btn mobile-sticky-buy">
+      <i class="fa-solid fa-bolt"></i>
+      <span>Mua ngay</span>
+    </button>
+  </div>
+
+  <!-- FLOATING ACTIONS -->
+  <div class="floating-actions">
+    <a href="tel:0987xxxxxx" class="action-btn hotline-btn" title="Gọi Hotline">
+      <i class="fa-solid fa-phone"></i>
+    </a>
+    <a href="https://zalo.me/0987xxxxxx" target="_blank" class="action-btn zalo-btn" title="Chat Zalo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo"
+        style="width: 100%; height: 100%; border-radius: var(--radius-circle)" />
+    </a>
+    <a href="https://m.me/yourpage" target="_blank" class="action-btn mess-btn" title="Chat Messenger">
+      <i class="fa-brands fa-facebook-messenger"></i>
+    </a>
+    <button id="scrollTopBtn" class="action-btn scroll-top-btn" title="Lên đầu trang">
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
+  </div>
+
+  <!-- MOBILE BOTTOM NAVIGATION -->
+  <div class="mobile-bottom-nav">
+    <a href="index.html" class="mobile-nav-item">
+      <i class="fa-solid fa-house"></i>
+      <span>Trang chủ</span>
+    </a>
+    <a href="products.html" class="mobile-nav-item active">
+      <i class="fa-solid fa-boxes-stacked"></i>
+      <span>Sản phẩm</span>
+    </a>
+    <a href="orders.html" class="mobile-nav-item">
+      <i class="fa-solid fa-clipboard-list"></i>
+      <span>Đơn hàng</span>
+    </a>
+    <a href="profile.html" class="mobile-nav-item">
+      <i class="fa-solid fa-user"></i>
+      <span>Cá nhân</span>
+    </a>
+  </div>
+
+  <!-- MOBILE DRAWER -->
+  <div class="mobile-drawer-overlay" id="mobileOverlay"></div>
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="drawer-user-header">
+      <div class="user-info">
+        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100&auto=format&fit=crop"
+          alt="User" />
+        <div class="user-text">
+          <p class="name">Nam Nguyễn</p>
+          <p class="level"><i class="fa-solid fa-crown"></i> Thành viên Vàng</p>
+        </div>
+      </div>
+      <div class="close-drawer" id="closeMobileMenu">
+        <i class="fa-solid fa-xmark"></i>
+      </div>
+    </div>
+    <div class="drawer-content">
+      <div class="drawer-menu">
+        <a href="index.html" class="menu-item"><i class="fa-solid fa-house" style="color: #64748b;"></i> Quảng Phát
+          Mall</a>
+        <a href="about.html" class="menu-item"><i class="fa-solid fa-truck-fast" style="color: #64748b;"></i> Quảng Phát
+          Logistic</a>
+        <a href="news.html" class="menu-item"><i class="fa-solid fa-newspaper" style="color: #64748b;"></i> Tin tức mới
+          nhất</a>
+        <a href="lien-he.html" class="menu-item"><i class="fa-solid fa-envelope" style="color: #f59e0b;"></i> Liên hệ hỗ
+          trợ</a>
+      </div>
+
+      <div class="drawer-divider"></div>
+
+      <div class="drawer-menu">
+        <div class="menu-label">Tiện ích của tôi</div>
+        <a href="cart.html" class="menu-item"><i class="fa-solid fa-cart-shopping" style="color: #f97316;"></i> Giỏ
+          hàng</a>
+        <a href="orders.html" class="menu-item"><i class="fa-solid fa-clipboard-list" style="color: #f97316;"></i> Đơn
+          hàng của tôi</a>
+        <a href="#" class="menu-item"><i class="fa-solid fa-ticket" style="color: #f59e0b;"></i> Kho Voucher</a>
+        <a href="#" class="menu-item"><i class="fa-solid fa-coins" style="color: #f59e0b;"></i> QP Xu <span
+            class="badge-mini">1.2k</span></a>
+        <a href="#" class="menu-item"><i class="fa-solid fa-heart" style="color: #f97316;"></i> Đã thích</a>
+      </div>
+
+      <div class="drawer-divider"></div>
+
+      <div class="seller-menu-section">
+        <div class="menu-label">Kênh người bán</div>
+        <a href="seller-dashboard.html" class="menu-item"><i class="fa-solid fa-chart-line"></i> Dashboard thống kê</a>
+        <a href="seller-products.html" class="menu-item"><i class="fa-solid fa-boxes-stacked"></i> Quản lý sản phẩm</a>
+        <a href="seller-orders.html" class="menu-item"><i class="fa-solid fa-clipboard-list"></i> Đơn hàng đã nhận</a>
+        <a href="seller-payments.html" class="menu-item"><i class="fa-solid fa-wallet"></i> Lịch sử thanh toán</a>
+        <a href="shop-config.html" class="menu-item"><i class="fa-solid fa-gear"></i> Cài đặt Shop</a>
+      </div>
+
+      <div class="drawer-divider"></div>
+
+      <div class="drawer-menu">
+        <a href="#" class="menu-item logout-item"><i class="fa-solid fa-right-from-bracket" style="color: #f97316;"></i>
+          Đăng xuất</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 1000,
+      once: true,
+      offset: 100,
+      easing: "ease-out-cubic",
+    });
+
+    // Toggle Cart Sidebar Logic
+    const toggleCart = () => {
+      const cartSidebar = document.getElementById("cartSidebar");
+      const cartOverlay = document.getElementById("cartOverlay");
+
+      if (!cartSidebar || !cartOverlay) return;
+
+      cartSidebar.classList.toggle("active");
+      cartOverlay.classList.toggle("active");
+      document.body.style.overflow = cartSidebar.classList.contains("active")
+        ? "hidden"
+        : "";
+    };
+
+    // Event Delegation for Cart Actions
+    document.addEventListener("click", (e) => {
+      const target = e.target.closest(
+        ".cart-btn, #closeCart, #cartOverlay, .btn-add-cart, .btn-add-cart-detail",
+      );
+      if (target) {
+        e.preventDefault();
+        toggleCart();
+      }
+    });
+
+    // Gallery Swipe Logic
+    const galleryTrack = document.getElementById('galleryScrollTrack');
+    const galleryCountText = document.getElementById('galleryCountText');
+    const slides = document.querySelectorAll('.gallery-slide');
+    const totalSlides = slides.length;
+
+    if (galleryTrack) {
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+
+      galleryTrack.addEventListener('mousedown', (e) => {
+        isDown = true;
+        galleryTrack.classList.add('active');
+        // Disable snap to make JS dragging smooth
+        galleryTrack.style.scrollSnapType = 'none';
+        startX = e.pageX - galleryTrack.offsetLeft;
+        scrollLeft = galleryTrack.scrollLeft;
+      });
+
+      const finishDrag = () => {
+        isDown = false;
+        galleryTrack.classList.remove('active');
+        // Re-enable snap to auto-align slide
+        galleryTrack.style.scrollSnapType = 'x mandatory';
+      };
+
+      galleryTrack.addEventListener('mouseleave', finishDrag);
+      galleryTrack.addEventListener('mouseup', (e) => {
+        const x = e.pageX - galleryTrack.offsetLeft;
+        // If movement was less than 5px, treat as a click to open Fancybox
+        if (Math.abs(x - startX) < 5) {
+          const fancyboxImages = [];
+          slides.forEach(img => {
+            fancyboxImages.push({ src: img.src, type: "image" });
+          });
+          const currentIndex = Math.round(galleryTrack.scrollLeft / galleryTrack.clientWidth);
+          if (typeof Fancybox !== 'undefined') {
+            Fancybox.show(fancyboxImages, { startIndex: currentIndex });
+          }
+        }
+        finishDrag();
+      });
+
+      galleryTrack.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - galleryTrack.offsetLeft;
+        const walk = (x - startX) * 1.5; // Scroll-fast
+        galleryTrack.scrollLeft = scrollLeft - walk;
+      });
+
+      // Update counter on scroll
+      galleryTrack.addEventListener('scroll', () => {
+        let index = Math.round(galleryTrack.scrollLeft / galleryTrack.clientWidth);
+        galleryCountText.textContent = `${index + 1}/${totalSlides}`;
+      });
+    }
+
+
+    function updateQty(delta) {
+      const input = document.getElementById("qtyVal");
+      let val = parseInt(input.value) + delta;
+      if (val < 1) val = 1;
+      input.value = val;
+    }
+
+    function switchTab(el, tabId) {
+      document
+        .querySelectorAll(".tab-nav-item")
+        .forEach((item) => item.classList.remove("active"));
+      el.classList.add("active");
+
+      const content = document.getElementById("tabContent");
+      if (tabId === "desc") {
+        content.innerHTML = `<div id="desc">
+                        <p>Máy pha cà phê DeLonghi Dedica EC685 là sự kết hợp hoàn hảo giữa thiết kế mỏng nhẹ tinh tế và hiệu suất pha chế chuyên nghiệp. Với bề rộng chỉ 15cm, máy dễ dàng phù hợp với mọi không gian bếp hoặc văn phòng.</p>
+                        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1000&auto=format&fit=crop" alt="Mô tả sản phẩm" style="width: 100%; border-radius: var(--radius-lg); margin: 25px 0;">
+                        <p>Hệ thống Thermoblock giúp máy đạt đến nhiệt độ lý tưởng chỉ trong 40 giây. Áp suất 15 bar đảm bảo chiết xuất trọn vẹn hương vị và tạo lớp crema mịn màng cho tách Espresso hoàn hảo.</p>
+                        <p style="margin-top: 15px;"><strong>Ưu điểm nổi bật:</strong></p>
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            <li>Hệ thống đánh sữa LatteCrema độc quyền tạo lớp bọt sữa hoàn hảo.</li>
+                            <li>Tùy chỉnh nhiệt độ và độ đậm đặc của cà phê theo sở thích.</li>
+                            <li>Thiết kế kim loại cao cấp, sang trọng và bền bỉ.</li>
+                        </ul>
+                    </div>`;
+      } else {
+        content.innerHTML = `
+          <div class="reviews-container">
+            <h3 style="font-size: 18px; margin-bottom: 20px; font-weight: 600;">Đánh giá từ khách hàng</h3>
+            <div class="review-item" style="border-bottom: 1px solid #e2e8f0; padding-bottom: 20px; margin-bottom: 20px;">
+              <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100&auto=format&fit=crop" style="width: 45px; height: 45px; border-radius: 50%; margin-right: 15px; object-fit: cover;" />
+                <div>
+                  <h4 style="margin: 0; font-size: 15px; color: #1e293b;">Nguyễn Văn A</h4>
+                  <div style="color: #f59e0b; font-size: 12px; margin-top: 4px;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                </div>
+              </div>
+              <p style="margin: 0; font-size: 14px; color: #475569; line-height: 1.5;">Máy pha cà phê rất tốt, nhỏ gọn và sang trọng. Pha espresso lớp bọt rất dày, tôi rất ưng ý. Giao hàng cực kỳ nhanh chóng.</p>
+              <div style="color: #94a3b8; font-size: 13px; margin-top: 8px;">20/05/2026 14:30 | Phân loại: Màu Đen</div>
+            </div>
+            
+            <div class="review-item" style="border-bottom: 1px solid #e2e8f0; padding-bottom: 20px; margin-bottom: 20px;">
+              <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=100&auto=format&fit=crop" style="width: 45px; height: 45px; border-radius: 50%; margin-right: 15px; object-fit: cover;" />
+                <div>
+                  <h4 style="margin: 0; font-size: 15px; color: #1e293b;">Trần Thị B</h4>
+                  <div style="color: #f59e0b; font-size: 12px; margin-top: 4px;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                </div>
+              </div>
+              <p style="margin: 0; font-size: 14px; color: #475569; line-height: 1.5;">Mua đợt sale nên giá quá hời so với chất lượng mang lại! Thiết kế đẹp, hợp với căn bếp nhỏ nhà mình.</p>
+              <div style="color: #94a3b8; font-size: 13px; margin-top: 8px;">18/05/2026 09:15 | Phân loại: Màu Bạc</div>
+            </div>
+
+            <div class="review-form-wrapper" style="margin-top: 40px; background: #f8fafc; padding: 25px; border-radius: var(--radius-lg);">
+              <h3 style="font-size: 16px; margin-bottom: 15px; font-weight: 600;">Viết đánh giá của bạn</h3>
+              <form onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã gửi đánh giá!');">
+                <div style="margin-bottom: 15px;">
+                  <label style="display: block; font-size: 14px; margin-bottom: 8px; color: #475569;">Đánh giá của bạn *</label>
+                  <div style="color: #cbd5e1; font-size: 18px; cursor: pointer;">
+                    <i class="fa-solid fa-star hover-star" onclick="this.style.color='#f59e0b'"></i>
+                    <i class="fa-solid fa-star hover-star" onclick="this.style.color='#f59e0b'"></i>
+                    <i class="fa-solid fa-star hover-star" onclick="this.style.color='#f59e0b'"></i>
+                    <i class="fa-solid fa-star hover-star" onclick="this.style.color='#f59e0b'"></i>
+                    <i class="fa-solid fa-star hover-star" onclick="this.style.color='#f59e0b'"></i>
+                  </div>
+                </div>
+                <div style="margin-bottom: 15px;">
+                  <textarea placeholder="Nhập nội dung đánh giá..." rows="4" style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: var(--radius-md); font-family: inherit; resize: vertical;" required></textarea>
+                </div>
+                <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+                  <input type="text" placeholder="Họ tên *" style="flex: 1; padding: 12px; border: 1px solid #e2e8f0; border-radius: var(--radius-md);" required />
+                  <input type="email" placeholder="Email (Không bắt buộc)" style="flex: 1; padding: 12px; border: 1px solid #e2e8f0; border-radius: var(--radius-md);" />
+                </div>
+                <button type="submit" style="background: #feb700; color: white; border: none; padding: 12px 25px; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; transition: 0.3s;">Gửi đánh giá</button>
+              </form>
+            </div>
+          </div>`;
+      }
+    }
+
+    // Similar Products Logic
+    const similarTrack = document.getElementById("similarTrack");
+    const productsList = [
+      {
+        id: 1,
+        name: "Máy Pha Cà Phê Breville 870XL Chuyên Nghiệp",
+        brand: "Breville",
+        price: "18.500.000đ",
+        oldPrice: "21.000.000đ",
+        discount: 12,
+        rating: 4.8,
+        sold: 1500,
+        unit: "Chiếc",
+        vat: 10,
+        image:
+          "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=800&auto=format&fit=crop",
+      },
+      {
+        id: 2,
+        name: "Máy Xay Cà Phê DeLonghi KG79 Tự Động",
+        brand: "DeLonghi",
+        price: "1.250.000đ",
+        oldPrice: "1.500.000đ",
+        discount: 16,
+        rating: 4.6,
+        sold: 2100,
+        unit: "Chiếc",
+        vat: 10,
+        image:
+          "https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?q=80&w=800&auto=format&fit=crop",
+      },
+      {
+        id: 3,
+        name: "Máy Pha Cà Phê Gaggia Classic Pro",
+        brand: "Gaggia",
+        price: "12.900.000đ",
+        oldPrice: "14.500.000đ",
+        discount: 11,
+        rating: 4.7,
+        sold: 850,
+        unit: "Chiếc",
+        vat: 10,
+        image:
+          "https://images.unsplash.com/photo-1510972527921-ce03766a1cf1?q=80&w=800&auto=format&fit=crop",
+      },
+      {
+        id: 4,
+        name: "Ấm Pha Cà Phê Moka Bialetti 3 Cup",
+        brand: "Bialetti",
+        price: "950.000đ",
+        oldPrice: "1.100.000đ",
+        discount: 14,
+        rating: 4.9,
+        sold: 3400,
+        unit: "Chiếc",
+        vat: 10,
+        image:
+          "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop",
+      },
+      {
+        id: 5,
+        name: "Máy Pha Cà Phê Philips EP2220/10",
+        brand: "Philips",
+        price: "11.200.000đ",
+        oldPrice: "13.500.000đ",
+        discount: 17,
+        rating: 4.5,
+        sold: 1200,
+        unit: "Chiếc",
+        vat: 10,
+        image:
+          "https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?q=80&w=800&auto=format&fit=crop",
+      }
+    ];
+
+    if (similarTrack) {
+      productsList.forEach((p, index) => {
+        const isMall = index % 3 === 0;
+        let badgesHtml = '<div class="badges-overlay">';
+        if (isMall) badgesHtml += '<span class="badge-item badge-mall">Mall</span>';
+        badgesHtml += '<span class="badge-item badge-freeship">Freeship</span>';
+        badgesHtml += '</div>';
+
+        similarTrack.innerHTML += `
+            <div class="p-card listing-p-card" style="cursor: pointer;" onclick="window.location.href='product-detail.html'">
+              <div class="discount-badge">-${p.discount}%</div>
+              <div class="p-image-box">
+                <img src="${p.image}" alt="${p.name}" />
+                ${badgesHtml}
+              </div>
+              <div class="p-info">
+                <h4 class="p-title">${p.name}</h4>
+                <div class="p-rating">
+                  <i class="fa-solid fa-star"></i>
+                  <span>${p.rating} | Đã bán ${p.sold >= 1000 ? (p.sold / 1000).toFixed(1) + 'k' : p.sold}</span>
+                </div>
+                <div class="p-price">
+                  ${p.price}
+                  <span class="p-price-old">${p.oldPrice}</span>
+                </div>
+                <button class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</button>
+              </div>
+            </div>
+        `;
+      });
+    }
+
+
+    // Floating Actions: Scroll to Top
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
+    if (scrollTopBtn) {
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+          scrollTopBtn.classList.add("show");
+        } else {
+          scrollTopBtn.classList.remove("show");
+        }
+      });
+
+      scrollTopBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
+  </script>
+  <!-- SIDE CART -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3>Giỏ hàng của bạn</h3>
+      <button class="close-cart" id="closeCart">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="cart-items-list">
+      <div class="cart-item">
+        <div class="cart-item-img">
+          <img src="https://images.unsplash.com/photo-1510972527921-ce03766a1cf1?q=80&w=200&auto=format&fit=crop"
+            alt="Product" />
+        </div>
+        <div class="cart-item-info">
+          <a href="#" class="cart-item-name">Máy pha cà phê DeLonghi Dedica EC685</a>
+          <div class="cart-item-price">4.250.000đ</div>
+          <div class="cart-item-qty">Số lượng: 1</div>
+        </div>
+        <div class="remove-item"><i class="fa-solid fa-trash-can"></i></div>
+      </div>
+      <div class="cart-item">
+        <div class="cart-item-img">
+          <img src="https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?q=80&w=200&auto=format&fit=crop"
+            alt="Product" />
+        </div>
+        <div class="cart-item-info">
+          <a href="#" class="cart-item-name">Ấm Pha Cà Phê Moka Bialetti Cao Cấp</a>
+          <div class="cart-item-price">950.000đ</div>
+          <div class="cart-item-qty">Số lượng: 1</div>
+        </div>
+        <div class="remove-item"><i class="fa-solid fa-trash-can"></i></div>
+      </div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Tổng cộng:</span>
+        <span class="cart-total-price">5.200.000đ</span>
+      </div>
+      <button class="btn-checkout" onclick="window.location.href = 'cart.html'">
+        Tiến hành thanh toán
+      </button>
+    </div>
+  </div>
+  <!-- MOBILE BOTTOM NAVIGATION -->
+  <div class="mobile-bottom-nav">
+    <a href="index.html" class="mobile-nav-item">
+      <i class="fa-solid fa-house"></i>
+      <span>Trang chủ</span>
+    </a>
+    <a href="products.html" class="mobile-nav-item active">
+      <i class="fa-solid fa-layer-group"></i>
+      <span>Sản phẩm</span>
+    </a>
+    <a href="cart.html" class="mobile-nav-item">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span>Giỏ hàng</span>
+    </a>
+    <a href="profile.html" class="mobile-nav-item">
+      <i class="fa-solid fa-user"></i>
+      <span>Tài khoản</span>
+    </a>
+  </div>
+
+  <!-- MOBILE DRAWER -->
+  <div class="mobile-drawer-overlay" id="mobileOverlay"></div>
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="drawer-user-header">
+      <div class="user-info">
+        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100&auto=format&fit=crop"
+          alt="User" />
+        <div class="user-text">
+          <p class="name">Nam Nguyễn</p>
+          <p class="level"><i class="fa-solid fa-crown"></i> Thành viên Vàng</p>
+        </div>
+      </div>
+      <div class="close-drawer" id="closeMobileMenu">
+        <i class="fa-solid fa-xmark"></i>
+      </div>
+    </div>
+    <div class="drawer-content">
+      <div class="drawer-menu">
+        <a href="index.html" class="menu-item"><i class="fa-solid fa-house"></i> <span>Trang chủ</span></a>
+        <a href="about.html" class="menu-item"><i class="fa-solid fa-circle-info"></i> <span>Quảng Phát
+            Logistics</span></a>
+        <a href="products.html" class="menu-item"><i class="fa-solid fa-store"></i> <span>Quảng Phát Mall</span></a>
+        <a href="news.html" class="menu-item"><i class="fa-solid fa-newspaper"></i> <span>Tin tức</span></a>
+        <a href="lien-he.html" class="menu-item"><i class="fa-solid fa-envelope"></i> <span>Liên hệ</span></a>
+      </div>
+
+      <div class="drawer-divider"></div>
+
+      <div class="drawer-menu">
+        <div class="menu-label">Tài khoản của tôi</div>
+        <a href="profile.html" class="menu-item"><i class="fa-regular fa-user"></i> <span>Thông tin cá nhân</span></a>
+        <a href="orders.html" class="menu-item"><i class="fa-solid fa-clipboard-list"></i> <span>Đơn hàng của
+            tôi</span></a>
+        <a href="cart.html" class="menu-item"><i class="fa-solid fa-cart-shopping"></i> <span>Giỏ hàng</span></a>
+      </div>
+
+      <div class="drawer-divider"></div>
+
+      <div class="seller-menu-section">
+        <div class="menu-label">Kênh người bán</div>
+        <a href="seller-dashboard.html" class="menu-item"><i class="fa-solid fa-chart-line"></i> <span>Dashboard thống
+            kê</span></a>
+        <a href="seller-products.html" class="menu-item"><i class="fa-solid fa-boxes-stacked"></i> <span>Quản lý sản
+            phẩm</span></a>
+        <a href="seller-orders.html" class="menu-item"><i class="fa-solid fa-clipboard-list"></i> <span>Đơn hàng đã
+            nhận</span></a>
+      </div>
+
+      <div class="drawer-divider"></div>
+
+      <div class="drawer-menu">
+        <a href="#" class="menu-item logout-item" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i>
+          <span>Đăng xuất</span></a>
+      </div>
+    </div>
+  </div>
+
+  <script src="mobile.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Fancybox JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Bind 'Xem tất cả' to Fancybox
+      const viewAllBtn = document.querySelector('.view-all-text');
+      const galleryTrack = document.getElementById('galleryScrollTrack');
+      const slides = document.querySelectorAll('.gallery-slide');
+
+      if (viewAllBtn && galleryTrack && slides.length > 0) {
+        viewAllBtn.addEventListener('click', () => {
+          const fancyboxImages = [];
+          slides.forEach(img => {
+            fancyboxImages.push({ src: img.src, type: "image" });
+          });
+          const currentIndex = Math.round(galleryTrack.scrollLeft / galleryTrack.clientWidth) || 0;
+          if (typeof Fancybox !== 'undefined') {
+            Fancybox.show(fancyboxImages, { startIndex: currentIndex });
+          }
+        });
+      }
+    });
+  </script>
+  <script src="mobile.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

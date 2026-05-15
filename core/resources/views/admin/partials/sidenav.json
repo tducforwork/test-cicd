@@ -1,0 +1,426 @@
+{
+    "dashboard": {
+        "keyword": [
+            "Dashboard",
+            "Home",
+            "Panel",
+            "Admin",
+            "Control center",
+            "Overview",
+            "Main hub",
+            "Management hub",
+            "Administrative hub",
+            "Central hub",
+            "Command center",
+            "Administrator portal",
+            "Centralized interface",
+            "Admin console",
+            "Management dashboard",
+            "Main screen",
+            "Administrative dashboard",
+            "Command dashboard",
+            "Main control panel"
+        ],
+        "header": "Analytics",
+        "title": "Dashboard",
+        "icon": "las la-tachometer-alt",
+        "route_name": "admin.dashboard",
+        "menu_active": "admin.dashboard"
+    },
+    "my_shop": {
+        "keyword": ["My Shop", "My Store"],
+        "title": "My Shop",
+        "icon": "las la-home",
+        "route_name": "admin.dashboard.self",
+        "menu_active": "admin.dashboard.self"
+    },
+    "menu_management": {
+        "title": "Quản lý Menu",
+        "icon": "las la-list",
+        "route_name": "admin.menu.group.index",
+        "menu_active": "admin.menu.*"
+    },
+    "manage_users": {
+        "title": "Manage Users",
+        "icon": "las la-users",
+        "counters": [
+            "bannedUsersCount",
+            "emailUnverifiedUsersCount",
+            "mobileUnverifiedUsersCount"
+        ],
+        "menu_active": "admin.users*",
+        "submenu": [
+            {
+                "keyword": ["all users", "Manage Users", "User management"],
+                "title": "All Users",
+                "route_name": "admin.users.all",
+                "menu_active": "admin.users.all"
+            },
+            {
+                "keyword": ["active users", "Manage User", "User management"],
+                "title": "Active Users",
+                "route_name": "admin.users.active",
+                "menu_active": "admin.users.active"
+            },
+            {
+                "keyword": [
+                    "banned users",
+                    "Manage Users",
+                    "User management",
+                    "Account bans"
+                ],
+                "title": "Banned Users",
+                "route_name": "admin.users.banned",
+                "menu_active": "admin.users.banned",
+                "counter": "bannedUsersCount"
+            },
+            {
+                "keyword": [
+                    "email unverified users",
+                    "Manage Users",
+                    "User verification"
+                ],
+                "title": "Email Unverified",
+                "route_name": "admin.users.email.unverified",
+                "menu_active": "admin.users.email.unverified",
+                "counter": "emailUnverifiedUsersCount"
+            },
+            {
+                "keyword": [
+                    "mobile unverified users",
+                    "Manage Users",
+                    "User verification"
+                ],
+                "title": "Mobile Unverified",
+                "route_name": "admin.users.mobile.unverified",
+                "menu_active": "admin.users.mobile.unverified",
+                "counter": "mobileUnverifiedUsersCount"
+            },
+            {
+                "keyword": ["send notification users"],
+                "title": "Notification to All",
+                "route_name": "admin.users.notification.all",
+                "menu_active": "admin.users.notification.all"
+            }
+        ]
+    },
+    "manage_sellers": {
+        "title": "Quản lý người bán",
+        "icon": "las la-store",
+        "counters": ["pendingSellersCount"],
+        "menu_active": "admin.sellers*",
+        "submenu": [
+            {
+                "keyword": ["all sellers"],
+                "title": "All Sellers",
+                "route_name": "admin.sellers.all",
+                "menu_active": "admin.sellers.all"
+            },
+            {
+                "keyword": ["active sellers"],
+                "title": "Người bán hoạt động",
+                "route_name": "admin.sellers.active",
+                "menu_active": "admin.sellers.active"
+            },
+            {
+                "keyword": ["pending sellers"],
+                "title": "Người bán chờ duyệt",
+                "route_name": "admin.sellers.pending",
+                "menu_active": "admin.sellers.pending",
+                "counter": "pendingSellersCount"
+            },
+            {
+                "keyword": ["banned sellers"],
+                "title": "Banned Sellers",
+                "route_name": "admin.sellers.banned",
+                "menu_active": "admin.sellers.banned"
+            }
+        ]
+    },
+    "products": {
+        "title": "Product",
+        "icon": "la la-product-hunt",
+        "counters": ["pendingProductsCount"],
+        "menu_active": [
+            "admin.product*",
+            "admin.category*",
+            "admin.subcategory*",
+            "admin.attribute*",
+            "admin.brand.*",
+            "admin.product.type.*",
+            "admin.tag.*"
+        ],
+        "submenu": [
+            {
+                "keyword": ["Categories", "Manage Category"],
+                "title": "Categories",
+                "route_name": "admin.category.all",
+                "menu_active": "admin.category.*"
+            },
+            {
+                "keyword": ["All Products", "Manage Product"],
+                "title": "All Products",
+                "route_name": "admin.products.all",
+                "menu_active": "admin.products.all"
+            },
+            {
+                "keyword": ["My Products", "Manage Product"],
+                "title": "My Products",
+                "route_name": "admin.products.admin",
+                "menu_active": "admin.products.admin"
+            },
+            {
+                "keyword": ["Seller Products", "Manage Product"],
+                "title": "Sản phẩm người bán",
+                "route_name": "admin.products.seller",
+                "menu_active": "admin.products.seller",
+                "counter": "pendingProductsCount"
+            },
+            {
+                "keyword": ["Product Reviews", "Manage Review"],
+                "title": "Product Reviews",
+                "route_name": "admin.products.reviews",
+                "menu_active": "admin.products.reviews*"
+            },
+            {
+                "keyword": [
+                    "Product Config",
+                    "Currency",
+                    "Exchange Rate",
+                    "Tệ"
+                ],
+                "title": "Cấu hình tiền tệ",
+                "route_name": "admin.products.config",
+                "menu_active": "admin.products.config*"
+            },
+            {
+                "keyword": ["Brands", "Thương hiệu"],
+                "title": "Thương hiệu",
+                "route_name": "admin.brand.all",
+                "menu_active": "admin.brand.*"
+            },
+            {
+                "keyword": ["Product Types", "Loại sản phẩm"],
+                "title": "Loại sản phẩm",
+                "route_name": "admin.product.type.index",
+                "menu_active": "admin.product.type.*"
+            },
+            {
+                "keyword": ["Tags", "Product Tags", "Thẻ sản phẩm"],
+                "title": "Quản lý Tag",
+                "route_name": "admin.tag.all",
+                "menu_active": "admin.tag.*"
+            }
+        ]
+    },
+    "manage_coupons": {
+        "title": "Mã giảm giá",
+        "icon": "las la-ticket-alt",
+        "route_name": "admin.coupon.index",
+        "menu_active": "admin.coupon*"
+    },
+    "manage_promotions": {
+        "title": "Chương trình khuyến mãi",
+        "icon": "las la-percentage",
+        "route_name": "admin.promotions.index",
+        "menu_active": "admin.promotions*"
+    },
+    "orders": {
+        "title": "Quản lý đơn hàng",
+        "icon": "las la-shopping-cart",
+        "menu_active": "admin.order*",
+        "counters": [
+            "pendingOrdersCount",
+            "processingOrdersCount",
+            "dispatchedOrdersCount",
+            "deliveredOrdersCount",
+            "readyToPickupSubOrdersCount"
+        ],
+        "submenu": [
+            {
+                "keyword": ["All Orders", "Manage Order"],
+                "title": "Tất cả đơn hàng",
+                "route_name": "admin.order.all",
+                "menu_active": "admin.order.all"
+            },
+            {
+                "keyword": ["Sales Log", "Admin Sales Log"],
+                "title": "Nhật ký bán của tôi",
+                "route_name": "admin.order.sells.log.admin",
+                "menu_active": "admin.order.sells.log.admin"
+            },
+            {
+                "keyword": ["Sales Log", "Seller Sales Log"],
+                "title": "Nhật ký bán của Shop",
+                "route_name": "admin.order.sells.log.seller",
+                "menu_active": "admin.order.sells.log.seller"
+            }
+        ]
+    },
+    "admin_orders": {
+        "title": "Đơn hàng của tôi",
+        "icon": "las la-luggage-cart",
+        "menu_active": "admin.suborder.*",
+        "counters": [
+            "pendingSubOrdersCount",
+            "processingSubOrdersCount",
+            "dispatchedSubOrdersCount",
+            "deliveredSubOrdersCount"
+        ],
+        "submenu": [
+            {
+                "keyword": ["Admin Orders", "Admin All Orders", "Suborders"],
+                "title": "Tất cả đơn hàng",
+                "route_name": "admin.suborder.all",
+                "menu_active": "admin.suborder.all"
+            }
+        ]
+    },
+
+    "news": {
+        "title": "Tin Tức",
+        "icon": "las la-newspaper",
+        "menu_active": "admin.news.*",
+        "submenu": [
+            {
+                "title": "Danh sách tin",
+                "route_name": "admin.news.index",
+                "menu_active": "admin.news.index"
+            },
+            {
+                "title": "Thêm tin mới",
+                "route_name": "admin.news.create",
+                "menu_active": "admin.news.create"
+            },
+            {
+                "title": "Danh mục",
+                "route_name": "admin.news.category.index",
+                "menu_active": "admin.news.category.*"
+            }
+        ]
+    },
+    "frontend_management": {
+        "title": "Quản lý Giao diện",
+        "icon": "la la-desktop",
+        "menu_active": [
+            "admin.manage.pages.*",
+            "admin.frontend.*",
+            "admin.setting.logo.icon",
+            "admin.seo"
+        ],
+        "submenu": [
+            {
+                "title": "Quản lý trang",
+                "route_name": "admin.manage.pages.index",
+                "menu_active": "admin.manage.pages.*"
+            },
+            {
+                "title": "Quản lý section",
+                "route_name": "admin.frontend.index",
+                "menu_active": "admin.frontend.*"
+            },
+            {
+                "title": "Logo & Icon",
+                "route_name": "admin.setting.logo.icon",
+                "menu_active": "admin.setting.logo.icon"
+            },
+
+            {
+                "title": "Quản trị SEO",
+                "route_name": "admin.seo",
+                "menu_active": "admin.seo"
+            }
+        ]
+    },
+
+    "support_ticket": {
+        "title": "Support Ticket",
+        "icon": "las la-dot-circle",
+        "counters": ["pendingTicketCount"],
+        "menu_active": "admin.ticket.*",
+        "submenu": [
+            {
+                "title": "All Ticket",
+                "route_name": "admin.ticket.index",
+                "menu_active": "admin.ticket.index"
+            },
+            {
+                "title": "Pending Ticket",
+                "route_name": "admin.ticket.pending",
+                "menu_active": "admin.ticket.pending",
+                "counter": "pendingTicketCount"
+            },
+            {
+                "title": "Closed Ticket",
+                "route_name": "admin.ticket.closed",
+                "menu_active": "admin.ticket.closed"
+            },
+            {
+                "title": "Answered Ticket",
+                "route_name": "admin.ticket.answered",
+                "menu_active": "admin.ticket.answered"
+            }
+        ]
+    },
+
+    "subscribers": {
+        "title": "Subscribers",
+        "icon": "las la-paper-plane",
+        "menu_active": "admin.subscriber.*",
+        "submenu": [
+            {
+                "title": "All Subscribers",
+                "route_name": "admin.subscriber.index",
+                "menu_active": "admin.subscriber.index"
+            },
+            {
+                "title": "Send Email",
+                "route_name": "admin.subscriber.send.email",
+                "menu_active": "admin.subscriber.send.email"
+            }
+        ]
+    },
+
+    "settings": {
+        "title": "Cài đặt",
+        "icon": "las la-cog",
+        "menu_active": [
+            "admin.setting.*",
+            "admin.language.manage*",
+            "admin.extensions.index"
+        ],
+        "submenu": [
+            {
+                "title": "Cài đặt chung",
+                "route_name": "admin.setting.general",
+                "menu_active": "admin.setting.general"
+            },
+            {
+                "title": "Cấu hình hệ thống",
+                "route_name": "admin.setting.system.configuration",
+                "menu_active": "admin.setting.system.configuration"
+            },
+            {
+                "title": "Đăng nhập mạng xã hội",
+                "route_name": "admin.setting.socialite.credentials",
+                "menu_active": "admin.setting.socialite.credentials"
+            },
+
+            {
+                "title": "Ngôn ngữ",
+                "route_name": "admin.language.manage",
+                "menu_active": "admin.language.manage*"
+            },
+            {
+                "title": "Tiện ích mở rộng",
+                "route_name": "admin.extensions.index",
+                "menu_active": "admin.extensions.index"
+            },
+            {
+                "title": "Cài đặt thông báo",
+                "route_name": "admin.setting.notification.templates",
+                "menu_active": "admin.setting.notification.*"
+            }
+        ]
+    }
+}

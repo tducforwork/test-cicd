@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Tiết Tin Tức | Quảng Phát Logistic</title>
+
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="mobile.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body>
+
+    <!-- MOBILE HEADER -->
+    <div class="mobile-header">
+        <div class="mobile-logo">
+            <a href="index.html">
+                <img src="assets/logo-black.png" alt="QUẢNG PHÁT" />
+            </a>
+        </div>
+        <div class="mobile-tools">
+            <div class="mobile-tool-item search-trigger">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <div class="mobile-tool-item" onclick="window.location.href='profile.html'">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100&auto=format&fit=crop"
+                    alt="User" class="mobile-avatar" />
+            </div>
+            <div class="mobile-tool-item cart-btn">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="badge">2</span>
+            </div>
+            <div class="mobile-tool-item" id="openMobileMenu">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- MOBILE SEARCH BAR (Toggled) -->
+    <div class="mobile-search-bar" id="mobileSearchBar">
+        <div class="container">
+            <div class="search-input-wrapper">
+                <input type="text" placeholder="Bạn muốn tìm gì hôm nay?" id="mobileSearchInput" />
+                <button type="button" class="mobile-search-btn">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+            <!-- Hot Keywords -->
+            <div class="mobile-search-hot">
+                <span>Xu hướng:</span>
+                <div class="hot-tags">
+                    <a href="#">iPhone 15</a>
+                    <a href="#">Giao hàng 24h</a>
+                    <a href="#">Máy khoan Bosch</a>
+                    <a href="#">Thời trang Mall</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOP BAR (CLEAN) -->
+    <div class="top-bar">
+        <div class="container top-bar-inner d-flex justify-content-between align-items-center">
+            <div class="top-bar-left d-flex gap-3">
+                <a href="#" class="text-decoration-none">Kênh Người Bán</a>
+                <div class="vr" style="width: 1px; height: 14px; align-self: center;"></div>
+                <a href="#" class="text-decoration-none">Vận chuyển Logistics</a>
+                <div class="vr" style="width: 1px; height: 14px; align-self: center;"></div>
+                <a href="#" class="text-decoration-none">Tải ứng dụng</a>
+                <div class="vr" style="width: 1px; height: 14px; align-self: center;"></div>
+                <div class="d-flex align-items-center gap-2">
+                    <span>Kết nối</span>
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="top-bar-right d-flex gap-3 align-items-center">
+                <a href="tel:1900633605" class="text-decoration-none fw-bold"><i class="fa-solid fa-phone me-1"></i>
+                    Hotline: 1900 633 605</a>
+                <a href="#" class="text-decoration-none"><i class="fa-regular fa-circle-question me-1"></i> Hỗ trợ</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER (SHOPEE-STYLE QP MALL) -->
+    <header>
+        <div class="container header-inner">
+            <div class="dual-logo-container">
+                <a href="index.html" class="logo-link">
+                    <img src="assets/logo-mall-black.png" alt="QP MALL" style="height: 60px;" />
+                </a>
+                <div class="logo-divider-v"></div>
+                <a href="about.html" class="logo-link">
+                    <img src="assets/logo-black.png" alt="QP LOGISTICS" style="height: 60px;" />
+                </a>
+            </div>
+
+            <!-- Centered Search Area -->
+            <div class="search-area-wrapper">
+                <div class="shopee-search-bar">
+                    <input type="text" placeholder="Tìm kiếm sản phẩm, thương hiệu hoặc dịch vụ Logistics..." />
+                    <button class="shopee-search-btn">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+                <div class="search-suggestions-box">
+                    <div class="suggestion-section">
+                        <div class="suggestion-section-title">
+                            <span>SẢN PHẨM VỪA TÌM KIẾM</span>
+                            <a href="#">Xóa lịch sử</a>
+                        </div>
+                        <div class="recent-products-grid">
+                            <a href="product-detail.html" class="recent-p-item">
+                                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=100&auto=format&fit=crop"
+                                    class="recent-p-img" alt="Product">
+                                <div class="recent-p-info">
+                                    <p class="recent-p-name">Giày Nike Air Max</p>
+                                    <p class="recent-p-price">2.100.000đ</p>
+                                </div>
+                            </a>
+                            <a href="product-detail.html" class="recent-p-item">
+                                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=100&auto=format&fit=crop"
+                                    class="recent-p-img" alt="Product">
+                                <div class="recent-p-info">
+                                    <p class="recent-p-name">Tai nghe Sony WH</p>
+                                    <p class="recent-p-price">850.000đ</p>
+                                </div>
+                            </a>
+                            <a href="product-detail.html" class="recent-p-item">
+                                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=100&auto=format&fit=crop"
+                                    class="recent-p-img" alt="Product">
+                                <div class="recent-p-info">
+                                    <p class="recent-p-name">Apple Watch Series 8</p>
+                                    <p class="recent-p-price">450.000đ</p>
+                                </div>
+                            </a>
+                            <a href="product-detail.html" class="recent-p-item">
+                                <img src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=100&auto=format&fit=crop"
+                                    class="recent-p-img" alt="Product">
+                                <div class="recent-p-info">
+                                    <p class="recent-p-name">Nước hoa Bleu Chanel</p>
+                                    <p class="recent-p-price">1.850.000đ</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <hr class="my-3 opacity-10">
+                    <div class="suggestion-section">
+                        <div class="suggestion-section-title">
+                            <span>XU HƯỚNG TÌM KIẾM</span>
+                            <a href="#">Xóa tất cả</a>
+                        </div>
+                        <div class="suggestion-tags">
+                            <a href="#" class="suggestion-tag">iPhone 15 Pro Max</a>
+                            <a href="#" class="suggestion-tag">Vận chuyển Trung Việt</a>
+                            <a href="#" class="suggestion-tag">Phụ kiện Mall</a>
+                            <a href="#" class="suggestion-tag">Ốp lưng iPhone</a>
+                            <a href="#" class="suggestion-tag">Sạc dự phòng 20W</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="search-hints">
+                    <a href="#">iPhone 15</a>
+                    <a href="#">Dịch vụ Vận Chuyển</a>
+                    <a href="#">Hàng Chính Hãng</a>
+                    <a href="#">Deal 1K</a>
+                    <a href="#">Flash Sale</a>
+                </div>
+            </div>
+
+            <!-- Tools Section -->
+            <div class="header-right-tools">
+                <div class="header-auth" id="headerAuth">
+                    <div class="user-profile guest-profile">
+                        <img src="https://ui-avatars.com/api/?name=Guest&background=e2e8f0&color=64748b&size=80&bold=true"
+                            alt="Guest" class="avatar" />
+                        <span class="user-name-mall" style="color:#64748b;">Tài khoản</span>
+                        <div class="profile-menu">
+                            <a href="login.html" class="menu-item"><i class="fa-solid fa-right-to-bracket"></i> Đăng
+                                nhập</a>
+                            <a href="register.html" class="menu-item"><i class="fa-solid fa-user-plus"></i> Đăng ký</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-profile is-logged-in" id="userProfile">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100&auto=format&fit=crop"
+                        alt="User" class="avatar" />
+                    <span class="user-name-mall">Nam Nguyễn</span>
+                    <div class="profile-menu">
+                        <a href="profile.html" class="menu-item"><i class="fa-regular fa-user"></i> Hồ sơ</a>
+                        <hr class="dropdown-divider">
+                        <a href="#" class="menu-item logout-item" id="logoutBtn"><i
+                                class="fa-solid fa-right-from-bracket"></i> Thoát</a>
+                    </div>
+                </div>
+                <div class="header-cart-shopee">
+                    <a href="#" class="cart-btn">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="cart-count">2</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- PAGE BREADCRUMB -->
+    <div class="breadcrumb-section"
+        style="background-color: #f8f9fa; padding: 20px 0; border-bottom: 1px solid #eaeaea;">
+        <div class="container">
+            <a href="index.html" style="color: #666; font-size: 14px;">Trang chủ</a>
+            <span style="margin: 0 10px; color: #ccc;">/</span>
+            <a href="news.html" style="color: #666; font-size: 14px;">Tin tức</a>
+            <span style="margin: 0 10px; color: #ccc;">/</span>
+            <span style="color: var(--primary); font-size: 14px; font-weight: 600;">Chi tiết tin tức</span>
+        </div>
+    </div>
+
+    <!-- NEWS DETAIL SECTION -->
+    <section style="padding-top: 48px; background-color: white;">
+        <div class="container">
+            <div class="news-detail-layout">
+                <!-- MAIN CONTENT -->
+                <article class="news-main-content" data-aos="fade-right">
+                    <div class="news-meta-top">
+                        <span class="news-tag">Thị trường</span>
+                        <span class="news-date-detail"><i class="fa-regular fa-calendar" style="margin-right: 5px;"></i>
+                            05/05/2026</span>
+                        <span class="news-author"><i class="fa-regular fa-user" style="margin-right: 5px;"></i> Bởi: Ban
+                            biên tập Quảng Phát</span>
+                    </div>
+
+                    <h1 class="news-detail-title">Xu hướng Logistics xanh 2026: Doanh nghiệp Việt cần chuẩn bị những gì
+                        để thích ứng?</h1>
+
+                    <div class="news-detail-featured-img">
+                        <img src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?q=80&w=800&auto=format&fit=crop"
+                            alt="Featured Image">
+                        <p class="img-caption">Hệ thống kho bãi hiện đại ứng dụng năng lượng sạch tại Quảng Phát
+                            Logistic.</p>
+                    </div>
+
+                    <div class="news-content-text">
+                        <p>Ngành Logistics toàn cầu đang chứng kiến một cuộc cách mạng mang tên "Logistics Xanh". Đây
+                            không còn là một lựa chọn, mà đã trở thành yêu cầu bắt buộc đối với các doanh nghiệp muốn
+                            tồn tại và phát triển bền vững trong chuỗi cung ứng toàn cầu hiện nay.</p>
+
+                        <h2>1. Tại sao Logistics Xanh lại trở nên cấp thiết?</h2>
+                        <p>Với các cam kết về cắt giảm khí thải Net Zero vào năm 2050, các thị trường lớn như EU, Mỹ và
+                            Nhật Bản đang áp dụng những rào cản kỹ thuật khắt khe hơn đối với hàng hóa nhập khẩu. Điều
+                            này đòi hỏi quy trình vận chuyển từ điểm đi đến điểm đến phải được tối ưu hóa về năng lượng
+                            và giảm thiểu tác động đến môi trường.</p>
+
+                        <p>Tại Việt Nam, Chính phủ cũng đã ban hành nhiều nghị định nhằm thúc đẩy phát triển xanh. Các
+                            doanh nghiệp Logistics không thích ứng kịp thời sẽ đối mặt với nguy cơ mất đi các đối tác
+                            lớn quốc tế.</p>
+
+                        <blockquote>
+                            "Logistics Xanh không chỉ là trách nhiệm với môi trường, mà còn là lợi thế cạnh tranh cốt
+                            lõi giúp doanh nghiệp tối ưu hóa chi phí vận hành và nâng cao uy tín thương hiệu."
+                        </blockquote>
+
+                        <h2>2. Những lộ trình doanh nghiệp cần chuẩn bị</h2>
+                        <ul>
+                            <li><strong>Chuyển đổi phương tiện:</strong> Đầu tư vào đội xe tải điện và các phương tiện
+                                sử dụng năng lượng thay thế.</li>
+                            <li><strong>Tối ưu hóa hành trình:</strong> Ứng dụng AI và Big Data để tính toán tuyến đường
+                                ngắn nhất, giảm thời gian xe chạy rỗng.</li>
+                            <li><strong>Kho bãi xanh:</strong> Lắp đặt hệ thống điện năng lượng mặt trời áp mái và sử
+                                dụng thiết bị nâng hạ chạy bằng điện thay cho dầu diesel.</li>
+                            <li><strong>Bao bì bền vững:</strong> Sử dụng vật liệu tái chế và giảm thiểu rác thải nhựa
+                                trong quy trình đóng gói.</li>
+                        </ul>
+
+                        <div style="margin: 30px 0;">
+                            <img src="https://images.unsplash.com/photo-1513828583688-c52646db42da?q=80&w=1000&auto=format&fit=crop"
+                                alt="Inner Image" style="width: 100%; border-radius: 12px; margin-bottom: 10px;">
+                            <p class="img-caption">Tối ưu hóa vận tải biển giúp giảm thiểu lượng khí thải CO2 đáng kể.
+                            </p>
+                        </div>
+
+                        <h2>3. Quảng Phát Logistic và cam kết phát triển bền vững</h2>
+                        <p>Hiểu rõ xu thế này, Quảng Phát Logistic đã và đang triển khai lộ trình chuyển đổi số song
+                            hành với chuyển đổi xanh. Chúng tôi tự hào là một trong những đơn vị tiên phong áp dụng hệ
+                            thống quản lý kho thông minh giúp tiết kiệm 20% điện năng tiêu thụ và giảm 15% lượng rác
+                            thải công nghiệp mỗi năm.</p>
+
+                        <p>Kết luận: Logistics xanh là một hành trình dài đòi hỏi sự đầu tư bài bản và tầm nhìn dài hạn.
+                            Doanh nghiệp Việt cần hành động ngay từ hôm nay để không bị bỏ lại phía sau trong cuộc chơi
+                            toàn cầu.</p>
+                    </div>
+
+                    <div class="news-detail-footer">
+                        <div class="news-share">
+                            <span>Chia sẻ:</span>
+                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fa-solid fa-link"></i></a>
+                        </div>
+                        <div class="news-tags">
+                            <a href="#">#LogisticsXanh</a>
+                            <a href="#">#XuHuong2026</a>
+                            <a href="#">#QuangPhatNews</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- SIDEBAR -->
+                <aside class="news-sidebar" data-aos="fade-left">
+                    <!-- Related News Widget -->
+                    <div class="sidebar-widget">
+                        <h4 class="widget-title">Tin Liên Quan</h4>
+                        <div class="related-news-list">
+                            <div class="related-item">
+                                <a href="#" class="related-img">
+                                    <img src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?q=80&w=150&auto=format&fit=crop"
+                                        alt="Related">
+                                </a>
+                                <div class="related-info">
+                                    <h4 class="news-title" style="font-size: 14px; margin-bottom: 5px;">
+                                        <a href="#">Quảng Phát mở rộng tuyến vận tải đường biển đi Châu Âu</a>
+                                    </h4>
+                                    <span class="news-date">03/05/2026</span>
+                                </div>
+                            </div>
+                            <div class="related-item">
+                                <a href="#" class="related-img">
+                                    <img src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?q=80&w=150&auto=format&fit=crop"
+                                        alt="Related">
+                                </a>
+                                <div class="related-info">
+                                    <h4 class="news-title" style="font-size: 14px; margin-bottom: 5px;">
+                                        <a href="#">Thương mại điện tử xuyên biên giới bùng nổ</a>
+                                    </h4>
+                                    <span class="news-date">01/05/2026</span>
+                                </div>
+                            </div>
+                            <div class="related-item">
+                                <a href="#" class="related-img">
+                                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800&auto=format&fit=crop"
+                                        alt="Related">
+                                </a>
+                                <div class="related-info">
+                                    <h4 class="news-title" style="font-size: 14px; margin-bottom: 5px;">
+                                        <a href="#">Ứng dụng AI trong quản lý kho bãi tại Quảng Phát</a>
+                                    </h4>
+                                    <span class="news-date">25/04/2026</span>
+                                </div>
+                            </div>
+                            <div class="related-item">
+                                <a href="#" class="related-img">
+                                    <img src="https://images.unsplash.com/photo-1513828583688-c52646db42da?q=80&w=150&auto=format&fit=crop"
+                                        alt="Related">
+                                </a>
+                                <div class="related-info">
+                                    <h4 class="news-title" style="font-size: 14px; margin-bottom: 5px;">
+                                        <a href="#">Giá cước vận tải biển biến động mạnh quý II/2026</a>
+                                    </h4>
+                                    <span class="news-date">22/04/2026</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Categories Widget -->
+                    <div class="sidebar-widget">
+                        <h4 class="widget-title">Danh Mục</h4>
+                        <ul class="sidebar-cat-list">
+                            <li><a href="#">Thị trường <span>(12)</span></a></li>
+                            <li><a href="#">Logistics <span>(25)</span></a></li>
+                            <li><a href="#">E-commerce <span>(18)</span></a></li>
+                            <li><a href="#">Sự kiện công ty <span>(09)</span></a></li>
+                            <li><a href="#">Thông cáo báo chí <span>(05)</span></a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Newsletter Widget -->
+                    <div class="sidebar-widget newsletter-widget"
+                        style="background: var(--bg-alt); padding: 30px; border-radius: 12px; border: 1px solid var(--border);">
+                        <h4 style="font-size: 18px; margin-bottom: 15px;">Đăng ký nhận tin</h4>
+                        <p style="font-size: 13px; color: #666; margin-bottom: 20px;">Nhận các bản tin mới nhất từ chúng
+                            tôi qua email hàng tuần.</p>
+                        <form style="display: flex; flex-direction: column; gap: 10px;">
+                            <input type="email" placeholder="Email của bạn..."
+                                style="padding: 12px 15px; border-radius: 8px; border: 1px solid var(--border); font-size: 14px; outline: none;">
+                            <button type="submit" class="btn btn-primary"
+                                style="padding: 12px; font-size: 14px; background: #f7b543; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">ĐĂNG
+                                KÝ</button>
+                        </form>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-col"
+                    style="grid-column: span 1.5; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                    <img src="assets/logo-black.png" alt="QUẢNG PHÁT" style="height: 90px; margin-bottom: 20px;">
+                    <p style="color: #999; font-size: 13px; margin-bottom: 20px;text-align: justify;">Cầu nối giao
+                        thương toàn cầu. Quảng Phát Logistic mang đến giải pháp vận chuyển và thương mại điện tử trọn
+                        gói cho doanh nghiệp.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4 style="color: white; margin-bottom: 20px; font-size: 14px;">GIỚI THIỆU</h4>
+                    <a href="about.html" class="footer-link">Về chúng tôi</a>
+                    <a href="#" class="footer-link">Hướng dẫn mua hàng</a>
+                    <a href="#" class="footer-link">Quy trình xử lý khiếu nại</a>
+                    <a href="#" class="footer-link">Chính sách & Điều khoản</a>
+                </div>
+                <div class="footer-col">
+                    <h4 style="color: white; margin-bottom: 20px; font-size: 14px;">CHÍNH SÁCH</h4>
+                    <a href="#" class="footer-link">Chính sách giao hàng</a>
+                    <a href="#" class="footer-link">Chính sách bảo mật</a>
+                    <a href="#" class="footer-link">Chính sách thanh toán</a>
+                    <a href="#" class="footer-link">Đối tác vận chuyển</a>
+                </div>
+                <div class="footer-col" style="grid-column: span 1.5;">
+                    <h4 style="color: white; margin-bottom: 20px; font-size: 14px;">LIÊN HỆ</h4>
+                    <p style="color: #999; font-size: 13px; margin-bottom: 10px;"><i class="fa-solid fa-location-dot"
+                            style="margin-right: 10px;"></i> Địa chỉ: Số 123, Đường ABC, Quận XYZ, TP. Hồ Chí Minh</p>
+                    <p style="color: #999; font-size: 13px; margin-bottom: 10px;"><i class="fa-solid fa-phone"
+                            style="margin-right: 10px;"></i> Hotline: 0987.xxx.xxx</p>
+                    <p style="color: #999; font-size: 13px; margin-bottom: 10px;"><i class="fa-solid fa-envelope"
+                            style="margin-right: 10px;"></i> Email: contact@quangphat.com</p>
+                </div>
+            </div>
+            <div
+                style="height: 40px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #666;">
+                <p>&copy; 2026 Quảng Phát Logistic. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FLOATING ACTIONS -->
+    <div class="floating-actions">
+        <a href="tel:0987xxxxxx" class="action-btn hotline-btn" title="Gọi Hotline">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+        <a href="https://zalo.me/0987xxxxxx" target="_blank" class="action-btn zalo-btn" title="Chat Zalo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo"
+                style="width: 100%; height: 100%; border-radius: 50%;">
+        </a>
+        <a href="https://m.me/yourpage" target="_blank" class="action-btn mess-btn" title="Chat Messenger">
+            <i class="fa-brands fa-facebook-messenger"></i>
+        </a>
+        <button id="scrollTopBtn" class="action-btn scroll-top-btn" title="Lên đầu trang">
+            <i class="fa-solid fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100,
+            easing: 'ease-out-cubic'
+        });
+
+        // Scroll to Top
+        const scrollTopBtn = document.getElementById("scrollTopBtn");
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add("show");
+            } else {
+                scrollTopBtn.classList.remove("show");
+            }
+        });
+        scrollTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    </script>
+    <!-- SIDE CART -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Giỏ hàng của bạn</h3>
+            <button class="close-cart" id="closeCart">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="cart-items-list">
+            <div class="cart-item">
+                <div class="cart-item-img">
+                    <img src="https://images.unsplash.com/photo-1510972527921-ce03766a1cf1?q=80&w=200&auto=format&fit=crop"
+                        alt="Product" />
+                </div>
+                <div class="cart-item-info">
+                    <a href="#" class="cart-item-name">Máy pha cà phê DeLonghi Dedica EC685</a>
+                    <div class="cart-item-price">4.250.000đ</div>
+                    <div class="cart-item-qty">Số lượng: 1</div>
+                </div>
+                <div class="remove-item"><i class="fa-solid fa-trash-can"></i></div>
+            </div>
+            <div class="cart-item">
+                <div class="cart-item-img">
+                    <img src="https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?q=80&w=200&auto=format&fit=crop"
+                        alt="Product" />
+                </div>
+                <div class="cart-item-info">
+                    <a href="#" class="cart-item-name">Ấm Pha Cà Phê Moka Bialetti Cao Cấp</a>
+                    <div class="cart-item-price">950.000đ</div>
+                    <div class="cart-item-qty">Số lượng: 1</div>
+                </div>
+                <div class="remove-item"><i class="fa-solid fa-trash-can"></i></div>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Tổng cộng:</span>
+                <span class="cart-total-price">5.200.000đ</span>
+            </div>
+            <button class="btn-checkout" onclick="window.location.href = 'cart.html'">
+                Tiến hành thanh toán
+            </button>
+        </div>
+    </div>
+
+    <!-- MOBILE BOTTOM NAVIGATION -->
+    <div class="mobile-bottom-nav">
+        <a href="index.html" class="mobile-nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>Trang chủ</span>
+        </a>
+        <a href="products.html" class="mobile-nav-item">
+            <i class="fa-solid fa-boxes-stacked"></i>
+            <span>Sản phẩm</span>
+        </a>
+        <a href="orders.html" class="mobile-nav-item">
+            <i class="fa-solid fa-clipboard-list"></i>
+            <span>Đơn hàng</span>
+        </a>
+        <a href="profile.html" class="mobile-nav-item">
+            <i class="fa-solid fa-user"></i>
+            <span>Cá nhân</span>
+        </a>
+    </div>
+
+    <!-- MOBILE DRAWER -->
+    <div class="mobile-drawer-overlay" id="mobileOverlay"></div>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-user-header">
+            <div class="user-info">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100&auto=format&fit=crop"
+                    alt="User" />
+                <div class="user-text">
+                    <p class="name">Nam Nguyễn</p>
+                    <p class="level"><i class="fa-solid fa-crown"></i> Thành viên Vàng</p>
+                </div>
+            </div>
+            <div class="close-drawer" id="closeMobileMenu">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+        <div class="drawer-content">
+            <div class="drawer-menu">
+                <a href="index.html" class="menu-item"><i class="fa-solid fa-house" style="color: #64748b;"></i> Quảng
+                    Phát Mall</a>
+                <a href="about.html" class="menu-item"><i class="fa-solid fa-truck-fast" style="color: #64748b;"></i>
+                    Quảng Phát Logistic</a>
+                <a href="news.html" class="menu-item"><i class="fa-solid fa-newspaper" style="color: #64748b;"></i> Tin
+                    tức mới nhất</a>
+                <a href="lien-he.html" class="menu-item"><i class="fa-solid fa-envelope" style="color: #f59e0b;"></i>
+                    Liên hệ hỗ trợ</a>
+            </div>
+
+            <div class="drawer-divider"></div>
+
+            <div class="drawer-menu">
+                <div class="menu-label">Tiện ích của tôi</div>
+                <a href="cart.html" class="menu-item"><i class="fa-solid fa-cart-shopping" style="color: #f97316;"></i>
+                    Giỏ hàng</a>
+                <a href="orders.html" class="menu-item"><i class="fa-solid fa-clipboard-list"
+                        style="color: #f97316;"></i> Đơn hàng của tôi</a>
+                <a href="#" class="menu-item"><i class="fa-solid fa-ticket" style="color: #f59e0b;"></i> Kho Voucher</a>
+                <a href="#" class="menu-item"><i class="fa-solid fa-coins" style="color: #f59e0b;"></i> QP Xu <span
+                        class="badge-mini">1.2k</span></a>
+                <a href="#" class="menu-item"><i class="fa-solid fa-heart" style="color: #f97316;"></i> Đã thích</a>
+            </div>
+
+            <div class="drawer-divider"></div>
+
+            <!-- Seller Only Section -->
+            <div class="seller-menu-section">
+                <div class="menu-label">Kênh người bán</div>
+                <a href="seller-dashboard.html" class="menu-item"><i class="fa-solid fa-chart-line"></i> Dashboard thống
+                    kê</a>
+                <a href="seller-products.html" class="menu-item"><i class="fa-solid fa-boxes-stacked"></i> Quản lý sản
+                    phẩm</a>
+                <a href="seller-orders.html" class="menu-item"><i class="fa-solid fa-clipboard-list"></i> Đơn hàng đã
+                    nhận</a>
+                <a href="seller-payments.html" class="menu-item"><i class="fa-solid fa-wallet"></i> Lịch sử thanh
+                    toán</a>
+                <a href="shop-config.html" class="menu-item"><i class="fa-solid fa-gear"></i> Cài đặt Shop</a>
+            </div>
+
+            <div class="drawer-divider"></div>
+
+            <div class="drawer-menu">
+                <a href="#" class="menu-item logout-item"><i class="fa-solid fa-right-from-bracket"
+                        style="color: #f97316;"></i> Đăng xuất</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="mobile.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,3184 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quảng Phát Logistic | Sàn Thương Mại Điện Tử & Vận Chuyển</title>
+
+  <!-- CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="qp_mall.css" />
+  <link rel="stylesheet" href="mobile.css" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+  <!-- MOBILE HEADER -->
+  <div class="mobile-header">
+    <div class="mobile-logo">
+      <a href="index.html">
+        <img src="assets/logo-black.png" alt="QUẢNG PHÁT" />
+      </a>
+    </div>
+    <div class="mobile-tools">
+      <div class="mobile-tool-item search-trigger">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+      <div class="mobile-tool-item" onclick="window.location.href='profile.html'">
+        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100&auto=format&fit=crop"
+          alt="User" class="mobile-avatar" />
+      </div>
+      <div class="mobile-tool-item cart-btn">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="badge">2</span>
+      </div>
+      <div class="mobile-tool-item" id="openMobileMenu">
+        <i class="fa-solid fa-bars-staggered"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOBILE SEARCH BAR (Toggled) -->
+  <div class="mobile-search-bar" id="mobileSearchBar">
+    <div class="container">
+      <div class="search-input-wrapper">
+        <input type="text" placeholder="Bạn muốn tìm gì hôm nay?" id="mobileSearchInput" />
+        <button type="button" class="mobile-search-btn">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="top-bar-left">
+        <span><i class="fa-solid fa-phone"></i> Hotline: 0987.xxx.xxx</span>
+        <span><i class="fa-solid fa-location-dot"></i> Địa chỉ: Hà Nội, Việt
+          Nam</span>
+      </div>
+      <div class="top-bar-right">
+        <a href="#">Hướng dẫn mua hàng</a>
+        <a href="#">Chính sách giao hàng</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container header-main">
+      <div class="logo-group">
+        <a href="qp_mall_home.html" class="logo-item">
+          <img src="assets/logo-white.png" alt="QP Mall" />
+          <span class="logo-text-label">QP Mall</span>
+        </a>
+        <div class="logo-divider"></div>
+        <a href="qp_logistic_hub.html" class="logo-item">
+          <img src="assets/logo-white.png" alt="QP Logistic" />
+          <span class="logo-text-label">QP Logistic</span>
+        </a>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="search-bar-main pc-only">
+        <div class="search-input-group">
+          <input type="text" placeholder="Tìm kiếm sản phẩm trên QP Mall..." id="mainSearchInput" />
+          <button><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+
+        <!-- Integrated Quick Keywords -->
+        <div class="quick-links-search">
+          <a href="#">Áo thun nam</a>
+          <a href="#">Khóa vân tay</a>
+          <a href="#">Súng bắn keo</a>
+          <a href="#">iPhone 15</a>
+          <a href="#">Freeship Xtra</a>
+          <a href="#">Voucher 50%</a>
+        </div>
+      </div>
+
+      <div class="header-tools">
+
+        <div class="header-auth" id="headerAuth" style="display: none">
+          <a href="login.html" class="auth-btn auth-btn-login">Đăng nhập</a>
+          <a href="register.html" class="auth-btn auth-btn-register">Đăng ký</a>
+        </div>
+
+        <!-- User Profile (Logged In State) -->
+        <div class="user-profile is-logged-in" id="userProfile">
+          <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100&auto=format&fit=crop"
+            alt="User" class="avatar" />
+          <div class="profile-menu">
+            <div class="user-info-brief">
+              <span class="user-name">Nguyễn Văn Nam</span>
+              <span class="user-role">Người bán (Seller)</span>
+            </div>
+
+            <!-- General Items -->
+            <a href="profile.html" class="menu-item"><i class="fa-regular fa-user"></i> Thông tin cá nhân</a>
+            <a href="change-password.html" class="menu-item"><i class="fa-solid fa-lock"></i> Đổi mật khẩu</a>
+
+            <!-- Seller Only Section -->
+            <div class="seller-menu-section">
+              <div class="menu-label">Kênh người bán</div>
+              <a href="seller-dashboard.html" class="menu-item"><i class="fa-solid fa-chart-line"></i> Dashboard thống
+                kê</a>
+              <a href="seller-products.html" class="menu-item"><i class="fa-solid fa-boxes-stacked"></i> Quản lý sản
+                phẩm</a>
+              <a href="seller-orders.html" class="menu-item"><i class="fa-solid fa-clipboard-list"></i> Đơn hàng đã
+                nhận</a>
+              <a href="seller-payments.html" class="menu-item"><i class="fa-solid fa-wallet"></i> Lịch sử thanh toán</a>
+              <a href="shop-config.html" class="menu-item"><i class="fa-solid fa-gear"></i> Cài đặt Shop</a>
+            </div>
+
+            <a href="#" class="menu-item logout-item" onclick="logoutDemo()"><i
+                class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+          </div>
+        </div>
+
+        <a href="#" class="cart-btn">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="cart-count">2</span>
+        </a>
+      </div> <!-- Close header-tools -->
+    </div> <!-- Close header-main -->
+
+    <div class="header-nav-bar">
+      <div class="container">
+        <div class="header-nav-items">
+          <div class="has-mega-menu">
+            <a href="products.html" class="header-nav-link"><i class="fa-solid fa-bars" style="margin-right: 8px;"></i>
+              Danh mục sản phẩm</a>
+            <div class="ecommerce-mega-menu">
+              <div class="mega-sidebar">
+                <!-- Item 1 -->
+                <div class="mega-tab">
+                  <a href="products.html" class="mega-tab-link">
+                    <span class="mega-tab-left"><i class="fa-solid fa-apple-whole icon"></i> Thực phẩm & Đồ uống</span>
+                    <i class="fa-solid fa-chevron-right arrow"></i>
+                  </a>
+                  <div class="mega-panel">
+                    <div class="mega-grid">
+                      <div class="mega-column">
+                        <h4 class="mega-title">Thực phẩm tươi sống</h4>
+                        <a href="products.html">Thịt, cá, hải sản</a>
+                        <a href="products.html">Rau củ quả tươi</a>
+                        <a href="products.html">Trái cây trong nước</a>
+                        <a href="products.html">Trái cây nhập khẩu</a>
+                      </div>
+                      <div class="mega-column">
+                        <h4 class="mega-title">Thực phẩm khô</h4>
+                        <a href="products.html">Gạo, mì, miến</a>
+                        <a href="products.html">Gia vị, nước chấm</a>
+                        <a href="products.html">Đồ hộp, đóng gói</a>
+                        <a href="products.html">Đồ ăn vặt</a>
+                      </div>
+                      <div class="mega-column">
+                        <h4 class="mega-title">Đồ uống & Giải khát</h4>
+                        <a href="products.html">Nước tinh khiết</a>
+                        <a href="products.html">Nước ngọt có gas</a>
+                        <a href="products.html">Trà & Cà phê</a>
+                        <a href="products.html">Sữa & Chế phẩm</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="mega-tab">
+                  <a href="products.html" class="mega-tab-link">
+                    <span class="mega-tab-left"><i class="fa-solid fa-industry icon"></i> Máy móc & Công nghiệp</span>
+                    <i class="fa-solid fa-chevron-right arrow"></i>
+                  </a>
+                  <div class="mega-panel">
+                    <div class="mega-grid">
+                      <div class="mega-column">
+                        <h4 class="mega-title">Thiết bị công nghiệp</h4>
+                        <a href="products.html">Máy gia công cơ khí</a>
+                        <a href="products.html">Máy phát điện</a>
+                        <a href="products.html">Máy bơm công nghiệp</a>
+                        <a href="products.html">Thiết bị nâng hạ</a>
+                      </div>
+                      <div class="mega-column">
+                        <h4 class="mega-title">Dụng cụ điện & Cầm tay</h4>
+                        <a href="products.html">Máy khoan, máy mài</a>
+                        <a href="products.html">Bộ đồ nghề đa năng</a>
+                        <a href="products.html">Thiết bị đo lường</a>
+                        <a href="products.html">Vật tư tiêu hao</a>
+                      </div>
+                      <div class="mega-column">
+                        <h4 class="mega-title">Linh kiện & Phụ tùng</h4>
+                        <a href="products.html">Vòng bi, bạc đạn</a>
+                        <a href="products.html">Motor, động cơ</a>
+                        <a href="products.html">Linh kiện khí nén</a>
+                        <a href="products.html">Thiết bị thủy lực</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="mega-tab">
+                  <a href="products.html" class="mega-tab-link">
+                    <span class="mega-tab-left"><i class="fa-solid fa-shirt icon"></i> Thời trang & Phụ kiện</span>
+                    <i class="fa-solid fa-chevron-right arrow"></i>
+                  </a>
+                  <div class="mega-panel">
+                    <div class="mega-grid">
+                      <div class="mega-column">
+                        <h4 class="mega-title">Thời trang Nam</h4>
+                        <a href="products.html">Áo thun, áo sơ mi</a>
+                        <a href="products.html">Quần jean, kaki</a>
+                        <a href="products.html">Áo khoác, áo vest</a>
+                        <a href="products.html">Đồ lót nam</a>
+                      </div>
+                      <div class="mega-column">
+                        <h4 class="mega-title">Thời trang Nữ</h4>
+                        <a href="products.html">Váy đầm, chân váy</a>
+                        <a href="products.html">Áo kiểu, sơ mi nữ</a>
+                        <a href="products.html">Đồ mặc nhà</a>
+                        <a href="products.html">Đồ lót nữ</a>
+                      </div>
+                      <div class="mega-column">
+                        <h4 class="mega-title">Phụ kiện & Trang sức</h4>
+                        <a href="products.html">Đồng hồ, mắt kính</a>
+                        <a href="products.html">Túi xách, balo</a>
+                        <a href="products.html">Giày dép</a>
+                        <a href="products.html">Trang sức</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Item 4 -->
+                <div class="mega-tab">
+                  <a href="products.html" class="mega-tab-link">
+                    <span class="mega-tab-left"><i class="fa-solid fa-laptop icon"></i> Điện tử & Công nghệ</span>
+                    <i class="fa-solid fa-chevron-right arrow"></i>
+                  </a>
+                  <div class="mega-panel">
+                    <div class="mega-grid">
+                      <div class="mega-column">
+                        <h4 class="mega-title">Điện thoại & Phụ kiện</h4>
+                        <a href="products.html">Điện thoại thông minh</a>
+                        <a href="products.html">Máy tính bảng</a>
+                        <a href="products.html">Ốp lưng, bao da</a>
+                        <a href="products.html">Sạc, cáp, pin dự phòng</a>
+                      </div>
+                      <div class="mega-column">
+                        <h4 class="mega-title">Máy tính & Laptop</h4>
+                        <a href="products.html">Laptop văn phòng</a>
+                        <a href="products.html">Laptop gaming</a>
+                        <a href="products.html">Linh kiện máy tính</a>
+                        <a href="products.html">Phụ kiện máy tính</a>
+                      </div>
+                      <div class="mega-column">
+                        <h4 class="mega-title">Thiết bị âm thanh & Nhìn</h4>
+                        <a href="products.html">Tivi, màn hình</a>
+                        <a href="products.html">Loa bluetooth</a>
+                        <a href="products.html">Tai nghe, headset</a>
+                        <a href="products.html">Máy ảnh, máy quay</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Item 5 -->
+                <div class="mega-tab">
+                  <a href="products.html" class="mega-tab-link">
+                    <span class="mega-tab-left"><i class="fa-solid fa-house-chimney icon"></i> Nhà cửa & Đời sống</span>
+                    <i class="fa-solid fa-chevron-right arrow"></i>
+                  </a>
+                  <div class="mega-panel">
+                    <div class="mega-grid">
+                      <div class="mega-column">
+                        <h4 class="mega-title">Nội thất phòng khách</h4>
+                        <a href="products.html">Sofa, bàn trà</a>
+                        <a href="products.html">Kệ tivi, tủ giày</a>
+                        <a href="products.html">Đèn trang trí</a>
+                      </div>
+                      <div class="mega-column">
+                        <h4 class="mega-title">Phòng ngủ & Chăn ga</h4>
+                        <a href="products.html">Giường, nệm</a>
+                        <a href="products.html">Chăn ga gối</a>
+                        <a href="products.html">Tủ quần áo</a>
+                      </div>
+                      <div class="mega-column">
+                        <h4 class="mega-title">Dụng cụ nhà bếp</h4>
+                        <a href="products.html">Bếp, lò nướng</a>
+                        <a href="products.html">Xoong nồi, chảo</a>
+                        <a href="products.html">Thiết bị tiện ích</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Item 6 -->
+                <div class="mega-tab">
+                  <a href="products.html" class="mega-tab-link">
+                    <span class="mega-tab-left"><i class="fa-solid fa-heart-pulse icon"></i> Sức khỏe & Làm đẹp</span>
+                    <i class="fa-solid fa-chevron-right arrow"></i>
+                  </a>
+                  <div class="mega-panel">
+                    <div class="mega-grid">
+                      <div class="mega-column">
+                        <h4 class="mega-title">Mỹ phẩm chăm sóc da</h4>
+                        <a href="products.html">Sữa rửa mặt</a>
+                        <a href="products.html">Kem dưỡng, serum</a>
+                        <a href="products.html">Mặt nạ, tẩy tế bào</a>
+                      </div>
+                      <div class="mega-column">
+                        <h4 class="mega-title">Trang điểm & Nước hoa</h4>
+                        <a href="products.html">Son, phấn phủ</a>
+                        <a href="products.html">Nước hoa nam/nữ</a>
+                        <a href="products.html">Dụng cụ trang điểm</a>
+                      </div>
+                      <div class="mega-column">
+                        <h4 class="mega-title">Chăm sóc cơ thể</h4>
+                        <a href="products.html">Sữa tắm, dầu gội</a>
+                        <a href="products.html">Chăm sóc răng miệng</a>
+                        <a href="products.html">Thực phẩm chức năng</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Other nav links -->
+          <a href="index.html" class="header-nav-link">Trang chủ</a>
+          <a href="qp_logistic_hub.html" class="header-nav-link">Logistics</a>
+          <a href="qp_mall_home.html" class="header-nav-link active">QP Mall</a>
+          <a href="lien-he.html" class="header-nav-link">Liên hệ</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container ecommerce-wrapper">
+    <!-- Left Sidebar: QP Logistic -->
+    <aside class="logistic-sidebar left pc-only">
+      <div class="logistic-sidebar-title">
+        <img src="assets/logo-black.png" style="height:24px" alt="QP Logistic"> Dịch vụ
+      </div>
+      <a href="qp_logistic_hub.html" class="logistic-menu-item"><i class="fa-solid fa-warehouse"></i> Kho vận</a>
+      <a href="qp_logistic_hub.html" class="logistic-menu-item"><i class="fa-solid fa-truck-fast"></i> Logistics nội
+        địa</a>
+      <a href="qp_logistic_hub.html" class="logistic-menu-item"><i class="fa-solid fa-ship"></i> Logistics quốc tế</a>
+      <a href="qp_logistic_hub.html" class="logistic-menu-item"><i class="fa-solid fa-file-signature"></i> Khai báo hải
+        quan</a>
+      <a href="qp_logistic_hub.html" class="logistic-menu-item"><i class="fa-solid fa-globe"></i> TMĐT Quốc tế</a>
+      <a href="qp_logistic_hub.html" class="logistic-menu-item"><i class="fa-solid fa-handshake"></i> Ủy thác XNK</a>
+    </aside>
+
+    <div class="mall-main-content">
+      <!-- Right Sidebar: Hot Deals (Positioned fixed via CSS) -->
+      <aside class="logistic-sidebar right pc-only">
+        <div class="logistic-sidebar-title">
+          <i class="fa-solid fa-fire"></i> ƯU ĐÃI HOT
+        </div>
+        <div class="promo-card">
+          <img src="https://images.unsplash.com/photo-1607083206968-13611e3d76db?q=80&w=400&auto=format&fit=crop"
+            alt="Promo 1">
+          <div class="promo-badge">SALE 50%</div>
+        </div>
+        <div class="promo-card">
+          <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=400&auto=format&fit=crop"
+            alt="Promo 2">
+          <div class="promo-badge">FLASH SALE</div>
+        </div>
+      </aside>
+      <!-- HERO SECTION (EDITORIAL SLIDER) -->
+      <section class="hero-slider">
+        <div class="slider-container">
+          <!-- Slide 1: Ecommerce Marketplace -->
+          <div class="slide active" style="
+            background-image:
+              linear-gradient(
+                to right,
+                rgba(0, 0, 0, 0.85) 0%,
+                rgba(0, 0, 0, 0.4) 50%,
+                transparent 100%
+              ),
+              url(../assets/images/hero-bg.jpg);
+          ">
+            <div class="container">
+              <div class="slide-content">
+                <span class="slide-sub">HỆ SINH THÁI MUA SẮM TRỰC TUYẾN</span>
+                <h1 class="slide-title">Sàn Thương Mại Điện Tử Quảng Phát</h1>
+                <a href="products.html" class="btn btn-white">Mua Sắm Ngay</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2: Technology & Digital Boutique -->
+          <div class="slide" style="
+            background-image:
+              linear-gradient(
+                to right,
+                rgba(0, 0, 0, 0.85) 0%,
+                rgba(0, 0, 0, 0.4) 50%,
+                transparent 100%
+              ),
+              url(&quot;https://images.unsplash.com/photo-1491933382434-500287f9b54b?q=80&w=1920&auto=format&fit=crop&quot;);
+          ">
+            <div class="container">
+              <div class="slide-content">
+                <span class="slide-sub">CÔNG NGHỆ ĐỘT PHÁ</span>
+                <h1 class="slide-title">Trải Nghiệm Digital Boutique</h1>
+                <a href="products.html" class="btn btn-white">Khám Phá Ngay</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3: Lifestyle & Premium Shopping -->
+          <div class="slide" style="
+            background-image:
+              linear-gradient(
+                to right,
+                rgba(0, 0, 0, 0.85) 0%,
+                rgba(0, 0, 0, 0.4) 50%,
+                transparent 100%
+              ),
+              url(&quot;https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1920&auto=format&fit=crop&quot;);
+          ">
+            <div class="container">
+              <div class="slide-content">
+                <span class="slide-sub">PHONG CÁCH SỐNG THỜI THƯỢNG</span>
+                <h1 class="slide-title">Bộ Sưu Tập Thượng Lưu</h1>
+                <a href="products.html" class="btn btn-white">Xem Bộ Sưu Tập</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <button class="slider-nav prev pc-only">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button class="slider-nav next pc-only">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+        <!-- Pagination Dots -->
+        <div class="slider-dots">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </section>
+
+      <!-- SUB BANNERS -->
+      <section class="sub-banners-section py-lg-5 py-4">
+        <div class="container">
+          <div class="shopee-cat-wrap">
+            <button class="shopee-cat-arrow sub-prev pc-only" aria-label="Trước">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button class="shopee-cat-arrow sub-next pc-only" aria-label="Sau">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+            <div class="sub-banners-slider">
+              <!-- Banner 1 -->
+              <div class="sub-banner-item" onclick="openCoupon('QP-NEW50', 'Giảm 50% cho đơn đầu tiên')">
+                <div class="sub-banner-item-bg" style="
+                  background: #1e293b
+                    url(&quot;https://images.unsplash.com/photo-1607083206968-13611e3d76db?q=80&w=1000&auto=format&fit=crop&quot;)
+                    center/cover;
+                "></div>
+                <div>
+                  <h3 style="color: white; margin-bottom: 10px">
+                    Voucher Độc Quyền
+                  </h3>
+                  <p style="font-size: 14px; opacity: 0.8; margin-bottom: 15px">
+                    Giảm đến 50% cho thành viên mới
+                  </p>
+                  <span style="
+                    font-size: 12px;
+                    font-weight: 700;
+                    color: var(--accent);
+                    text-transform: uppercase;
+                    cursor: pointer;
+                  ">Nhận mã ngay</span>
+                </div>
+              </div>
+
+              <!-- Banner 2 -->
+              <div class="sub-banner-item" onclick="openCoupon('QP-BEAUTY', 'Ưu đãi 30% Mỹ phẩm')">
+                <div class="sub-banner-item-bg" style="
+                  background: #0f172a
+                    url(&quot;https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=1000&auto=format&fit=crop&quot;)
+                    center/cover;
+                "></div>
+                <div>
+                  <h3 style="color: white; margin-bottom: 10px">
+                    Mỹ Phẩm Chính Hãng
+                  </h3>
+                  <p style="font-size: 14px; opacity: 0.8; margin-bottom: 15px">
+                    Thương hiệu cao cấp, 100% Authentic
+                  </p>
+                  <span style="
+                    font-size: 12px;
+                    font-weight: 700;
+                    color: var(--accent);
+                    text-transform: uppercase;
+                    cursor: pointer;
+                  ">Mua sắm ngay</span>
+                </div>
+              </div>
+
+              <!-- Banner 3 -->
+              <div class="sub-banner-item" onclick="openCoupon('QP-FASHION', 'Sale sập sàn 70%')">
+                <div class="sub-banner-item-bg" style="
+                  background: #1e293b
+                    url(&quot;https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1000&auto=format&fit=crop&quot;)
+                    center/cover;
+                "></div>
+                <div>
+                  <h3 style="color: white; margin-bottom: 10px">
+                    Thời Trang Nam
+                  </h3>
+                  <p style="font-size: 14px; opacity: 0.8; margin-bottom: 15px">
+                    Bộ sưu tập Thu Đông 2026
+                  </p>
+                  <span style="
+                    font-size: 12px;
+                    font-weight: 700;
+                    color: var(--accent);
+                    text-transform: uppercase;
+                    cursor: pointer;
+                  ">Xem ngay</span>
+                </div>
+              </div>
+
+              <!-- Banner 4 -->
+              <div class="sub-banner-item" onclick="openCoupon('QP-HOME', 'Miễn phí vận chuyển')">
+                <div class="sub-banner-item-bg" style="
+                  background: #0f172a
+                    url(&quot;https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1000&auto=format&fit=crop&quot;)
+                    center/cover;
+                "></div>
+                <div>
+                  <h3 style="color: white; margin-bottom: 10px">Đồ Gia Dụng</h3>
+                  <p style="font-size: 14px; opacity: 0.8; margin-bottom: 15px">
+                    Tiện nghi cho ngôi nhà của bạn
+                  </p>
+                  <span style="
+                    font-size: 12px;
+                    font-weight: 700;
+                    color: var(--accent);
+                    text-transform: uppercase;
+                    cursor: pointer;
+                  ">Khám phá</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- GIỚI THIỆU -->
+      <!-- <section class="intro-section py-lg-5 py-4">
+    <div class="container intro-grid">
+      <div class="intro-content">
+        <span class="intro-label">Về chúng tôi</span>
+        <h2 class="intro-title">
+          Dịch Vụ Vận Chuyển Xuất Nhập Khẩu Quảng Phát
+        </h2>
+        <p class="intro-desc">
+          Với nhiều năm kinh nghiệm trong lĩnh vực Logistics, Quảng Phát tự
+          hào là đơn vị cung cấp giải pháp vận chuyển xuất nhập khẩu toàn
+          diện. Chúng tôi không chỉ vận chuyển hàng hóa, mà còn là đối tác tin
+          cậy giúp doanh nghiệp tối ưu hóa chi phí và thời gian.
+        </p>
+        <ul class="intro-features">
+          <li>
+            <i class="fa-solid fa-check"></i>
+            <span>Vận chuyển đa phương thức (Biển, Hàng không, Bộ)</span>
+          </li>
+          <li>
+            <i class="fa-solid fa-check"></i>
+            <span>Dịch vụ khai báo hải quan chuyên nghiệp</span>
+          </li>
+          <li>
+            <i class="fa-solid fa-check"></i>
+            <span>Hệ thống kho bãi hiện đại, an toàn</span>
+          </li>
+        </ul>
+        <a href="about.html" class="btn btn-primary">Tìm hiểu thêm</a>
+      </div>
+      <div class="intro-image-wrapper">
+        <img src="assets/images/intro.png" alt="Quảng Phát XNK" class="intro-image" />
+      </div>
+    </div>
+  </section> -->
+
+      <!-- DANH MỤC -->
+      <section class="category-section py-lg-5 py-4">
+        <div class="container">
+          <div class="shopee-cat-header">
+            <h2 class="section-title">Danh mục sản phẩm</h2>
+          </div>
+          <div class="shopee-cat-wrap">
+            <button class="shopee-cat-arrow cat-prev-page" aria-label="Trang trước">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button class="shopee-cat-arrow cat-next-page" aria-label="Trang sau">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+            <div class="shopee-cat-viewport">
+              <div class="shopee-cat-slider" id="shopee-cat-grid">
+                <div class="shopee-cat-page">
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=200&auto=format&fit=crop"
+                        alt="Thực phẩm" />
+                    </div>
+                    <p>Thực phẩm</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=200&auto=format&fit=crop"
+                        alt="Máy móc" />
+                    </div>
+                    <p>Máy móc</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=200&auto=format&fit=crop"
+                        alt="Thời trang" />
+                    </div>
+                    <p>Thời trang</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1498049794561-7780e7231661?q=80&w=200&auto=format&fit=crop"
+                        alt="Thiết bị điện" />
+                    </div>
+                    <p>Thiết bị điện</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1523206489230-c012c64b2b48?q=80&w=200&auto=format&fit=crop"
+                        alt="Điện tử" />
+                    </div>
+                    <p>Điện tử</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=200&auto=format&fit=crop"
+                        alt="Sức khỏe" />
+                    </div>
+                    <p>Sức khỏe</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=200&auto=format&fit=crop"
+                        alt="Làm đẹp" />
+                    </div>
+                    <p>Làm đẹp</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=200&auto=format&fit=crop"
+                        alt="Mẹ &amp; Bé" />
+                    </div>
+                    <p>Mẹ &amp; Bé</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=200&auto=format&fit=crop"
+                        alt="Công nghiệp" />
+                    </div>
+                    <p>Công nghiệp</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=200&auto=format&fit=crop"
+                        alt="Tiêu dùng" />
+                    </div>
+                    <p>Tiêu dùng</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=200&auto=format&fit=crop"
+                        alt="Nội thất" />
+                    </div>
+                    <p>Nội thất</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=200&auto=format&fit=crop"
+                        alt="Thể thao" />
+                    </div>
+                    <p>Thể thao</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=200&auto=format&fit=crop"
+                        alt="Đồng hồ" />
+                    </div>
+                    <p>Đồng hồ</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=200&auto=format&fit=crop"
+                        alt="Phụ kiện" />
+                    </div>
+                    <p>Phụ kiện</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1464618663641-bbdd760ae84a?q=80&w=200&auto=format&fit=crop"
+                        alt="Du lịch" />
+                    </div>
+                    <p>Du lịch</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=200&auto=format&fit=crop"
+                        alt="Sách &amp; Truyện" />
+                    </div>
+                    <p>Sách &amp; Truyện</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1585664811087-47f65abbad64?q=80&w=200&auto=format&fit=crop"
+                        alt="Thú cưng" />
+                    </div>
+                    <p>Thú cưng</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=200&auto=format&fit=crop"
+                        alt="Nhà bếp" />
+                    </div>
+                    <p>Nhà bếp</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=200&auto=format&fit=crop"
+                        alt="Văn phòng phẩm" />
+                    </div>
+                    <p>Văn phòng phẩm</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=200&auto=format&fit=crop"
+                        alt="Giày dép" />
+                    </div>
+                    <p>Giày dép</p>
+                  </a>
+                </div>
+                <!-- /.shopee-cat-page -->
+
+                <!-- PAGE 2 -->
+                <div class="shopee-cat-page">
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1511556820780-d912e42b4980?q=80&w=200&auto=format&fit=crop"
+                        alt="Đồ chơi" />
+                    </div>
+                    <p>Đồ chơi</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?q=80&w=200&auto=format&fit=crop"
+                        alt="Golf" />
+                    </div>
+                    <p>Golf</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1493770348161-369560ae357d?q=80&w=200&auto=format&fit=crop"
+                        alt="Ẩm thực" />
+                    </div>
+                    <p>Ẩm thực</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1601924994987-69e26d50dc26?q=80&w=200&auto=format&fit=crop"
+                        alt="Xe cộ" />
+                    </div>
+                    <p>Xe cộ</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=200&auto=format&fit=crop"
+                        alt="Máy ảnh" />
+                    </div>
+                    <p>Máy ảnh</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?q=80&w=200&auto=format&fit=crop"
+                        alt="Dược phẩm" />
+                    </div>
+                    <p>Dược phẩm</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1468495244123-6c6c332eeece?q=80&w=200&auto=format&fit=crop"
+                        alt="Điện gia dụng" />
+                    </div>
+                    <p>Điện gia dụng</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=200&auto=format&fit=crop"
+                        alt="Laptop" />
+                    </div>
+                    <p>Laptop</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?q=80&w=200&auto=format&fit=crop"
+                        alt="Âm nhạc" />
+                    </div>
+                    <p>Âm nhạc</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?q=80&w=200&auto=format&fit=crop"
+                        alt="Yoga" />
+                    </div>
+                    <p>Yoga</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?q=80&w=200&auto=format&fit=crop"
+                        alt="Áo khoác" />
+                    </div>
+                    <p>Áo khoác</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?q=80&w=200&auto=format&fit=crop"
+                        alt="Túi xách" />
+                    </div>
+                    <p>Túi xách</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=200&auto=format&fit=crop"
+                        alt="Trang sức" />
+                    </div>
+                    <p>Trang sức</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=200&auto=format&fit=crop"
+                        alt="Nha khoa" />
+                    </div>
+                    <p>Nha khoa</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?q=80&w=200&auto=format&fit=crop"
+                        alt="Dưỡng da" />
+                    </div>
+                    <p>Dưỡng da</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1472396961693-142e6e269027?q=80&w=200&auto=format&fit=crop"
+                        alt="Dã ngoại" />
+                    </div>
+                    <p>Dã ngoại</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1512438248247-f0f2a5a8b7f0?q=80&w=200&auto=format&fit=crop"
+                        alt="Smart TV" />
+                    </div>
+                    <p>Smart TV</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1567225557594-88d73e55f2cb?q=80&w=200&auto=format&fit=crop"
+                        alt="Làm bánh" />
+                    </div>
+                    <p>Làm bánh</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1498049794561-7780e7231661?q=80&w=200&auto=format&fit=crop"
+                        alt="Điện thoại" />
+                    </div>
+                    <p>Điện thoại</p>
+                  </a>
+                  <a href="products.html" class="shopee-cat-item">
+                    <div class="shopee-cat-img">
+                      <img
+                        src="https://images.unsplash.com/photo-1615397349754-cfa2066a298e?q=80&w=200&auto=format&fit=crop"
+                        alt="Nước hoa" />
+                    </div>
+                    <p>Nước hoa</p>
+                  </a>
+                </div>
+                <!-- /.shopee-cat-page 2 -->
+              </div>
+              <!-- /.shopee-cat-slider -->
+            </div>
+            <!-- /.shopee-cat-viewport -->
+          </div>
+          <!-- /.shopee-cat-wrap -->
+        </div>
+        <!-- /.container -->
+      </section>
+
+      <!-- FLASH SALE -->
+      <section class="flash-sale-section py-lg-5 py-4">
+        <div class="container">
+          <div class="flash-sale-header">
+            <h2 class="section-title">Flash Sale</h2>
+            <a href="products.html" class="view-more-link">XEM THÊM</a>
+          </div>
+
+          <div class="shopee-cat-wrap">
+            <button class="shopee-cat-arrow flash-prev" aria-label="Trước">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button class="shopee-cat-arrow flash-next" aria-label="Sau">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+            <div class="product-slider-wrapper flash-wrapper">
+              <div class="product-track">
+                <!-- Item 1 -->
+                <a href="#" class="p-card">
+                  <div class="discount-badge">-25%</div>
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-freeship">Freeship</span>
+                      <span class="badge-item badge-mall">Mall</span>
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                    </div>
+                    <img
+                      src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=300&auto=format&fit=crop"
+                      alt="Đồng hồ thông minh" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">Đồng hồ thông minh cao cấp Series 8</p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Apple</strong></p>
+                    <div class="flash-progress">
+                      <div class="flash-progress-bar" style="width: 73%"></div>
+                      <span class="flash-progress-text">Đã bán 73%</span>
+                    </div>
+                    <p class="p-price">
+                      450.000đ
+                      <span class="p-price-old">600.000đ</span>
+                    </p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+
+                <!-- Item 2 -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="discount-badge">-15%</div>
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                    </div>
+                    <img
+                      src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=300&auto=format&fit=crop"
+                      alt="Tai nghe" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">Tai nghe Over-ear Chống ồn chủ động</p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Sony</strong></p>
+                    <div class="flash-progress">
+                      <div class="flash-progress-bar" style="width: 58%"></div>
+                      <span class="flash-progress-text">Đã bán 58%</span>
+                    </div>
+                    <p class="p-price">
+                      850.000đ
+                      <span class="p-price-old">1.000.000đ</span>
+                    </p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+
+                <!-- Item 3 -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-freeship">Freeship</span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=300&auto=format&fit=crop"
+                      alt="Giày thể thao" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">
+                      Giày thể thao Nam công nghệ Air Max siêu nhẹ
+                    </p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Nike</strong></p>
+                    <div class="flash-progress">
+                      <div class="flash-progress-bar" style="width: 79%"></div>
+                      <span class="flash-progress-text">Đã bán 79%</span>
+                    </div>
+                    <p class="p-price">2.100.000đ</p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+
+                <!-- Item 4 -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="discount-badge">-50%</div>
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-freeship">Freeship</span>
+                    </div>
+                    <img
+                      src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=300&auto=format&fit=crop"
+                      alt="Nước hoa" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">
+                      Nước hoa Nam Bleu de Chanel 100ml Eau de Parfum
+                    </p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Chanel</strong></p>
+                    <div class="flash-progress">
+                      <div class="flash-progress-bar" style="width: 80%"></div>
+                      <span class="flash-progress-text">Đã bán 80%</span>
+                    </div>
+                    <p class="p-price">
+                      1.850.000đ
+                      <span class="p-price-old">3.700.000đ</span>
+                    </p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+
+                <!-- Item 5 -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="discount-badge">-10%</div>
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                    </div>
+                    <img
+                      src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=300&auto=format&fit=crop"
+                      alt="Máy ảnh" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">
+                      Máy ảnh Film Vintage Instax Mini - Phiên bản giới hạn
+                    </p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Fujifilm</strong></p>
+                    <div class="flash-progress">
+                      <div class="flash-progress-bar" style="width: 88%"></div>
+                      <span class="flash-progress-text">Đã bán 88% - Sắp cháy hàng</span>
+                    </div>
+                    <p class="p-price">
+                      1.350.000đ
+                      <span class="p-price-old">1.500.000đ</span>
+                    </p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+
+                <!-- Item 6 (Duplicated) -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="discount-badge">-25%</div>
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                    </div>
+                    <img
+                      src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=300&auto=format&fit=crop"
+                      alt="Đồng hồ thông minh" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">Đồng hồ thông minh cao cấp Series 8</p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Apple</strong></p>
+                    <div class="flash-progress">
+                      <div class="flash-progress-bar" style="width: 64%"></div>
+                      <span class="flash-progress-text">Đã bán 64%</span>
+                    </div>
+                    <p class="p-price">
+                      450.000đ
+                      <span class="p-price-old">600.000đ</span>
+                    </p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+
+                <!-- Item 7 (Duplicated) -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="discount-badge">-15%</div>
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-mall">Mall</span>
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                    </div>
+                    <img
+                      src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=300&auto=format&fit=crop"
+                      alt="Tai nghe" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">Tai nghe Over-ear Chống ồn chủ động</p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Sony</strong></p>
+                    <div class="flash-progress">
+                      <div class="flash-progress-bar" style="width: 81%"></div>
+                      <span class="flash-progress-text">Đã bán 81% - Sắp cháy hàng</span>
+                    </div>
+                    <p class="p-price">
+                      850.000đ
+                      <span class="p-price-old">1.000.000đ</span>
+                    </p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+
+                <!-- Item 8 (Duplicated) -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                      <span class="badge-item badge-freeship">Freeship</span>
+                      <span class="badge-item badge-mall">Mall</span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=300&auto=format&fit=crop"
+                      alt="Giày thể thao" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">
+                      Giày thể thao Nam công nghệ Air Max siêu nhẹ
+                    </p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Nike</strong></p>
+                    <div class="flash-progress">
+                      <div class="flash-progress-bar" style="width: 56%"></div>
+                      <span class="flash-progress-text">Đã bán 56%</span>
+                    </div>
+                    <p class="p-price">2.100.000đ</p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+
+                <!-- Item 4 -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="discount-badge">-50%</div>
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                      <span class="badge-item badge-mall">Mall</span>
+                      <span class="badge-item badge-freeship">Freeship</span>
+                    </div>
+                    <img
+                      src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=300&auto=format&fit=crop"
+                      alt="Nước hoa" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">
+                      Nước hoa Nam Bleu de Chanel 100ml Eau de Parfum
+                    </p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Chanel</strong></p>
+                    <div class="flash-progress">
+                      <div class="flash-progress-bar" style="width: 56%"></div>
+                      <span class="flash-progress-text">Đã bán 56%</span>
+                    </div>
+                    <p class="p-price">
+                      1.850.000đ
+                      <span class="p-price-old">3.700.000đ</span>
+                    </p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+
+                <!-- Item 5 -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="discount-badge">-10%</div>
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                      <span class="badge-item badge-mall">Mall</span>
+                      <span class="badge-item badge-freeship">Freeship</span>
+                    </div>
+                    <img
+                      src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=300&auto=format&fit=crop"
+                      alt="Máy ảnh" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">
+                      Máy ảnh Film Vintage Instax Mini - Phiên bản giới hạn
+                    </p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Fujifilm</strong></p>
+                    <div class="flash-progress">
+                      <div class="flash-progress-bar" style="width: 58%"></div>
+                      <span class="flash-progress-text">Đã bán 58%</span>
+                    </div>
+                    <p class="p-price">
+                      1.350.000đ
+                      <span class="p-price-old">1.500.000đ</span>
+                    </p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+
+                <!-- Item 6 (Duplicated) -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="discount-badge">-25%</div>
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                      <span class="badge-item badge-mall">Mall</span>
+                    </div>
+                    <img
+                      src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=300&auto=format&fit=crop"
+                      alt="Đồng hồ thông minh" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">Đồng hồ thông minh cao cấp Series 8</p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Apple</strong></p>
+                    <div class="flash-progress">
+                      <div class="flash-progress-bar" style="width: 89%"></div>
+                      <span class="flash-progress-text">Đã bán 89% - Sắp cháy hàng</span>
+                    </div>
+                    <p class="p-price">
+                      450.000đ
+                      <span class="p-price-old">600.000đ</span>
+                    </p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+
+                <!-- Item 7 (Duplicated) -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="discount-badge">-15%</div>
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                      <span class="badge-item badge-mall">Mall</span>
+                    </div>
+                    <img
+                      src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=300&auto=format&fit=crop"
+                      alt="Tai nghe" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">Tai nghe Over-ear Chống ồn chủ động</p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Sony</strong></p>
+                    <div class="flash-progress">
+                      <div class="flash-progress-bar" style="width: 59%"></div>
+                      <span class="flash-progress-text">Đã bán 59%</span>
+                    </div>
+                    <p class="p-price">
+                      850.000đ
+                      <span class="p-price-old">1.000.000đ</span>
+                    </p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+
+                <!-- Item 8 (Duplicated) -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-mall">Mall</span>
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                      <span class="badge-item badge-freeship">Freeship</span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=300&auto=format&fit=crop"
+                      alt="Giày thể thao" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">
+                      Giày thể thao Nam công nghệ Air Max siêu nhẹ
+                    </p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Nike</strong></p>
+                    <div class="flash-progress">
+                      <div class="flash-progress-bar" style="width: 63%"></div>
+                      <span class="flash-progress-text">Đã bán 63%</span>
+                    </div>
+                    <p class="p-price">2.100.000đ</p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+
+                <a href="product-detail.html" class="p-card">
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                      <span class="badge-item badge-mall">Mall</span>
+                      <span class="badge-item badge-freeship">Freeship</span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=300&auto=format&fit=crop"
+                      alt="Giày thể thao" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">
+                      Giày thể thao Nam công nghệ Air Max siêu nhẹ
+                    </p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Nike</strong></p>
+                    <div class="flash-progress">
+                      <div class="flash-progress-bar" style="width: 45%"></div>
+                      <span class="flash-progress-text">Đã bán 45%</span>
+                    </div>
+                    <p class="p-price">2.100.000đ</p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BANNER KHUYẾN MÃI -->
+      <section class="promo-section py-lg-5 py-4">
+        <div class="container">
+          <div class="promo-slider-outer">
+            <div class="promo-slider-wrapper">
+              <div class="promo-slider-track">
+                <!-- Banner 1 -->
+                <div class="promo-banner-item" style="
+                  background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+                ">
+                  <div class="promo-banner-content">
+                    <span class="promo-badge">HOT DEAL</span>
+                    <h3 class="promo-title">Siêu Sale Cuối Tháng</h3>
+                    <p class="promo-desc">
+                      Giảm đến <strong>70%</strong> toàn bộ đơn hàng điện tử
+                    </p>
+                    <a href="#" class="promo-cta">Mua Ngay &rarr;</a>
+                  </div>
+                  <div class="promo-banner-badge">-70%</div>
+                </div>
+                <!-- Banner 2 -->
+                <div class="promo-banner-item" style="
+                  background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 100%);
+                ">
+                  <div class="promo-banner-content">
+                    <span class="promo-badge">FLASH SALE</span>
+                    <h3 class="promo-title">Flash Sale 12.12</h3>
+                    <p class="promo-desc">
+                      Ngàn deal sốc <strong>0 đồng</strong> mỗi giờ trong ngày
+                    </p>
+                    <a href="#" class="promo-cta">Xem Ngay &rarr;</a>
+                  </div>
+                  <div class="promo-banner-badge">0đ</div>
+                </div>
+                <!-- Banner 3 -->
+                <div class="promo-banner-item" style="
+                  background: linear-gradient(135deg, #064e3b 0%, #047857 100%);
+                ">
+                  <div class="promo-banner-content">
+                    <span class="promo-badge">FREESHIP</span>
+                    <h3 class="promo-title">Miễn Phí Vận Chuyển</h3>
+                    <p class="promo-desc">
+                      Tất cả đơn hàng từ <strong>199.000đ</strong> trên toàn quốc
+                    </p>
+                    <a href="#" class="promo-cta">Đặt Hàng &rarr;</a>
+                  </div>
+                  <div class="promo-banner-badge">FREE</div>
+                </div>
+                <!-- Banner 4 -->
+                <div class="promo-banner-item" style="
+                  background: linear-gradient(135deg, #1e1b4b 0%, #4338ca 100%);
+                ">
+                  <div class="promo-banner-content">
+                    <span class="promo-badge">VIP</span>
+                    <h3 class="promo-title">Ưu Đãi Thành Viên</h3>
+                    <p class="promo-desc">
+                      Hoàn tiền <strong>15%</strong> mỗi đơn hàng khi đăng ký VIP
+                    </p>
+                    <a href="#" class="promo-cta">Đăng Ký &rarr;</a>
+                  </div>
+                  <div class="promo-banner-badge">15%</div>
+                </div>
+                <!-- Banner 5 -->
+                <div class="promo-banner-item" style="
+                  background: linear-gradient(135deg, #451a03 0%, #c2410c 100%);
+                ">
+                  <div class="promo-banner-content">
+                    <span class="promo-badge">COMBO</span>
+                    <h3 class="promo-title">Mua Combo Siêu Tiết Kiệm</h3>
+                    <p class="promo-desc">
+                      Mua 2 tặng 1 — áp dụng toàn bộ danh mục thời trang
+                    </p>
+                    <a href="#" class="promo-cta">Khám Phá &rarr;</a>
+                  </div>
+                  <div class="promo-banner-badge">2+1</div>
+                </div>
+              </div>
+            </div>
+            <!-- Dots -->
+            <div class="promo-dots">
+              <span class="promo-dot active"></span>
+              <span class="promo-dot"></span>
+              <span class="promo-dot"></span>
+              <span class="promo-dot"></span>
+              <span class="promo-dot"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SẢN PHẨM MỚI -->
+      <section class="new-products-section py-lg-5 py-4">
+        <div class="container">
+          <div class="product-section-header">
+            <h2 class="section-title">Sản phẩm mới</h2>
+            <div class="sale-tabs">
+              <div class="tab-btn active">Tất cả</div>
+              <div class="tab-btn">Điện tử</div>
+              <div class="tab-btn">Thời trang</div>
+              <div class="tab-btn">Gia dụng</div>
+            </div>
+            <a href="products.html" class="view-more-link">XEM THÊM</a>
+          </div>
+
+          <div class="shopee-cat-wrap">
+            <button class="shopee-cat-arrow new-prev" aria-label="Trước">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button class="shopee-cat-arrow new-next" aria-label="Sau">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+            <div class="product-slider-wrapper new-wrapper">
+              <div class="product-track">
+                <!-- Item 1 -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                      <span class="badge-item badge-mall">Mall</span>
+                      <span class="badge-item badge-freeship">Freeship</span>
+                    </div>
+                    <img
+                      src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=300&auto=format&fit=crop"
+                      alt="Tai nghe" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">Tai nghe Over-ear Chống ồn chủ động</p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Sony</strong></p>
+                    <p class="p-price">850.000đ</p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+                <!-- Item 2 -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-mall">Mall</span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=300&auto=format&fit=crop"
+                      alt="Giày thể thao" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">
+                      Giày thể thao Nam công nghệ Air Max siêu nhẹ
+                    </p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Nike</strong></p>
+                    <p class="p-price">2.100.000đ</p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+                <!-- Item 3 -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-mall">Mall</span>
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                    </div>
+                    <img
+                      src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=300&auto=format&fit=crop"
+                      alt="Nước hoa" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">
+                      Nước hoa Nam Bleu de Chanel 100ml Eau de Parfum
+                    </p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Chanel</strong></p>
+                    <p class="p-price">1.850.000đ</p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+                <!-- Item 4 -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                      <span class="badge-item badge-mall">Mall</span>
+                      <span class="badge-item badge-freeship">Freeship</span>
+                    </div>
+                    <img
+                      src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=300&auto=format&fit=crop"
+                      alt="Máy ảnh" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">
+                      Máy ảnh Film Vintage Instax Mini - Phiên bản giới hạn
+                    </p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Fujifilm</strong></p>
+                    <p class="p-price">1.350.000đ</p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+                <!-- Item 5 -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                    </div>
+                    <img
+                      src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=300&auto=format&fit=crop"
+                      alt="Đồng hồ thông minh" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">Đồng hồ thông minh cao cấp Series 8</p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Apple</strong></p>
+                    <p class="p-price">450.000đ</p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+                <!-- Item 6 -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                    </div>
+                    <img
+                      src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=300&auto=format&fit=crop"
+                      alt="Tai nghe" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">Tai nghe Over-ear Chống ồn chủ động</p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Sony</strong></p>
+                    <p class="p-price">850.000đ</p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+                <!-- Item 7 (Duplicated) -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-mall">Mall</span>
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                    </div>
+                    <img
+                      src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=300&auto=format&fit=crop"
+                      alt="Máy ảnh" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">
+                      Máy ảnh Film Vintage Instax Mini - Phiên bản giới hạn
+                    </p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Fujifilm</strong></p>
+                    <p class="p-price">1.350.000đ</p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+                <!-- Item 8 (Duplicated) -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-mall">Mall</span>
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                    </div>
+                    <img
+                      src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=300&auto=format&fit=crop"
+                      alt="Đồng hồ thông minh" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">Đồng hồ thông minh cao cấp Series 8</p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Apple</strong></p>
+                    <p class="p-price">450.000đ</p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+                <!-- Extra Item 1 -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=300&auto=format&fit=crop"
+                      alt="Giày thể thao" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">
+                      Giày thể thao Nam công nghệ Air Max siêu nhẹ 2
+                    </p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Nike</strong></p>
+                    <p class="p-price">2.100.000đ</p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+                <!-- Extra Item 2 -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                      <span class="badge-item badge-mall">Mall</span>
+                      <span class="badge-item badge-freeship">Freeship</span>
+                    </div>
+                    <img
+                      src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=300&auto=format&fit=crop"
+                      alt="Nước hoa" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">
+                      Nước hoa Nam Bleu de Chanel 100ml Eau de Parfum 2
+                    </p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Chanel</strong></p>
+                    <p class="p-price">1.850.000đ</p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+                <!-- Extra Item 3 -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-freeship">Freeship</span>
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                      <span class="badge-item badge-mall">Mall</span>
+                    </div>
+                    <img
+                      src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=300&auto=format&fit=crop"
+                      alt="Máy ảnh" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">
+                      Máy ảnh Film Vintage Instax Mini - Bản Giới Hạn 2
+                    </p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Fujifilm</strong></p>
+                    <p class="p-price">1.350.000đ</p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+                <!-- Extra Item 4 -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                      <span class="badge-item badge-mall">Mall</span>
+                      <span class="badge-item badge-freeship">Freeship</span>
+                    </div>
+                    <img
+                      src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=300&auto=format&fit=crop"
+                      alt="Tai nghe" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">Tai nghe Over-ear Chống ồn chủ động 2</p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Sony</strong></p>
+                    <p class="p-price">850.000đ</p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- THƯƠNG HIỆU -->
+      <section class="brand-section py-lg-5 py-4">
+        <div class="container">
+          <h2 class="section-title">Thương hiệu nổi bật</h2>
+          <div class="shopee-cat-wrap">
+            <button class="shopee-cat-arrow brand-prev" aria-label="Trước">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button class="shopee-cat-arrow brand-next" aria-label="Sau">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+            <div class="brand-slider-wrapper">
+              <div class="brand-track">
+                <a href="#" class="brand-item">
+                  <div class="brand-logo-box" style="background: #1e3a5f">
+                    <span style="
+                      color: white;
+                      font-size: 18px;
+                      font-weight: 900;
+                      letter-spacing: 1px;
+                    ">SSSTU</span>
+                  </div>
+                  <p class="brand-name">SSSTUTTER</p>
+                </a>
+                <a href="#" class="brand-item">
+                  <div class="brand-logo-box" style="background: #f5f0e8">
+                    <span style="
+                      color: #1a1a1a;
+                      font-size: 20px;
+                      font-weight: 900;
+                      font-style: italic;
+                    ">LIBÉ</span>
+                  </div>
+                  <p class="brand-name">LIBÉ</p>
+                </a>
+                <a href="#" class="brand-item">
+                  <div class="brand-logo-box" style="background: #f5f5f5">
+                    <span style="
+                      color: #1a1a1a;
+                      font-size: 14px;
+                      font-weight: 900;
+                      letter-spacing: 2px;
+                    ">HEAD<br />LESS</span>
+                  </div>
+                  <p class="brand-name">HEADLESS</p>
+                </a>
+                <a href="#" class="brand-item">
+                  <div class="brand-logo-box" style="background: #fff; border: 2px solid #eee">
+                    <span style="
+                      color: #1a1a1a;
+                      font-size: 14px;
+                      font-weight: 900;
+                      letter-spacing: 1px;
+                    ">FINAN<br />KE</span>
+                  </div>
+                  <p class="brand-name">FINANKE</p>
+                </a>
+                <a href="#" class="brand-item">
+                  <div class="brand-logo-box" style="background: #1e3a5f">
+                    <span style="
+                      color: white;
+                      font-size: 18px;
+                      font-weight: 900;
+                      letter-spacing: 1px;
+                    ">NIKE</span>
+                  </div>
+                  <p class="brand-name">NIKE</p>
+                </a>
+                <a href="#" class="brand-item">
+                  <div class="brand-logo-box" style="background: #1a1a1a">
+                    <span style="
+                      color: white;
+                      font-size: 20px;
+                      font-weight: 900;
+                      font-style: italic;
+                    ">LIBÉ</span>
+                  </div>
+                  <p class="brand-name">LIBÉ BLACK</p>
+                </a>
+                <a href="#" class="brand-item">
+                  <div class="brand-logo-box" style="background: #f5f5f5">
+                    <span style="
+                      color: #1a1a1a;
+                      font-size: 14px;
+                      font-weight: 900;
+                      letter-spacing: 2px;
+                    ">ADID<br />AS</span>
+                  </div>
+                  <p class="brand-name">ADIDAS</p>
+                </a>
+                <a href="#" class="brand-item">
+                  <div class="brand-logo-box" style="background: #e8f0fe">
+                    <span style="
+                      color: #1a3a8f;
+                      font-size: 14px;
+                      font-weight: 900;
+                      letter-spacing: 1px;
+                    ">APPLE</span>
+                  </div>
+                  <p class="brand-name">APPLE</p>
+                </a>
+                <a href="#" class="brand-item">
+                  <div class="brand-logo-box" style="background: #0a0a0a">
+                    <span style="
+                      color: white;
+                      font-size: 14px;
+                      font-weight: 900;
+                      letter-spacing: 1px;
+                    ">SONY</span>
+                  </div>
+                  <p class="brand-name">SONY</p>
+                </a>
+                <a href="#" class="brand-item">
+                  <div class="brand-logo-box" style="background: #ff6600">
+                    <span style="
+                      color: white;
+                      font-size: 13px;
+                      font-weight: 900;
+                      letter-spacing: 1px;
+                    ">FUJI<br />FILM</span>
+                  </div>
+                  <p class="brand-name">FUJIFILM</p>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SẢN PHẨM NỔI BẬT -->
+      <section class="featured-products-section py-lg-5 py-4">
+        <div class="container">
+          <div class="product-section-header">
+            <h2 class="section-title">Sản phẩm nổi bật</h2>
+            <div class="sale-tabs">
+              <div class="tab-btn active">Tất cả</div>
+              <div class="tab-btn">Sức khỏe</div>
+              <div class="tab-btn">Mẹ & Bé</div>
+              <div class="tab-btn">Thực phẩm</div>
+            </div>
+          </div>
+
+          <div class="shopee-cat-wrap">
+            <button class="shopee-cat-arrow best-prev" aria-label="Trước">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button class="shopee-cat-arrow best-next" aria-label="Sau">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+            <div class="product-slider-wrapper best-wrapper">
+              <div class="product-track">
+                <!-- Item 1 -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                      <span class="badge-item badge-freeship">Freeship</span>
+                      <span class="badge-item badge-mall">Mall</span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=300&auto=format&fit=crop"
+                      alt="Giày thể thao" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">
+                      Giày thể thao Nam công nghệ Air Max siêu nhẹ
+                    </p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Nike</strong></p>
+                    <p class="p-price">2.100.000đ</p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+                <!-- Item 2 -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                    </div>
+                    <img
+                      src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=300&auto=format&fit=crop"
+                      alt="Máy ảnh" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">
+                      Máy ảnh Film Vintage Instax Mini - Phiên bản giới hạn
+                    </p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Fujifilm</strong></p>
+                    <p class="p-price">1.350.000đ</p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+                <!-- Item 3 -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                      <span class="badge-item badge-mall">Mall</span>
+                    </div>
+                    <img
+                      src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=300&auto=format&fit=crop"
+                      alt="Tai nghe" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">Tai nghe Over-ear Chống ồn chủ động</p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Sony</strong></p>
+                    <p class="p-price">850.000đ</p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+                <!-- Item 4 -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                      <span class="badge-item badge-mall">Mall</span>
+                    </div>
+                    <img
+                      src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=300&auto=format&fit=crop"
+                      alt="Nước hoa" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">
+                      Nước hoa Nam Bleu de Chanel 100ml Eau de Parfum
+                    </p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Chanel</strong></p>
+                    <p class="p-price">1.850.000đ</p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+                <!-- Item 5 -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-mall">Mall</span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=300&auto=format&fit=crop"
+                      alt="Giày thể thao" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">
+                      Giày thể thao Nam công nghệ Air Max siêu nhẹ
+                    </p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Nike</strong></p>
+                    <p class="p-price">2.100.000đ</p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+                <!-- Item 6 -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-mall">Mall</span>
+                    </div>
+                    <img
+                      src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=300&auto=format&fit=crop"
+                      alt="Đồng hồ thông minh" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">Đồng hồ thông minh cao cấp Series 8</p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Apple</strong></p>
+                    <p class="p-price">450.000đ</p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+                <!-- Item 7 (Duplicated) -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-freeship">Freeship</span>
+                      <span class="badge-item badge-mall">Mall</span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=300&auto=format&fit=crop"
+                      alt="Giày thể thao" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">
+                      Giày thể thao Nam công nghệ Air Max siêu nhẹ
+                    </p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Nike</strong></p>
+                    <p class="p-price">2.100.000đ</p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+                <!-- Item 8 (Duplicated) -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-freeship">Freeship</span>
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                    </div>
+                    <img
+                      src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=300&auto=format&fit=crop"
+                      alt="Máy ảnh" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">
+                      Máy ảnh Film Vintage Instax Mini - Phiên bản giới hạn
+                    </p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Fujifilm</strong></p>
+                    <p class="p-price">1.350.000đ</p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+                <!-- Extra Item 1 -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-mall">Mall</span>
+                      <span class="badge-item badge-freeship">Freeship</span>
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=300&auto=format&fit=crop"
+                      alt="Giày thể thao" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">
+                      Giày thể thao Nam công nghệ Air Max siêu nhẹ 2
+                    </p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Nike</strong></p>
+                    <p class="p-price">2.100.000đ</p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+                <!-- Extra Item 2 -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-freeship">Freeship</span>
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                    </div>
+                    <img
+                      src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=300&auto=format&fit=crop"
+                      alt="Nước hoa" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">
+                      Nước hoa Nam Bleu de Chanel 100ml Eau de Parfum 2
+                    </p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Chanel</strong></p>
+                    <p class="p-price">1.850.000đ</p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+                <!-- Extra Item 3 -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-mall">Mall</span>
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                    </div>
+                    <img
+                      src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=300&auto=format&fit=crop"
+                      alt="Tai nghe" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">Tai nghe Over-ear Chống ồn chủ động 2</p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Sony</strong></p>
+                    <p class="p-price">850.000đ</p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+                <!-- Extra Item 4 -->
+                <a href="product-detail.html" class="p-card">
+                  <div class="p-image-box">
+                    <div class="badges-overlay">
+                      <span class="badge-item badge-mall">Mall</span>
+                      <span class="badge-item badge-cheap">Rẻ vô đối</span>
+                      <span class="badge-item badge-freeship">Freeship</span>
+                    </div>
+                    <img
+                      src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=300&auto=format&fit=crop"
+                      alt="Đồng hồ thông minh" />
+                  </div>
+                  <div class="p-info">
+                    <p class="p-title">Đồng hồ thông minh cao cấp Series 8 2</p>
+                    <div class="p-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <span>4.8 | Đã bán 1.2k</span>
+                    </div>
+                    <p class="p-brand">Thương hiệu: <strong>Apple</strong></p>
+                    <p class="p-price">450.000đ</p>
+                    <button class="btn-add-cart" style="margin-top: 10px">
+                      <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                    </button>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SHOP NỔI BẬT 
+  <section class="shop-section py-lg-5 py-4">
+    <div class="container">
+      <div class="product-section-header">
+        <h2 class="section-title">Shop nổi bật</h2>
+        <a href="products.html" class="view-more-link">XEM THÊM</a>
+      </div>
+      <div class="shopee-cat-wrap">
+        <button class="shopee-cat-arrow shop-prev" aria-label="Trước">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button class="shopee-cat-arrow shop-next" aria-label="Sau">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        <div class="brand-slider-wrapper shop-wrapper">
+          <div class="brand-track">
+            <a href="#" class="brand-item">
+              <div class="brand-logo-box" style="overflow: hidden; padding: 0">
+                <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=200&auto=format&fit=crop"
+                  alt="Thực phẩm" style="
+                      width: 100%;
+                      height: 100%;
+                      object-fit: cover;
+                      border-radius: var(--radius-circle);
+                    " />
+              </div>
+              <p class="brand-name">Thực phẩm tươi</p>
+            </a>
+            <a href="#" class="brand-item">
+              <div class="brand-logo-box" style="overflow: hidden; padding: 0">
+                <img src="https://images.unsplash.com/photo-1471193945509-9ad0617afabf?q=80&w=200&auto=format&fit=crop"
+                  alt="Thực phẩm khô" style="
+                      width: 100%;
+                      height: 100%;
+                      object-fit: cover;
+                      border-radius: var(--radius-circle);
+                    " />
+              </div>
+              <p class="brand-name">Thực phẩm khô</p>
+            </a>
+            <a href="#" class="brand-item">
+              <div class="brand-logo-box" style="overflow: hidden; padding: 0">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=200&auto=format&fit=crop"
+                  alt="F&B" style="
+                      width: 100%;
+                      height: 100%;
+                      object-fit: cover;
+                      border-radius: var(--radius-circle);
+                    " />
+              </div>
+              <p class="brand-name">F&B Ẩm thực</p>
+            </a>
+            <a href="#" class="brand-item">
+              <div class="brand-logo-box" style="overflow: hidden; padding: 0">
+                <img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?q=80&w=200&auto=format&fit=crop"
+                  alt="Điện tử" style="
+                      width: 100%;
+                      height: 100%;
+                      object-fit: cover;
+                      border-radius: var(--radius-circle);
+                    " />
+              </div>
+              <p class="brand-name">Điện tử</p>
+            </a>
+            <a href="#" class="brand-item">
+              <div class="brand-logo-box" style="overflow: hidden; padding: 0">
+                <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=200&auto=format&fit=crop"
+                  alt="Thời trang" style="
+                      width: 100%;
+                      height: 100%;
+                      object-fit: cover;
+                      border-radius: var(--radius-circle);
+                    " />
+              </div>
+              <p class="brand-name">Thời trang</p>
+            </a>
+            <a href="#" class="brand-item">
+              <div class="brand-logo-box" style="overflow: hidden; padding: 0">
+                <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=200&auto=format&fit=crop"
+                  alt="Làm đẹp" style="
+                      width: 100%;
+                      height: 100%;
+                      object-fit: cover;
+                      border-radius: var(--radius-circle);
+                    " />
+              </div>
+              <p class="brand-name">Làm đẹp</p>
+            </a>
+            <a href="products.html" class="brand-item">
+              <div class="brand-logo-box" style="overflow: hidden; padding: 0">
+                <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=200&auto=format&fit=crop"
+                  alt="Công nghiệp" style="
+                      width: 100%;
+                      height: 100%;
+                      object-fit: cover;
+                      border-radius: var(--radius-circle);
+                    " />
+              </div>
+              <p class="brand-name">Công nghiệp</p>
+            </a>
+            <a href="products.html" class="brand-item">
+              <div class="brand-logo-box" style="overflow: hidden; padding: 0">
+                <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=200&auto=format&fit=crop"
+                  alt="Sức khỏe" style="
+                      width: 100%;
+                      height: 100%;
+                      object-fit: cover;
+                      border-radius: var(--radius-circle);
+                    " />
+              </div>
+              <p class="brand-name">Sức khỏe</p>
+            </a>
+            <a href="products.html" class="brand-item">
+              <div class="brand-logo-box" style="overflow: hidden; padding: 0">
+                <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=200&auto=format&fit=crop"
+                  alt="Mẹ & Bé" style="
+                      width: 100%;
+                      height: 100%;
+                      object-fit: cover;
+                      border-radius: var(--radius-circle);
+                    " />
+              </div>
+              <p class="brand-name">Mẹ & Bé</p>
+            </a>
+            <a href="products.html" class="brand-item">
+              <div class="brand-logo-box" style="overflow: hidden; padding: 0">
+                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=200&auto=format&fit=crop"
+                  alt="Máy móc" style="
+                      width: 100%;
+                      height: 100%;
+                      object-fit: cover;
+                      border-radius: var(--radius-circle);
+                    " />
+              </div>
+              <p class="brand-name">Máy móc</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  -->
+
+      <!-- TIN TỨC -->
+      <section class="news-section py-lg-5 py-4">
+        <div class="container">
+          <h2 class="section-title">Tin tức mới nhất</h2>
+          <div class="shopee-cat-wrap">
+            <button class="shopee-cat-arrow news-prev" aria-label="Trước">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button class="shopee-cat-arrow news-next" aria-label="Sau">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+            <div class="news-slider-wrapper">
+              <div class="news-track">
+                <a href="news-detail.html" class="news-card">
+                  <div class="news-img-box">
+                    <img
+                      src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop"
+                      alt="E-commerce strategy" />
+                  </div>
+                  <div class="p-info">
+                    <span class="news-date">CHIẾN LƯỢC SÀN</span>
+                    <h4 class="news-title">
+                      Cách tối ưu hóa gian hàng trên Sàn Quảng Phát
+                    </h4>
+                    <p class="news-excerpt">
+                      Bí quyết giúp Shop của bạn chuyên nghiệp và thu hút khách
+                      hàng hơn...
+                    </p>
+                    <div class="news-read-more">
+                      Đọc thêm <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                  </div>
+                </a>
+                <a href="news-detail.html" class="news-card">
+                  <div class="news-img-box">
+                    <img src="https://images.unsplash.com/photo-1557838923-2985c318be48?q=80&w=600&auto=format&fit=crop"
+                      alt="Marketing tips" />
+                  </div>
+                  <div class="p-info">
+                    <span class="news-date">MARKETING ONLINE</span>
+                    <h4 class="news-title">
+                      Mẹo Marketing giúp tăng 200% doanh số cho Shop
+                    </h4>
+                    <p class="news-excerpt">
+                      Tận dụng các công cụ quảng cáo có sẵn để bùng nổ đơn hàng
+                      trong tháng này...
+                    </p>
+                    <div class="news-read-more">
+                      Đọc thêm <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                  </div>
+                </a>
+                <a href="news-detail.html" class="news-card">
+                  <div class="news-img-box">
+                    <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=600&auto=format&fit=crop"
+                      alt="Payment system" />
+                  </div>
+                  <div class="p-info">
+                    <span class="news-date">TÀI CHÍNH</span>
+                    <h4 class="news-title">
+                      Hệ thống thanh toán mới: An toàn & Bảo mật
+                    </h4>
+                    <p class="news-excerpt">
+                      Quảng Phát cập nhật phương thức thanh toán linh hoạt, bảo vệ
+                      quyền lợi Shop...
+                    </p>
+                    <div class="news-read-more">
+                      Đọc thêm <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                  </div>
+                </a>
+                <a href="news-detail.html" class="news-card">
+                  <div class="news-img-box">
+                    <img
+                      src="https://images.unsplash.com/photo-1580674285054-bed31e145f59?q=80&w=600&auto=format&fit=crop"
+                      alt="Fulfillment service" />
+                  </div>
+                  <div class="p-info">
+                    <span class="news-date">DỊCH VỤ HỖ TRỢ</span>
+                    <h4 class="news-title">
+                      Dịch vụ đóng gói chuyên nghiệp cho Shop Online
+                    </h4>
+                    <p class="news-excerpt">
+                      Giảm thiểu rủi ro hư hỏng hàng hóa với quy trình đóng gói
+                      chuẩn quốc tế...
+                    </p>
+                    <div class="news-read-more">
+                      Đọc thêm <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                  </div>
+                </a>
+                <a href="news-detail.html" class="news-card">
+                  <div class="news-img-box">
+                    <img
+                      src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=600&auto=format&fit=crop"
+                      alt="Brand building" />
+                  </div>
+                  <div class="p-info">
+                    <span class="news-date">XÂY DỰNG THƯƠNG HIỆU</span>
+                    <h4 class="news-title">
+                      Xây dựng uy tín thương hiệu trên sàn thương mại
+                    </h4>
+                    <p class="news-excerpt">
+                      Cách thu thập đánh giá 5 sao và giữ chân khách hàng trung
+                      thành...
+                    </p>
+                    <div class="news-read-more">
+                      Đọc thêm <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                  </div>
+                </a>
+                <a href="news-detail.html" class="news-card">
+                  <div class="news-img-box">
+                    <img
+                      src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=600&auto=format&fit=crop"
+                      alt="Case study" />
+                  </div>
+                  <div class="p-info">
+                    <span class="news-date">CÂU CHUYỆN THÀNH CÔNG</span>
+                    <h4 class="news-title">
+                      Hành trình khởi nghiệp của Shop 'Organic Farm'
+                    </h4>
+                    <p class="news-excerpt">
+                      Từ một cửa hàng nhỏ đến Top 1 doanh số ngành thực phẩm trên
+                      sàn...
+                    </p>
+                    <div class="news-read-more">
+                      Đọc thêm <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer>
+        <div class="container">
+          <div class="footer-main">
+            <div class="footer-col" style="
+              grid-column: span 1.5;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              text-align: center;
+            ">
+              <img src="assets/logo-white.png" alt="QUẢNG PHÁT" style="height: 90px; margin-bottom: 20px" />
+              <p style="
+                color: #999;
+                font-size: 13px;
+                margin-bottom: 20px;
+                text-align: justify;
+              ">
+                Cầu nối giao thương toàn cầu. Quảng Phát Logistic mang đến giải
+                pháp vận chuyển và thương mại điện tử trọn gói cho doanh nghiệp.
+              </p>
+              <div class="footer-social">
+                <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" class="social-icon"><i class="fa-brands fa-tiktok"></i></a>
+                <!-- <a href="#" class="social-icon"><i class="fa-brands fa-google"></i></a> -->
+              </div>
+            </div>
+            <div class="footer-col">
+              <h4 style="color: white; margin-bottom: 20px; font-size: 14px">
+                GIỚI THIỆU
+              </h4>
+              <a href="#" class="footer-link">Về chúng tôi</a>
+              <a href="#" class="footer-link">Hướng dẫn mua hàng</a>
+              <a href="#" class="footer-link">Quy trình xử lý khiếu nại</a>
+              <a href="#" class="footer-link">Chính sách & Điều khoản</a>
+            </div>
+            <div class="footer-col">
+              <h4 style="color: white; margin-bottom: 20px; font-size: 14px">
+                CHÍNH SÁCH
+              </h4>
+              <a href="#" class="footer-link">Chính sách giao hàng</a>
+              <a href="#" class="footer-link">Chính sách bảo mật</a>
+              <a href="#" class="footer-link">Chính sách thanh toán</a>
+              <a href="#" class="footer-link">Đối tác vận chuyển</a>
+            </div>
+            <div class="footer-col" style="grid-column: span 1.5">
+              <h4 style="color: white; margin-bottom: 20px; font-size: 14px">
+                LIÊN HỆ
+              </h4>
+              <p style="color: #999; font-size: 13px; margin-bottom: 10px">
+                <i class="fa-solid fa-location-dot" style="margin-right: 10px"></i>
+                Địa chỉ: Số 123, Đường ABC, Quận XYZ, TP. Hồ Chí Minh
+              </p>
+              <p style="color: #999; font-size: 13px; margin-bottom: 10px">
+                <i class="fa-solid fa-phone" style="margin-right: 10px"></i>
+                Hotline: 0987.xxx.xxx
+              </p>
+              <p style="color: #999; font-size: 13px; margin-bottom: 10px">
+                <i class="fa-solid fa-envelope" style="margin-right: 10px"></i>
+                Email: contact@quangphat.com
+              </p>
+            </div>
+          </div>
+          <div style="
+            height: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #666;
+          ">
+            <p>&copy; 2026 Quảng Phát Logistic. Tất cả quyền được bảo lưu.</p>
+            <!-- <div style="display: flex; gap: 20px;">
+                    <span>VN</span>
+                    <span>EN</span>
+                </div> -->
+          </div>
+        </div>
+      </footer>
+
+      <!-- FLOATING ACTIONS -->
+      <div class="floating-actions">
+        <a href="tel:0987xxxxxx" class="action-btn hotline-btn" title="Gọi Hotline">
+          <i class="fa-solid fa-phone"></i>
+        </a>
+        <a href="https://zalo.me/0987xxxxxx" target="_blank" class="action-btn zalo-btn" title="Chat Zalo">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo"
+            style="width: 100%; height: 100%; border-radius: var(--radius-circle)" />
+        </a>
+        <a href="https://m.me/yourpage" target="_blank" class="action-btn mess-btn" title="Chat Messenger">
+          <i class="fa-brands fa-facebook-messenger"></i>
+        </a>
+        <button id="scrollTopBtn" class="action-btn scroll-top-btn" title="Lên đầu trang">
+          <i class="fa-solid fa-arrow-up"></i>
+        </button>
+      </div>
+
+      <!-- JavaScript for Slider -->
+      <script>
+        const slides = document.querySelectorAll(".slide");
+        const dots = document.querySelectorAll(".dot");
+        const prevBtn = document.querySelector(".prev");
+        const nextBtn = document.querySelector(".next");
+        let currentSlide = 0;
+
+        function showSlide(index) {
+          slides.forEach((slide) => slide.classList.remove("active"));
+          dots.forEach((dot) => dot.classList.remove("active"));
+
+          currentSlide = (index + slides.length) % slides.length;
+          slides[currentSlide].classList.add("active");
+          dots[currentSlide].classList.add("active");
+        }
+
+        prevBtn.addEventListener("click", () => showSlide(currentSlide - 1));
+        nextBtn.addEventListener("click", () => showSlide(currentSlide + 1));
+
+        dots.forEach((dot, i) => {
+          dot.addEventListener("click", () => showSlide(i));
+        });
+
+        // Auto slide
+        setInterval(() => showSlide(currentSlide + 1), 5000);
+
+        // Shopee Category – smooth slide pagination via CSS transform
+        (function () {
+          const slider = document.getElementById("shopee-cat-grid");
+          const prevBtn = document.querySelector(".cat-prev-page");
+          const nextBtn = document.querySelector(".cat-next-page");
+          if (!slider || !prevBtn || !nextBtn) return;
+
+          const pages = Array.from(slider.querySelectorAll(".shopee-cat-page"));
+          let page = 0;
+
+          function goTo(idx, dir) {
+            idx = Math.max(0, Math.min(idx, pages.length - 1));
+            if (idx === page && dir === undefined) return;
+            slider.style.transform = `translateX(-${idx * 100}%)`;
+            page = idx;
+            prevBtn.disabled = page === 0;
+            nextBtn.disabled = page >= pages.length - 1;
+          }
+
+          nextBtn.addEventListener("click", () => goTo(page + 1));
+          prevBtn.addEventListener("click", () => goTo(page - 1));
+
+          // Swipe support (touch)
+          let touchStartX = 0;
+          slider.addEventListener(
+            "touchstart",
+            (e) => {
+              touchStartX = e.touches[0].clientX;
+            },
+            { passive: true },
+          );
+          slider.addEventListener(
+            "touchend",
+            (e) => {
+              const dx = e.changedTouches[0].clientX - touchStartX;
+              if (Math.abs(dx) > 50) goTo(dx < 0 ? page + 1 : page - 1);
+            },
+            { passive: true },
+          );
+
+          goTo(0);
+        })();
+
+        // Flash Sale Slider (Scoped to flash-sale section)
+        const flashSection =
+          document.querySelector(".flash-sale-header").parentElement;
+        const flashWrapper = flashSection.querySelector(
+          ".product-slider-wrapper",
+        );
+        // Flash Sale Slider
+        setupProductSlider(".flash-wrapper", ".flash-prev", ".flash-next");
+
+        // Generic setup for product sliders
+        function setupProductSlider(wrapperSelector, prevSelector, nextSelector) {
+          const wrapper = document.querySelector(wrapperSelector);
+          const prev = document.querySelector(prevSelector);
+          const next = document.querySelector(nextSelector);
+
+          if (wrapper && prev && next) {
+            const getAmount = () => {
+              // Find any immediate child in the track/wrapper
+              const item = wrapper.querySelector(
+                '.p-card, .brand-item, .news-card, .sub-banner-item, [class*="item"], [class*="card"]',
+              );
+              if (!item) return 300;
+              const track = item.parentElement;
+              const gap = parseInt(window.getComputedStyle(track).gap) || 0;
+              return item.offsetWidth + gap;
+            };
+            const scrollNext = () => {
+              const amount = getAmount();
+              // Move content LEFT (viewport moves RIGHT)
+              if (
+                wrapper.scrollLeft + wrapper.clientWidth >=
+                wrapper.scrollWidth - 50
+              ) {
+                wrapper.scrollTo({ left: 0, behavior: "smooth" });
+              } else {
+                wrapper.scrollBy({ left: amount, behavior: "smooth" });
+              }
+            };
+
+            next.addEventListener("click", scrollNext);
+            prev.addEventListener("click", () => {
+              // Move content RIGHT (viewport moves LEFT)
+              wrapper.scrollBy({ left: -getAmount(), behavior: "smooth" });
+            });
+
+            let interval = setInterval(scrollNext, 6000);
+            wrapper.addEventListener("mouseenter", () => clearInterval(interval));
+            wrapper.addEventListener("mouseleave", () => {
+              interval = setInterval(scrollNext, 6000);
+            });
+          }
+        }
+
+        setupProductSlider(".new-wrapper", ".new-prev", ".new-next");
+        setupProductSlider(".best-wrapper", ".best-prev", ".best-next");
+
+        // Filter tabs logic
+        document.querySelectorAll(".sale-tabs").forEach((tabsGroup) => {
+          const btns = tabsGroup.querySelectorAll(".tab-btn");
+          btns.forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+              // Update active state
+              btns.forEach((b) => b.classList.remove("active"));
+              e.target.classList.add("active");
+
+              // Simulate filtering by adding a fade out / fade in effect to the product track
+              const section = e.target.closest("section");
+              const track = section.querySelector(".product-track");
+              if (track) {
+                track.style.opacity = "0";
+                setTimeout(() => {
+                  // In a real app, products would be replaced here based on the selected category
+                  // For the mockup, we just shuffle them to look like they changed
+                  for (let i = track.children.length; i >= 0; i--) {
+                    track.appendChild(track.children[(Math.random() * i) | 0]);
+                  }
+                  track.style.opacity = "1";
+                  // Scroll back to start
+                  const wrapper = section.querySelector(
+                    ".product-slider-wrapper",
+                  );
+                  if (wrapper) wrapper.scrollTo({ left: 0, behavior: "smooth" });
+                }, 300);
+              }
+            });
+          });
+        });
+
+        // Promo Banner Slider
+        (function () {
+          const track = document.querySelector(".promo-slider-track");
+          const dots = document.querySelectorAll(".promo-dot");
+          const totalSlides = dots.length;
+          let current = 0;
+
+          function goTo(index) {
+            current = (index + totalSlides) % totalSlides;
+            track.style.transform = `translateX(-${current * 100}%)`;
+            dots.forEach((d) => d.classList.remove("active"));
+            dots[current].classList.add("active");
+          }
+
+          dots.forEach((dot, i) => {
+            dot.addEventListener("click", () => goTo(i));
+          });
+
+          let promoInterval = setInterval(() => goTo(current + 1), 7000);
+
+          const outer = document.querySelector(".promo-slider-outer");
+          outer.addEventListener("mouseenter", () =>
+            clearInterval(promoInterval),
+          );
+          outer.addEventListener("mouseleave", () => {
+            promoInterval = setInterval(() => goTo(current + 1), 7000);
+          });
+        })();
+
+        // Brand Slider
+        setupProductSlider(
+          ".brand-section .brand-slider-wrapper",
+          ".brand-prev",
+          ".brand-next",
+        );
+
+        // Shop Slider
+        setupProductSlider(
+          ".shop-section .shop-wrapper",
+          ".shop-prev",
+          ".shop-next",
+        );
+
+        // News Slider
+        setupProductSlider(
+          ".news-section .news-slider-wrapper",
+          ".news-prev",
+          ".news-next",
+        );
+
+        // Floating Actions: Scroll to Top
+        const scrollTopBtn = document.getElementById("scrollTopBtn");
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 300) {
+            scrollTopBtn.classList.add("show");
+          } else {
+            scrollTopBtn.classList.remove("show");
+          }
+        });
+
+        scrollTopBtn.addEventListener("click", () => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        });
+
+        // Toggle Cart Sidebar Logic
+        const toggleCart = () => {
+          const cartSidebar = document.getElementById("cartSidebar");
+          const cartOverlay = document.getElementById("cartOverlay");
+
+          if (!cartSidebar || !cartOverlay) return;
+
+          cartSidebar.classList.toggle("active");
+          cartOverlay.classList.toggle("active");
+          document.body.style.overflow = cartSidebar.classList.contains("active")
+            ? "hidden"
+            : "";
+        };
+
+        // Event Delegation for Cart Actions
+        document.addEventListener("click", (e) => {
+          // Check if clicked element or its parent is a cart toggle
+          const target = e.target.closest(
+            ".cart-btn, #closeCart, #cartOverlay, .btn-add-cart, .btn-add-cart-detail",
+          );
+
+          if (target) {
+            e.preventDefault();
+            toggleCart();
+          }
+        });
+        // Toggle Demo Logged In State
+        function loginDemo() {
+          document.getElementById("headerAuth").style.display = "none";
+          document.getElementById("userProfile").classList.add("is-logged-in");
+        }
+
+        function logoutDemo() {
+          document.getElementById("headerAuth").style.display = "flex";
+          const userProfile = document.getElementById("userProfile");
+          userProfile.classList.remove("is-logged-in");
+          userProfile.style.display = "none";
+        }
+
+        // Simulating logged in for demo after 3 seconds
+        // setTimeout(loginDemo, 3000);
+        // Sub Banners Slider
+        setupProductSlider(
+          ".sub-banners-section .sub-banners-slider",
+          ".sub-prev",
+          ".sub-next",
+        );
+
+        // Coupon Popup Logic
+        window.openCoupon = (code, title) => {
+          const couponOverlay = document.getElementById("couponOverlay");
+          const couponCodeEl = document.getElementById("couponCode");
+          const couponTitleEl = document.getElementById("couponTitle");
+          const copyBtn = document.querySelector(".btn-copy");
+
+          if (!couponOverlay || !couponCodeEl) return;
+
+          couponCodeEl.innerText = code;
+          couponTitleEl.innerText = title;
+          couponOverlay.classList.add("active");
+          copyBtn.innerText = "Copy mã";
+          copyBtn.classList.remove("copied");
+        };
+
+        window.closeCoupon = () => {
+          document.getElementById("couponOverlay").classList.remove("active");
+        };
+
+        window.copyCoupon = () => {
+          const couponCodeEl = document.getElementById("couponCode");
+          const copyBtn = document.querySelector(".btn-copy");
+          const code = couponCodeEl.innerText;
+
+          navigator.clipboard.writeText(code).then(() => {
+            copyBtn.innerText = "Đã Copy!";
+            copyBtn.classList.add("copied");
+            setTimeout(() => {
+              closeCoupon();
+            }, 1000);
+          });
+        };
+
+        // Close on escape or outside click
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") closeCoupon();
+        });
+        couponOverlay.addEventListener("click", (e) => {
+          if (e.target === couponOverlay) closeCoupon();
+        });
+      </script>
+
+      <!-- COUPON POPUP -->
+      <div class="coupon-overlay" id="couponOverlay">
+        <div class="coupon-card">
+          <i class="fa-solid fa-xmark close-coupon" onclick="closeCoupon()"></i>
+          <div class="coupon-icon">
+            <i class="fa-solid fa-gift"></i>
+          </div>
+          <h3 class="coupon-title" id="couponTitle">Voucher Độc Quyền</h3>
+          <p class="coupon-desc">
+            Sử dụng mã bên dưới khi thanh toán để nhận ưu đãi ngay lập tức!
+          </p>
+          <div class="coupon-box">
+            <span class="coupon-code" id="couponCode">QP-NEW50</span>
+            <button class="btn-copy" onclick="copyCoupon()">Copy mã</button>
+          </div>
+          <p class="coupon-exp">
+            Hạn dùng: 31/05/2026 • Áp dụng cho mọi đơn hàng
+          </p>
+        </div>
+      </div>
+
+    </div> <!-- End mall-main-content -->
+
+    <!-- Right Sidebar: Ads/Promos -->
+    <aside class="logistic-sidebar right pc-only">
+      <div class="logistic-sidebar-title">
+        <i class="fa-solid fa-fire"></i> Ưu đãi Hot
+      </div>
+      <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=300&auto=format&fit=crop"
+        style="width:100%; border-radius: 8px; margin-bottom: 15px;" alt="Promo">
+      <img src="https://images.unsplash.com/photo-1607082349566-187342175e2f?q=80&w=300&auto=format&fit=crop"
+        style="width:100%; border-radius: 8px;" alt="Promo">
+    </aside>
+  </div> <!-- End ecommerce-wrapper -->
+
+  <!-- SIDE CART -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3>Giỏ hàng của bạn</h3>
+      <button class="close-cart" id="closeCart">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="cart-items-list">
+      <div class="cart-item">
+        <div class="cart-item-img">
+          <img src="https://images.unsplash.com/photo-1510972527921-ce03766a1cf1?q=80&w=200&auto=format&fit=crop"
+            alt="Product" />
+        </div>
+        <div class="cart-item-info">
+          <a href="#" class="cart-item-name">Máy pha cà phê DeLonghi Dedica EC685</a>
+          <div class="cart-item-price">4.250.000đ</div>
+          <div class="cart-item-qty">Số lượng: 1</div>
+        </div>
+        <div class="remove-item"><i class="fa-solid fa-trash-can"></i></div>
+      </div>
+      <div class="cart-item">
+        <div class="cart-item-img">
+          <img src="https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?q=80&w=200&auto=format&fit=crop"
+            alt="Product" />
+        </div>
+        <div class="cart-item-info">
+          <a href="#" class="cart-item-name">Ấm Pha Cà Phê Moka Bialetti Cao Cấp</a>
+          <div class="cart-item-price">950.000đ</div>
+          <div class="cart-item-qty">Số lượng: 1</div>
+        </div>
+        <div class="remove-item"><i class="fa-solid fa-trash-can"></i></div>
+      </div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Tổng cộng:</span>
+        <span class="cart-total-price">5.200.000đ</span>
+      </div>
+      <button class="btn-checkout" onclick="window.location.href = 'cart.html'">
+        Tiến hành thanh toán
+      </button>
+    </div>
+  </div>
+  <!-- MOBILE BOTTOM NAVIGATION -->
+  <div class="mobile-bottom-nav">
+    <a href="index.html" class="mobile-nav-item active">
+      <i class="fa-solid fa-house"></i>
+      <span>Trang chủ</span>
+    </a>
+    <a href="products.html" class="mobile-nav-item">
+      <i class="fa-solid fa-boxes-stacked"></i>
+      <span>Sản phẩm</span>
+    </a>
+    <a href="orders.html" class="mobile-nav-item">
+      <i class="fa-solid fa-clipboard-list"></i>
+      <span>Đơn hàng</span>
+    </a>
+    <a href="profile.html" class="mobile-nav-item">
+      <i class="fa-solid fa-user"></i>
+      <span>Cá nhân</span>
+    </a>
+  </div>
+
+  <!-- MOBILE MENU DRAWER -->
+  <!-- MOBILE DRAWER -->
+  <div class="mobile-drawer-overlay" id="mobileOverlay"></div>
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="drawer-header">
+      <img src="assets/logo-black.png" alt="Logo" class="drawer-logo" />
+      <div class="close-drawer" id="closeMobileMenu">
+        <i class="fa-solid fa-xmark"></i>
+      </div>
+    </div>
+    <div class="drawer-content">
+      <div class="drawer-menu">
+        <a href="index.html" class="menu-item active"><i class="fa-solid fa-house"></i> Trang chủ</a>
+        <a href="about.html" class="menu-item"><i class="fa-solid fa-circle-info"></i> Quảng Phát Logistics</a>
+
+        <!-- Submenu Item -->
+        <div class="menu-item-wrapper">
+          <div class="menu-item has-submenu" data-target="mall-submenu">
+            <span><i class="fa-solid fa-store"></i> Quảng Phát Mall</span>
+            <i class="fa-solid fa-chevron-down submenu-icon"></i>
+          </div>
+          <div class="submenu-list" id="mall-submenu">
+            <a href="products.html" class="submenu-item">Thực phẩm</a>
+            <a href="products.html" class="submenu-item">Công nghiệp</a>
+            <a href="products.html" class="submenu-item">Thời trang</a>
+          </div>
+        </div>
+
+        <a href="lien-he.html" class="menu-item"><i class="fa-solid fa-envelope"></i> Liên hệ</a>
+      </div>
+
+      <div class="drawer-divider"></div>
+
+      <div class="drawer-menu">
+        <div class="menu-label">Tài khoản của tôi</div>
+        <a href="profile.html" class="menu-item"><i class="fa-regular fa-user"></i> Thông tin cá nhân</a>
+        <a href="orders.html" class="menu-item"><i class="fa-solid fa-clipboard-list"></i> Đơn hàng của tôi</a>
+        <a href="cart.html" class="menu-item"><i class="fa-solid fa-cart-shopping"></i> Giỏ hàng</a>
+      </div>
+
+      <div class="drawer-divider"></div>
+
+      <!-- Seller Only Section -->
+      <div class="seller-menu-section">
+        <div class="menu-label">Kênh người bán</div>
+        <a href="seller-dashboard.html" class="menu-item"><i class="fa-solid fa-chart-line"></i> Dashboard thống kê</a>
+        <a href="seller-products.html" class="menu-item"><i class="fa-solid fa-boxes-stacked"></i> Quản lý sản phẩm</a>
+        <a href="seller-orders.html" class="menu-item"><i class="fa-solid fa-clipboard-list"></i> Đơn hàng đã nhận</a>
+        <a href="seller-payments.html" class="menu-item"><i class="fa-solid fa-wallet"></i> Lịch sử thanh toán</a>
+        <a href="shop-config.html" class="menu-item"><i class="fa-solid fa-gear"></i> Cài đặt Shop</a>
+      </div>
+
+      <div class="drawer-divider"></div>
+
+      <div class="drawer-menu">
+        <a href="#" class="menu-item logout-item"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="mobile.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "Kviet Shop",
+  "short_name": "Kviet",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "description": "Kviet Shop - Nền tảng mua sắm trực tuyến chuyên nghiệp",
+  "icons": [
+    {
+      "src": "assets/images/logo_icon/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/images/logo_icon/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

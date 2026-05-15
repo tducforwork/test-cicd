@@ -1,0 +1,934 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quảng Phát Logistic | Sàn Thương Mại Điện Tử & Vận Chuyển</title>
+
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="mobile.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+    <!-- MOBILE HEADER -->
+    <div class="mobile-header">
+        <div class="mobile-logo">
+            <a href="index.html">
+                <img src="assets/logo-black.png" alt="QUẢNG PHÁT" />
+            </a>
+        </div>
+        <div class="mobile-tools">
+            <div class="mobile-tool-item search-trigger">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <div class="mobile-tool-item" onclick="window.location.href='profile.html'">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100&auto=format&fit=crop"
+                    alt="User" class="mobile-avatar" />
+            </div>
+            <div class="mobile-tool-item cart-btn">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="badge">2</span>
+            </div>
+            <div class="mobile-tool-item" id="openMobileMenu">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- MOBILE SEARCH BAR (Toggled) -->
+    <div class="mobile-search-bar" id="mobileSearchBar">
+        <div class="container">
+            <div class="search-input-wrapper">
+                <input type="text" placeholder="Bạn muốn tìm gì hôm nay?" id="mobileSearchInput" />
+                <button type="button" class="mobile-search-btn">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+            <!-- Hot Keywords -->
+            <div class="mobile-search-hot">
+                <span>Xu hướng:</span>
+                <div class="hot-tags">
+                    <a href="#">iPhone 15</a>
+                    <a href="#">Giao hàng 24h</a>
+                    <a href="#">Máy khoan Bosch</a>
+                    <a href="#">Thời trang Mall</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOP BAR (CLEAN) -->
+    <div class="top-bar">
+        <div class="container top-bar-inner d-flex justify-content-between align-items-center">
+            <div class="top-bar-left d-flex gap-3">
+                <a href="#" class="text-decoration-none">Kênh Người Bán</a>
+                <div class="vr" style="width: 1px; height: 14px; align-self: center;"></div>
+                <a href="#" class="text-decoration-none">Vận chuyển Logistics</a>
+                <div class="vr" style="width: 1px; height: 14px; align-self: center;"></div>
+                <a href="#" class="text-decoration-none">Tải ứng dụng</a>
+                <div class="vr" style="width: 1px; height: 14px; align-self: center;"></div>
+                <div class="d-flex align-items-center gap-2">
+                    <span>Kết nối</span>
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="top-bar-right d-flex gap-3 align-items-center">
+                <a href="tel:1900633605" class="text-decoration-none fw-bold"><i class="fa-solid fa-phone me-1"></i> Hotline:
+                    1900 633 605</a>
+                <a href="#" class="text-decoration-none"><i class="fa-regular fa-circle-question me-1"></i> Hỗ trợ</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER (SHOPEE-STYLE QP MALL) -->
+    <header>
+        <div class="container header-inner">
+            <!-- Logo Section: Two Separate Logos Side-by-Side -->
+            <div class="dual-logo-container">
+                <a href="index.html" class="logo-link">
+                    <img src="assets/logo-mall-black.png" alt="QP MALL" style="height: 60px;" />
+                </a>
+                <div class="logo-divider-v"></div>
+                <a href="about.html" class="logo-link">
+                    <img src="assets/logo-black.png" alt="QP LOGISTICS" style="height: 60px;" />
+                </a>
+            </div>
+
+            <!-- Centered Search Area -->
+            <div class="search-area-wrapper">
+                <div class="shopee-search-bar">
+                    <input type="text" placeholder="Tìm kiếm sản phẩm, thương hiệu hoặc dịch vụ Logistics..." />
+                    <button class="shopee-search-btn">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+
+                <!-- Suggestions Box -->
+                <div class="search-suggestions-box">
+                    <div class="suggestion-section">
+                        <div class="suggestion-section-title">
+                            <span>SẢN PHẨM VỪA TÌM KIẾM</span>
+                            <a href="#">Xóa lịch sử</a>
+                        </div>
+                        <div class="recent-products-grid">
+                            <a href="product-detail.html" class="recent-p-item">
+                                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=100&auto=format&fit=crop"
+                                    class="recent-p-img" alt="Product">
+                                <div class="recent-p-info">
+                                    <p class="recent-p-name">Giày Nike Air Max</p>
+                                    <p class="recent-p-price">2.100.000đ</p>
+                                </div>
+                            </a>
+                            <a href="product-detail.html" class="recent-p-item">
+                                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=100&auto=format&fit=crop"
+                                    class="recent-p-img" alt="Product">
+                                <div class="recent-p-info">
+                                    <p class="recent-p-name">Tai nghe Sony WH</p>
+                                    <p class="recent-p-price">850.000đ</p>
+                                </div>
+                            </a>
+                            <a href="product-detail.html" class="recent-p-item">
+                                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=100&auto=format&fit=crop"
+                                    class="recent-p-img" alt="Product">
+                                <div class="recent-p-info">
+                                    <p class="recent-p-name">Apple Watch Series 8</p>
+                                    <p class="recent-p-price">450.000đ</p>
+                                </div>
+                            </a>
+                            <a href="product-detail.html" class="recent-p-item">
+                                <img src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=100&auto=format&fit=crop"
+                                    class="recent-p-img" alt="Product">
+                                <div class="recent-p-info">
+                                    <p class="recent-p-name">Nước hoa Bleu Chanel</p>
+                                    <p class="recent-p-price">1.850.000đ</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <hr class="my-3 opacity-10">
+
+                    <div class="suggestion-section">
+                        <div class="suggestion-section-title">
+                            <span>XU HƯỚNG TÌM KIẾM</span>
+                            <a href="#">Xóa tất cả</a>
+                        </div>
+                        <div class="suggestion-tags">
+                            <a href="#" class="suggestion-tag">iPhone 15 Pro Max</a>
+                            <a href="#" class="suggestion-tag">Vận chuyển Trung Việt</a>
+                            <a href="#" class="suggestion-tag">Phụ kiện Mall</a>
+                            <a href="#" class="suggestion-tag">Ốp lưng iPhone</a>
+                            <a href="#" class="suggestion-tag">Sạc dự phòng 20W</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hot Hints Below -->
+                <div class="search-hints">
+                    <a href="#">iPhone 15</a>
+                    <a href="#">Dịch vụ Vận Chuyển</a>
+                    <a href="#">Hàng Chính Hãng</a>
+                    <a href="#">Deal 1K</a>
+                    <a href="#">Flash Sale</a>
+                </div>
+            </div>
+
+            <!-- Tools Section -->
+            <div class="header-right-tools">
+                <!-- Guest -->
+                <div class="header-auth" id="headerAuth">
+                    <div class="user-profile guest-profile">
+                        <img src="https://ui-avatars.com/api/?name=Guest&background=e2e8f0&color=64748b&size=80&bold=true"
+                            alt="Guest" class="avatar" />
+                        <span class="user-name-mall" style="color:#64748b;">Tài khoản</span>
+                        <div class="profile-menu">
+                            <a href="login.html" class="menu-item"><i class="fa-solid fa-right-to-bracket"></i> Đăng nhập</a>
+                            <a href="register.html" class="menu-item"><i class="fa-solid fa-user-plus"></i> Đăng ký</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Logged-in -->
+                <div class="user-profile is-logged-in" id="userProfile">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100&auto=format&fit=crop"
+                        alt="User" class="avatar" />
+                    <span class="user-name-mall">Nam Nguyễn</span>
+                    <div class="profile-menu">
+                        <a href="profile.html" class="menu-item"><i class="fa-regular fa-user"></i> Hồ sơ</a>
+                        <hr class="dropdown-divider">
+                        <a href="#" class="menu-item logout-item" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i>
+                            Thoát</a>
+                    </div>
+                </div>
+
+                <div class="header-cart-shopee">
+                    <a href="#" class="cart-btn">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="cart-count">2</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="breadcrumb-section" style="
+        background-color: #f8f9fa;
+        padding: 20px 0;
+        border-bottom: 1px solid #eaeaea;
+      ">
+        <div class="container">
+            <a href="index.html" style="color: #666; font-size: 14px">Trang chủ</a>
+            <span style="margin: 0 10px; color: #ccc">/</span>
+            <span style="color: var(--primary); font-weight: 600; font-size: 14px">Liên hệ</span>
+        </div>
+    </div>
+    <!-- CONTACT SECTION -->
+    <section class="contact-section py-lg-5 py-4">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Info Column -->
+                <div class="contact-info-column" data-reveal>
+                    <div class="contact-info-card">
+                        <h2 class="section-title">Thông tin liên hệ</h2>
+                        <p style="color: var(--text-muted); margin-bottom: 40px; font-size: 14px;">
+                            Chúng tôi luôn sẵn sàng lắng nghe và hỗ trợ bạn. Hãy liên hệ với chúng tôi qua các kênh dưới
+                            đây hoặc để lại lời nhắn qua biểu mẫu.
+                        </p>
+
+                        <div class="contact-info-list">
+                            <!-- Item: Company -->
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="fa-solid fa-building"></i>
+                                </div>
+                                <div class="info-text">
+                                    <h4>Công Ty</h4>
+                                    <p>Công ty Cổ phần Quảng Phát Logistic</p>
+                                </div>
+                            </div>
+
+                            <!-- Item: Address -->
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div class="info-text">
+                                    <h4>Địa chỉ trụ sở</h4>
+                                    <p>Số 123, Đường ABC, Quận XYZ, TP. Hà Nội</p>
+                                </div>
+                            </div>
+
+                            <!-- Item: Phone -->
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div class="info-text">
+                                    <h4>Hotline hỗ trợ</h4>
+                                    <p><a href="tel:0987xxxxxx">0987.xxx.xxx</a></p>
+                                </div>
+                            </div>
+
+                            <!-- Item: Email -->
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div class="info-text">
+                                    <h4>Email liên hệ</h4>
+                                    <p><a href="mailto:contact@quangphat.com">contact@quangphat.com</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Column -->
+                <div class="contact-form-column" data-reveal>
+                    <div class="contact-form-wrapper">
+                        <h3 style="margin-bottom: 10px; font-size: 20px;">Gửi yêu cầu cho chúng tôi</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 30px; font-size: 14px;">
+                            Vui lòng điền đầy đủ thông tin bên dưới, chuyên viên của chúng tôi sẽ phản hồi bạn trong
+                            vòng 24h làm việc.
+                        </p>
+
+                        <form id="contactForm" class="contact-form">
+                            <div class="form-group">
+                                <label class="form-label">Họ và tên *</label>
+                                <input type="text" name="full_name" class="form-control"
+                                    placeholder="Nhập họ tên của bạn" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Số điện thoại *</label>
+                                <input type="tel" name="phone" class="form-control"
+                                    placeholder="Nhập số điện thoại liên hệ" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Nội dung trao đổi *</label>
+                                <textarea name="message" class="form-control"
+                                    placeholder="Bạn cần chúng tôi hỗ trợ vấn đề gì?" required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn-submit">
+                                <span>Gửi yêu cầu ngay</span>
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Reveal animation on scroll
+        const revealElements = document.querySelectorAll("[data-reveal]");
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("revealed");
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Form submission demo
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const btn = this.querySelector('.btn-submit');
+            const originalText = btn.innerHTML;
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Đang gửi...';
+
+            setTimeout(() => {
+                alert('Cảm ơn bạn! Yêu cầu của bạn đã được gửi thành công. Chúng tôi sẽ liên hệ lại sớm nhất.');
+                this.reset();
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }, 1500);
+        });
+    </script>
+
+    <!-- FOOTER -->
+
+    <footer>
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-col" style="
+              grid-column: span 1.5;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              text-align: center;
+            ">
+                    <img src="assets/logo-white.png" alt="QUẢNG PHÁT" style="height: 90px; margin-bottom: 20px" />
+                    <p style="
+                color: #999;
+                font-size: 13px;
+                margin-bottom: 20px;
+                text-align: justify;
+              ">
+                        Cầu nối giao thương toàn cầu. Quảng Phát Logistic mang đến giải
+                        pháp vận chuyển và thương mại điện tử trọn gói cho doanh nghiệp.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-tiktok"></i></a>
+                        <!-- <a href="#" class="social-icon"><i class="fa-brands fa-google"></i></a> -->
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4 style="color: white; margin-bottom: 20px; font-size: 14px">
+                        GIỚI THIỆU
+                    </h4>
+                    <a href="#" class="footer-link">Về chúng tôi</a>
+                    <a href="#" class="footer-link">Hướng dẫn mua hàng</a>
+                    <a href="#" class="footer-link">Quy trình xử lý khiếu nại</a>
+                    <a href="#" class="footer-link">Chính sách & Điều khoản</a>
+                </div>
+                <div class="footer-col">
+                    <h4 style="color: white; margin-bottom: 20px; font-size: 14px">
+                        CHÍNH SÁCH
+                    </h4>
+                    <a href="#" class="footer-link">Chính sách giao hàng</a>
+                    <a href="#" class="footer-link">Chính sách bảo mật</a>
+                    <a href="#" class="footer-link">Chính sách thanh toán</a>
+                    <a href="#" class="footer-link">Đối tác vận chuyển</a>
+                </div>
+                <div class="footer-col" style="grid-column: span 1.5">
+                    <h4 style="color: white; margin-bottom: 20px; font-size: 14px">
+                        LIÊN HỆ
+                    </h4>
+                    <p style="color: #999; font-size: 13px; margin-bottom: 10px">
+                        <i class="fa-solid fa-location-dot" style="margin-right: 10px"></i>
+                        Địa chỉ: Số 123, Đường ABC, Quận XYZ, TP. Hồ Chí Minh
+                    </p>
+                    <p style="color: #999; font-size: 13px; margin-bottom: 10px">
+                        <i class="fa-solid fa-phone" style="margin-right: 10px"></i>
+                        Hotline: 0987.xxx.xxx
+                    </p>
+                    <p style="color: #999; font-size: 13px; margin-bottom: 10px">
+                        <i class="fa-solid fa-envelope" style="margin-right: 10px"></i>
+                        Email: contact@quangphat.com
+                    </p>
+                </div>
+            </div>
+            <div style="
+            height: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #666;
+          ">
+                <p>&copy; 2026 Quảng Phát Logistic. Tất cả quyền được bảo lưu.</p>
+                <!-- <div style="display: flex; gap: 20px;">
+                    <span>VN</span>
+                    <span>EN</span>
+                </div> -->
+            </div>
+        </div>
+    </footer>
+
+    <!-- FLOATING ACTIONS -->
+    <div class="floating-actions">
+        <a href="tel:0987xxxxxx" class="action-btn hotline-btn" title="Gọi Hotline">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+        <a href="https://zalo.me/0987xxxxxx" target="_blank" class="action-btn zalo-btn" title="Chat Zalo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo"
+                style="width: 100%; height: 100%; border-radius: var(--radius-circle)" />
+        </a>
+        <a href="https://m.me/yourpage" target="_blank" class="action-btn mess-btn" title="Chat Messenger">
+            <i class="fa-brands fa-facebook-messenger"></i>
+        </a>
+        <button id="scrollTopBtn" class="action-btn scroll-top-btn" title="Lên đầu trang">
+            <i class="fa-solid fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- JavaScript for Slider -->
+    <script>
+        const slides = document.querySelectorAll(".slide");
+        const dots = document.querySelectorAll(".dot");
+        const prevBtn = document.querySelector(".prev");
+        const nextBtn = document.querySelector(".next");
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide) => slide.classList.remove("active"));
+            dots.forEach((dot) => dot.classList.remove("active"));
+
+            currentSlide = (index + slides.length) % slides.length;
+            slides[currentSlide].classList.add("active");
+            dots[currentSlide].classList.add("active");
+        }
+
+        prevBtn.addEventListener("click", () => showSlide(currentSlide - 1));
+        nextBtn.addEventListener("click", () => showSlide(currentSlide + 1));
+
+        dots.forEach((dot, i) => {
+            dot.addEventListener("click", () => showSlide(i));
+        });
+
+        // Auto slide
+        setInterval(() => showSlide(currentSlide + 1), 5000);
+
+        // Shopee Category – smooth slide pagination via CSS transform
+        (function () {
+            const slider = document.getElementById("shopee-cat-grid");
+            const prevBtn = document.querySelector(".cat-prev-page");
+            const nextBtn = document.querySelector(".cat-next-page");
+            if (!slider || !prevBtn || !nextBtn) return;
+
+            const pages = Array.from(slider.querySelectorAll(".shopee-cat-page"));
+            let page = 0;
+
+            function goTo(idx, dir) {
+                idx = Math.max(0, Math.min(idx, pages.length - 1));
+                if (idx === page && dir === undefined) return;
+                slider.style.transform = `translateX(-${idx * 100}%)`;
+                page = idx;
+                prevBtn.disabled = page === 0;
+                nextBtn.disabled = page >= pages.length - 1;
+            }
+
+            nextBtn.addEventListener("click", () => goTo(page + 1));
+            prevBtn.addEventListener("click", () => goTo(page - 1));
+
+            // Swipe support (touch)
+            let touchStartX = 0;
+            slider.addEventListener(
+                "touchstart",
+                (e) => {
+                    touchStartX = e.touches[0].clientX;
+                },
+                { passive: true },
+            );
+            slider.addEventListener(
+                "touchend",
+                (e) => {
+                    const dx = e.changedTouches[0].clientX - touchStartX;
+                    if (Math.abs(dx) > 50) goTo(dx < 0 ? page + 1 : page - 1);
+                },
+                { passive: true },
+            );
+
+            goTo(0);
+        })();
+
+        // Flash Sale Slider (Scoped to flash-sale section)
+        const flashSection =
+            document.querySelector(".flash-sale-header").parentElement;
+        const flashWrapper = flashSection.querySelector(
+            ".product-slider-wrapper",
+        );
+        // Flash Sale Slider
+        setupProductSlider(".flash-wrapper", ".flash-prev", ".flash-next");
+
+        // Generic setup for product sliders
+        function setupProductSlider(wrapperSelector, prevSelector, nextSelector) {
+            const wrapper = document.querySelector(wrapperSelector);
+            const prev = document.querySelector(prevSelector);
+            const next = document.querySelector(nextSelector);
+
+            if (wrapper && prev && next) {
+                const getAmount = () => {
+                    // Find any immediate child in the track/wrapper
+                    const item = wrapper.querySelector(
+                        '.p-card, .brand-item, .news-card, .sub-banner-item, [class*="item"], [class*="card"]',
+                    );
+                    if (!item) return 300;
+                    const track = item.parentElement;
+                    const gap = parseInt(window.getComputedStyle(track).gap) || 0;
+                    return item.offsetWidth + gap;
+                };
+                const scrollNext = () => {
+                    const amount = getAmount();
+                    // Move content LEFT (viewport moves RIGHT)
+                    if (
+                        wrapper.scrollLeft + wrapper.clientWidth >=
+                        wrapper.scrollWidth - 50
+                    ) {
+                        wrapper.scrollTo({ left: 0, behavior: "smooth" });
+                    } else {
+                        wrapper.scrollBy({ left: amount, behavior: "smooth" });
+                    }
+                };
+
+                next.addEventListener("click", scrollNext);
+                prev.addEventListener("click", () => {
+                    // Move content RIGHT (viewport moves LEFT)
+                    wrapper.scrollBy({ left: -getAmount(), behavior: "smooth" });
+                });
+
+                let interval = setInterval(scrollNext, 3500);
+                wrapper.addEventListener("mouseenter", () => clearInterval(interval));
+                wrapper.addEventListener("mouseleave", () => {
+                    interval = setInterval(scrollNext, 3500);
+                });
+            }
+        }
+
+        setupProductSlider(".new-wrapper", ".new-prev", ".new-next");
+        setupProductSlider(".best-wrapper", ".best-prev", ".best-next");
+
+        // Filter tabs logic
+        document.querySelectorAll(".sale-tabs").forEach((tabsGroup) => {
+            const btns = tabsGroup.querySelectorAll(".tab-btn");
+            btns.forEach((btn) => {
+                btn.addEventListener("click", (e) => {
+                    // Update active state
+                    btns.forEach((b) => b.classList.remove("active"));
+                    e.target.classList.add("active");
+
+                    // Simulate filtering by adding a fade out / fade in effect to the product track
+                    const section = e.target.closest("section");
+                    const track = section.querySelector(".product-track");
+                    if (track) {
+                        track.style.opacity = "0";
+                        setTimeout(() => {
+                            // In a real app, products would be replaced here based on the selected category
+                            // For the mockup, we just shuffle them to look like they changed
+                            for (let i = track.children.length; i >= 0; i--) {
+                                track.appendChild(track.children[(Math.random() * i) | 0]);
+                            }
+                            track.style.opacity = "1";
+                            // Scroll back to start
+                            const wrapper = section.querySelector(
+                                ".product-slider-wrapper",
+                            );
+                            if (wrapper) wrapper.scrollTo({ left: 0, behavior: "smooth" });
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Promo Banner Slider
+        (function () {
+            const track = document.querySelector(".promo-slider-track");
+            const dots = document.querySelectorAll(".promo-dot");
+            const totalSlides = dots.length;
+            let current = 0;
+
+            function goTo(index) {
+                current = (index + totalSlides) % totalSlides;
+                track.style.transform = `translateX(-${current * 100}%)`;
+                dots.forEach((d) => d.classList.remove("active"));
+                dots[current].classList.add("active");
+            }
+
+            dots.forEach((dot, i) => {
+                dot.addEventListener("click", () => goTo(i));
+            });
+
+            let promoInterval = setInterval(() => goTo(current + 1), 4000);
+
+            const outer = document.querySelector(".promo-slider-outer");
+            outer.addEventListener("mouseenter", () =>
+                clearInterval(promoInterval),
+            );
+            outer.addEventListener("mouseleave", () => {
+                promoInterval = setInterval(() => goTo(current + 1), 4000);
+            });
+        })();
+
+        // Brand Slider
+        setupProductSlider(
+            ".brand-section .brand-slider-wrapper",
+            ".brand-prev",
+            ".brand-next",
+        );
+
+        // Shop Slider
+        setupProductSlider(
+            ".shop-section .shop-wrapper",
+            ".shop-prev",
+            ".shop-next",
+        );
+
+        // News Slider
+        setupProductSlider(
+            ".news-section .news-slider-wrapper",
+            ".news-prev",
+            ".news-next",
+        );
+
+        // Floating Actions: Scroll to Top
+        const scrollTopBtn = document.getElementById("scrollTopBtn");
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add("show");
+            } else {
+                scrollTopBtn.classList.remove("show");
+            }
+        });
+
+        scrollTopBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+            });
+        });
+
+        // Toggle Cart Sidebar Logic
+        const toggleCart = () => {
+            const cartSidebar = document.getElementById("cartSidebar");
+            const cartOverlay = document.getElementById("cartOverlay");
+
+            if (!cartSidebar || !cartOverlay) return;
+
+            cartSidebar.classList.toggle("active");
+            cartOverlay.classList.toggle("active");
+            document.body.style.overflow = cartSidebar.classList.contains("active")
+                ? "hidden"
+                : "";
+        };
+
+        // Event Delegation for Cart Actions
+        document.addEventListener("click", (e) => {
+            // Check if clicked element or its parent is a cart toggle
+            const target = e.target.closest(
+                ".cart-btn, #closeCart, #cartOverlay, .btn-add-cart, .btn-add-cart-detail",
+            );
+
+            if (target) {
+                e.preventDefault();
+                toggleCart();
+            }
+        });
+        // Toggle Demo Logged In State
+        function loginDemo() {
+            document.getElementById("headerAuth").style.display = "none";
+            document.getElementById("userProfile").classList.add("is-logged-in");
+        }
+
+        function logoutDemo() {
+            document.getElementById("headerAuth").style.display = "flex";
+            const userProfile = document.getElementById("userProfile");
+            userProfile.classList.remove("is-logged-in");
+            userProfile.style.display = "none";
+        }
+
+        // Simulating logged in for demo after 3 seconds
+        // setTimeout(loginDemo, 3000);
+        // Sub Banners Slider
+        setupProductSlider(
+            ".sub-banners-section .sub-banners-slider",
+            ".sub-prev",
+            ".sub-next",
+        );
+
+        // Coupon Popup Logic
+        window.openCoupon = (code, title) => {
+            const couponOverlay = document.getElementById("couponOverlay");
+            const couponCodeEl = document.getElementById("couponCode");
+            const couponTitleEl = document.getElementById("couponTitle");
+            const copyBtn = document.querySelector(".btn-copy");
+
+            if (!couponOverlay || !couponCodeEl) return;
+
+            couponCodeEl.innerText = code;
+            couponTitleEl.innerText = title;
+            couponOverlay.classList.add("active");
+            copyBtn.innerText = "Copy mã";
+            copyBtn.classList.remove("copied");
+        };
+
+        window.closeCoupon = () => {
+            document.getElementById("couponOverlay").classList.remove("active");
+        };
+
+        window.copyCoupon = () => {
+            const couponCodeEl = document.getElementById("couponCode");
+            const copyBtn = document.querySelector(".btn-copy");
+            const code = couponCodeEl.innerText;
+
+            navigator.clipboard.writeText(code).then(() => {
+                copyBtn.innerText = "Đã Copy!";
+                copyBtn.classList.add("copied");
+                setTimeout(() => {
+                    closeCoupon();
+                }, 1000);
+            });
+        };
+
+        // Close on escape or outside click
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") closeCoupon();
+        });
+        couponOverlay.addEventListener("click", (e) => {
+            if (e.target === couponOverlay) closeCoupon();
+        });
+    </script>
+
+    <!-- COUPON POPUP -->
+    <div class="coupon-overlay" id="couponOverlay">
+        <div class="coupon-card">
+            <i class="fa-solid fa-xmark close-coupon" onclick="closeCoupon()"></i>
+            <div class="coupon-icon">
+                <i class="fa-solid fa-gift"></i>
+            </div>
+            <h3 class="coupon-title" id="couponTitle">Voucher Độc Quyền</h3>
+            <p class="coupon-desc">
+                Sử dụng mã bên dưới khi thanh toán để nhận ưu đãi ngay lập tức!
+            </p>
+            <div class="coupon-box">
+                <span class="coupon-code" id="couponCode">QP-NEW50</span>
+                <button class="btn-copy" onclick="copyCoupon()">Copy mã</button>
+            </div>
+            <p class="coupon-exp">
+                Hạn dùng: 31/05/2026 • Áp dụng cho mọi đơn hàng
+            </p>
+        </div>
+    </div>
+
+    <!-- SIDE CART -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Giỏ hàng của bạn</h3>
+            <button class="close-cart" id="closeCart">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="cart-items-list">
+            <div class="cart-item">
+                <div class="cart-item-img">
+                    <img src="https://images.unsplash.com/photo-1510972527921-ce03766a1cf1?q=80&w=200&auto=format&fit=crop"
+                        alt="Product" />
+                </div>
+                <div class="cart-item-info">
+                    <a href="#" class="cart-item-name">Máy pha cà phê DeLonghi Dedica EC685</a>
+                    <div class="cart-item-price">4.250.000đ</div>
+                    <div class="cart-item-qty">Số lượng: 1</div>
+                </div>
+                <div class="remove-item"><i class="fa-solid fa-trash-can"></i></div>
+            </div>
+            <div class="cart-item">
+                <div class="cart-item-img">
+                    <img src="https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?q=80&w=200&auto=format&fit=crop"
+                        alt="Product" />
+                </div>
+                <div class="cart-item-info">
+                    <a href="#" class="cart-item-name">Ấm Pha Cà Phê Moka Bialetti Cao Cấp</a>
+                    <div class="cart-item-price">950.000đ</div>
+                    <div class="cart-item-qty">Số lượng: 1</div>
+                </div>
+                <div class="remove-item"><i class="fa-solid fa-trash-can"></i></div>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Tổng cộng:</span>
+                <span class="cart-total-price">5.200.000đ</span>
+            </div>
+            <button class="btn-checkout" onclick="window.location.href = 'cart.html'">
+                Tiến hành thanh toán
+            </button>
+        </div>
+    </div>
+
+    <!-- MOBILE BOTTOM NAVIGATION -->
+    <div class="mobile-bottom-nav">
+        <a href="index.html" class="mobile-nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>Trang chủ</span>
+        </a>
+        <a href="products.html" class="mobile-nav-item">
+            <i class="fa-solid fa-boxes-stacked"></i>
+            <span>Sản phẩm</span>
+        </a>
+        <a href="orders.html" class="mobile-nav-item">
+            <i class="fa-solid fa-clipboard-list"></i>
+            <span>Đơn hàng</span>
+        </a>
+        <a href="profile.html" class="mobile-nav-item">
+            <i class="fa-solid fa-user"></i>
+            <span>Cá nhân</span>
+        </a>
+    </div>
+
+    <!-- MOBILE MENU DRAWER -->
+    <div class="mobile-drawer-overlay" id="mobileOverlay"></div>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-user-header">
+            <div class="user-info">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100&auto=format&fit=crop"
+                    alt="User" />
+                <div class="user-text">
+                    <p class="name">Nam Nguyễn</p>
+                    <p class="level"><i class="fa-solid fa-crown"></i> Thành viên Vàng</p>
+                </div>
+            </div>
+            <div class="close-drawer" id="closeMobileMenu">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+        <div class="drawer-content">
+            <div class="drawer-menu">
+                <a href="index.html" class="menu-item"><i class="fa-solid fa-house" style="color: #64748b;"></i> Quảng
+                    Phát Mall</a>
+                <a href="about.html" class="menu-item"><i class="fa-solid fa-truck-fast" style="color: #64748b;"></i>
+                    Quảng Phát Logistic</a>
+                <a href="news.html" class="menu-item"><i class="fa-solid fa-newspaper" style="color: #64748b;"></i> Tin
+                    tức mới nhất</a>
+                <a href="lien-he.html" class="menu-item"><i class="fa-solid fa-envelope" style="color: #f59e0b;"></i>
+                    Liên hệ hỗ trợ</a>
+            </div>
+
+            <div class="drawer-divider"></div>
+
+            <div class="drawer-menu">
+                <div class="menu-label">Tiện ích của tôi</div>
+                <a href="cart.html" class="menu-item"><i class="fa-solid fa-cart-shopping" style="color: #f97316;"></i>
+                    Giỏ hàng</a>
+                <a href="orders.html" class="menu-item"><i class="fa-solid fa-clipboard-list"
+                        style="color: #f97316;"></i> Đơn hàng của tôi</a>
+                <a href="#" class="menu-item"><i class="fa-solid fa-ticket" style="color: #f59e0b;"></i> Kho Voucher</a>
+                <a href="#" class="menu-item"><i class="fa-solid fa-coins" style="color: #f59e0b;"></i> QP Xu <span
+                        class="badge-mini">1.2k</span></a>
+                <a href="#" class="menu-item"><i class="fa-solid fa-heart" style="color: #f97316;"></i> Đã thích</a>
+            </div>
+
+            <div class="drawer-divider"></div>
+
+            <!-- Seller Only Section -->
+            <div class="seller-menu-section">
+                <div class="menu-label">Kênh người bán</div>
+                <a href="seller-dashboard.html" class="menu-item"><i class="fa-solid fa-chart-line"></i> Dashboard thống
+                    kê</a>
+                <a href="seller-products.html" class="menu-item"><i class="fa-solid fa-boxes-stacked"></i> Quản lý sản
+                    phẩm</a>
+                <a href="seller-orders.html" class="menu-item"><i class="fa-solid fa-clipboard-list"></i> Đơn hàng đã
+                    nhận</a>
+                <a href="seller-payments.html" class="menu-item"><i class="fa-solid fa-wallet"></i> Lịch sử thanh
+                    toán</a>
+                <a href="shop-config.html" class="menu-item"><i class="fa-solid fa-gear"></i> Cài đặt Shop</a>
+            </div>
+
+            <div class="drawer-divider"></div>
+
+            <div class="drawer-menu">
+                <a href="#" class="menu-item logout-item"><i class="fa-solid fa-right-from-bracket"
+                        style="color: #f97316;"></i> Đăng xuất</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="mobile.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

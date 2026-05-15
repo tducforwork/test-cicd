@@ -1,0 +1,259 @@
+{
+    "topbar": {
+        "builder": true,
+        "name": "Top Bar",
+        "content": {
+            "seller_link": "text",
+            "logistics_link": "text",
+            "app_link": "text",
+            "facebook_link": "text",
+            "instagram_link": "text",
+            "hotline": "text",
+            "support_link": "text"
+        }
+    },
+    "header": {
+        "builder": true,
+        "name": "Header",
+        "content": {
+            "images": {
+                "logo_mall": {
+                    "size": ""
+                },
+                "logo_logistics": {
+                    "size": ""
+                }
+            },
+            "logo_mall_link": "text",
+            "logo_logistics_link": "text"
+        }
+    },
+    "footer": {
+        "builder": true,
+        "name": "Footer",
+        "content": {
+            "images": {
+                "footer_logo": {
+                    "size": ""
+                }
+            },
+            "about_text": "textarea",
+            "address": "text",
+            "hotline": "text",
+            "email": "text",
+            "copyright_text": "text"
+        }
+    },
+    "hero_slider": {
+        "builder": true,
+        "name": "Hero Slider",
+        "content": {
+            "images": {
+                "side_banner_1": {
+                    "size": "400x250"
+                },
+                "side_banner_2": {
+                    "size": "400x250"
+                }
+            },
+            "side_banner_1_link": "text",
+            "side_banner_2_link": "text"
+        },
+        "element": {
+            "sort_order": "text",
+            "link": "text",
+            "images": {
+                "slider_image": {
+                    "size": "1920x800"
+                }
+            },
+            "modal": true
+        }
+    },
+    "sub_banners": {
+        "builder": true,
+        "name": "Sub Banners (4 Items)",
+        "element": {
+            "title": "text",
+            "description": "text",
+            "button_text": "text",
+            "coupon_code": "text",
+            "images": {
+                "banner_image": {
+                    "size": ""
+                }
+            },
+            "modal": true
+        }
+    },
+    "intro_section": {
+        "builder": true,
+        "name": "Intro Section",
+        "content": {
+            "label": "text",
+            "title": "text",
+            "description": "textarea",
+            "button_text": "text",
+            "button_url": "text",
+            "images": {
+                "intro_image": {
+                    "size": ""
+                }
+            }
+        },
+        "element": {
+            "feature": "text",
+            "modal": true
+        }
+    },
+    "categories": {
+        "builder": true,
+        "name": "Product Categories",
+        "content": {
+            "title": "text"
+        }
+    },
+    "flash_sale": {
+        "builder": true,
+        "name": "Flash Sale Section",
+        "content": {
+            "title": "text",
+            "promotion_id": "text"
+        }
+    },
+    "promo_section": {
+        "builder": true,
+        "name": "Promotion Banners",
+        "element": {
+            "badge": "text",
+            "title": "text",
+            "description": "text",
+            "button_text": "text",
+            "button_url": "text",
+            "banner_badge": "text",
+            "background_color": "color",
+            "images": {
+                "background_image": {
+                    "size": ""
+                }
+            },
+            "instruction": "Lưu ý: Ưu tiên hiển thị màu sắc hơn ảnh background.",
+            "modal": true
+        }
+    },
+    "most_searched": {
+        "builder": true,
+        "name": "Most Searched Section",
+        "content": {
+            "title": "text",
+            "category_ids": "text"
+        }
+    },
+    "top_deal": {
+        "builder": true,
+        "name": "Top Deal Section",
+        "content": {
+            "title": "text",
+            "category_ids": "text"
+        }
+    },
+    "suggestion": {
+        "builder": true,
+        "name": "Suggestion Section",
+        "content": {
+            "title": "text",
+            "category_ids": "text"
+        }
+    },
+    "brands": {
+        "builder": true,
+        "name": "Featured Brands",
+        "content": {
+            "title": "text"
+        }
+    },
+    "featured_products": {
+        "builder": true,
+        "name": "Featured Products Section",
+        "content": {
+            "title": "text",
+            "category_ids": "text"
+        }
+    },
+    "shops": {
+        "builder": true,
+        "name": "Featured Shops",
+        "content": {
+            "title": "text"
+        }
+    },
+    "news": {
+        "builder": true,
+        "name": "Latest News Section",
+        "content": {
+            "title": "text"
+        }
+    },
+    "pages": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Pages",
+        "element": {
+            "title": "text",
+            "slug": "title",
+            "description": "textarea-nic",
+            "modal": false
+        }
+    },
+    "social_media_links": {
+        "builder": true,
+        "name": "Social Media",
+        "element": {
+            "title": "text",
+            "images": {
+                "social_icon": {
+                    "size": ""
+                }
+            },
+            "url": "text",
+            "modal": true
+        }
+    },
+    "contact": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Liên hệ - Thông tin",
+        "content": {
+            "title_1": "text",
+            "desc_1": "text",
+            "phone": "text",
+            "title_2": "text",
+            "desc_2": "text",
+            "email_1": "text",
+            "email_2": "text"
+        }
+    },
+    "policy_pages": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Policy Pages",
+        "hide_builder": true,
+        "element": {
+            "title": "text",
+            "slug": "title",
+            "details": "textarea-nic",
+            "modal": false,
+            "seo": true
+        }
+    },
+    "kyc": {
+        "builder": true,
+        "no_selection": true,
+        "name": "KYC Content",
+        "content": {
+            "required": "text",
+            "pending": "text",
+            "reject": "text"
+        }
+    }
+}

@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi tiết đơn hàng | Quảng Phát Logistic</title>
+
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="index.css" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <div class="container top-bar-inner">
+            <div class="top-bar-left">
+                <span><i class="fa-solid fa-phone"></i> Hotline: 0987.xxx.xxx</span>
+                <span><i class="fa-solid fa-location-dot"></i> Địa chỉ: Hà Nội, Việt Nam</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="#">Hướng dẫn mua hàng</a>
+                <a href="#">Chính sách giao hàng</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header style="background: white; border-bottom: 1px solid var(--border);">
+        <div class="container header-inner">
+            <div class="logo-container" style="display: flex; align-items: center">
+                <a href="index.html"><img src="assets/logo-white.png" alt="QUẢNG PHÁT"
+                        style="height: 60px; display: block; object-fit: contain" /></a>
+            </div>
+
+            <div class="header-nav-items">
+                <a href="index.html" class="header-nav-link">Trang chủ</a>
+                <a href="about.html" class="header-nav-link">Quảng Phát Logistics</a>
+                <a href="products.html" class="header-nav-link">Quảng Phát Mall</a>
+                <a href="lien-he.html" class="header-nav-link">Liên hệ</a>
+            </div>
+
+            <div class="header-tools">
+                <div class="user-profile is-logged-in" id="userProfile">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100&auto=format&fit=crop"
+                        alt="User" class="avatar" />
+                    <div class="profile-menu">
+                        <div class="user-info-brief">
+                            <span class="user-name">Nguyễn Văn Nam</span>
+                            <span class="user-role">Người bán (Seller)</span>
+                        </div>
+                        <a href="profile.html" class="menu-item"><i class="fa-regular fa-user"></i> Thông tin cá nhân</a>
+                        <a href="change-password.html" class="menu-item"><i class="fa-solid fa-lock"></i> Đổi mật khẩu</a>
+                        <div class="seller-menu-section">
+                            <div class="menu-label">Kênh người bán</div>
+                            <a href="seller-dashboard.html" class="menu-item"><i class="fa-solid fa-chart-line"></i> Dashboard thống kê</a>
+                            <a href="seller-products.html" class="menu-item"><i class="fa-solid fa-boxes-stacked"></i> Quản lý sản phẩm</a>
+                            <a href="seller-orders.html" class="menu-item active"><i class="fa-solid fa-clipboard-list"></i> Đơn hàng đã nhận</a>
+                            <a href="seller-payments.html" class="menu-item"><i class="fa-solid fa-wallet"></i> Lịch sử thanh toán</a>
+                            <a href="shop-config.html" class="menu-item"><i class="fa-solid fa-gear"></i> Cài đặt Shop</a>
+                        </div>
+                        <a href="#" class="menu-item logout-item"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="breadcrumb-section"
+        style="background-color: #f8f9fa; padding: 20px 0; border-bottom: 1px solid #eaeaea;">
+        <div class="container">
+            <a href="index.html" style="color: #666; font-size: 14px">Trang chủ</a>
+            <span style="margin: 0 10px; color: #ccc">/</span>
+            <a href="seller-orders.html" style="color: #666; font-size: 14px">Quản lý Đơn hàng</a>
+            <span style="margin: 0 10px; color: #ccc">/</span>
+            <span style="color: var(--primary); font-weight: 600; font-size: 14px">Chi tiết đơn hàng #ORD-9982</span>
+        </div>
+    </div>
+
+    <!-- MAIN SECTION -->
+    <section class="profile-section py-lg-5 py-4">
+        <div class="container">
+            <div class="profile-container">
+                <!-- Sidebar -->
+                <aside class="profile-sidebar">
+                    <div class="sidebar-user-info">
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100&auto=format&fit=crop"
+                            alt="Avatar" class="sidebar-avatar">
+                        <div style="text-align: center; margin-top: 10px;">
+                            <h3 style="margin-bottom: 5px;">Nguyễn Văn Nam</h3>
+                            <span style="font-size: 13px; color: var(--accent); font-weight: 700; display: block;">Quảng
+                                Phát Official Store</span>
+                            <span class="user-status-active">Đang hoạt động</span>
+                        </div>
+                    </div>
+                    <nav class="sidebar-menu">
+                        <a href="seller-dashboard.html" class="sidebar-link">
+                            <i class="fa-solid fa-chart-line"></i> Dashboard thống kê
+                        </a>
+                        <a href="shop-config.html" class="sidebar-link">
+                            <i class="fa-solid fa-gear"></i> Thông tin người bán
+                        </a>
+                        <a href="seller-products.html" class="sidebar-link">
+                            <i class="fa-solid fa-boxes-stacked"></i> Quản lý sản phẩm
+                        </a>
+                        <a href="seller-orders.html" class="sidebar-link active">
+                            <i class="fa-solid fa-clipboard-list"></i> Quản lý đơn hàng
+                        </a>
+                        <a href="seller-payments.html" class="sidebar-link">
+                            <i class="fa-solid fa-wallet"></i> Lịch sử thanh toán
+                        </a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="profile-main-content">
+                    <!-- Order Header -->
+                    <div class="content-header d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <h2 class="mb-1">Đơn hàng #ORD-9982</h2>
+                            <p style="color: var(--text-muted); font-size: 14px;">Ngày đặt: 12/05/2026 14:30</p>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <div class="dropdown">
+                                <button class="btn btn-light" type="button" data-bs-toggle="dropdown"
+                                    style="border: 1px solid #e2e8f0; border-radius: 8px; font-weight: 600; font-size: 13px; color: #475569; padding: 10px 20px;">
+                                    Cập nhật trạng thái <i class="fa-solid fa-chevron-down ms-2"
+                                        style="font-size: 10px; opacity: 0.5;"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-custom">
+                                    <li><button class="dropdown-item-custom" onclick="updateStatus('shipping')"><i
+                                                class="fa-solid fa-truck-fast"></i> Đang giao hàng</button></li>
+                                    <li><button class="dropdown-item-custom" onclick="updateStatus('delivered')"><i
+                                                class="fa-solid fa-circle-check"></i> Đã hoàn thành</button></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><button class="dropdown-item-custom text-danger"
+                                            onclick="updateStatus('cancelled')"><i class="fa-solid fa-circle-xmark"></i>
+                                            Hủy đơn hàng</button></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order Status Banner -->
+                    <div class="premium-card mb-4"
+                        style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white; border: none;">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center gap-4">
+                                <div
+                                    style="width: 60px; height: 60px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px;">
+                                    <i class="fa-solid fa-clock-rotate-left"></i>
+                                </div>
+                                <div>
+                                    <h4 class="mb-1 text-white" style="font-weight: 800;">Đang chờ xử lý</h4>
+                                    <p class="mb-0" style="opacity: 0.7; font-size: 13px;">Vui lòng xác nhận và đóng gói
+                                        sản phẩm để chuyển cho đơn vị vận chuyển.</p>
+                                </div>
+                            </div>
+                            <span class="badge badge-pending" style="padding: 10px 20px; font-size: 13px;">TRẠNG THÁI:
+                                PENDING</span>
+                        </div>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Left Column: Order Items -->
+                        <div class="col-lg-8">
+                            <div class="premium-card mb-4">
+                                <h3 class="form-section-title"><i class="fa-solid fa-box"></i> Sản phẩm trong đơn</h3>
+                                <div class="table-responsive">
+                                    <table class="table table-borderless align-middle" style="margin-bottom: 0;">
+                                        <thead>
+                                            <tr style="border-bottom: 1px solid #f1f5f9;">
+                                                <th
+                                                    style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); padding: 15px 0;">
+                                                    Sản phẩm</th>
+                                                <th
+                                                    style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); padding: 15px 0; text-align: center;">
+                                                    Đơn giá</th>
+                                                <th
+                                                    style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); padding: 15px 0; text-align: center;">
+                                                    Số lượng</th>
+                                                <th
+                                                    style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); padding: 15px 0; text-align: right;">
+                                                    Thành tiền</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr style="border-bottom: 1px solid #f8fafc;">
+                                                <td style="padding: 20px 0;">
+                                                    <div class="d-flex align-items-center gap-3">
+                                                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=100&auto=format&fit=crop"
+                                                            style="width: 50px; height: 50px; border-radius: 10px; object-fit: cover;">
+                                                        <div>
+                                                            <div
+                                                                style="font-weight: 700; font-size: 14px; color: var(--primary);">
+                                                                Giày thể thao nam cao cấp UltraBoost</div>
+                                                            <div style="font-size: 12px; color: var(--text-muted);">Màu:
+                                                                Đỏ | Size: 42</div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td style="text-align: center; font-weight: 600; font-size: 14px;">
+                                                    1.250.000đ</td>
+                                                <td style="text-align: center; font-weight: 600; font-size: 14px;">x1
+                                                </td>
+                                                <td
+                                                    style="text-align: right; font-weight: 800; font-size: 14px; color: var(--primary);">
+                                                    1.250.000đ</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 20px 0;">
+                                                    <div class="d-flex align-items-center gap-3">
+                                                        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=100&auto=format&fit=crop"
+                                                            style="width: 50px; height: 50px; border-radius: 10px; object-fit: cover;">
+                                                        <div>
+                                                            <div
+                                                                style="font-weight: 700; font-size: 14px; color: var(--primary);">
+                                                                Đồng hồ thông minh Series 7</div>
+                                                            <div style="font-size: 12px; color: var(--text-muted);">Dây:
+                                                                Silicon Đen</div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td style="text-align: center; font-weight: 600; font-size: 14px;">
+                                                    3.500.000đ</td>
+                                                <td style="text-align: center; font-weight: 600; font-size: 14px;">x1
+                                                </td>
+                                                <td
+                                                    style="text-align: right; font-weight: 800; font-size: 14px; color: var(--primary);">
+                                                    3.500.000đ</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="mt-4 pt-4" style="border-top: 1px solid #f1f5f9;">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span style="color: var(--text-muted); font-size: 14px;">Tạm tính</span>
+                                        <span style="font-weight: 600; font-size: 14px;">4.750.000đ</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span style="color: var(--text-muted); font-size: 14px;">Phí vận chuyển</span>
+                                        <span style="font-weight: 600; font-size: 14px;">35.000đ</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-3 pt-3"
+                                        style="border-top: 2px dashed #f1f5f9;">
+                                        <span style="font-weight: 800; font-size: 16px; color: var(--primary);">TỔNG
+                                            CỘNG</span>
+                                        <span
+                                            style="font-weight: 800; font-size: 20px; color: var(--accent);">4.785.000đ</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Customer & Shipping -->
+                        <div class="col-lg-4">
+                            <!-- Customer Info -->
+                            <div class="premium-card mb-4">
+                                <h3 class="form-section-title"><i class="fa-solid fa-user"></i> Khách hàng</h3>
+                                <div class="d-flex align-items-center gap-3 mb-3">
+                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&auto=format&fit=crop"
+                                        style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
+                                    <div>
+                                        <div style="font-weight: 700; font-size: 15px; color: var(--primary);">Lê Minh
+                                            Duy</div>
+                                        <div style="font-size: 12px; color: var(--text-muted);">12 đơn hàng thành công
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="font-size: 14px; color: #475569;">
+                                    <div class="mb-2"><i class="fa-solid fa-envelope"
+                                            style="width: 20px; color: #94a3b8;"></i> minhduy.le@email.com</div>
+                                    <div><i class="fa-solid fa-phone" style="width: 20px; color: #94a3b8;"></i> 0912 345
+                                        678</div>
+                                </div>
+                            </div>
+
+                            <!-- Shipping Info -->
+                            <div class="premium-card mb-4">
+                                <h3 class="form-section-title"><i class="fa-solid fa-truck"></i> Giao hàng</h3>
+                                <div style="font-size: 14px; color: #475569;">
+                                    <div class="mb-3">
+                                        <div style="font-weight: 700; color: var(--primary); margin-bottom: 5px;">Địa
+                                            chỉ nhận hàng</div>
+                                        <p class="mb-0" style="line-height: 1.6;">Tầng 5, Tòa nhà Quảng Phát, 123 Đường
+                                            Láng, Đống Đa, Hà Nội</p>
+                                    </div>
+                                    <div>
+                                        <div style="font-weight: 700; color: var(--primary); margin-bottom: 5px;">Hình
+                                            thức vận chuyển</div>
+                                        <div class="d-flex align-items-center gap-2">
+
+                                            <span>Giao hàng nhanh (GHN)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Payment Info -->
+                            <div class="premium-card">
+                                <h3 class="form-section-title"><i class="fa-solid fa-credit-card"></i> Thanh toán</h3>
+                                <div style="font-size: 14px; color: #475569;">
+                                    <div class="mb-3">
+                                        <div style="font-weight: 700; color: var(--primary); margin-bottom: 5px;">Phương
+                                            thức</div>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <i class="fa-solid fa-money-bill-transfer" style="color: #22c55e;"></i>
+                                            <span>Thanh toán khi nhận hàng (COD)</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div style="font-weight: 700; color: var(--primary); margin-bottom: 5px;">Trạng
+                                            thái</div>
+                                        <span class="badge"
+                                            style="background: #fee2e2; color: #ef4444; font-size: 10px;">CHƯA THANH
+                                            TOÁN</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer style="background: var(--primary); color: white; padding: 60px 0; margin-top: 60px;">
+        <div class="container text-center">
+            <img src="assets/logo-white.png" alt="Logo" style="height: 50px; margin-bottom: 20px;">
+            <p style="opacity: 0.7; font-size: 14px;">© 2026 Quảng Phát Logistic. Bảo lưu mọi quyền.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function updateStatus(status) {
+            let statusText = '';
+            let icon = 'success';
+
+            switch (status) {
+                case 'shipping': statusText = 'Đang giao hàng'; break;
+                case 'delivered': statusText = 'Đã hoàn thành'; break;
+                case 'cancelled':
+                    statusText = 'Hủy đơn hàng';
+                    icon = 'warning';
+                    break;
+            }
+
+            Swal.fire({
+                title: 'Xác nhận?',
+                text: `Bạn muốn chuyển trạng thái đơn hàng sang "${statusText}"?`,
+                icon: icon,
+                showCancelButton: true,
+                confirmButtonColor: '#0f172a',
+                cancelButtonColor: '#64748b',
+                confirmButtonText: 'ĐỒNG Ý',
+                cancelButtonText: 'QUAY LẠI'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Đã cập nhật!',
+                        text: `Trạng thái đơn hàng đã được chuyển sang "${statusText}".`,
+                        confirmButtonColor: '#0f172a'
+                    });
+                }
+            });
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
