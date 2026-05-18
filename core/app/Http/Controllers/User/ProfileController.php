@@ -23,7 +23,11 @@ class ProfileController extends Controller
     {
         $request->validate([
             'fullname' => 'required|string|max:80',
-            'image' => ['image', new FileTypeValidate(['jpg', 'jpeg', 'png'])]
+            'image' => ['image', new FileTypeValidate(['jpg', 'jpeg', 'png'])],
+            'birth_date' => 'nullable|date',
+            'province_id' => 'required|integer|exists:provinces,id',
+            'ward_id' => 'required|integer|exists:wards,id',
+            'address' => 'required|string',
         ]);
 
         $user = auth()->user();
@@ -36,11 +40,16 @@ class ProfileController extends Controller
             $user->image = fileUploader($request->image, getFilePath('userProfile'), getFileSize('userProfile'), @$user->image);
         }
 
+        $user->birth_date = $request->birth_date;
+        $user->province_id = $request->province_id;
+        $user->ward_id = $request->ward_id;
+        $user->address = $request->address;
+
         $user->save();
         $notify[] = ['success', 'Profile updated successfully'];
 
         if ($request->ajax()) {
-            return response()->json(['status' => 'success', 'message' => 'Profile updated successfully']);
+            return response()->json(['status' => 'success', 'message' => 'Cập nhật thông tin hồ sơ thành công!']);
         }
 
         return back()->withNotify($notify);

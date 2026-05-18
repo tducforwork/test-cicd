@@ -1645,6 +1645,7 @@
     "Could not upload the main image": "Không thể tải lên ảnh chính",
     "Could not upload additional images": "Không thể tải lên các ảnh bổ sung",
     "Product added successfully": "Sản phẩm đã được thêm thành công",
+    "Product added successfully and waiting for admin approval": "Sản phẩm đã được thêm thành công và đang chờ admin phê duyệt",
     "Product updated successfully": "Sản phẩm đã được cập nhật thành công",
     "Product deleted successfully": "Sản phẩm đã được xóa thành công",
     "Product restored successfully": "Sản phẩm đã được khôi phục thành công",

@@ -216,36 +216,52 @@ class UserController extends Controller
     {
         $user = auth()->user();
         if ($user->is_seller) {
+            if ($request->ajax()) {
+                return response()->json(['status' => 'error', 'message' => 'Bạn đã là người bán rồi!']);
+            }
             return to_route('seller.home');
         }
 
         $request->validate([
-            'terms' => 'required'
+            'address_seller' => 'required|string|max:255',
+            'id_card' => 'required|string|max:255',
+            'bank_name' => 'required|string|max:255',
+            'bank_account_number' => 'required|string|max:255',
+            'bank_branch' => 'required|string|max:255',
+        ], [
+            'address_seller.required' => 'Vui lòng nhập địa chỉ kinh doanh.',
+            'id_card.required' => 'Vui lòng nhập số CCCD.',
+            'bank_name.required' => 'Vui lòng nhập tên ngân hàng.',
+            'bank_account_number.required' => 'Vui lòng nhập số tài khoản.',
+            'bank_branch.required' => 'Vui lòng nhập chi nhánh ngân hàng.',
         ]);
 
-        $fee = gs('seller_registration_fee');
-
-        if ($fee > 0) {
-            // Tạo một Order tạm thời để thanh toán phí đăng ký
-            $order = new Order();
-            $order->user_id = $user->id;
-            $order->order_number = getTrx();
-            $order->total_amount = $fee;
-            $order->payment_status = Status::PAYMENT_INITIATE;
-            $order->remark = 'seller_registration_fee';
-            $order->save();
-
-            session()->put('order_number', $order->order_number);
-            return to_route('user.deposit.index');
-        }
-
-        $user->is_seller = 1;
-        $user->seller_active = 0;
+        $user->is_seller = Status::YES;
+        $user->seller_active = Status::NO; // Chờ duyệt
+        $user->address = $request->address_seller;
+        $user->id_card = $request->id_card;
+        $user->bank_name = $request->bank_name;
+        $user->bank_account_number = $request->bank_account_number;
+        $user->bank_branch = $request->bank_branch;
         $user->seller_activated_at = now();
         $user->save();
 
-        $notify[] = ['success', 'Chúc mừng! Bạn hiện đã là người bán.'];
-        return to_route('seller.home')->withNotify($notify);
+        // Gửi thêm thông báo Admin duyệt Người Bán nếu đăng ký làm Seller
+        $adminNotificationSeller            = new \App\Models\AdminNotification();
+        $adminNotificationSeller->user_id   = $user->id;
+        $adminNotificationSeller->title     = 'Có yêu cầu đăng ký làm Người bán mới: ' . $user->fullname;
+        $adminNotificationSeller->click_url = urlPath('admin.sellers.detail', $user->id);
+        $adminNotificationSeller->save();
+
+        if ($request->ajax()) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Yêu cầu đăng ký làm Người bán đã gửi thành công! Đang chờ phê duyệt.'
+            ]);
+        }
+
+        $notify[] = ['success', 'Yêu cầu đăng ký làm Người bán đã gửi thành công! Đang chờ phê duyệt.'];
+        return to_route('user.home')->withNotify($notify);
     }
 
     public function getWards($id)

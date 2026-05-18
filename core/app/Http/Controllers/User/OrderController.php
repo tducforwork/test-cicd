@@ -123,14 +123,14 @@ class OrderController extends Controller
         $this->validateOrderRequest($request);
 
         if (!gs('cod') && $request->payment == Status::COD) {
-            $notify[] = ['error', 'Cash on delivery is not available now'];
+            $notify[] = ['error', 'Thanh toán COD hiện tại không khả dụng.'];
             return back()->withNotify($notify);
         }
 
         // 2. Lấy giỏ hàng
         $cartData = $this->getItems();
         if ($cartData->isEmpty()) {
-            $notify[] = ['error', 'Your cart is empty'];
+            $notify[] = ['error', 'Giỏ hàng của bạn hiện đang trống.'];
             return back()->withNotify($notify);
         }
 
@@ -139,9 +139,17 @@ class OrderController extends Controller
         $couponData = $this->handleCouponLogic($cartData, $cartTotal);
 
         if (isset($couponData['error_json'])) {
-            return response()->json(['error' => $couponData['error_json']]);
+            if ($request->ajax()) {
+                return response()->json(['error' => $couponData['error_json']]);
+            }
+            $notify[] = ['error', $couponData['error_json']];
+            return back()->withNotify($notify)->withInput();
         }
         if (isset($couponData['error_notify'])) {
+            if ($request->ajax()) {
+                $message = is_array($couponData['error_notify']) ? @$couponData['error_notify'][0][1] : $couponData['error_notify'];
+                return response()->json(['error' => $message]);
+            }
             return back()->withNotify($couponData['error_notify']);
         }
 
@@ -149,7 +157,7 @@ class OrderController extends Controller
         try {
             $order = $this->createOrderRecords($request, $type, $cartData, $cartTotal, $couponData);
         } catch (\Exception $e) {
-            $notify[] = ['error', 'Something went wrong while confirming your order: ' . $e->getMessage()];
+            $notify[] = ['error', 'Đã xảy ra lỗi trong quá trình xác nhận đơn hàng: ' . $e->getMessage()];
             return back()->withNotify($notify);
         }
 
@@ -220,7 +228,7 @@ class OrderController extends Controller
         });
 
         if ($eligibleCarts->isEmpty()) {
-            return ['error_notify' => [['error', 'This coupon is not applicable to any items in your cart (Promotion items are excluded)']]];
+            return ['error_notify' => [['error', 'Mã giảm giá này không áp dụng cho các sản phẩm trong giỏ hàng của bạn (Sản phẩm đang khuyến mãi không được áp dụng)']]];
         }
 
         $eligibleTotal = 0;
@@ -230,21 +238,21 @@ class OrderController extends Controller
 
         // Check Minimum Subtotal (Based on eligible items)
         if ($eligibleTotal < $coupon->minimum_spend) {
-            return ['error_json' => "You need to spend at least " . showAmount($coupon->minimum_spend) . " on eligible items to use this coupon"];
+            return ['error_json' => "Đơn hàng của bạn phải đạt tối thiểu " . showAmount($coupon->minimum_spend) . " đối với các sản phẩm hợp lệ để sử dụng mã giảm giá này."];
         }
 
         if ($coupon->maximum_spend != null && $eligibleTotal > $coupon->maximum_spend) {
-            return ['error_json' => "This coupon is only valid for eligible items up to " . showAmount($coupon->maximum_spend)];
+            return ['error_json' => "Mã giảm giá này chỉ áp dụng cho các sản phẩm hợp lệ có tổng giá trị tối đa " . showAmount($coupon->maximum_spend)];
         }
 
         // Check Limit Per Coupon
         if ($coupon->appliedCoupons->count() >= $coupon->usage_limit_per_coupon) {
-            return ['error_json' => "Sorry your Coupon has exceeded the maximum usage limit"];
+            return ['error_json' => "Rất tiếc, mã giảm giá này đã vượt quá giới hạn sử dụng tối đa."];
         }
 
         // Check Limit Per User
         if ($coupon->appliedCoupons->where('user_id', $user->id)->count() >= $coupon->usage_limit_per_user) {
-            return ['error_json' => "Sorry you have already reached the maximum usage limit for this coupon"];
+            return ['error_json' => "Rất tiếc, bạn đã đạt giới hạn sử dụng tối đa cho mã giảm giá này."];
         }
 
         // Check Categories/Products restriction (Standard logic)
@@ -256,15 +264,15 @@ class OrderController extends Controller
             foreach ($eligibleCarts as $cart) {
                 $pId = $cart->product_id;
                 $pCats = $cart->product->categories->pluck('id')->toArray();
-                
+
                 if (in_array($pId, $couponProducts) || !empty(array_intersect($pCats, $couponCategories))) {
                     $validForCart = true;
                     break;
                 }
             }
-            
+
             if (!$validForCart) {
-                return ['error_notify' => [['error', 'The coupon is not available for any of the eligible products in your cart']]];
+                return ['error_notify' => [['error', 'Mã giảm giá này không khả dụng cho bất kỳ sản phẩm hợp lệ nào trong giỏ hàng của bạn.']]];
             }
         }
 
@@ -308,12 +316,16 @@ class OrderController extends Controller
             $order->save();
 
             // 2. Tạo SubOrders & OrderDetails
+            $totalShippingCharge = 0;
             foreach ($cartData->groupBy('seller_id') as $sellerId => $sellerCarts) {
                 $suborder = new SubOrder();
                 $suborder->order_id = $order->id;
                 $suborder->seller_id = $sellerId;
                 $suborder->order_number = getTrx();
+                $suborder->shipping_charge = 30000; // Flat rate of 30,000 VND per Shop/Seller
                 $suborder->save();
+
+                $totalShippingCharge += 30000;
 
                 $suborderTotal = 0;
                 foreach ($sellerCarts as $cart) {
@@ -331,6 +343,7 @@ class OrderController extends Controller
             }
 
             // 3. Cập nhật tổng tiền đơn hàng chính
+            $order->shipping_charge = $totalShippingCharge;
             $order->total_amount = getAmount($cartTotal - $couponData['amount'] + $order->shipping_charge);
             $order->save();
 
@@ -383,7 +396,7 @@ class OrderController extends Controller
         $gate = \App\Models\GatewayCurrency::where('method_code', 512)->where('currency', $general->cur_text)->first();
 
         if (!$gate) {
-            $notify[] = ['error', 'PayOS gateway not found or not enabled.'];
+            $notify[] = ['error', 'Không tìm thấy cổng thanh toán PayOS hoặc cổng chưa được kích hoạt.'];
             return back()->withNotify($notify);
         }
 
@@ -430,7 +443,7 @@ class OrderController extends Controller
 
         $order->notifyParties(true);
 
-        $notify[] = ['success', 'Your order has been placed successfully'];
+        $notify[] = ['success', 'Đơn hàng của bạn đã được đặt thành công!'];
         return to_route('user.thank.you')->withNotify($notify);
     }
 
@@ -491,7 +504,7 @@ class OrderController extends Controller
 
         $product = Product::find($request->pid);
         if (!$product) {
-            $notify[] = ['error', 'Product not found'];
+            $notify[] = ['error', 'Không tìm thấy sản phẩm.'];
             return back()->withNotify($notify);
         }
 
@@ -503,14 +516,14 @@ class OrderController extends Controller
         })->where('product_id', $product->id)->exists();
 
         if (!$checkOrder) {
-            $notify[] = ['error', 'You have to purchase this product before review'];
+            $notify[] = ['error', 'Bạn phải mua sản phẩm này trước khi có thể gửi đánh giá.'];
             return back()->withNotify($notify);
         }
 
         $alreadyReviewed = ProductReview::where('user_id', $user->id)->where('product_id', $request->pid)->exists();
 
         if ($alreadyReviewed) {
-            $notify[] = ['error', 'You have already reviewed this product'];
+            $notify[] = ['error', 'Bạn đã gửi đánh giá cho sản phẩm này rồi.'];
             return back()->withNotify($notify);
         }
 
@@ -521,7 +534,7 @@ class OrderController extends Controller
         $productReview->rating = $request->rating;
         $productReview->save();
 
-        $notify[] = ['success', 'Review added successfully'];
+        $notify[] = ['success', 'Gửi đánh giá thành công!'];
         return back()->withNotify($notify);
     }
 
@@ -530,13 +543,13 @@ class OrderController extends Controller
         $order = Order::where('order_number', $order_number)->where('user_id', auth()->id())->with('subOrders')->first();
 
         if (!$order) {
-            $notify[] = ['error', 'Order not found'];
+            $notify[] = ['error', 'Không tìm thấy đơn hàng.'];
             return back()->withNotify($notify);
         }
 
         // Kiểm tra xem đơn hàng có thể hủy không (Chỉ cho phép khi đang ở trạng thái Chờ xác nhận và chưa thanh toán thành công)
         if ($order->computed_status != Status::ORDER_PENDING || $order->payment_status == Status::PAYMENT_SUCCESS) {
-            $notify[] = ['error', 'You cannot cancel this order as it is already being processed, completed, or already paid'];
+            $notify[] = ['error', 'Bạn không thể hủy đơn hàng này do đơn đã được xử lý, hoàn thành hoặc đã thanh toán.'];
             return back()->withNotify($notify);
         }
 
@@ -575,10 +588,10 @@ class OrderController extends Controller
                 }
             }
 
-            $notify[] = ['success', 'Order has been cancelled successfully'];
+            $notify[] = ['success', 'Đơn hàng đã được hủy thành công!'];
             return back()->withNotify($notify);
         } catch (\Exception $e) {
-            $notify[] = ['error', 'Something went wrong: ' . $e->getMessage()];
+            $notify[] = ['error', 'Đã xảy ra lỗi: ' . $e->getMessage()];
             return back()->withNotify($notify);
         }
     }

@@ -273,37 +273,32 @@ class OrderController extends Controller
         } elseif ($request->action == Status::SUBORDER_REJECTED) {
             $actionName = 'Rejected';
             StockLog::restoreStock($suborder->id, true);
+
+            $order->total_amount -= ($suborder->total_amount + $suborder->shipping_charge);
+            $order->shipping_charge -= $suborder->shipping_charge;
+            $order->save();
+
+            // Auto-refund online payment successful orders
+            if ($order->payment_status == Status::PAYMENT_SUCCESS && @$order->user) {
+                $user = $order->user;
+                $refundAmount = $suborder->total_amount + $suborder->shipping_charge;
+                $user->balance += $refundAmount;
+                $user->save();
+
+                $transaction = new \App\Models\Transaction();
+                $transaction->user_id = $user->id;
+                $transaction->amount = $refundAmount;
+                $transaction->post_balance = $user->balance;
+                $transaction->charge = 0;
+                $transaction->trx_type = '+';
+                $transaction->details = 'Refunded ' . showAmount($refundAmount) . ' due to admin rejecting suborder #' . $suborder->order_number;
+                $transaction->trx = getTrx();
+                $transaction->remark = 'suborder_refund';
+                $transaction->save();
+            }
         }
 
-        // Sync Parent Order Status: Use the logical hierarchy
-        $activeSubOrders = SubOrder::where('order_id', $order->id)->where('status', '!=', Status::SUBORDER_REJECTED)->get();
-        if ($activeSubOrders->count() > 0) {
-            $statuses = $activeSubOrders->pluck('status')->unique()->toArray();
-            
-            if (in_array(Status::SUBORDER_DISPUTED, $statuses)) {
-                $order->status = Status::ORDER_PROCESSING; // Keep in processing if disputed
-            } elseif (in_array(Status::SUBORDER_PENDING, $statuses)) {
-                $order->status = Status::ORDER_PENDING;
-            } elseif (in_array(Status::SUBORDER_PROCESSING, $statuses)) {
-                $order->status = Status::ORDER_PROCESSING;
-            } elseif (in_array(Status::SUBORDER_READY_TO_PICKUP, $statuses)) {
-                $order->status = Status::ORDER_READY_TO_DELIVER;
-            } elseif (in_array(Status::SUBORDER_DISPATCHED, $statuses)) {
-                $order->status = Status::ORDER_DISPATCHED;
-            } elseif (in_array(Status::SUBORDER_DELIVERED, $statuses)) {
-                $order->status = Status::ORDER_DELIVERED;
-                if ($order->payment_status != Status::PAYMENT_SUCCESS) {
-                    $order->payment_status = Status::PAYMENT_SUCCESS;
-                }
-            } else {
-                // All are COMPLETED (5)
-                $order->status = Status::ORDER_DELIVERED; // Still Delivered in main status but items are settled
-                if ($order->payment_status != Status::PAYMENT_SUCCESS) {
-                    $order->payment_status = Status::PAYMENT_SUCCESS;
-                }
-            }
-            $order->save();
-        }
+        $order->syncStatus();
 
         $notify[] = ['success', __('Sub-order status changed to') . ' ' . $actionName];
         

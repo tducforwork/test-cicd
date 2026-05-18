@@ -1,167 +1,228 @@
 @extends('Template::layouts.frontend')
 @section('content')
-<div class="thank-you-section padding-top padding-bottom">
-    <div class="container">
-        <div class="thank-you-wrapper text-center">
-            <div class="success-animation-wrapper">
-                <div class="checkmark-circle">
-                    <div class="background"></div>
-                    <div class="checkmark draw"></div>
+    <div class="success-page py-lg-5 py-4">
+        <div class="container">
+            <div class="success-card mx-auto">
+                <div class="success-icon">
+                    <i class="fa-solid fa-check"></i>
                 </div>
-            </div>
-            
-            <h2 class="title mt-4">@lang('Cảm ơn bạn đã đặt hàng!')</h2>
-            <p class="description mt-3">
-                @lang('Đơn hàng của bạn đã được tiếp nhận thành công. Chúng tôi sẽ sớm liên hệ với bạn để xác nhận.')
-            </p>
-            
-            <div class="order-info-card mt-5">
-                <div class="card-body p-4">
-                    <p class="order-number-label">@lang('Mã đơn hàng của bạn là:')</p>
-                    <h3 class="order-number text--base">#{{ $order->order_number }}</h3>
-                    <p class="mt-2 text-muted">@lang('Một email xác nhận đã được gửi đến') <strong>{{ auth()->user()->email }}</strong></p>
+                <h1 class="success-title">@lang('Đặt Hàng Thành Công!')</h1>
+                <p class="success-desc">
+                    @lang('Cảm ơn bạn đã mua sắm tại Quảng Phát Logistic.')<br>
+                    @lang('Đơn hàng của bạn đã được ghi nhận và đang trong quá trình xử lý.')
+                </p>
+
+                <div class="order-details-box text-start">
+                    <div class="detail-row">
+                        <span class="detail-label">@lang('Mã đơn hàng:')</span>
+                        <span class="detail-value text-accent">#{{ $order->order_number }}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">@lang('Ngày đặt:')</span>
+                        <span class="detail-value">{{ showDateTime($order->created_at, 'd/m/Y') }}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">@lang('Phương thức thanh toán:')</span>
+                        <span class="detail-value">
+                            @if($order->deposit && $order->deposit->method_code == 0)
+                                @lang('Thanh toán khi nhận hàng (COD)')
+                            @else
+                                {{ __(@$order->deposit->gateway->name ?? __('Thanh toán Online')) }}
+                            @endif
+                        </span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">@lang('Dự kiến giao hàng:')</span>
+                        <span class="detail-value">{{ showDateTime($order->created_at->addDays(4), 'd/m/Y') }} -
+                            {{ showDateTime($order->created_at->addDays(6), 'd/m/Y') }}</span>
+                    </div>
+                    <div class="detail-row pt-3 mt-2 border-top-dashed">
+                        <span class="detail-label font-weight-bold">@lang('Tổng thanh toán:')</span>
+                        <span class="detail-value text-accent font-size-lg">{{ showAmount($order->total_amount) }}</span>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="action-buttons mt-5">
-                <a href="{{ route('user.order.details', $order->order_number) }}" class="btn btn-outline--base me-3">
-                    <i class="las la-file-invoice"></i> @lang('Xem chi tiết đơn hàng')
-                </a>
-                <a href="{{ route('home') }}" class="btn btn--base">
-                    @lang('Tiếp tục mua sắm')
-                </a>
+
+                <div class="action-buttons">
+                    <a href="{{ route('home') }}" class="btn-action btn-outline-custom">
+                        <i class="fa-solid fa-arrow-left"></i> @lang('Về trang chủ')
+                    </a>
+                    <a href="{{ route('user.order.details', $order->order_number) }}" class="btn-action btn-primary-custom">
+                        <i class="fa-solid fa-box-open"></i> @lang('Xem đơn hàng')
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<style>
-    .thank-you-wrapper {
-        max-width: 600px;
-        margin: 0 auto;
-    }
-    
-    .success-animation-wrapper {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 20px;
-    }
-    
-    .checkmark-circle {
-        width: 100px;
-        height: 100px;
-        position: relative;
-        display: inline-block;
-        vertical-align: top;
-    }
-    
-    .checkmark-circle .background {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        background: #ff6f0f;
-        position: absolute;
-    }
-    
-    .checkmark-circle .checkmark {
-        display: block;
-    }
-    
-    .checkmark-circle .checkmark.draw:after {
-        animation-duration: 800ms;
-        animation-timing-function: ease;
-        animation-name: checkmark;
-        transform: scaleX(-1) rotate(135deg);
-    }
-    
-    .checkmark-circle .checkmark:after {
-        opacity: 1;
-        height: 50px;
-        width: 25px;
-        transform-origin: left top;
-        border-right: 5px solid #fff;
-        border-top: 5px solid #fff;
-        content: '';
-        left: 25px;
-        top: 50px;
-        position: absolute;
-    }
-    
-    @keyframes checkmark {
-        0% {
-            height: 0;
-            width: 0;
-            opacity: 1;
+    <style>
+        .success-page {
+            background: #f8fafc;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
         }
-        20% {
-            height: 0;
-            width: 25px;
-            opacity: 1;
+
+        .success-card {
+            background: white;
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
-        40% {
-            height: 50px;
-            width: 25px;
-            opacity: 1;
+
+        /* Decorative top border */
+        .success-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #10b981, #059669);
         }
-        100% {
-            height: 50px;
-            width: 25px;
-            opacity: 1;
+
+        .success-icon {
+            width: 90px;
+            height: 90px;
+            background: #d1fae5;
+            color: #10b981;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 45px;
+            margin: 0 auto 25px;
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
-    }
-    
-    .order-info-card {
-        background: #f8f9fa;
-        border-radius: 12px;
-        border: 1px dashed #ced4da;
-    }
-    
-    .order-number {
-        font-size: 32px;
-        font-weight: 700;
-        letter-spacing: 1px;
-    }
-    
-    .title {
-        color: #042656;
-        font-weight: 600;
-    }
-    
-    .description {
-        font-size: 16px;
-        color: #555;
-        max-width: 450px;
-        margin: 0 auto;
-    }
-    
-    .btn--base {
-        background-color: #ff6f0f;
-        color: #fff;
-        padding: 12px 30px;
-        border-radius: 8px;
-        font-weight: 500;
-    }
-    
-    .btn--base:hover {
-        background-color: #e65a00;
-        color: #fff;
-    }
-    
-    .btn-outline--base {
-        border: 1px solid #ff6f0f;
-        color: #ff6f0f;
-        padding: 12px 30px;
-        border-radius: 8px;
-        font-weight: 500;
-    }
-    
-    .btn-outline--base:hover {
-        background-color: #ff6f0f;
-        color: #fff;
-    }
-    
-    .text--base {
-        color: #ff6f0f !important;
-    }
-</style>
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .success-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 15px;
+        }
+
+        .success-desc {
+            color: #64748b;
+            font-size: 15px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .order-details-box {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .detail-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .border-top-dashed {
+            border-top: 1px dashed #cbd5e1;
+        }
+
+        .detail-label {
+            color: #64748b;
+        }
+
+        .detail-value {
+            color: #0f172a;
+            font-weight: 600;
+        }
+
+        .text-accent {
+            color: #ffb800 !important;
+        }
+
+        .font-weight-bold {
+            font-weight: 700 !important;
+        }
+
+        .font-size-lg {
+            font-size: 18px !important;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn-action {
+            padding: 14px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+        }
+
+        .btn-primary-custom {
+             background: var(--primary);
+                    color: white;
+                    border: 2px solid var(--primary);
+        }
+
+        .btn-primary-custom:hover {
+               background: #1e293b;
+                    border-color: #1e293b;
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+        }
+
+        .btn-outline-custom {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--border);
+        }
+
+        .btn-outline-custom:hover {
+            border-color: var(--primary);
+            background: #f8fafc;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 575px) {
+            .action-buttons {
+                flex-direction: column-reverse;
+                gap: 10px;
+            }
+
+            .btn-action {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
 @endsection

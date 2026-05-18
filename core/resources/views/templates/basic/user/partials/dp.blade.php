@@ -2,7 +2,7 @@
 
 <div class="thumb">
     <a href="{{ route('user.profile.setting') }}">
-        <img src="{{ getAvatar(getFilePath('userProfile') . '/' . auth()->user()->image) }}" alt="@lang('user')">
+        <img src="{{ getAvatar(getFilePath('userProfile') . '/' . auth()->user()->image, auth()->user()->fullname ?? auth()->user()->username) }}" alt="@lang('user')">
     </a>
 </div>
 <div class="content">

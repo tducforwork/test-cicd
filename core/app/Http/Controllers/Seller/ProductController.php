@@ -65,7 +65,7 @@ class ProductController extends Controller
     public function store(Request $request, $id)
     {
         $notify = $this->storeProduct($request, $id, $this->id());
-        
+
         $hasError = false;
         if (isset($notify)) {
             foreach ($notify as $item) {

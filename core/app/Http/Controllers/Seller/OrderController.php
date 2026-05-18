@@ -203,8 +203,10 @@ class OrderController extends Controller
         }
 
         if ($newStatus == Status::SUBORDER_REJECTED) {
-            $order->total_amount -= $suborder->total_amount;
+            $order->total_amount -= ($suborder->total_amount + $suborder->shipping_charge);
+            $order->shipping_charge -= $suborder->shipping_charge;
             $order->save();
+
             StockLog::restoreStock($suborder->id, true);
 
             if (@$order->user) {
@@ -213,10 +215,25 @@ class OrderController extends Controller
                     'order_number' => $suborder->order_number,
                     'products' => $products
                 ]);
-            }
 
-            if ($order->subOrders->where('status', Status::SUBORDER_REJECTED)->count() == $order->subOrders->count()) {
-                $order->autoCancel();
+                // Auto-refund online payment successful orders
+                if ($order->payment_status == Status::PAYMENT_SUCCESS) {
+                    $user = $order->user;
+                    $refundAmount = $suborder->total_amount + $suborder->shipping_charge;
+                    $user->balance += $refundAmount;
+                    $user->save();
+
+                    $transaction = new \App\Models\Transaction();
+                    $transaction->user_id = $user->id;
+                    $transaction->amount = $refundAmount;
+                    $transaction->post_balance = $user->balance;
+                    $transaction->charge = 0;
+                    $transaction->trx_type = '+';
+                    $transaction->details = 'Refunded ' . showAmount($refundAmount) . ' due to seller rejecting suborder #' . $suborder->order_number;
+                    $transaction->trx = getTrx();
+                    $transaction->remark = 'suborder_refund';
+                    $transaction->save();
+                }
             }
 
             $adminNotification = new AdminNotification();
@@ -226,19 +243,7 @@ class OrderController extends Controller
             $adminNotification->save();
         }
 
-        if ($newStatus == Status::SUBORDER_DELIVERED) {
-            if ($order->subOrders->where('status', Status::SUBORDER_DELIVERED)->count() == $order->subOrders->count()) {
-                $order->status = Status::ORDER_DELIVERED;
-                $order->save();
-            }
-        }
-
-        if ($newStatus == Status::SUBORDER_DISPATCHED) {
-            if ($order->subOrders->where('status', Status::SUBORDER_DISPATCHED)->count() == $order->subOrders->count()) {
-                $order->status = Status::ORDER_DISPATCHED;
-                $order->save();
-            }
-        }
+        $order->syncStatus();
 
         $notify[] = ['success', 'Cập nhật trạng thái thành công'];
         return back()->withNotify($notify);

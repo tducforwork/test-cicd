@@ -17,6 +17,11 @@ Route::namespace('User\Auth')->name('user.')->middleware('guest')->group(functio
         Route::get('register', 'showRegistrationForm')->name('register');
         Route::post('register', 'register');
         Route::post('check-user', 'checkUser')->name('checkUser')->withoutMiddleware('guest');
+
+        // Luồng xác thực tài khoản Guest
+        Route::get('verify-account', 'verifyAccountForm')->name('verify.account');
+        Route::post('verify-account', 'verifyAccountSubmit')->name('verify.account.submit');
+        Route::get('verify-account/resend', 'verifyAccountResend')->name('verify.account.resend');
     });
 
     Route::controller('ForgotPasswordController')->prefix('password')->name('password.')->group(function () {
@@ -90,10 +95,7 @@ Route::middleware('auth')->name('user.')->group(function () {
                     Route::get('order/{order_number}', 'orderDetails')->name('order.details');
                     Route::get('product/review', 'productsReview')->name('product.review');
                     Route::post('product/review/add', 'addReview')->name('product.review.submit');
-                    Route::post('/checkout/{type}', 'confirmOrder')->name('checkout-to-payment');
                     Route::post('order/cancel/{order_number}', 'cancelOrder')->name('order.cancel');
-                    Route::get('/thank-you', 'thankYou')->name('thank.you');
-                    Route::get('/payment-failed', 'paymentFailed')->name('payment.failed');
                 });
             });
 
@@ -110,6 +112,12 @@ Route::middleware('auth')->name('user.')->group(function () {
 
         Route::controller('CartController')->group(function () {
             Route::get('checkout/', 'checkout')->name('checkout');
+        });
+
+        Route::namespace('User')->controller('OrderController')->group(function () {
+            Route::post('/checkout/{type}', 'confirmOrder')->name('checkout-to-payment');
+            Route::get('/thank-you', 'thankYou')->name('thank.you');
+            Route::get('/payment-failed', 'paymentFailed')->name('payment.failed');
         });
     });
 });

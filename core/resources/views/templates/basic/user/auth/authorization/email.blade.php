@@ -1,74 +1,63 @@
 @extends($activeTemplate . 'layouts.frontend')
 @section('content')
-<div class="bg-[#F7F7F7]">
-    <main class="container mx-auto pb-32 pt-10">
-        <div class="flex flex-col lg:flex-row gap-6">
-            <!-- Sidebar -->
-            <aside class="w-full lg:w-[312px] shrink-0">
-                @include($activeTemplate . 'user.partials.sidebar')
-            </aside>
-
-            <!-- Main Panel -->
-            <div class="flex-1 min-w-0">
-                <!-- Page Heading -->
-                <div class="flex items-center gap-4 mb-6">
-                    <a href="{{ url()->previous() }}" class="shrink-0 flex items-center justify-center w-10 h-10 bg-white rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
-                        <svg class="w-5 h-5 text-[#272343]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </a>
-                    <h1 class="font-semibold text-[#272343] text-xl md:text-2xl leading-normal">@lang('Xác minh email')</h1>
-                </div>
-
-                <!-- Content Card -->
-                <div class="flex flex-col items-center gap-6 p-4 md:p-6 w-full bg-white rounded-lg">
-                    <div class="w-full max-w-md mx-auto">
-                        <!-- Icon -->
-                        <div class="flex justify-center mb-6">
-                            <div class="w-20 h-20 bg-[#FFF6F0] rounded-full flex items-center justify-center">
-                                <i class="las la-envelope text-4xl text-[#FF6F0F]"></i>
-                            </div>
-                        </div>
-
-                        <h2 class="w-full font-bold text-[#272343] text-xl leading-[30px] text-center mb-2">@lang('Xác minh địa chỉ email')</h2>
-                        <p class="text-[#6B7280] text-base leading-6 text-center mb-6">
-                            @lang('Mã xác minh 6 chữ số đã được gửi đến email của bạn'): {{ showEmailAddress(auth()->user()->email) }}
-                        </p>
-
-                        <form action="{{ route('user.verify.email') }}" method="POST" class="submit-form ajax-form">
-                            @csrf
-                            @include($activeTemplate . 'partials.verification_code')
-
-                            <button type="submit" class="bg-[#FF6F0F] text-white px-8 py-3 rounded-lg font-semibold text-base leading-[17.6px] hover:bg-orange-600 transition-colors flex items-center justify-center gap-2 w-full mt-6 shadow-sm">
-                                @lang('Xác nhận')
-                            </button>
-                        </form>
-
-                        <div class="mt-6 text-center">
-                            <p class="text-[#6B7280] text-sm">
-                                @lang('Nếu bạn không nhận được mã nào'), <span class="countdown-wrapper">@lang('thử lại sau') <span id="countdown" class="fw-bold text-[#FF6F0F]">--</span> @lang('giây')</span> <a href="{{ route('user.send.verify.code', 'email') }}" class="try-again-link d-none text-[#FF6F0F] hover:underline">@lang('Thử lại')</a>
-                            </p>
-                            <a href="{{ route('user.logout') }}" class="text-[#6B7280] hover:text-[#FF6F0F] text-sm mt-2 inline-block">@lang('Đăng xuất')</a>
-                        </div>
-                    </div>
-                </div>
+<section class="auth-page">
+    <div class="auth-card">
+        <!-- Icon -->
+        <div class="flex justify-center mb-4" style="display: flex; justify-content: center; margin-bottom: 16px;">
+            <div class="w-16 h-16 bg-[#FFF6F0] rounded-full flex items-center justify-center" style="width: 64px; height: 64px; background-color: #FFF6F0; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <i class="las la-envelope text-3xl text-[#FF6F0F]" style="font-size: 28px; color: #FF6F0F;"></i>
             </div>
         </div>
-    </main>
-</div>
+
+        <div class="auth-header">
+            <h2>@lang('Xác minh Email')</h2>
+            <p>@lang('Mã xác minh 6 chữ số đã được gửi đến email'): <span style="color: var(--accent); font-weight: bold; word-break: break-all;">{{ showEmailAddress($email) }}</span></p>
+        </div>
+
+        <form action="{{ route('user.verify.account') }}" method="POST" class="auth-form submit-form">
+            @csrf
+            <input type="hidden" name="email" value="{{ $email }}">
+            
+            @include($activeTemplate . 'partials.verification_code')
+
+            <button type="submit" class="btn-auth mt-4" style="width: 100%;">@lang('Xác nhận kích hoạt')</button>
+        </form>
+
+        <div class="auth-footer" style="margin-top: 24px; text-align: center;">
+            <p class="text-[#6B7280] text-sm" style="color: #6B7280; font-size: 14px;">
+                @lang('Nếu bạn không nhận được mã nào'), <span class="countdown-wrapper">@lang('thử lại sau') <span id="countdown" class="fw-bold text-[#FF6F0F]" style="color: #FF6F0F; font-weight: bold;">--</span> @lang('giây')</span> 
+                <a href="{{ route('user.verify.account.resend') }}?email={{ $email }}" class="try-again-link d-none text-[#FF6F0F] hover:underline" style="color: #FF6F0F; font-weight: 600; text-decoration: none;">@lang('Thử lại')</a>
+            </p>
+            <div style="margin-top: 20px; border-top: 1px solid #f3f4f6; padding-top: 15px;">
+                <a href="{{ route('user.login') }}" style="color: #6B7280; text-decoration: none; font-size: 14px; font-weight: 500;">
+                    <i class="las la-arrow-left"></i> @lang('Quay lại Đăng nhập')
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
 @endsection
 
 @push('script')
 <script>
-    var distance = Number("{{ @$user->ver_code_send_at->addMinutes(2)->timestamp - time() }}");
-    var x = setInterval(function() {
-        distance--;
-        document.getElementById("countdown").innerHTML = distance;
-        if (distance <= 0) {
-            clearInterval(x);
-            document.querySelector('.countdown-wrapper').classList.add('d-none');
-            document.querySelector('.try-again-link').classList.remove('d-none');
-        }
-    }, 1000);
+    (function($) {
+        'use strict';
+        var sendAt = "{{ @$user->ver_code_send_at ? $user->ver_code_send_at->timestamp : time() }}";
+        var distance = Number("{{ @$user->ver_code_send_at ? ($user->ver_code_send_at->addMinutes(2)->timestamp - time()) : 120 }}");
+        if (distance < 0) distance = 0;
+        
+        var x = setInterval(function() {
+            distance--;
+            var countdownEl = document.getElementById("countdown");
+            if (countdownEl) {
+                countdownEl.innerHTML = distance;
+            }
+            if (distance <= 0) {
+                clearInterval(x);
+                $('.countdown-wrapper').addClass('d-none');
+                $('.try-again-link').removeClass('d-none');
+            }
+        }, 1000);
+    })(jQuery);
 </script>
 @endpush

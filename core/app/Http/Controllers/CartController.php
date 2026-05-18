@@ -94,9 +94,9 @@ class CartController extends Controller
         $coupon        = session('coupon');
 
         return view('Template::partials.cart_items', [
-            'data' => $carts, 
-            'subtotal' => $subtotal, 
-            'emptyMessage' => $emptyMessage, 
+            'data' => $carts,
+            'subtotal' => $subtotal,
+            'emptyMessage' => $emptyMessage,
             'coupon' => $coupon
         ]);
     }
@@ -112,16 +112,20 @@ class CartController extends Controller
         if (!session()->has('session_id')) {
             session()->put('session_id', uniqid());
         }
-        $pageTitle     = 'My Cart';
+        $pageTitle     = 'Giỏ hàng';
         $data = $this->getItems();
         $emptyMessage  = 'Cart is empty';
-        return view('Template::cart', compact('pageTitle', 'data', 'emptyMessage'));
+        $coupons = \App\Models\Coupon::where('status', 1)
+            ->whereDate('end_date', '>=', now())
+            ->whereDate('start_date', '<=', now())
+            ->get();
+        return view('Template::cart', compact('pageTitle', 'data', 'emptyMessage', 'coupons'));
     }
 
     public function updateCartItem(Request $request, $id)
     {
         if (session()->has('coupon')) {
-            return response()->json(['error' => 'You have applied a coupon on your cart. If you want to delete any item form your cart please remove the coupon first.']);
+            return response()->json(['error' => 'Bạn đã áp dụng mã giảm giá. Vui lòng gỡ mã trước khi thay đổi giỏ hàng.']);
         }
 
         $cart_item = Cart::findorFail($id);
@@ -135,32 +139,32 @@ class CartController extends Controller
             $stock_qty  = ProductStock::showAvailableStock($cart_item->product_id, $attributes);
 
             if ($request->quantity > $stock_qty) {
-                return response()->json(['error' => 'Sorry! your requested amount of quantity is not available in our stock', 'qty' => $stock_qty]);
+                return response()->json(['error' => 'Rất tiếc! Số lượng yêu cầu vượt quá số lượng trong kho.', 'qty' => $stock_qty]);
             }
         }
 
         if ($request->quantity == 0) {
-            return response()->json(['error' => 'Quantity must be greater than  0']);
+            return response()->json(['error' => 'Số lượng phải lớn hơn 0']);
         }
         $cart_item->quantity = $request->quantity;
         $cart_item->save();
-        return response()->json(['success' => 'Quantity updated']);
+        return response()->json(['success' => 'Cập nhật số lượng thành công.']);
     }
 
     public function removeCartItem($id)
     {
 
         if (session()->has('coupon')) {
-            return response()->json(['error' => 'You have applied a coupon on your cart. If you want to delete any item form your cart please remove the coupon first.']);
+            return response()->json(['error' => 'Bạn đã áp dụng mã giảm giá. Vui lòng gỡ mã trước khi thay đổi giỏ hàng.']);
         }
 
         $cart = Cart::find($id);
         if (!$cart) {
-            return response()->json(['error' => 'Item not found']);
+            return response()->json(['error' => 'Không tìm thấy sản phẩm trong giỏ hàng.']);
         }
 
         $cart->delete();
-        return response()->json(['success' => 'Item deleted successfully']);
+        return response()->json(['success' => 'Đã xóa sản phẩm khỏi giỏ hàng.']);
     }
 
     public function checkout()

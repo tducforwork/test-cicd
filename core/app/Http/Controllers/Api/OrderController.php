@@ -184,13 +184,17 @@ class OrderController extends Controller
         $order->payment_status      = $request->payment == Status::COD ? Status::COD : Status::PAYMENT_INITIATE;
         $order->save();
 
+        $totalShippingCharge = 0;
         foreach ($cartData->groupBy('product.seller_id') as $key => $sellerCarts) {
             $suborderTotal = 0;
             $suborder = new SubOrder();
             $suborder->order_id = $order->id;
             $suborder->seller_id = $key;
             $suborder->order_number = getTrx();
+            $suborder->shipping_charge = 30000; // Flat rate of 30,000 VND per Shop/Seller
             $suborder->save();
+
+            $totalShippingCharge += 30000;
 
             foreach ($sellerCarts as $cart) {
                 $orderDetail                  = new OrderDetail();
@@ -227,7 +231,10 @@ class OrderController extends Controller
             $suborder->save();
         }
 
+        $order->shipping_charge = $totalShippingCharge;
         $order->total_amount =  getAmount($cartTotal - $couponAmount + $order->shipping_charge);
+        $order->coupon_code = $couponCode;
+        $order->coupon_amount = $couponAmount;
         $order->save();
 
         if ($couponCode != null) {

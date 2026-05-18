@@ -18,16 +18,8 @@ class RegistrationStep
     {
         $user = auth()->user();
         if (!$user->profile_complete) {
-            if ($request->is('api/*')) {
-                $notify[] = 'Please complete your profile to go next';
-                return response()->json([
-                    'remark' => 'profile_incomplete',
-                    'status' => 'error',
-                    'message' => ['error' => $notify],
-                ]);
-            } else {
-                return to_route('user.data');
-            }
+            $user->profile_complete = 1;
+            $user->save();
         }
         return $next($request);
     }

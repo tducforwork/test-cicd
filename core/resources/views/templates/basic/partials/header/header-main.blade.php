@@ -6,18 +6,20 @@
         <!-- Logo Section: Two Separate Logos Side-by-Side -->
         <div class="dual-logo-container">
             <a href="{{ @$headerContent->data_values->logo_mall_link ?? route('home') }}" class="logo-link">
-                <img src="{{ frontendImage('header', @$headerContent->data_values->logo_mall) }}" alt="{{ gs('site_name') }}" style="height: 60px;" />
+                <img src="{{ frontendImage('header', @$headerContent->data_values->logo_mall) }}"
+                    alt="{{ gs('site_name') }}" style="height: 60px;" />
             </a>
             <div class="logo-divider-v"></div>
             <a href="{{ @$headerContent->data_values->logo_logistics_link ?? route('home') }}" class="logo-link">
-                <img src="{{ frontendImage('header', @$headerContent->data_values->logo_logistics) }}" alt="QP LOGISTICS" style="height: 60px;" />
+                <img src="{{ frontendImage('header', @$headerContent->data_values->logo_logistics) }}"
+                    alt="QP LOGISTICS" style="height: 60px;" />
             </a>
         </div>
 
         <!-- Centered Search Area -->
         <div class="search-area-wrapper">
             <div class="shopee-search-bar">
-                <form action="{{ route('product.search') }}" method="GET" class="w-100 d-flex">
+                <form action="#" method="GET" class="w-100 d-flex">
                     <input type="text" name="search"
                         placeholder="@lang('Tìm kiếm sản phẩm, thương hiệu hoặc dịch vụ Logistics')..."
                         value="{{ request()->search }}" autocomplete="off" />
@@ -42,8 +44,8 @@
                         @foreach ($recentProducts as $p)
                             <a href="{{ route('product.detail', ['id' => $p->id, 'slug' => slug($p->name)]) }}"
                                 class="recent-p-item">
-                                <img src="{{ getImage(getFilePath('product') . '/' . $p->main_image) }}" class="recent-p-img"
-                                    alt="{{ $p->name }}">
+                                <img src="{{ getImage(getFilePath('product') . '/' . $p->main_image) }}"
+                                    class="recent-p-img" alt="{{ $p->name }}">
                                 <div class="recent-p-info">
                                     <p class="recent-p-name">{{ __($p->name) }}</p>
                                     <p class="recent-p-price">{{ showAmount($p->price) }} {{ gs('cur_text') }}</p>
@@ -66,8 +68,7 @@
                             $hotKeywords = ['iPhone 15 Pro Max', 'Vận chuyển Trung Việt', 'Phụ kiện Mall', 'Ốp lưng iPhone', 'Sạc dự phòng 20W'];
                         @endphp
                         @foreach ($hotKeywords as $kw)
-                            <a href="{{ route('product.search', ['search' => $kw]) }}"
-                                class="suggestion-tag">{{ $kw }}</a>
+                            <a href="{{ route('product.search', ['search' => $kw]) }}" class="suggestion-tag">{{ $kw }}</a>
                         @endforeach
                     </div>
                 </div>
@@ -92,7 +93,8 @@
                         <span class="user-name-mall" style="color:#64748b;">@lang('Tài khoản')</span>
                         <div class="profile-menu">
                             <a href="{{ route('user.login') }}" class="menu-item"><i
-                                    class="fa-solid fa-right-to-bracket"></i> @lang('Đăng nhập')</a>
+                                    class="fa-solid fa-right-to-bracket"></i>
+                                @lang('Đăng nhập')</a>
                             <a href="{{ route('user.register') }}" class="menu-item"><i class="fa-solid fa-user-plus"></i>
                                 @lang('Đăng ký')</a>
                         </div>
@@ -103,12 +105,12 @@
             @auth
                 <!-- Logged-in profile (hiển thị khi đã đăng nhập) -->
                 <div class="user-profile is-logged-in" id="userProfile">
-                    <img src="{{ auth()->user()->image ? getImage(getFilePath('userProfile') . '/' . auth()->user()->image) : 'https://ui-avatars.com/api/?name=' . auth()->user()->username . '&background=random' }}"
+                    <img src="{{ getAvatar(getFilePath('userProfile') . '/' . auth()->user()->image, auth()->user()->fullname ?? auth()->user()->username) }}"
                         alt="User" class="avatar" />
                     <span class="user-name-mall">{{ auth()->user()->fullname }}</span>
                     <div class="profile-menu">
-                        <a href="{{ route('user.home') }}" class="menu-item"><i class="fa-regular fa-user"></i>
-                            @lang('Dashboard')</a>
+                        {{-- <a href="{{ route('user.home') }}" class="menu-item"><i class="fa-regular fa-user"></i>
+                            @lang('Dashboard')</a> --}}
                         <a href="{{ route('user.profile.setting') }}" class="menu-item"><i class="fa-solid fa-gear"></i>
                             @lang('Hồ sơ')</a>
                         @if (auth()->user()->is_seller)

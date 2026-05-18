@@ -113,6 +113,17 @@ class LoginController extends Controller
 
     public function authenticated(Request $request, $user)
     {
+        if ($user->ev == Status::NO) {
+            $email = $user->email;
+            $this->guard()->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+            $request->session()->put('verify_email', $email);
+            
+            $notify[] = ['error', 'Tài khoản của bạn chưa được xác thực email. Vui lòng nhập mã OTP để kích hoạt tài khoản.'];
+            return to_route('user.verify.account')->withNotify($notify);
+        }
+
         $user->tv = $user->ts == Status::YES ? Status::UNVERIFIED : Status::VERIFIED;
         $user->save();
         $ip = getRealIP();

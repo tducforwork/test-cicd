@@ -17,8 +17,7 @@
                         <div class="swiper-slide">
                             <div class="lazada-cat-grid">
                                 @foreach($chunk as $category)
-                                    <a href="{{ route('pages', $category->slug) }}"
-                                        class="lazada-cat-item">
+                                    <a href="{{ route('pages', ['slug'=>$category->slug]) }}" class="lazada-cat-item">
                                         <div class="lazada-cat-img"
                                             style="background-color: {{ $category->bg_color ?? '#f5f5f5' }};">
                                             @if ($category->image)

@@ -1,4 +1,4 @@
-<a href="{{ route('product.detail', $product->slug) }}" class="p-card">
+<a href="{{ route('pages', $product->slug) }}" class="p-card">
     @if ($product->base_price > $product->final_price)
         <div class="discount-badge">-{{ round(100 - ($product->final_price / $product->base_price * 100)) }}%
         </div>

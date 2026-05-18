@@ -19,9 +19,9 @@
           <span class="countdown-item" id="timer-seconds">00</span>
         </div>
       </div>
-      <a href="{{ route('products') }}" class="view-more-link">@lang('XEM THÊM')</a>
+      <a href="{{ route('quang_phat_mall') }}" class="view-more-link">@lang('XEM THÊM')</a>
     </div>
-
+ 
     <div class="shopee-cat-wrap">
       <button class="shopee-cat-arrow flash-prev" aria-label="Trước">
         <i class="fa-solid fa-chevron-left"></i>

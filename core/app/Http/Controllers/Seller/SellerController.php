@@ -112,10 +112,10 @@ class SellerController extends Controller
         $request->validate($rules, $messages, ['image' => 'logo']);
 
         if ($shop) {
-            $message = 'The shop updated successfully';
+            $message = 'Cập nhật thông tin thành công';
         } else {
             $shop = new Shop();
-            $message = 'The shop created successfully';
+            $message = 'Thêm thông tin thành công';
         }
 
 
@@ -165,7 +165,7 @@ class SellerController extends Controller
 
         $fullname = trim($request->fullname);
         $nameArr = explode(' ', $fullname);
-        
+
         if (count($nameArr) > 1) {
             $seller->lastname  = array_pop($nameArr);
             $seller->firstname = implode(' ', $nameArr);

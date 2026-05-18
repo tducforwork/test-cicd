@@ -168,14 +168,14 @@ ul {
 }
 
 .btn-primary {
-  background: var(--primary);
-  color: white;
+  background: var(--primary) !important;
+  color: white !important;
   border: 1px solid var(--primary);
 }
 
 .btn-primary:hover {
-  background: white;
-  color: var(--primary);
+  background: white !important;
+  color: var(--primary) !important;
 }
 
 /* --- TOP BAR --- */
@@ -1363,7 +1363,7 @@ header {
   /* margin-bottom handled by general section selector */
 }
 
-.shop-section {
+.brand-section {
   padding-top: 24px !important;
 }
 
@@ -4173,7 +4173,7 @@ footer {
 .btn-auth {
   width: 100%;
   padding: 16px;
-  background: var(--primary);
+  background: var(--primary) !important;
   color: white;
   border: none;
   border-radius: var(--radius-pill);
@@ -4187,7 +4187,7 @@ footer {
 }
 
 .btn-auth:hover {
-  background: var(--accent);
+  background: var(--accent) !important;
   box-shadow: 0 8px 20px rgba(245, 158, 11, 0.2);
 }
 
@@ -4815,17 +4815,19 @@ textarea.form-control {
 }
 
 .sidebar-avatar {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+
+  height: 80px;
   border-radius: var(--radius-circle);
   object-fit: cover;
-  margin-bottom: 15px;
+  margin: 0 auto 15px auto;
   border: 4px solid var(--bg-alt);
 }
 
 .sidebar-user-info h3 {
   font-size: 18px;
   margin-bottom: 5px;
+  font-weight: 700;
 }
 
 .sidebar-user-info p {
@@ -4901,6 +4903,7 @@ textarea.form-control {
 
 .content-header h2 {
   font-size: 22px;
+  font-weight: 700;
 }
 
 /* Orders Table */
@@ -9546,11 +9549,21 @@ header {
 .p-badge-new {
   margin-bottom: 0 !important;
 }
-.p-badge-new.red { background: #ef4444 !important; }
-.p-badge-new.blue { background: #3b82f6 !important; }
-.p-badge-new.orange { background: #f59e0b !important; }
-.p-badge-new.purple { background: #8b5cf6 !important; }
-.p-badge-new.green { background: #10b981 !important; }
+.p-badge-new.red {
+  background: #ef4444 !important;
+}
+.p-badge-new.blue {
+  background: #3b82f6 !important;
+}
+.p-badge-new.orange {
+  background: #f59e0b !important;
+}
+.p-badge-new.purple {
+  background: #8b5cf6 !important;
+}
+.p-badge-new.green {
+  background: #10b981 !important;
+}
 
 .social-shares {
   display: flex;

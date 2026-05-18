@@ -1,215 +1,208 @@
 @extends($activeTemplate . 'layouts.frontend')
 
 @section('content')
-    <div class="bg-[#F7F7F7]">
-        <main class="container mx-auto pb-32 pt-10">
-            <div class="flex flex-col lg:flex-row gap-6">
-                <!-- Sidebar -->
-                <aside class="w-full lg:w-[312px] shrink-0">
-                    @include('seller.partials.sidebar')
-                </aside>
+<div class="breadcrumb-section"
+    style="background-color: #f8f9fa; padding: 20px 0; border-bottom: 1px solid #eaeaea;">
+    <div class="container">
+        <a href="{{ route('home') }}" style="color: #666; font-size: 14px">@lang('Trang chủ')</a>
+        <span style="margin: 0 10px; color: #ccc">/</span>
+        <span style="color: var(--primary); font-weight: 600; font-size: 14px">@lang('Dashboard Người bán')</span>
+    </div>
+</div>
 
-                <!-- Main Content Area -->
-                <div class="flex-1 min-w-0">
-                    <!-- Header -->
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-                        <h1 class="text-2xl font-semibold text-[#272343]">{{ __($pageTitle) }}</h1>
+<!-- MAIN SECTION -->
+<section class="profile-section py-lg-5 py-4">
+    <div class="container">
+        <div class="profile-container">
+            <!-- Sidebar -->
+            <aside class="profile-sidebar">
+                @include('seller.partials.sidebar')
+            </aside>
+
+            <!-- Main Content -->
+            <main class="profile-main-content">
+                <div class="content-header d-flex justify-content-between align-items-center">
+                    <div>
+                        <h2 class="fw-bold">@lang('Tổng quan kinh doanh')</h2>
+                        <p style="color: var(--text-muted); font-size: 14px;">@lang('Theo dõi hiệu quả bán hàng của bạn')</p>
                     </div>
+                     <button class="btn-excel">
+                            <i class="fa-solid fa-file-export" style="margin-right: 8px;"></i> XUẤT BÁO CÁO EXCEL
+                        </button>
+                </div>
 
-                    <!-- Profile Card -->
-                    <div class="bg-white rounded-[8px] p-6 mb-6">
-                        <h2 class="text-xl md:text-[20px] font-bold text-[#272343] mb-6">@lang('Hello'),
-                            {{ seller()->fullname }}</h2>
-
-                        <div class="flex flex-col lg:flex-row gap-6 md:gap-[36px]">
-                            <img src="{{ getImage(getFilePath('userProfile') . '/' . seller()->image, getFileSize('userProfile')) }}"
-                                alt="Avatar"
-                                class="w-16 h-16 lg:w-[70px] lg:h-[70px] rounded-full object-cover border-[2px] border-[#ccc]">
-
-                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 flex-1">
-                                <div>
-                                    <p class="text-sm md:text-[16px] font-semibold text-[#272343] mb-1">@lang('Full name')
-                                    </p>
-                                    <p class="text-[#272343]/70 text-[16px]">{{ seller()->fullname }}</p>
-                                </div>
-                                <div>
-                                    <p class="text-sm md:text-[16px] font-semibold text-[#272343] mb-1">@lang('Phone')</p>
-                                    <p class="text-[#272343]/70 text-[16px]">{{ seller()->mobile }}</p>
-                                </div>
-                                <div>
-                                    <p class="text-sm md:text-[16px] font-semibold text-[#272343] mb-1">@lang('Email')</p>
-                                    <p class="text-[#272343]/70 text-[16px]">{{ seller()->email }}</p>
-                                </div>
+                <!-- Stats Grid -->
+                <div class="row g-4 mt-2">
+                    <div class="col-md-3">
+                        <div class="stat-card premium-card">
+                            <div class="stat-icon icon-blue">
+                                <i class="fa-solid fa-sack-dollar"></i>
                             </div>
+                            <div class="stat-value">{{ showAmount($sale['last_thirty_days']) }}</div>
+                            <div class="stat-label">@lang('Doanh thu tháng này')</div>
                         </div>
                     </div>
-
-                <!-- Sales Log Cards -->
-                <div class="mb-6 hidden">
-                    <h2 class="text-xl font-bold text-[#272343] mb-4">@lang('Sales Log')</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        <div class="bg-white rounded-[8px] p-6 border border-[#E6E6E6]">
-                            <h3 class="text-2xl font-bold text-[#272343]">{{ showAmount($sale['last_seven_days']) }}</h3>
-                            <p class="text-sm text-gray-600 mt-2">@lang('Sale Amount In Last 7 Days')</p>
+                    <div class="col-md-3">
+                        <div class="stat-card premium-card">
+                            <div class="stat-icon icon-orange">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                            </div>
+                            <div class="stat-value">{{ $order['pending'] }}</div>
+                            <div class="stat-label">@lang('Đơn hàng mới')</div>
                         </div>
-
-                        <div class="bg-white rounded-[8px] p-6 border border-[#E6E6E6]">
-                            <h3 class="text-2xl font-bold text-[#272343]">{{ showAmount($sale['last_fifteen_days']) }}</h3>
-                            <p class="text-sm text-gray-600 mt-2">@lang('Sale Amount In Last 15 Days')</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card premium-card">
+                            <div class="stat-icon icon-green">
+                                <i class="fa-solid fa-box-archive"></i>
+                            </div>
+                            <div class="stat-value">{{ $product['approved'] }}</div>
+                            <div class="stat-label">@lang('Sản phẩm đang bán')</div>
                         </div>
-
-                        <div class="bg-white rounded-[8px] p-6 border border-[#E6E6E6]">
-                            <h3 class="text-2xl font-bold text-[#272343]">{{ showAmount($sale['last_thirty_days']) }}</h3>
-                            <p class="text-sm text-gray-600 mt-2">@lang('Sale Amount In Last 30 Days')</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card premium-card">
+                            <div class="stat-icon icon-red">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="stat-value">{{ number_format(seller()->reviews()->avg('rating') ?? 5.0, 1) }} / 5</div>
+                            <div class="stat-label">@lang('Đánh giá trung bình')</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Latest Orders -->
-                <div class="bg-white rounded-[8px] p-6">
-                    <h2 class="text-xl md:text-[20px] leading-relaxed font-bold text-[#272343] mb-6">@lang('Latest Orders')</h2>
-
-                    <!-- Desktop Table -->
-                    <div class="hidden md:block">
-                        <div class="flex flex-col gap-4">
-                            @forelse($latestOrders->take(10) as $item)
-                            <div class="flex items-center justify-between p-5 border rounded-[12px] border-[#E6E6E6] hover:bg-gray-50 transition-colors bg-white">
-                                <div class="w-[20%]">
-                                    <div class="flex flex-col gap-[8px]">
-                                        <span class="overflow-hidden text-[#333] overflow-ellipsis text-[14px] font-bold leading-[20px]">#{{ $item->order_number }}</span>
-                                        <span class="overflow-hidden text-[#666] overflow-ellipsis text-[14px] not-italic font-bold leading-[20px]">@lang('Order')</span>
-                                    </div>
-                                </div>
-                                <div class="w-[20%] text-center">
-                                    <div class="flex flex-col gap-[8px] justify-center">
-                                        <span class="overflow-hidden text-[#333] overflow-ellipsis text-[14px] font-bold leading-[20px]">{{ showAmount($item->total_amount) }}</span>
-                                        <span class="overflow-hidden text-[#666] overflow-ellipsis text-[14px] not-italic font-bold leading-[20px]">@lang('Amount')</span>
-                                    </div>
-                                </div>
-                                <div class="w-[20%] text-center">
-                                    <div class="flex flex-col gap-[8px] justify-center">
-                                        <span class="overflow-hidden text-[#333] overflow-ellipsis text-[14px] font-bold leading-[20px]">{{ showDateTime($item->created_at, 'd M, Y') }}</span>
-                                        <span class="overflow-hidden text-[#666] overflow-ellipsis text-[14px] not-italic font-bold leading-[20px]">@lang('Date')</span>
-                                    </div>
-                                </div>
-                                <div class="w-[20%] text-center">
-                                    <div class="flex flex-col gap-[8px] justify-center">
-                                        {!! $item->statusBadge !!}
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <a href="{{ route('seller.order.details', $item->id) }}"
-                                        class="overflow-hidden text-[#2563EB] align-middle overflow-ellipsis text-[14px] font-bold leading-[20px]">@lang('View Order')</a>
-                                </div>
-                            </div>
-                            @empty
-                            <div class="py-12 text-center text-gray-400 border border-[#E6E6E6] rounded-[12px]">
-                                @lang('No orders found')
-                            </div>
-                            @endforelse
-                        </div>
+                <!-- Revenue Chart -->
+                @php
+                    $months = [];
+                    $salesData = [];
+                    for ($i = 5; $i >= 0; $i--) {
+                        $monthDate = \Carbon\Carbon::today()->subMonths($i);
+                        $months[] = $monthDate->translatedFormat('M Y');
+                        
+                        // Sum of sales in this month for this seller
+                        $monthlySum = App\Models\SellLog::where('seller_id', seller()->id)
+                            ->whereMonth('created_at', $monthDate->month)
+                            ->whereYear('created_at', $monthDate->year)
+                            ->sum('product_price');
+                        $salesData[] = floatval($monthlySum);
+                    }
+                @endphp
+                <div class="chart-container premium-card mt-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h4 style="font-size: 18px;">@lang('Biểu đồ doanh thu 6 tháng gần nhất')</h4>
                     </div>
-
-                    <!-- Mobile Cards -->
-                    <div class="md:hidden space-y-4">
-                        @forelse($latestOrders->take(10) as $item)
-                        <div class="border border-gray-200 rounded-xl p-4 space-y-3">
-                            <div>
-                                <span class="font-bold text-gray-800">#{{ $item->order_number }}</span>
-                                <span class="overflow-hidden text-[#666] overflow-ellipsis text-[14px] not-italic font-bold leading-[20px]">@lang('Order')</span>
-                                <div class="mt-1">{!! $item->statusBadge !!}</div>
-                            </div>
-                            <div class="grid grid-cols-2 gap-2 text-sm">
-                                <div><span class="text-gray-500">@lang('Amount'):</span> <span class="font-semibold">{{ showAmount($item->total_amount) }}</span></div>
-                                <div><span class="text-gray-500">@lang('Date'):</span> <span class="font-semibold">{{ showDateTime($item->created_at, 'd M, Y') }}</span></div>
-                            </div>
-                            <a href="{{ route('seller.order.details', $item->id) }}"
-                                class="block text-center bg-blue-50 text-[#2563EB] font-bold text-sm py-2 rounded-lg hover:bg-blue-100 transition-colors">
-                                @lang('View Order')
-                            </a>
-                        </div>
-                        @empty
-                            <div class="py-12 text-center text-gray-400 border border-[#E6E6E6] rounded-[12px]">
-                                @lang('No orders found')
-                            </div>
-                        @endforelse
-                    </div>
+                    <canvas id="revenueChart" height="100"></canvas>
                 </div>
 
-                </div>{{-- end flex-1 --}}
-            </div>{{-- end flex flex-col --}}
-        </main>
-    </div>{{-- end bg-[#F7F7F7] --}}
+                <!-- Recent Orders -->
+                <div class="recent-order-card premium-card mt-4">
+                    <h4 style="font-size: 18px; margin-bottom: 20px;">@lang('Đơn hàng mới nhất')</h4>
+                    <div class="order-table-wrapper">
+                        <table class="order-table">
+                            <thead>
+                                <tr>
+                                    <th>@lang('Mã đơn')</th>
+                                    <th>@lang('Khách hàng')</th>
+                                    <th>@lang('Sản phẩm')</th>
+                                    <th>@lang('Tổng tiền')</th>
+                                    <th>@lang('Trạng thái')</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse($latestOrders->take(10) as $item)
+                                    @php
+                                        $firstDetail = $item->orderDetail->first();
+                                    @endphp
+                                    <tr>
+                                        <td>
+                                            <a href="{{ route('seller.order.details', $item->id) }}" style="font-weight: 700; color: var(--primary);">
+                                                #{{ $item->order_number }}
+                                            </a>
+                                        </td>
+                                        <td class="customer-name">{{ __($item->order->user->fullname ?? $item->order->user->username) }}</td>
+                                        <td>
+                                            {{ $firstDetail && $firstDetail->product ? __($firstDetail->product->name) : 'N/A' }}
+                                            @if($item->orderDetail->count() > 1)
+                                                <span class="text-muted" style="font-size: 12px;">+ {{ $item->orderDetail->count() - 1 }} @lang('sản phẩm khác')</span>
+                                            @endif
+                                        </td>
+                                        <td style="font-weight: 700;">{{ showAmount($item->total_amount) }}</td>
+                                        <td>{!! $item->statusBadge !!}</td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="5" class="text-center py-4 text-muted">@lang('Chưa có đơn hàng mới nào.')</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center mt-3">
+                        <a href="{{ route('seller.order.all') }}"
+                            style="font-size: 13px; color: var(--accent); font-weight: 700;">
+                            @lang('Xem tất cả đơn hàng') <i class="fa-solid fa-arrow-right" style="margin-left: 5px;"></i>
+                        </a>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</section>
 @endsection
 
-    @push('style')
-        <style>
-            /* Alert styles */
-            .alert {
-                display: block;
-                padding: 20px;
-                border-radius: 5px;
+@push('script')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        const salesData = @json($salesData);
+        const monthsLabels = @json($months);
+        
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: monthsLabels,
+                datasets: [{
+                    label: 'Doanh thu (VNĐ)',
+                    data: salesData,
+                    borderColor: '#ff6f0f',
+                    backgroundColor: 'rgba(255, 111, 15, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    borderWidth: 3,
+                    pointBackgroundColor: '#ff6f0f',
+                    pointRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            display: true,
+                            drawBorder: false,
+                            color: '#f1f5f9'
+                        },
+                        ticks: {
+                            callback: function (value) {
+                                return value.toLocaleString() + 'đ';
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
             }
-
-            .alert-warning {
-                border: 1px solid hsla(29, 100%, 53%, 0.50);
-            }
-
-            .alert-danger {
-                border: 1px solid hsla(0, 83%, 53%, 0.50);
-            }
-
-            .alert-info {
-                border: 1px solid hsla(203, 89%, 53%, 0.50);
-            }
-
-            /* Stats card icon circle */
-            .bg-orange-100 {
-                background-color: #fff4e6;
-            }
-
-            .text-orange-600 {
-                color: #ff6f0f;
-            }
-
-            .bg-green-100 {
-                background-color: #f0fdf4;
-            }
-
-            .text-green-600 {
-                color: #16a34a;
-            }
-
-            .bg-yellow-100 {
-                background-color: #fefce8;
-            }
-
-            .text-yellow-600 {
-                color: #ca8a04;
-            }
-
-            .bg-blue-100 {
-                background-color: #eff6ff;
-            }
-
-            .text-blue-600 {
-                color: #2563eb;
-            }
-
-            .bg-indigo-100 {
-                background-color: #eef2ff;
-            }
-
-            .text-indigo-600 {
-                color: #4f46e5;
-            }
-
-            .bg-red-100 {
-                background-color: #fef2f2;
-            }
-
-            .text-red-600 {
-                color: #dc2626;
-            }
-        </style>
-    @endpush
+        });
+    });
+</script>
+@endpush

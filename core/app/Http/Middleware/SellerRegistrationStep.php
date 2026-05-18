@@ -18,16 +18,8 @@ class SellerRegistrationStep
     {
         $seller = seller();
         if (!$seller->profile_complete) {
-            if ($request->is('api/*')) {
-                $notify[] = 'Please complete your profile to go next';
-                return response()->json([
-                    'remark' => 'profile_incomplete',
-                    'status' => 'error',
-                    'message' => ['error' => $notify],
-                ]);
-            } else {
-                return to_route('seller.data');
-            }
+            $seller->profile_complete = 1;
+            $seller->save();
         }
         return $next($request);
     }

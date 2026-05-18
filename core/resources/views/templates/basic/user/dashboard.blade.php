@@ -26,7 +26,7 @@
                     <h2 class="text-xl md:text-[20px] font-bold text-[#272343] mb-6">@lang('Hello'), {{ auth()->user()->fullname }}</h2>
 
                     <div class="flex flex-col lg:flex-row gap-6 md:gap-[36px]">
-                        <img src="{{ getImage(getFilePath('userProfile') . '/' . auth()->user()->image, getFileSize('userProfile')) }}" alt="Avatar"
+                        <img src="{{ getAvatar(getFilePath('userProfile') . '/' . auth()->user()->image, auth()->user()->fullname ?? auth()->user()->username) }}" alt="Avatar"
                             class="w-16 h-16 lg:w-[70px] lg:h-[70px] rounded-full object-cover border-[2px] border-[#ccc]">
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 flex-1">

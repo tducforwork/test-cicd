@@ -1,243 +1,229 @@
 @extends($activeTemplate . 'layouts.frontend')
 
 @section('content')
-<div class="bg-[#F7F7F7]">
-    <main class="container mx-auto pb-32 pt-10">
-        <div class="flex flex-col lg:flex-row items-start gap-6">
+<div class="breadcrumb-section"
+    style="background-color: #f8f9fa; padding: 20px 0; border-bottom: 1px solid #eaeaea;">
+    <div class="container">
+        <a href="{{ route('home') }}" style="color: #666; font-size: 14px">@lang('Trang chủ')</a>
+        <span style="margin: 0 10px; color: #ccc">/</span>
+        <a href="{{ route('seller.home') }}" style="color: #666; font-size: 14px">@lang('Kênh người bán')</a>
+        <span style="margin: 0 10px; color: #ccc">/</span>
+        <a href="{{ route('seller.order.all') }}" style="color: #666; font-size: 14px">@lang('Quản lý đơn hàng')</a>
+        <span style="margin: 0 10px; color: #ccc">/</span>
+        <span style="color: var(--primary); font-weight: 600; font-size: 14px">@lang('Chi tiết đơn hàng') #{{ $suborder->order_number }}</span>
+    </div>
+</div>
+
+<!-- MAIN SECTION -->
+<section class="profile-section py-lg-5 py-4">
+    <div class="container">
+        <div class="profile-container">
             <!-- Sidebar -->
-            <aside class="w-full lg:w-[312px] shrink-0">
+            <aside class="profile-sidebar">
                 @include('seller.partials.sidebar')
             </aside>
 
-            <!-- Main panel -->
-            <main class="flex flex-col items-start gap-6 flex-1 min-w-0 w-full">
-
-                <!-- Page heading -->
-                <div class="flex items-center gap-4 md:gap-6">
-                    <a href="{{ route('seller.order.all') }}" class="shrink-0 flex items-center justify-center w-10 h-10 rounded-[8px] border-[1px] border-[solid] border-[#D4D4D4] bg-[#FFF] shadow-[inset_0_1px_2px_0_rgba(255,255,255,0.40),inset_0_-1px_2px_0_rgba(0,0,0,0.24),0_1px_2px_0_rgba(0,0,0,0.08)] hover:bg-gray-50 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M16.75 10C16.75 10.4142 16.4142 10.75 16 10.75L6.31078 10.75L9.0307 13.4696C9.32361 13.7625 9.32363 14.2374 9.03075 14.5303C8.73787 14.8232 8.263 14.8232 7.97009 14.5304L3.96969 10.5304C3.82902 10.3897 3.75 10.1989 3.75 10C3.75 9.80107 3.82902 9.6103 3.96969 9.46964L7.97009 5.46964C8.263 5.17676 8.73787 5.17679 9.03075 5.4697C9.32363 5.7626 9.32361 6.23748 9.0307 6.53036L6.31078 9.25L16 9.25C16.4142 9.25 16.75 9.58579 16.75 10Z" fill="#272343" />
-                        </svg>
+            <!-- Main Content -->
+            <main class="profile-main-content">
+                <!-- Order Header -->
+                <div class="content-header d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+                    <div>
+                        <h2 class="mb-1">@lang('Đơn hàng') #{{ $suborder->order_number }}</h2>
+                        <p style="color: var(--text-muted); font-size: 14px; margin: 0;">
+                            @lang('Ngày đặt'): {{ showDateTime($suborder->created_at, 'd/m/Y H:i') }}
+                        </p>
+                    </div>
+                    <a href="{{ route('seller.order.all') }}" class="btn btn-light" style="border: 1px solid var(--border); font-weight: 600;">
+                        <i class="fa-solid fa-arrow-left" style="margin-right: 6px;"></i> @lang('Quay lại danh sách')
                     </a>
-                    <h1 class="text-[#272343] text-[24px] font-semibold leading-[normal]">@lang('Order Details')</h1>
                 </div>
 
-                <!-- Order summary card -->
-                <div class="flex flex-col items-start gap-6 p-4 md:p-6 w-full bg-white rounded-[8px]">
-                    <!-- Order header -->
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-4 md:p-6 w-full bg-[#fff6f0] rounded-[8px]">
-                        <div class="flex flex-col gap-2 md:gap-[8px]">
-                            <div class="text-[#272343] text-[20px] font-bold leading-[28px]">
-                                #{{ $suborder->order_number }}
+                <!-- Order Status Banner -->
+                <div class="premium-card mb-4" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white; border: none; padding: 24px;">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                        <div class="d-flex align-items-center gap-4">
+                            <div style="width: 50px; height: 50px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px;">
+                                <i class="fa-solid fa-clock-rotate-left"></i>
                             </div>
-                            <div class="flex items-center gap-2 flex-wrap">
-                                <div class="text-[#475156] text-[14px] font-normal leading-[20px] whitespace-nowrap">
-                                    {{ $suborder->orderDetail->sum('quantity') }} @lang('Products')
-                                </div>
-                                <div class="text-gray-700">•</div>
-                                <div class="text-[#475156] text-[14px] font-normal leading-[20px]">
-                                @lang('Order Placed in') {{ showDateTime($suborder->created_at, 'd M, Y \\a\\t h:i A') }}
-                                </div>
+                            <div>
+                                <h4 class="mb-1 text-white" style="font-weight: 700;">@lang('Trạng thái đơn hàng')</h4>
+                                <p class="mb-0" style="opacity: 0.8; font-size: 13px;">@lang('Vui lòng cập nhật tiến độ xử lý và giao nhận cho khách hàng.')</p>
                             </div>
                         </div>
-                        <div class="text-[#FF383C] text-[28px] font-semibold leading-[32px]">
-                            {{ showAmount($suborder->total_amount) }}
+                        <div>
+                            @php echo $suborder->statusBadge @endphp
                         </div>
-                    </div>
-
-                    <!-- Status -->
-                    <div class="flex flex-col gap-[8px] w-full">
-                        <div class="flex items-center gap-1">
-                            <div class="text-[#272343] text-[14px] font-semibold leading-[24px] tracking-[-0.14px]">@lang('Status')</div>
-                        </div>
-                        <form id="statusForm" action="{{ route('seller.order.change.status') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="suborder_id" value="{{ $suborder->id }}">
-                            <div class="flex items-center gap-3">
-                                <div class="relative flex-1">
-                                    <select name="status" id="statusSelect" onchange="handleStatusChange(this)"
-                                        class="w-full h-[49px] px-4 pr-10 rounded-[12px] border border-[#D4D4D4] bg-white text-[14px] font-medium focus:outline-none focus:ring-2 focus:ring-[#FF6F0F] focus:border-transparent appearance-none cursor-pointer transition-all @if(in_array($suborder->status, [\App\Constants\Status::SUBORDER_DELIVERED, \App\Constants\Status::SUBORDER_REJECTED, \App\Constants\Status::SUBORDER_COMPLETED, \App\Constants\Status::SUBORDER_DISPUTED])) bg-gray-100 text-gray-400 cursor-not-allowed @endif">
-                                        <option value="{{ \App\Constants\Status::SUBORDER_PENDING }}" @if($suborder->status == \App\Constants\Status::SUBORDER_PENDING) selected @endif>@lang('Pending')</option>
-                                        <option value="{{ \App\Constants\Status::SUBORDER_PROCESSING }}" @if($suborder->status == \App\Constants\Status::SUBORDER_PROCESSING) selected @endif>@lang('Processing')</option>
-                                        <option value="{{ \App\Constants\Status::SUBORDER_READY_TO_PICKUP }}" @if($suborder->status == \App\Constants\Status::SUBORDER_READY_TO_PICKUP) selected @endif>@lang('Ready to Pickup')</option>
-                                        <option value="{{ \App\Constants\Status::SUBORDER_DISPATCHED }}" @if($suborder->status == \App\Constants\Status::SUBORDER_DISPATCHED) selected @endif>@lang('Dispatched')</option>
-                                        <option value="{{ \App\Constants\Status::SUBORDER_DELIVERED }}" @if($suborder->status == \App\Constants\Status::SUBORDER_DELIVERED) selected @endif>@lang('Delivered')</option>
-                                        {{-- <option value="{{ \App\Constants\Status::SUBORDER_COMPLETED }}" @if($suborder->status == \App\Constants\Status::SUBORDER_COMPLETED) selected @endif>Hoàn thành</option>
-                                        <option value="{{ \App\Constants\Status::SUBORDER_DISPUTED }}" @if($suborder->status == \App\Constants\Status::SUBORDER_DISPUTED) selected @endif>Khiếu nại</option>
-                                        <option value="{{ \App\Constants\Status::SUBORDER_REJECTED }}" @if($suborder->status == \App\Constants\Status::SUBORDER_REJECTED) selected @endif>Từ chối</option> --}}
-                                    </select>
-                                    <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none">
-                                        <svg class="w-5 h-5 text-[#6B7280]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <button type="submit" id="statusSubmitBtn"
-                                    class="h-[49px] px-6 bg-[#FF6F0F] text-white font-bold rounded-[12px] hover:bg-orange-600 transition-colors hidden">
-                                    @lang('Update')
-                                </button>
-                            </div>
-                        </form>
                     </div>
                 </div>
 
-                <!-- Products card -->
-                <div class="flex flex-col items-start gap-6 p-4 md:p-6 w-full bg-white rounded-lg">
-                    <div class="text-[#303030] text-[20px] font-semibold leading-[32px] tracking-[-0.4px]">@lang('Products')</div>
-
-                    <!-- Table -->
-                    <div class="w-full rounded-lg overflow-hidden">
-                        <!-- Table header - hidden on mobile -->
-                        <div class="hidden sm:flex items-center px-3 py-0">
-                            <div class="w-[200px] md:w-[280px] flex items-center p-2">
-                                <div class="text-[#8A8A8A] text-[13px] font-semibold leading-[16px] tracking-[-0.13px]">@lang('Product')</div>
+                <!-- Status Update Section -->
+                <div class="premium-card mb-4" style="padding: 24px;">
+                    <h5 style="font-size: 15px; font-weight: 700; color: var(--primary); margin-bottom: 15px;"><i class="fa-solid fa-arrows-rotate" style="margin-right: 8px;"></i> @lang('Cập nhật tiến trình đơn hàng')</h5>
+                    <form id="statusForm" action="{{ route('seller.order.change.status') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="suborder_id" value="{{ $suborder->id }}">
+                        <div class="d-flex gap-3 align-items-center flex-wrap">
+                            <div style="flex: 1; min-width: 250px; position: relative;">
+                                <select name="status" id="statusSelect" onchange="handleStatusChange(this)"
+                                    class="form-select" style="height: 48px; font-size: 14px; border-radius: 10px; cursor: pointer; @if(in_array($suborder->status, [\App\Constants\Status::SUBORDER_DELIVERED, \App\Constants\Status::SUBORDER_REJECTED, \App\Constants\Status::SUBORDER_COMPLETED, \App\Constants\Status::SUBORDER_DISPUTED])) background: #f1f5f9; color: #94a3b8; pointer-events: none; @endif">
+                                    <option value="{{ \App\Constants\Status::SUBORDER_PENDING }}" @selected($suborder->status == \App\Constants\Status::SUBORDER_PENDING)>@lang('Chờ xử lý')</option>
+                                    <option value="{{ \App\Constants\Status::SUBORDER_PROCESSING }}" @selected($suborder->status == \App\Constants\Status::SUBORDER_PROCESSING)>@lang('Đang chuẩn bị hàng / Đóng gói')</option>
+                                    <option value="{{ \App\Constants\Status::SUBORDER_READY_TO_PICKUP }}" @selected($suborder->status == \App\Constants\Status::SUBORDER_READY_TO_PICKUP)>@lang('Chờ lấy hàng / Bàn giao shipper')</option>
+                                    <option value="{{ \App\Constants\Status::SUBORDER_DISPATCHED }}" @selected($suborder->status == \App\Constants\Status::SUBORDER_DISPATCHED)>@lang('Đang giao hàng')</option>
+                                    <option value="{{ \App\Constants\Status::SUBORDER_DELIVERED }}" @selected($suborder->status == \App\Constants\Status::SUBORDER_DELIVERED)>@lang('Đã giao thành công')</option>
+                                </select>
                             </div>
-                            <div class="flex items-center justify-between flex-1">
-                                <div class="flex items-center p-2 flex-1">
-                                    <div class="text-[#8A8A8A] text-[13px] font-semibold leading-[16px] tracking-[-0.13px]">@lang('Price')</div>
-                                </div>
-                                <div class="flex items-center p-2 flex-1">
-                                    <div class="text-[#8A8A8A] text-[13px] font-semibold leading-[16px] tracking-[-0.13px]">@lang('Quantity')</div>
-                                </div>
-                                <div class="flex items-center p-2 flex-1">
-                                    <div class="text-[#8A8A8A] text-[13px] font-semibold leading-[16px] tracking-[-0.13px]">@lang('Total')</div>
+                            <button type="submit" id="statusSubmitBtn" class="btn btn-primary hidden" style="height: 48px; background: var(--primary); border: none; font-weight: 700; padding: 0 30px;">
+                                <i class="fa-solid fa-circle-check" style="margin-right: 6px;"></i> @lang('Cập nhật trạng thái')
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Left Column: Products -->
+                    <div class="col-lg-8">
+                        <div class="premium-card mb-4" style="padding: 24px;">
+                            <h4 style="font-size: 16px; font-weight: 700; color: var(--primary); margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+                                <i class="fa-solid fa-box-open" style="margin-right: 8px;"></i> @lang('Danh sách sản phẩm')
+                            </h4>
+                            <div class="table-responsive">
+                                <table class="table align-middle" style="margin-bottom: 0;">
+                                    <thead>
+                                        <tr style="border-bottom: 1px solid #f1f5f9; font-size: 12px; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">
+                                            <th>@lang('Sản phẩm')</th>
+                                            <th style="text-align: center;">@lang('Đơn giá')</th>
+                                            <th style="text-align: center;">@lang('Số lượng')</th>
+                                            <th style="text-align: right;">@lang('Thành tiền')</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($suborder->orderDetail as $item)
+                                            @php
+                                                $details = json_decode($item->details);
+                                                $offer_price = $details->offer_amount ?? 0;
+                                                $extra_price = 0;
+                                                if (@$details->variants) {
+                                                    foreach ($details->variants as $variant) {
+                                                        $extra_price += $variant->price;
+                                                    }
+                                                }
+                                                $base_price = $item->base_price + $extra_price;
+                                                $item_total = ($base_price - $offer_price) * $item->quantity;
+                                            @endphp
+                                            <tr style="border-bottom: 1px solid #f8fafc;">
+                                                <td style="padding: 15px 0;">
+                                                    <div class="d-flex align-items-center gap-3">
+                                                        <img src="{{ getImage(getFilePath('product') . '/' . @$item->product->main_image, getFileSize('product')) }}"
+                                                            style="width: 50px; height: 50px; border-radius: 8px; object-fit: cover; border: 1px solid var(--border);">
+                                                        <div>
+                                                            <div style="font-weight: 600; font-size: 14px; color: var(--primary);">
+                                                                {{ __($item->product->name) }}
+                                                            </div>
+                                                            @if ($item->details && @$details->variants)
+                                                                <div class="d-flex gap-2 flex-wrap mt-1">
+                                                                    @foreach ($details->variants as $variant)
+                                                                        <span style="font-size: 11px; padding: 2px 8px; background: #f1f5f9; border-radius: 4px; color: #64748b;">
+                                                                            {{ __($variant->name) }}: <b>{{ __($variant->value) }}</b>
+                                                                        </span>
+                                                                    @endforeach
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td style="text-align: center; font-weight: 600; font-size: 14px;">
+                                                    {{ showAmount($item->base_price - $offer_price) }}
+                                                </td>
+                                                <td style="text-align: center; font-weight: 600; font-size: 14px; color: #64748b;">
+                                                    x{{ $item->quantity }}
+                                                </td>
+                                                <td style="text-align: right; font-weight: 700; font-size: 14px; color: var(--accent);">
+                                                    {{ showAmount($item->total_price) }}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div style="border-top: 2px dashed var(--border); margin-top: 20px; padding-top: 20px;">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span style="font-weight: 700; font-size: 15px; color: var(--primary);">@lang('TỔNG GIÁ TRỊ ĐƠN HÀNG')</span>
+                                    <span style="font-weight: 800; font-size: 22px; color: var(--accent);">{{ showAmount($suborder->total_amount) }}</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="h-px bg-[#f1f1f1] rounded-full"></div>
+                    </div>
 
-                        @foreach ($suborder->orderDetail as $item)
-                        @php
-                        $details = json_decode($item->details);
-                        $offer_price = $details->offer_amount ?? 0;
-                        $extra_price = 0;
-                        if ($details->variants) {
-                            foreach ($details->variants as $variant) {
-                                $extra_price += $variant->price;
-                            }
-                        }
-                        $base_price = $item->base_price + $extra_price;
-                        $item_total = ($base_price - $offer_price) * $item->quantity;
-                        @endphp
-                        <!-- Product row -->
-                        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 px-1 py-4 sm:py-2">
-                            <div class="flex items-center sm:w-[200px] md:w-[280px] gap-0 w-full">
-                                <div class="p-2 shrink-0">
-                                    <div class="w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden bg-gray-100">
-                                        <img src="{{ getImage(getFilePath('product') . '/' . @$item->product->main_image, getFileSize('product')) }}" alt="{{ __($item->product->name) }}" class="w-full h-full object-cover">
-                                    </div>
+                    <!-- Right Column: Shipping & Customer Details -->
+                    <div class="col-lg-4">
+                        <!-- Customer Card -->
+                        <div class="premium-card mb-4" style="padding: 20px;">
+                            <h5 style="font-size: 15px; font-weight: 700; color: var(--primary); margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">
+                                <i class="fa-solid fa-user" style="margin-right: 6px;"></i> @lang('Khách hàng')
+                            </h5>
+                            @php
+                                $shippingAddr = json_decode($suborder->order->shipping_address);
+                            @endphp
+                            <div class="d-flex align-items-center gap-3 mb-3">
+                                <div style="width: 40px; height: 40px; border-radius: 50%; background: #eee; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #64748b;">
+                                    {{ strtoupper(substr($shippingAddr->firstname ?? 'K', 0, 1)) }}
                                 </div>
                                 <div>
-                                    <p class="overflow-hidden text-[#272343] text-[14px] font-medium leading-[24px]">
-                                        {{ __($item->product->name) }}
-                                    </p>
-                                    @if ($item->details && $details->variants)
-                                        @foreach ($details->variants as $variant)
-                                        <p class="text-[#8a8a8a] text-xs mt-0.5">{{ __($variant->name) }}: <b>{{ __($variant->value) }}</b></p>
-                                        @endforeach
-                                    @endif
-                                </div>
-                            </div>
-                            <!-- On mobile: show labels inline -->
-                            <div class="flex sm:flex-1 flex-row flex-wrap gap-x-4 gap-y-1 px-2 sm:px-0 w-full sm:w-auto">
-                                <div class="flex items-center gap-2 sm:hidden">
-                                    <span class="text-[#8a8a8a] text-xs">@lang('Price'):</span>
-                                </div>
-                                <div class="flex flex-col sm:flex-row sm:flex-1 sm:items-center w-full">
-                                    <div class="flex flex-col items-start justify-center p-0 sm:p-2 sm:flex-1">
-                                        <div class="inline-flex flex-col items-center justify-center px-1.5 rounded-[8px] bg-[#EAF4FF] overflow-hidden">
-                                            <div class="text-[#303030] text-center text-[15px] font-semibold leading-[24px] tracking-[-0.15px]">
-                                                {{ showAmount($item->base_price - $offer_price) }}
-                                            </div>
-                                        </div>
+                                    <div style="font-weight: 700; font-size: 15px; color: var(--primary);">
+                                        {{ @$shippingAddr->firstname }} {{ @$shippingAddr->lastname }}
                                     </div>
-                                    <div class="flex items-center py-1 sm:p-2 sm:flex-1">
-                                        <div class="flex-1 font-normal text-[#8a8a8a] text-sm">x{{ $item->quantity }}</div>
-                                    </div>
-                                    <div class="flex items-center py-1 sm:p-2 sm:flex-1">
-                                        <div class="text-[#272343] text-[14px] font-semibold leading-[24px] tracking-[-0.14px]">{{ showAmount($item->total_price) }}</div>
+                                    <div style="font-size: 12px; color: var(--text-muted);">
+                                        @lang('Điện thoại'): {{ @$shippingAddr->mobile }}
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        @if (!$loop->last)
-                        <div class="h-px bg-[#f1f1f1] rounded-full"></div>
-                        @endif
-                        @endforeach
-                    </div>
 
-                    <!-- Total -->
-                    <div class="flex flex-col w-full gap-4">
-                        <div class="h-px bg-[#272343]"></div>
-                        <div class="flex items-start justify-between w-full">
-                            <div class="text-[#272343] text-[20px] font-bold leading-[24px]">@lang('Total'):</div>
-                            <div class="text-[#272343] text-right text-[20px] font-bold leading-[24px]">{{ showAmount($suborder->total_amount) }}</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Shipping + Customer card -->
-                <div class="flex flex-col items-start gap-6 p-4 md:p-6 w-full bg-white rounded-lg">
-                    <div class="text-[#272343] text-[20px] font-bold leading-[150%]">@lang('Customer Info')</div>
-                    <div class="flex flex-col gap-4 md:gap-[16px] w-full">
-                        @php $shippingAddr = json_decode($suborder->order->shipping_address); @endphp
-                        <div class="flex items-center gap-1 w-full">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M6 21V19C6 17.9391 6.42143 16.9217 7.17157 16.1716C7.92172 15.4214 8.93913 15 10 15H14C15.0609 15 16.0783 15.4214 16.8284 16.1716C17.5786 16.9217 18 17.9391 18 19V21M8 7C8 8.06087 8.42143 9.07828 9.17157 9.82843C9.92172 10.5786 10.9391 11 12 11C13.0609 11 14.0783 10.5786 14.8284 9.82843C15.5786 9.07828 16 8.06087 16 7C16 5.93913 15.5786 4.92172 14.8284 4.17157C14.0783 3.42143 13.0609 3 12 3C10.9391 3 9.92172 3.42143 9.17157 4.17157C8.42143 4.92172 8 5.93913 8 7Z" stroke="#CCCCCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                            <div class="text-[#272343] text-[16px] font-normal leading-[normal]">
-                                {{ @$shippingAddr->firstname }} {{ @$shippingAddr->lastname }}
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-1 w-full">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.8413 9.85567C7.63237 13.7539 10.814 16.8432 14.7633 18.5187L14.7753 18.5237L15.5393 18.8637C16.0112 19.0741 16.5412 19.1157 17.0401 18.9815C17.5391 18.8473 17.9766 18.5455 18.2793 18.1267L19.5533 16.3637C19.5907 16.3117 19.6069 16.2474 19.5983 16.184C19.5897 16.1206 19.5572 16.0628 19.5073 16.0227L17.2833 14.2277C17.2571 14.2065 17.2268 14.1909 17.1943 14.1817C17.1619 14.1725 17.1279 14.17 17.0945 14.1743C17.061 14.1786 17.0288 14.1896 16.9997 14.2067C16.9707 14.2238 16.9453 14.2466 16.9253 14.2737L16.0593 15.4417C15.9573 15.5795 15.8111 15.6782 15.6452 15.7213C15.4792 15.7644 15.3035 15.7494 15.1473 15.6787C12.189 14.3372 9.81873 11.9669 8.4773 9.00867C8.4066 8.85246 8.39157 8.67675 8.43469 8.5108C8.47781 8.34486 8.5765 8.1987 8.7143 8.09667L9.8813 7.22967C9.90841 7.20963 9.9312 7.18431 9.94827 7.15523C9.96535 7.12616 9.97637 7.09393 9.98067 7.06048C9.98496 7.02704 9.98245 6.99307 9.97328 6.96062C9.96411 6.92817 9.94847 6.89792 9.9273 6.87167L8.1333 4.64767C8.09316 4.5978 8.03541 4.56523 7.97197 4.55667C7.90853 4.54811 7.84422 4.56422 7.7923 4.60167L6.0193 5.88167C5.5977 6.18578 5.2944 6.62649 5.16096 7.1289C5.02752 7.63132 5.07216 8.16444 5.2873 8.63767L5.8413 9.85567Z" fill="#CCCCCC" />
-                            </svg>
-                            <div class="text-[#272343] text-[16px] font-normal leading-[normal]">
-                                {{ @$shippingAddr->mobile }}
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-1 w-full">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M12 3.75C9.10875 3.75 6.75 6.10875 6.75 9C6.75 11.637 8.71275 13.8135 11.25 14.1795V21H12.75V14.1795C15.2872 13.8135 17.25 11.637 17.25 9C17.25 6.10875 14.8912 3.75 12 3.75ZM12 5.25C14.0798 5.25 15.75 6.92025 15.75 9C15.75 11.0798 14.0798 12.75 12 12.75C9.92025 12.75 8.25 11.0798 8.25 9C8.25 6.92025 9.92025 5.25 12 5.25ZM12 6C10.35 6 9 7.35 9 9H10.5C10.5 8.16225 11.1623 7.5 12 7.5V6Z" fill="#CCCCCC" />
-                            </svg>
-                            <p class="text-[#272343] text-[16px] font-normal leading-[normal]">
+                        <!-- Shipping Card -->
+                        <div class="premium-card mb-4" style="padding: 20px;">
+                            <h5 style="font-size: 15px; font-weight: 700; color: var(--primary); margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">
+                                <i class="fa-solid fa-truck" style="margin-right: 6px;"></i> @lang('Địa chỉ giao hàng')
+                            </h5>
+                            <p style="font-size: 13.5px; color: #475569; line-height: 1.6; margin: 0;">
                                 {{ @$shippingAddr->address }}, {{ @$shippingAddr->ward }}, {{ @$shippingAddr->province }}
                             </p>
                         </div>
-                    </div>
 
-                    <!-- Payment Info -->
-                    @if (isset($suborder->order->deposit))
-                    <div class="text-[#272343] text-[20px] font-bold leading-[150%] w-full">@lang('Payment Info')</div>
-                    <div class="flex flex-col gap-3 w-full">
-                        <div class="flex items-center justify-between">
-                            <span class="text-[#6b7280] text-sm">@lang('Payment Method')</span>
-                            <span class="text-[#272343] text-sm font-medium">
-                                @if ($suborder->order->deposit->method_code == 0)
-                                COD
-                                @else
-                                {{ __($suborder->order->deposit->gateway->name) }}
-                                @endif
-                            </span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-[#6b7280] text-sm">@lang('Payment Status')</span>
-                            <span class="text-sm font-medium">
-                                @php echo $suborder->order->paymentBadge() @endphp
-                            </span>
-                        </div>
+                        <!-- Payment Card -->
+                        @if (isset($suborder->order->deposit))
+                            <div class="premium-card" style="padding: 20px;">
+                                <h5 style="font-size: 15px; font-weight: 700; color: var(--primary); margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">
+                                    <i class="fa-solid fa-credit-card" style="margin-right: 6px;"></i> @lang('Thông tin thanh toán')
+                                </h5>
+                                <div style="font-size: 13.5px; color: #475569; line-height: 1.8;">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="text-muted">@lang('Phương thức'):</span>
+                                        <strong>
+                                            @if ($suborder->order->deposit->method_code == 0)
+                                                COD (Thanh toán khi nhận hàng)
+                                            @else
+                                                {{ __($suborder->order->deposit->gateway->name) }}
+                                            @endif
+                                        </strong>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="text-muted">@lang('Trạng thái'):</span>
+                                        <span>
+                                            @php echo $suborder->order->paymentBadge() @endphp
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                     </div>
-                    @endif
                 </div>
-
             </main>
         </div>
-    </main>
-</div>
+    </div>
+</section>
 @endsection
-
-<x-confirmation-modal />
 
 @push('script')
 <script>
@@ -261,12 +247,13 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        padding: 2px 7px;
-        border-radius: 3px;
-        font-size: 10px;
-        font-weight: 500;
-        border-width: 0.7px;
+        padding: 5px 12px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        border-width: 1px;
         border-style: solid;
+        text-transform: uppercase;
     }
 
     .badge--warning {

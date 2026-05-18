@@ -178,7 +178,9 @@ trait ProductManager
             }
         }
 
-        $product->status = Status::ENABLE;
+        if (!$id) {
+            $product->status = $sellerId ? Status::DISABLE : Status::ENABLE;
+        }
 
         if ($request->hasFile('main_image')) {
             try {
@@ -288,7 +290,9 @@ trait ProductManager
             }
         }
 
-        $message  = __('Product added successfully');
+        $message = $sellerId 
+            ? __('Product added successfully and waiting for admin approval') 
+            : __('Product added successfully');
 
         $categories = is_array($request->categories) ? array_filter($request->categories) : [];
 

@@ -22,7 +22,7 @@
                         <div class="flex items-center gap-6 mb-6">
                             <div class="relative">
                                 <img id="profilePreview"
-                                    src="{{ getAvatar(getFilePath('userProfile') . '/' . $seller->image) }}"
+                                    src="{{ getAvatar(getFilePath('userProfile') . '/' . $seller->image, $seller->fullname ?? $seller->username) }}"
                                     alt="Profile" class="w-24 h-24 rounded-full object-cover border-2 border-gray-200">
                                 <input type="file" name="image" id="profileImage" class="hidden"
                                     accept=".png,.jpg,.jpeg">

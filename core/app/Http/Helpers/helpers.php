@@ -763,9 +763,39 @@ function paginate($items, $perPage = 5, $page = null,  $options = [])
 }
 
 
-function getAvatar($image, $clean = '')
+function getAvatar($image, $name = 'User')
 {
-    return file_exists($image) && is_file($image) ? asset($image) . $clean : getImage(getFilePath('avatar'), getFileSize('avatar'));
+    if (file_exists($image) && is_file($image)) {
+        return asset($image);
+    }
+    
+    // Tạo ảnh SVG từ chữ cái đầu tiên của tên người dùng
+    $firstLetter = 'U';
+    if ($name) {
+        $trimmedName = trim(strip_tags($name));
+        if ($trimmedName !== '') {
+            $firstLetter = mb_strtoupper(mb_substr($trimmedName, 0, 1, 'UTF-8'), 'UTF-8');
+        }
+    }
+    
+    $colors = [
+        'A' => '#FF6F0F', 'B' => '#3b82f6', 'C' => '#10b981', 'D' => '#8b5cf6',
+        'E' => '#ec4899', 'F' => '#f59e0b', 'G' => '#06b6d4', 'H' => '#14b8a6',
+        'I' => '#f43f5e', 'J' => '#84cc16', 'K' => '#a855f7', 'L' => '#6366f1',
+        'M' => '#0ea5e9', 'N' => '#10b981', 'O' => '#f97316', 'P' => '#d946ef',
+        'Q' => '#8b5cf6', 'R' => '#3b82f6', 'S' => '#14b8a6', 'T' => '#FF6F0F',
+        'U' => '#ec4899', 'V' => '#06b6d4', 'W' => '#f59e0b', 'X' => '#f43f5e',
+        'Y' => '#84cc16', 'Z' => '#a855f7'
+    ];
+    
+    $bgColor = $colors[$firstLetter] ?? '#FF6F0F';
+    
+    $svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">' .
+           '<circle cx="50" cy="50" r="50" fill="' . $bgColor . '"/>' .
+           '<text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-size="46" font-family="\'Outfit\', \'Inter\', \'Helvetica Neue\', sans-serif" font-weight="bold" fill="#ffffff">' . $firstLetter . '</text>' .
+           '</svg>';
+           
+    return 'data:image/svg+xml;utf8,' . rawurlencode($svg);
 }
 
 function getMenu($location)

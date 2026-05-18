@@ -151,7 +151,7 @@ class Product extends Model
     public function getFinalPriceAttribute()
     {
         $basePrice = $this->base_price;
-        
+
         // Prioritize product's own discount price if set
         if ($this->discount_price > 0) {
             return $this->discount_price;
@@ -217,5 +217,4 @@ class Product extends Model
     {
         return $this->stocks->sum('quantity');
     }
-
 }

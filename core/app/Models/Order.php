@@ -285,4 +285,40 @@ class Order extends Model
             }
         }
     }
+
+    public function syncStatus()
+    {
+        $activeSubOrders = $this->subOrders()->where('status', '!=', \App\Constants\Status::SUBORDER_REJECTED)->get();
+        
+        if ($activeSubOrders->count() > 0) {
+            $statuses = $activeSubOrders->pluck('status')->unique()->toArray();
+            
+            if (in_array(\App\Constants\Status::SUBORDER_DISPUTED, $statuses)) {
+                $this->status = \App\Constants\Status::ORDER_PROCESSING;
+            } elseif (in_array(\App\Constants\Status::SUBORDER_PENDING, $statuses)) {
+                $this->status = \App\Constants\Status::ORDER_PENDING;
+            } elseif (in_array(\App\Constants\Status::SUBORDER_PROCESSING, $statuses)) {
+                $this->status = \App\Constants\Status::ORDER_PROCESSING;
+            } elseif (in_array(\App\Constants\Status::SUBORDER_READY_TO_PICKUP, $statuses)) {
+                $this->status = \App\Constants\Status::ORDER_READY_TO_DELIVER;
+            } elseif (in_array(\App\Constants\Status::SUBORDER_DISPATCHED, $statuses)) {
+                $this->status = \App\Constants\Status::ORDER_DISPATCHED;
+            } elseif (in_array(\App\Constants\Status::SUBORDER_DELIVERED, $statuses)) {
+                $this->status = \App\Constants\Status::ORDER_DELIVERED;
+                if ($this->payment_status != \App\Constants\Status::PAYMENT_SUCCESS) {
+                    $this->payment_status = \App\Constants\Status::PAYMENT_SUCCESS;
+                }
+            } else {
+                // All active suborders are Status::SUBORDER_COMPLETED (5)
+                $this->status = \App\Constants\Status::ORDER_DELIVERED;
+                if ($this->payment_status != \App\Constants\Status::PAYMENT_SUCCESS) {
+                    $this->payment_status = \App\Constants\Status::PAYMENT_SUCCESS;
+                }
+            }
+        } else {
+            // All suborders are rejected/canceled
+            $this->status = \App\Constants\Status::ORDER_CANCELED;
+        }
+        $this->save();
+    }
 }

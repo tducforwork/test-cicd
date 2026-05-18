@@ -1,932 +1,890 @@
 @extends($activeTemplate . 'layouts.frontend')
 
 @section('content')
-<div class="bg-[#F7F7F7]">
-    <main class="container mx-auto pb-32 pt-10">
-        <div class="flex flex-col lg:flex-row gap-6">
-            <!-- Sidebar -->
-            <aside class="w-full lg:w-[312px] shrink-0">
-                @include('seller.partials.sidebar')
-            </aside>
+    @php
+        $productConfig = \App\Models\ProductConfig::firstOrCreate([]);
+        $selectedCategories = old('categories', @$product->categories ? $product->categories->pluck('id')->toArray() : []);
+        $selectedBrands = old('brands', @$product->brand_id ? [$product->brand_id] : []);
+        $selectedTags = old('tags', @$product->tags ? $product->tags->pluck('id')->toArray() : []);
+        $selectedProductTypes = old('product_types', @$product->productTypes ? $product->productTypes->pluck('id')->toArray() : []);
+    @endphp
+    <div class="breadcrumb-section" style="background-color: #f8f9fa; padding: 20px 0; border-bottom: 1px solid #eaeaea;">
+        <div class="container">
+            <a href="{{ route('home') }}" style="color: #666; font-size: 14px">@lang('Trang chủ')</a>
+            <span style="margin: 0 10px; color: #ccc">/</span>
+            <a href="{{ route('seller.home') }}" style="color: #666; font-size: 14px">@lang('Kênh người bán')</a>
+            <span style="margin: 0 10px; color: #ccc">/</span>
+            <span style="color: var(--primary); font-weight: 600; font-size: 14px">
+                @if(isset($product))
+                    @lang('Chỉnh sửa sản phẩm')
+                @else
+                    @lang('Thêm sản phẩm mới')
+                @endif
+            </span>
+        </div>
+    </div>
 
-            <!-- Main Content Area -->
-            <div class="flex-1 min-w-0">
-                <div class="bg-[#f7f7f7]">
-                    <!-- Main Content -->
-                    <div class="max-w-[1320px] mx-auto px-4 md:px-0 pb-[60px]">
-                        <!-- Page heading -->
-                        <div class="flex items-center gap-4 md:gap-6 mb-6">
-                            <a href="{{ route('seller.products.all') }}">
-                                <img alt="back" src="https://c.animaapp.com/mnvtah15dkaXN7/img/button.svg" class="w-10 h-10 cursor-pointer" />
-                            </a>
-                            <span class="text-[#272343] text-lg md:text-[20px] font-bold leading-[150%]">@lang('Product')</span>
+    <!-- MAIN SECTION -->
+    <section class="profile-section py-lg-5 py-4">
+        <div class="container">
+            <div class="profile-container">
+                <!-- Sidebar -->
+                <aside class="profile-sidebar">
+                    @include('seller.partials.sidebar')
+                </aside>
+
+                <!-- Main Content -->
+                <main class="profile-main-content">
+                    <div class="content-header d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <h2>
+                                @if(isset($product))
+                                    @lang('Chỉnh sửa sản phẩm')
+                                @else
+                                    @lang('Thêm sản phẩm mới')
+                                @endif
+                            </h2>
+                            <p style="color: var(--text-muted); font-size: 14px;">
+                                @lang('Đăng tải sản phẩm mới lên gian hàng của bạn')
+                            </p>
                         </div>
+                        <a href="{{ route('seller.products.all') }}" class="btn btn-light"
+                            style="border: 1px solid var(--border); font-weight: 600;">
+                            <i class="fa-solid fa-arrow-left" style="margin-right: 6px;"></i> @lang('Quay lại')
+                        </a>
+                    </div>
 
-                        <!-- Form and Preview Wrapper -->
-                        <div class="flex flex-col xl:flex-row gap-6 md:gap-[24px] items-start">
-                            <form action="{{ route('seller.products.product.store', $product->id ?? 0) }}" id="addForm" method="POST" enctype="multipart/form-data" class="flex-1 flex flex-col gap-6 w-full">
+                    <div class="row">
+                        <!-- Form Column -->
+                        <div class="col-lg-12 col-md-12">
+                            <form action="{{ route('seller.products.product.store', $product->id ?? 0) }}" id="addForm"
+                                method="POST" enctype="multipart/form-data">
                                 @csrf
 
-                                <!-- Name & Description Card -->
-                                <div class="flex flex-col gap-4 md:gap-6 p-4 md:p-6 bg-white rounded-lg">
-                                    <h2 class="text-[#272343] text-lg md:text-[20px] font-bold leading-[150%]">@lang('Name & Description')</h2>
-
-                                    <!-- Product Name -->
-                                    <div class="flex flex-col gap-2">
-                                        <div class="flex items-center gap-2 flex-wrap">
-                                            <div class="inline-flex items-center gap-1">
-                                                <span class="text-[#272343] text-[14px] font-semibold leading-[24px] tracking-[-0.14px]">@lang('Product title')</span>
-                                                <img alt="" class="w-5 h-5" src="https://c.animaapp.com/mnvtah15dkaXN7/img/info.svg" />
-                                            </div>
-                                            <div class="inline-flex items-center justify-center px-2 py-0.5 bg-[#00000014] rounded-md">
-                                                <span class="text-[#8a8a8a] text-xs">@lang('Maximum 100 characters')</span>
-                                            </div>
+                                <!-- SECTION 1: BASIC INFO -->
+                                <div class="form-section-card premium-card mb-5" style="padding: 24px;">
+                                    <h3 class="form-section-title"><i class="fa-solid fa-circle-info"></i>
+                                        @lang('Thông tin cơ bản')</h3>
+                                    <div class="row">
+                                        <div class="col-md-12 mb-4">
+                                            <label class="form-label">@lang('Tên sản phẩm') <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" name="name" id="productName" class="form-control"
+                                                placeholder="@lang('Nhập tên sản phẩm (Ví dụ: Giày thể thao nam cao cấp)')"
+                                                value="{{ old('name', @$product->name) }}" required>
                                         </div>
-                                        <input type="text" class="w-full h-[48px] md:h-[52px] px-4 md:px-[16px] md:py-[14px] rounded-[8px] border text-[#666] text-[16px] font-normal leading-[150%] border-[solid] border-[#E6E6E6] bg-[#FFF] focus:outline-none"
-                                            value="{{ old('name', @$product->name) }}" name="name" required placeholder="@lang('Enter product name...')" />
-                                    </div>
-
-                                    <!-- Description -->
-                                    <div class="flex flex-col gap-2">
-                                        <div class="inline-flex items-center gap-1">
-                                            <span class="text-[#272343] text-[14px] font-semibold leading-[24px] tracking-[-0.14px]">@lang('Description')</span>
+                                        <div class="col-md-6 mb-4">
+                                            <label class="form-label">@lang('Đơn vị tính')</label>
+                                            <input type="text" name="unit" class="form-control"
+                                                placeholder="@lang('Ví dụ: Cái, Chiếc, Bộ, Hộp, kg...')"
+                                                value="{{ old('unit', @$product->unit) }}">
                                         </div>
-                                        <textarea id="description" name="description" rows="6"
-                                            class="w-full px-4 py-3 rounded-xl border border-[#e6e6e6] bg-white text-base focus:outline-none focus:ring-1 focus:ring-[#FF6F0F]">{{ old('description', @$product->description) }}</textarea>
-                                    </div>
-
-                                    <!-- Categories -->
-                                    <div class="flex flex-col gap-2">
-                                        <div class="inline-flex items-center gap-1">
-                                            <span class="text-[#272343] text-[14px] font-semibold leading-[24px] tracking-[-0.14px]">@lang('Category')</span>
+                                        <div class="col-md-6 mb-4">
+                                            <label class="form-label">@lang('Tình trạng sản phẩm')</label>
+                                            <input type="text" name="condition" class="form-control"
+                                                placeholder="@lang('Ví dụ: Mới 100%, Likenew 99%, Đã qua sử dụng...')"
+                                                value="{{ old('condition', @$product->condition) }}">
                                         </div>
-                                        <div class="select2-parent">
-                                            <select class="category-select2 w-full h-[48px] md:h-[52px] px-4 md:px-[16px] md:py-[14px] rounded-[8px] border text-[#666] text-[16px] font-normal leading-[150%] border-[solid] border-[#E6E6E6] bg-[#FFF] focus:outline-none" name="categories[]" id="categories">
-                                                <option value="">@lang('Select One')</option>
+                                        <div class="col-md-12 mb-4 select2-parent">
+                                            <label class="form-label">@lang('Danh mục sản phẩm') <span
+                                                    class="text-danger">*</span></label>
+                                            <select class="form-select category-select2" name="categories[]" id="categories"
+                                                required>
+                                                <option value="">@lang('Chọn một danh mục')</option>
                                                 @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}" data-title="{{ __($category->name) }}">@lang($category->name)</option>
-                                                @php $prefix = '--'; @endphp
-                                                @foreach ($category->allSubcategories as $subcategory)
-                                                <option value="{{ $subcategory->id }}" data-title="{{ __($subcategory->name) }}">
-                                                    {{ $prefix }}@lang($subcategory->name)
-                                                </option>
-                                                @include('admin.partials.subcategories', ['subcategory' => $subcategory, 'prefix' => $prefix])
-                                                @endforeach
+                                                    <option value="{{ $category->id }}" data-title="{{ __($category->name) }}"
+                                                        @selected(in_array($category->id, $selectedCategories))>
+                                                        @lang($category->name)
+                                                    </option>
+                                                    @php $prefix = '--'; @endphp
+                                                    @foreach ($category->allSubcategories as $subcategory)
+                                                        <option value="{{ $subcategory->id }}"
+                                                            data-title="{{ __($subcategory->name) }}"
+                                                            @selected(in_array($subcategory->id, $selectedCategories))>
+                                                            {{ $prefix }}@lang($subcategory->name)
+                                                        </option>
+                                                        @include('admin.partials.subcategories', ['subcategory' => $subcategory, 'prefix' => $prefix])
+                                                    @endforeach
                                                 @endforeach
                                             </select>
                                         </div>
-                                    </div>
-
-                                    <!-- SKU -->
-                                    <div class=" flex-col gap-2 d-none">
-                                        <div class="inline-flex items-center gap-1">
-                                            <span class="text-[#272343] text-[14px] font-semibold leading-[24px] tracking-[-0.14px]">@lang('SKU')</span>
-                                        </div>
-                                        <input type="text" class="w-full h-[52px] px-4 md:px-[16px] md:py-[14px] rounded-[8px] border text-[#666] text-[16px] font-normal leading-[150%] border-[solid] border-[#E6E6E6] bg-[#FFF] focus:outline-none"
-                                            value="{{ old('sku', @$product->sku) }}" name="sku" placeholder="@lang('Enter SKU...')" />
-                                    </div>
-
-                                    <!-- Tags -->
-                                    <div class="flex flex-col gap-2">
-                                        <div class="inline-flex items-center gap-1">
-                                            <span class="text-[#272343] text-[14px] font-semibold leading-[24px] tracking-[-0.14px]">@lang('Tags')</span>
-                                            <img alt="" class="w-5 h-5" src="https://c.animaapp.com/mnvtah15dkaXN7/img/info.svg" />
-                                        </div>
-                                        <div class="select2-parent">
-                                            <select class="select2-auto-tokenize-seller" name="meta_keywords[]" multiple="multiple">
-                                                @php
-                                                $metaKeywords = null;
-                                                if (old('meta_keywords')) {
-                                                $metaKeywords = old('meta_keywords');
-                                                } elseif (isset($product) && $product->meta_keywords) {
-                                                $metaKeywords = $product->meta_keywords;
-                                                }
-                                                @endphp
-                                                @if ($metaKeywords)
-                                                @foreach ($metaKeywords as $option)
-                                                <option value="{{ $option }}" selected>{{ __($option) }}</option>
-                                                @endforeach
-                                                @endif
-                                            </select>
+                                        <div class="col-md-12">
+                                            <label class="form-label">@lang('Mô tả sản phẩm') <span
+                                                    class="text-danger">*</span></label>
+                                            <textarea id="description" name="description" class="form-control" rows="8"
+                                                placeholder="@lang('Mô tả chi tiết về sản phẩm của bạn...')"
+                                                required>{{ old('description', @$product->description) }}</textarea>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Images Card -->
-                                <div class="flex flex-col gap-4 md:gap-6 p-4 md:p-6 bg-white rounded-lg">
-                                    <h2 class="font-bold text-[#272343] text-lg md:text-xl leading-[30px]">@lang('Images')</h2>
-
-                                    <!-- Cover Image -->
-                                    <div class="flex flex-col gap-2">
-                                        <div class="inline-flex items-center gap-1">
-                                            <span class="text-[#272343] text-[14px] font-semibold leading-[24px] tracking-[-0.14px]">@lang('Cover images')</span>
-                                        </div>
-                                        <div id="mainImageBox" class="relative rounded-[12px] border-[1px] border-[#D4D4D4] bg-[rgba(0,_0,_0,_0.08)] flex h-[180px] md:h-[200px] p-[12px] justify-center items-center self-stretch">
-                                            <button type="button" id="mainImageBtn"
-                                                class="all-[unset] box-border inline-flex items-center justify-center gap-2 px-[18px] py-2.5 bg-white rounded-xl border border-solid border-neutral-300 shadow-[0_1px_2px_rgba(0,0,0,0.08)] cursor-pointer hover:bg-gray-50 transition-colors">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M12.9002 5.1002C12.9002 4.60314 12.4973 4.2002 12.0002 4.2002C11.5031 4.2002 11.1002 4.60314 11.1002 5.1002V13.1274L9.03659 11.0638C8.68512 10.7123 8.11527 10.7123 7.7638 11.0638C7.41233 11.4153 7.41233 11.9851 7.7638 12.3366L11.3638 15.9366C11.7153 16.2881 12.2851 16.2881 12.6366 15.9366L16.2366 12.3366C16.5881 11.9851 16.5881 11.4153 16.2366 11.0638C15.8851 10.7123 15.3153 10.7123 14.9638 11.0638L12.9002 13.1274L12.9002 5.1002Z" fill="#272343" />
-                                                    <path d="M19.8002 16.5002C19.8002 16.0031 19.3973 15.6002 18.9002 15.6002C18.4031 15.6002 18.0002 16.0031 18.0002 16.5002V17.4602C18.0002 17.9573 17.5973 18.3602 17.1002 18.3602L6.9002 18.3602C6.40314 18.3602 6.0002 17.9572 6.0002 17.4602L6.0002 16.5002C6.0002 16.0031 5.59725 15.6002 5.1002 15.6002C4.60314 15.6002 4.2002 16.0031 4.2002 16.5002V17.4602C4.2002 18.9514 5.40903 20.1602 6.9002 20.1602L17.1002 20.1602C18.5914 20.1602 19.8002 18.9514 19.8002 17.4602V16.5002Z" fill="#272343" />
-                                                </svg>
-                                                <span class="text-[#272343] text-[15px] font-bold leading-[24px] tracking-[-0.15px]">@lang('Click or drag and drop image')</span>
-                                            </button>
-                                            <input type="file" name="main_image" id="mainImageInput" class="hidden" accept="image/png, image/jpeg, image/jpg">
-                                            @php
-                                            $mainImagePath = @$product->main_image ? getImage(getFilePath('product') . '/' . $product->main_image) : null;
-                                            @endphp
-                                            @if($mainImagePath)
-                                            <div class="absolute inset-0 group">
-                                                <img id="mainImagePreview" src="{{ $mainImagePath }}"
-                                                    class="w-full h-full object-cover rounded-xl">
-                                                <button type="button" id="mainImageRemoveBtn"
-                                                    class="absolute top-2 right-2 w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600">
-                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                            @endif
-                                        </div>
-                                    </div>
-
-                                    <!-- Additional Images -->
-                                    <div class="flex flex-col gap-2">
-                                        <div class="flex items-center gap-2 flex-wrap">
-                                            <div class="inline-flex items-center gap-1">
-                                                <span class="text-[#272343] text-[14px] font-semibold leading-[24px] tracking-[-0.14px]">@lang('Images')</span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M12.9002 5.1002C12.9002 4.60314 12.4973 4.2002 12.0002 4.2002C11.5031 4.2002 11.1002 4.60314 11.1002 5.1002V13.1274L9.03659 11.0638C8.68512 10.7123 8.11527 10.7123 7.7638 11.0638C7.41233 11.4153 7.41233 11.9851 7.7638 12.3366L11.3638 15.9366C11.7153 16.2881 12.2851 16.2881 12.6366 15.9366L16.2366 12.3366C16.5881 11.9851 16.5881 11.4153 16.2366 11.0638C15.8851 10.7123 15.3153 10.7123 14.9638 11.0638L12.9002 13.1274L12.9002 5.1002Z" fill="#272343" />
-                                                    <path d="M19.8002 16.5002C19.8002 16.0031 19.3973 15.6002 18.9002 15.6002C18.4031 15.6002 18.0002 16.0031 18.0002 16.5002V17.4602C18.0002 17.9573 17.5973 18.3602 17.1002 18.3602L6.9002 18.3602C6.40314 18.3602 6.0002 17.9572 6.0002 17.4602L6.0002 16.5002C6.0002 16.0031 5.59725 15.6002 5.1002 15.6002C4.60314 15.6002 4.2002 16.0031 4.2002 16.5002V17.4602C4.2002 18.9514 5.40903 20.1602 6.9002 20.1602L17.1002 20.1602C18.5914 20.1602 19.8002 18.9514 19.8002 17.4602V16.5002Z" fill="#272343" />
-                                                </svg>
-                                            </div>
-                                            <div class="inline-flex items-center justify-center px-2 py-0.5 bg-[#00000014] rounded-md">
-                                                <span class="text-[#8a8a8a] text-xs">@lang('Maximum 6 images')</span>
-                                            </div>
-                                        </div>
-                                        <div id="additional-image-box" class="relative rounded-[12px] border-[1px] border-[#D4D4D4] bg-[rgba(0,_0,_0,_0.08)] flex h-[180px] md:h-[200px] p-[12px] justify-center items-center self-stretch">
-                                            <button type="button" id="additional-images-btn"
-                                                class="all-[unset] box-border inline-flex items-center justify-center gap-2 px-[18px] py-2.5 bg-white rounded-xl border border-solid border-neutral-300 shadow-[0_1px_2px_rgba(0,0,0,0.08)] cursor-pointer hover:bg-gray-50 transition-colors">
-                                                <img alt="" class="w-6 h-6" src="https://c.animaapp.com/mnvtah15dkaXN7/img/import.svg" />
-                                                <span class="text-[#272343] text-[15px] font-bold leading-[24px] tracking-[-0.15px]">@lang('Click or drag and drop image')</span>
-                                            </button>
-                                            <input type="file" id="additional-images-input" class="hidden" multiple accept="image/*">
-                                        </div>
-                                        <div id="additional-images-preview" class="flex flex-wrap gap-3 mt-3"></div>
-                                        @if(isset($images) && count($images) > 0)
-                                        <div class="mt-3 flex flex-wrap gap-3">
-                                            @foreach($images as $img)
-                                            <div class="inline-block relative group existing-image-item" data-id="{{ $img['id'] }}">
-                                                <img src="{{ $img['src'] }}" alt="" class="w-20 h-20 md:w-24 h-24 object-cover rounded-lg border">
-                                                <button type="button" class="remove-existing-btn absolute bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center cursor-pointer text-sm hover:bg-red-600 transition-colors shadow-sm z-10"
-                                                    style="top: 0px; right: 0px;"
-                                                    data-id="{{ $img['id'] }}">×</button>
-                                                <input type="hidden" name="old[]" value="{{ $img['id'] }}">
-                                            </div>
-                                            @endforeach
-                                        </div>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <!-- Price Card -->
-                                <div class="flex flex-col gap-4 md:gap-6 p-4 md:p-6 bg-white rounded-lg">
-                                    <h2 class="font-bold text-[#272343] text-lg md:text-xl leading-[30px]">@lang('Price')</h2>
-
-                                    @php
-                                        $productConfig = \App\Models\ProductConfig::firstOrCreate([]);
-                                    @endphp
-                                    <div class="flex flex-col gap-2">
-                                        <div class="inline-flex items-center gap-1">
-                                            <span class="text-[#272343] text-[14px] font-semibold leading-[24px] tracking-[-0.14px]">@lang('Currency')</span>
-                                        </div>
-                                        <div class="select2-parent">
-                                            <select name="currency_type" class="w-full h-[48px] md:h-[52px] px-4 md:px-[16px] md:py-[14px] rounded-[8px] border text-[#666] text-[16px] font-normal leading-[150%] border-[solid] border-[#E6E6E6] bg-[#FFF] focus:outline-none" id="currency_type">
-                                                <option value="1" @selected(old('currency_type', @$product->currency_type) == 1)>VND</option>
-                                                <option value="2" @selected(old('currency_type', @$product->currency_type) == 2)>Tệ (CNY)</option>
+                                <!-- SECTION 2: PRICE & STOCK -->
+                                <div class="form-section-card premium-card mb-5" style="padding: 24px;">
+                                    <h3 class="form-section-title"><i class="fa-solid fa-tags"></i>
+                                        @lang('Giá bán & Kho hàng')</h3>
+                                    <div class="row">
+                                        <div class="col-md-12 mb-4">
+                                            <label class="form-label">@lang('Tiền tệ') <span
+                                                    class="text-danger">*</span></label>
+                                            <select class="form-select" id="currencySelector" name="currency_type" required>
+                                                <option value="1" @selected(old('currency_type', @$product->currency_type) == 1)>@lang('VNĐ (Việt Nam Đồng)')</option>
+                                                <option value="2" @selected(old('currency_type', @$product->currency_type) == 2)>@lang('Tệ (CNY - Nhân dân tệ)')</option>
                                             </select>
                                         </div>
-                                    </div>
 
-                                    <div class="flex flex-col gap-2 cny-price-wrapper hidden">
-                                        <div class="inline-flex items-center gap-1">
-                                            <span class="text-[#272343] text-[14px] font-semibold leading-[24px] tracking-[-0.14px]">@lang('Base Price (CNY)')</span>
-                                        </div>
-                                        <div class="price-input-group flex items-center rounded-[12px] border-[1px] border-[solid] border-[#272343] bg-[#FFF] overflow-hidden transition-all duration-200">
-                                            <div class="inline-flex items-center justify-center px-4 py-2.5 bg-[#00000014]">
-                                                <span class="font-medium text-[#8a8a8a]">CNY</span>
+                                        <!-- VND Price Inputs -->
+                                        <div class="col-md-6 mb-4 vnd-only">
+                                            <label class="form-label">@lang('Giá gốc') <span
+                                                    class="text-danger">*</span></label>
+                                            <div class="input-group">
+                                                <input type="number" name="base_price" id="basePriceInput"
+                                                    class="form-control" placeholder="0"
+                                                    value="{{ old('base_price', @$product->base_price ? getAmount($product->base_price) : '') }}"
+                                                    required>
+                                                <span class="input-group-text">đ</span>
                                             </div>
-                                            <input type="number" step="any" min="0" class="flex-1 h-[44px] md:h-[49px] px-4 bg-white text-[#272343] text-base focus:outline-none border-none shadow-none"
-                                                name="cny_price" id="cny_price" value="{{ old('cny_price', @$product->cny_price ? getAmount($product->cny_price) : '') }}" placeholder="0.00" />
                                         </div>
-                                    </div>
-
-                                    <!-- Base Price -->
-                                    <div class="flex flex-col gap-2">
-                                        <div class="inline-flex items-center gap-1">
-                                            <span class="text-[#272343] text-[14px] font-semibold leading-[24px] tracking-[-0.14px]">@lang('Amount (VND)')</span>
-                                        </div>
-                                        <div class="price-input-group flex items-center rounded-[12px] border-[1px] border-[solid] border-[#272343] bg-[#FFF] overflow-hidden transition-all duration-200">
-                                            <div class="inline-flex items-center justify-center px-4 py-2.5 bg-[#00000014]">
-                                                <span class="font-medium text-[#8a8a8a]">{{ gs('cur_sym') }}</span>
+                                        <div class="col-md-6 mb-4 vnd-only">
+                                            <label class="form-label">@lang('Giá khuyến mãi')</label>
+                                            <div class="input-group">
+                                                <input type="number" name="discount_price" id="discountPriceInput"
+                                                    class="form-control" placeholder="0"
+                                                    value="{{ old('discount_price', @$product->discount_price ? getAmount($product->discount_price) : '') }}">
+                                                <span class="input-group-text">đ</span>
                                             </div>
-                                            <input type="number" step="any" min="0" class="flex-1 h-[44px] md:h-[49px] px-4 bg-white text-[#272343] text-base focus:outline-none border-none shadow-none"
-                                                name="base_price" id="base_price" value="{{ old('base_price', @$product->base_price ? getAmount($product->base_price) : '') }}" required placeholder="0.00" />
                                         </div>
-                                    </div>
 
-                                    <div class="flex flex-col gap-2 cny-discount-price-wrapper hidden">
-                                        <div class="inline-flex items-center gap-1">
-                                            <span class="text-[#272343] text-[14px] font-semibold leading-[24px] tracking-[-0.14px]">@lang('Discount Price (CNY)')</span>
-                                        </div>
-                                        <div class="price-input-group flex items-center rounded-[12px] border-[1px] border-[solid] border-[#272343] bg-[#FFF] overflow-hidden transition-all duration-200">
-                                            <div class="inline-flex items-center justify-center px-4 py-2.5 bg-[#00000014]">
-                                                <span class="font-medium text-[#8a8a8a]">CNY</span>
+                                        <!-- CNY Price Inputs -->
+                                        <div class="col-md-6 mb-4 cny-only" style="display: none;">
+                                            <label class="form-label">@lang('Giá gốc (CNY)') <span
+                                                    class="text-danger">*</span></label>
+                                            <div class="input-group">
+                                                <input type="number" name="cny_price" id="cny_price" class="form-control"
+                                                    placeholder="0"
+                                                    value="{{ old('cny_price', @$product->cny_price ? getAmount($product->cny_price) : '') }}">
+                                                <span class="input-group-text">CNY</span>
                                             </div>
-                                            <input type="number" step="any" min="0" class="flex-1 h-[44px] md:h-[49px] px-4 bg-white text-[#272343] text-base focus:outline-none border-none shadow-none"
-                                                name="cny_discount_price" id="cny_discount_price" value="{{ old('cny_discount_price', @$product->cny_discount_price ? getAmount($product->cny_discount_price) : '') }}" placeholder="0.00" />
                                         </div>
-                                    </div>
-
-                                    <!-- Discount Price -->
-                                    <div class="flex flex-col gap-2">
-                                        <div class="inline-flex items-center gap-1">
-                                            <span class="text-[#272343] text-[14px] font-semibold leading-[24px] tracking-[-0.14px]">@lang('Discount Price (VND)')</span>
-                                        </div>
-                                        <div class="price-input-group flex items-center rounded-[12px] border-[1px] border-[solid] border-[#272343] bg-[#FFF] overflow-hidden transition-all duration-200">
-                                            <div class="inline-flex items-center justify-center px-4 py-2.5 bg-[#00000014]">
-                                                <span class="font-medium text-[#8a8a8a]">{{ gs('cur_sym') }}</span>
+                                        <div class="col-md-6 mb-4 cny-only" style="display: none;">
+                                            <label class="form-label">@lang('Giá gốc (VNĐ quy đổi)')</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control bg-light" id="cny_price_converted"
+                                                    placeholder="0" readonly>
+                                                <span class="input-group-text">đ</span>
                                             </div>
-                                            <input type="number" step="any" min="0" class="flex-1 h-[44px] md:h-[49px] px-4 bg-white text-[#272343] text-base focus:outline-none border-none shadow-none"
-                                                name="discount_price" id="discount_price" value="{{ old('discount_price', @$product->discount_price ? getAmount($product->discount_price) : '') }}" placeholder="0.00" />
                                         </div>
-                                    </div>
+                                        <div class="col-md-6 mb-4 cny-only" style="display: none;">
+                                            <label class="form-label">@lang('Giá ưu đãi (CNY)')</label>
+                                            <div class="input-group">
+                                                <input type="number" name="cny_discount_price" id="cny_discount_price"
+                                                    class="form-control" placeholder="0"
+                                                    value="{{ old('cny_discount_price', @$product->cny_discount_price ? getAmount($product->cny_discount_price) : '') }}">
+                                                <span class="input-group-text">CNY</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4 cny-only" style="display: none;">
+                                            <label class="form-label">@lang('Giá ưu đãi (VNĐ quy đổi)')</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control bg-light" id="cny_discount_converted"
+                                                    placeholder="0" readonly>
+                                                <span class="input-group-text">đ</span>
+                                            </div>
+                                        </div>
 
-                                    <!-- Negotiable Toggle -->
-                                    <div class="flex flex-col gap-4">
-                                        <div class="w-full h-px bg-neutral-300 rounded-full"></div>
-                                        <div class="flex items-center gap-4">
-                                            <div class="flex items-center gap-2 flex-1">
-                                                <div class="inline-flex items-center gap-1">
-                                                    <span class="text-[rgba(39,_35,_67,_0.24)] text-[14px] font-semibold leading-[24px] tracking-[-0.14px]">@lang('Negotiable')</span>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                        <path d="M9.99998 14C9.58577 14 9.24999 13.6642 9.25 13.25L9.25006 9.74999C9.25007 9.33577 9.58586 8.99999 10.0001 9C10.4143 9.00001 10.7501 9.3358 10.7501 9.75001L10.75 13.25C10.75 13.6642 10.4142 14 9.99998 14Z" fill="#272343" fill-opacity="0.24" />
-                                                        <path d="M9 7C9 6.44772 9.44772 6 10 6C10.5523 6 11 6.44772 11 7C11 7.55228 10.5523 8 10 8C9.44772 8 9 7.55228 9 7Z" fill="#272343" fill-opacity="0.24" />
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10ZM15.5 10C15.5 13.0376 13.0376 15.5 10 15.5C6.96243 15.5 4.5 13.0376 4.5 10C4.5 6.96243 6.96243 4.5 10 4.5C13.0376 4.5 15.5 6.96243 15.5 10Z" fill="#272343" fill-opacity="0.24" />
-                                                    </svg>
+                                        <div class="col-md-6 mb-4">
+                                            <label class="form-label">@lang('Số lượng tồn kho') <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="number" name="quantity" class="form-control" placeholder="0"
+                                                value="{{ old('quantity', isset($product) && !$product->has_variants ? @$product->stock->quantity : '') }}"
+                                                required>
+                                        </div>
+                                        <div class="col-md-6 mb-4">
+                                            <label class="form-label">@lang('Mã SKU (Quản lý kho)')</label>
+                                            <input type="text" name="sku" class="form-control bg-light"
+                                                placeholder="Ví dụ: SP-001-RED" value="{{ old('sku', @$product->sku) }}">
+                                        </div>
+
+                                        <div class="col-md-12 mt-3 d-none">
+                                            <div class="d-flex align-items-center justify-content-between p-3 bg-light rounded-3"
+                                                style="border-radius: 12px !important;">
+                                                <div>
+                                                    <label class="form-label mb-0"
+                                                        style="font-weight: 700;">@lang('Giá có thể thương lượng')</label>
+                                                    <p class="mb-0 text-muted" style="font-size: 12px;">
+                                                        @lang('Bật nếu bạn muốn khách hàng chủ động đàm phán giá cả')
+                                                    </p>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" name="negotiable"
+                                                        value="1" id="negotiableSwitch" @checked(old('negotiable', @$product->negotiable))
+                                                        style="width: 40px; height: 20px; cursor: pointer;">
                                                 </div>
                                             </div>
-                                            <label class="relative inline-flex items-center cursor-pointer">
-                                                <input type="checkbox" name="negotiable" value="1" @checked(old('negotiable', @$product->negotiable)) class="sr-only peer">
-                                                <div class="w-12 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#FF6F0F] shadow-[0_1px_2px_rgba(0,0,0,0.08)]"></div>
-                                            </label>
                                         </div>
                                     </div>
 
+                                    <!-- Hidden fields to preserve original system specs -->
                                     @php
-                                    $trackInventory = old('track_inventory', @$product->track_inventory ?? 1);
-                                    $showInFrontend = old('show_in_frontend', @$product->show_in_frontend ?? 0);
-                                    $hasVariants = old('has_variants', @$product->has_variants ?? 0);
+                                        $trackInventory = old('track_inventory', @$product->track_inventory ?? 1);
+                                        $showInFrontend = old('show_in_frontend', @$product->show_in_frontend ?? 0);
+                                        $hasVariants = old('has_variants', @$product->has_variants ?? 0);
                                     @endphp
                                     <input type="hidden" name="track_inventory" value="{{ $trackInventory ? 1 : 0 }}">
                                     <input type="hidden" name="show_in_frontend" value="{{ $showInFrontend ? 1 : 0 }}">
                                     <input type="hidden" name="has_variants" value="{{ $hasVariants ? 1 : 0 }}">
                                 </div>
 
-                                <!-- Product Filters -->
-                                <div class="flex flex-col gap-4 md:gap-6 p-4 md:p-6 bg-white rounded-lg shadow-sm border border-gray-100">
-                                    <div class="flex items-center gap-2">
-                                        <div class="w-1.5 h-6 bg-[#FF6F0F] rounded-full"></div>
-                                        <h2 class="font-bold text-[#272343] text-lg md:text-xl leading-[30px]">@lang('Product Filters')</h2>
-                                    </div>
-                                    
-                                    <div class="flex flex-col gap-6">
-                                        @forelse($filterGroups as $group)
-                                            <div class="flex flex-col gap-3">
-                                                <div class="flex items-center gap-2">
-                                                    <span class="text-[#272343] text-[15px] font-bold tracking-tight opacity-90 uppercase">{{ __($group->name) }}</span>
+                                <!-- SECTION: BRAND, PRODUCT TYPES, DISPLAY CONFIGS, TAGS & FLASH SALE (CUSTOM & DIFFERENT DESIGN!) -->
+                                <div class="form-section-card premium-card mb-5"
+                                    style="border: 2px solid var(--accent); background: #fffcf8; box-shadow: 0 12px 30px rgba(245, 158, 11, 0.05); padding: 24px;">
+                                    <h3 class="form-section-title" style="color: var(--accent);"><i
+                                            class="fa-solid fa-wand-magic-sparkles"></i>
+                                        @lang('Cấu hình Phân loại & Hiển thị')</h3>
+                                    <p style="font-size: 13px; color: #64748b; margin-top: -15px; margin-bottom: 25px;">
+                                        <i class="fa-solid fa-sparkles"></i>
+                                        @lang('Thiết lập cấu hình hiển thị đặc biệt của sản phẩm trên Quảng Phát Mall.')
+                                    </p>
+
+                                    <div class="row">
+                                        <!-- Left Column: Brand & Product Types -->
+                                        <div class="col-lg-12 mb-4">
+                                            <div class="p-3 bg-white rounded-3 border mb-4"
+                                                style="border-radius: 16px !important;">
+                                                <label class="form-label" style="font-weight: 700; color: var(--primary);">
+                                                    @lang('Thương hiệu sản phẩm')</label>
+                                                <div class="select2-parent">
+                                                    <select name="brands[]" class="form-select select2-basic"
+                                                        style="font-size: 13px;">
+                                                        <option value="">@lang('Chọn một thương hiệu')</option>
+                                                        @foreach($brands as $brand)
+                                                            <option value="{{ $brand->id }}" @selected(in_array($brand->id, $selectedBrands))>
+                                                                {{ __($brand->name) }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
-                                                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                                                    @foreach($group->options as $option)
-                                                        <label class="filter-item-check flex items-center gap-3 p-3 rounded-xl cursor-pointer hover:bg-orange-50 transition-all group border border-gray-100 hover:border-orange-100 shadow-sm hover:shadow-md">
-                                                            <div class="flex items-center justify-center">
-                                                                <input type="checkbox" name="filter_options[]" value="{{ $option->id }}" id="option_{{ $option->id }}" class="cursor-pointer m-0" @checked(in_array($option->id, old('filter_options', @$product->filterOptions ? $product->filterOptions->pluck('id')->toArray() : []))) style="width: 18px; height: 18px;">
-                                                            </div>
-                                                            <span class="text-sm font-medium text-[#666] group-hover:text-[#FF6F0F] transition-colors leading-tight">{{ __($option->value) }}</span>
-                                                        </label>
+                                            </div>
+
+                                            <div class="p-3 bg-white rounded-3 border"
+                                                style="border-radius: 16px !important;">
+                                                <label class="form-label" style="font-weight: 700; color: var(--primary);">
+                                                    @lang('Loại sản phẩm (Chọn nhiều)')</label>
+                                                <div class="row g-2">
+                                                    @foreach($productTypes as $type)
+                                                        <div class="col-sm-6">
+                                                            <label class="checkbox-card">
+                                                                <input type="checkbox" name="product_types[]"
+                                                                    value="{{ $type->id }}" id="type_{{ $type->id }}"
+                                                                    @checked(in_array($type->id, $selectedProductTypes))>
+                                                                <span>{{ __($type->name) }}</span>
+                                                            </label>
+                                                        </div>
                                                     @endforeach
                                                 </div>
                                             </div>
-                                            @if(!$loop->last)
-                                                <div class="w-full h-px bg-neutral-100 my-2"></div>
-                                            @endif
-                                        @empty
-                                            <div class="text-center py-8 bg-gray-50 rounded-xl border border-dashed border-gray-200 text-gray-400 italic">
-                                                @lang('No filter groups available.')
-                                            </div>
-                                        @endforelse
-                                    </div>
-                                </div>
-
-                                <!-- Save / Publish Actions -->
-                                <div class="flex items-center gap-4 flex-wrap">
-                                    <div class="flex items-center gap-2 flex-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M18.9366 7.16399C19.2881 7.51547 19.2881 8.08531 18.9366 8.43679L11.1366 16.2368C10.7851 16.5883 10.2153 16.5883 9.8638 16.2368L5.9638 12.3368C5.61233 11.9853 5.61233 11.4155 5.9638 11.064C6.31527 10.7125 6.88512 10.7125 7.23659 11.064L10.5002 14.3276L17.6638 7.16399C18.0153 6.81252 18.5851 6.81252 18.9366 7.16399Z" fill="#272343" />
-                                        </svg>
-                                        <p class="text-[#8A8A8A] text-[13px] font-semibold leading-[16px] tracking-[-0.13px]">
-                                            <span>@lang('Last saved')</span>
-                                            <span class="text-[#272343] text-[13px] font-semibold leading-[16px] tracking-[-0.13px]">{{ now()->format('M d, Y - H:i') }}</span>
-                                        </p>
-                                    </div>
-                                    <div class="flex items-center gap-2 w-full md:w-auto flex-wrap">
-                                        <button type="button" class="flex-1 md:flex-none rounded-[12px] border-[1px] border-[solid] border-[#D4D4D4] bg-[#FFF] flex px-[18px] py-[10px] justify-center text-[#272343] font-[Inter] text-[16px] not-italic font-semibold leading-[24px] items-center gap-[8px] [box-shadow:0_1px_2px_0_rgba(255,_255,_255,_0.40)_inset,_0_-1px_2px_0_rgba(0,_0,_0,_0.24)_inset,_0_1px_2px_0_rgba(0,_0,_0,_0.08)] cursor-pointer hover:bg-gray-50 transition-colors">
-                                            <span class="font-semibold text-[#272343] text-base leading-6">@lang('Save Draft')</span>
-                                        </button>
-                                        <button type="submit" class="flex-1 md:flex-none rounded-[12px] border-[1px] border-[solid] border-[#616161] bg-[#272343] flex px-[18px] py-[10px] justify-center items-center gap-[8px] text-[#FFF] text-[16px] font-semibold leading-[24px] [box-shadow:0_1px_2px_0_rgba(255,_255,_255,_0.40)_inset,_0_-1px_2px_0_rgba(0,_0,_0,_0.24)_inset,_0_1px_2px_0_rgba(0,_0,_0,_0.08)] cursor-pointer hover:opacity-90 transition-opacity">
-                                            <span class="font-semibold text-white text-base leading-6">@lang('Publish now')</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-
-                            <!-- Preview Column -->
-                            <aside class="w-full xl:w-[312px] sticky top-6">
-                                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
-                                    <h3 class="text-[#272343] text-lg md:text-[20px] font-bold leading-[150%] mb-4 md:mb-[16px]">@lang('Preview')</h3>
-
-                                    <div class="product-cardoverflow-hidden bg-white transition-all duration-300 flex flex-col gap-2 md:gap-[12px]">
-                                        <!-- Image Preview -->
-                                        <div class="relative aspect-square bg-[#F7F7F7] flex items-center justify-center">
-                                            @php
-                                            $mainImagePath = @$product->main_image ? getImage(getFilePath('product') . '/' . $product->main_image) : null;
-                                            @endphp
-                                            <img id="previewImage" src="{{ $mainImagePath ?? 'https://via.placeholder.com/400x400?text=No+Image' }}"
-                                                class="w-full h-full object-cover {{ $mainImagePath ? '' : 'opacity-20 grayscale' }}">
                                         </div>
 
-                                        <!-- Card Body -->
-                                        <div>
-                                            <h4 id="previewTitle" class="overflow-hidden text-[#272343] overflow-ellipsis whitespace-nowrap font-[Inter] text-[16px] font-normal leading-[130%] capitalize">
-                                                {{ old('name', @$product->name) ?: __('Product Name') }}
-                                            </h4>
+                                        <!-- Right Column: Display Config & Flash Sale -->
+                                        <div class="col-lg-12 mb-4">
+                                            <div class="p-3 bg-white rounded-3 border mb-4"
+                                                style="border-radius: 16px !important;">
+                                                <label class="form-label" style="font-weight: 700; color: var(--primary);">
+                                                    @lang('Cấu hình hiển thị (Trang chủ)')</label>
+                                                <div class="d-flex flex-column gap-3">
+                                                        <label class="checkbox-card">
+                                                            <input type="checkbox" name="is_search" value="1" id="is_search"
+                                                                @checked(old('is_search', @$product->is_search))>
+                                                            <span> @lang('Tìm kiếm nhiều nhất')</span>
+                                                        </label>
+                                                        <label class="checkbox-card">
+                                                            <input type="checkbox" name="is_topdeal" value="1" id="is_topdeal"
+                                                                @checked(old('is_topdeal', @$product->is_topdeal))>
+                                                            <span> @lang('Top Deal đắt khách')</span>
+                                                        </label>
+                                                        <label class="checkbox-card">
+                                                            <input type="checkbox" name="is_suggestion" value="1"
+                                                                id="is_suggestion" @checked(old('is_suggestion', @$product->is_suggestion))>
+                                                            <span> @lang('Gợi ý cho bạn')</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
 
-                                            <div class="flex items-center justify-between">
-                                                <div class="flex-1 min-w-0">
-                                                    <span id="previewPrice" class="text-[#CC0001] text-[18px] font-semibold leading-[110%]">
-                                                        @if(old('base_price', @$product->base_price))
-                                                        {{ showAmount($product->base_price, currencyFormat: false) }} {{ gs('cur_sym') }}
-                                                        @else
-                                                        0.00 {{ gs('cur_sym') }}
-                                                        @endif
-                                                    </span>
-                                                    <div class="flex items-center gap-1 mt-1">
-                                                        <svg class="w-3 h-3 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path>
-                                                            <circle cx="12" cy="10" r="3"></circle>
-                                                        </svg>
-                                                        <p class="text-[10px] text-gray-400 truncate">@lang('Location & Time')</p>
+                                                    <div class="p-3 bg-white rounded-3 border"
+                                                        style="border-radius: 16px !important;">
+                                                        <label class="form-label" style="font-weight: 700; color: var(--primary);">
+                                                            @lang('Tiến trình Flash Sale')</label>
+                                                        <div class="row g-2 mb-2">
+                                                            <div class="col-6">
+                                                                <div class="input-group input-group-sm">
+                                                                    <span class="input-group-text">% Độ dài</span>
+                                                                    <input type="number" name="flash_percentage"
+                                                                        class="form-control"
+                                                                        value="{{ old('flash_percentage', @$product->flash_percentage) }}"
+                                                                        min="0" max="100" id="flash-percent"
+                                                                        style="padding: 6px 12px !important; border-radius: 0 !important;">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <input type="text" name="flash_text"
+                                                                    class="form-control form-control-sm"
+                                                                    value="{{ old('flash_text', @$product->flash_text) }}"
+                                                                    placeholder="Ví dụ: Đã bán 58%" id="flash-text-input"
+                                                                    style="padding: 6px 12px !important; border-radius: 12px !important;">
+                                                            </div>
+                                                        </div>
+                                                        <div class="flash-progress-preview p-2 rounded"
+                                                            style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px;">
+                                                            <p class="small text-muted mb-1"
+                                                                style="font-size: 10px; font-weight: 600;">
+                                                                @lang('Xem trước tiến trình'):
+                                                            </p>
+                                                            <div class="flash-progress" style="height: 20px">
+                                                                <div class="flash-progress-bar"
+                                                                    style="width: {{ @$product->flash_percentage ?? 0 }}%;">
+                                                                </div>
+                                                                <div class="flash-progress-text">
+                                                                    {{ @$product->flash_text ?? 'Đã bán 0%' }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
 
-                                                <button type="button" class="w-10 h-10 rounded-xl bg-[#F7F7F7] flex items-center justify-center text-[#272343] hover:bg-[#FF6F0F] hover:text-white transition-all">
-                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                                                    </svg>
-                                                </button>
+                                                <!-- Below: Tags Selection -->
+                                                <div class="col-md-12">
+                                                    <div class="p-3 bg-white rounded-3 border"
+                                                        style="border-radius: 16px !important;">
+                                                        <label class="form-label"
+                                                            style="font-weight: 700; color: var(--primary);"><i
+                                                                class="fa-solid fa-tags text-muted me-2"></i>
+                                                            @lang('Nhãn sản phẩm (Tags)')
+                                                        </label>
+                                                        <small class="text-info d-block mb-2" style="font-size: 11px;">
+                                                            <i class="fa-solid fa-circle-info me-1"></i>
+                                                            @lang('Có thể chọn nhiều nhãn, nhưng nên chọn 1 nhãn nổi bật để hiển thị đẹp nhất.')
+                                                        </small>
+                                                        <div class="select2-parent">
+                                                            <select name="tags[]" class="form-control select2-basic"
+                                                                multiple="multiple" id="tag-select" style="font-size: 13px;">
+                                                                @foreach($tags as $tag)
+                                                                    <option value="{{ $tag->id }}" data-type="{{ $tag->type }}"
+                                                                        @selected(in_array($tag->id, $selectedTags))>
+                                                                        {{ __($tag->name) }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div id="tag-previews"
+                                                            class="mt-3 d-flex flex-wrap gap-2 p-2 bg-light rounded"
+                                                            style="min-height: 40px; background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px;">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+
+
+
+                                        <!-- SECTION 3: IMAGES -->
+                                        <div class="form-section-card premium-card mb-5" style="padding: 24px;">
+                                            <h3 class="form-section-title"><i class="fa-solid fa-image"></i>
+                                                @lang('Hình ảnh sản phẩm')</h3>
+
+                                            <div class="row">
+                                                <!-- Main Image -->
+                                                <div class="col-md-4 mb-4">
+                                                    <label class="form-label">@lang('Ảnh chính') <span
+                                                            class="text-danger">*</span></label>
+                                                    <div class="image-upload-wrapper"
+                                                        onclick="document.getElementById('mainImageInput').click()"
+                                                        style="height: 200px;">
+                                                        <div class="upload-icon" style="font-size: 30px;"><i
+                                                                class="fa-solid fa-camera"></i></div>
+                                                        <h5 style="font-size: 14px; font-weight: 700;">@lang('Ảnh đại diện')</h5>
+                                                        <input type="file" name="main_image" id="mainImageInput"
+                                                            style="display: none;" accept="image/*">
+                                                    </div>
+                                                    <div class="image-preview-container mt-2" id="mainImagePreview">
+                                                        @if(@$product->main_image)
+                                                            <div class="preview-item">
+                                                                <img id="mainImagePreviewTag"
+                                                                    src="{{ getImage(getFilePath('product') . '/' . $product->main_image) }}">
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <!-- Additional Images -->
+                                                <div class="col-md-8 mb-4">
+                                                    <label class="form-label">@lang('Ảnh bổ sung (Tối đa 6 ảnh)')</label>
+                                                    <div class="image-upload-wrapper"
+                                                        onclick="document.getElementById('additionalImagesInput').click()"
+                                                        style="height: 200px;">
+                                                        <div class="upload-icon" style="font-size: 30px;"><i
+                                                                class="fa-solid fa-images"></i></div>
+                                                        <h5 style="font-size: 14px; font-weight: 700;">
+                                                            @lang('Thêm các góc chụp khác')
+                                                        </h5>
+                                                        <input type="file" id="additionalImagesInput" multiple
+                                                            style="display: none;" accept="image/*">
+                                                    </div>
+                                                    <div class="image-preview-container mt-2" id="additionalImagesPreview">
+                                                        @if(isset($images) && count($images) > 0)
+                                                            @foreach($images as $img)
+                                                                <div class="preview-item existing-image-item">
+                                                                    <img src="{{ $img['src'] }}">
+                                                                    <input type="hidden" name="old[]" value="{{ $img['id'] }}">
+                                                                    <button type="button" class="remove-preview remove-existing-btn">
+                                                                        <i class="fa-solid fa-xmark"></i>
+                                                                    </button>
+                                                                </div>
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- SECTION 4: SEO -->
+                                        <div class="form-section-card premium-card" style="padding: 24px;">
+                                            <h3 class="form-section-title"><i class="fa-solid fa-magnifying-glass-chart"></i>
+                                                @lang('Tối ưu SEO (Tùy chọn)')</h3>
+                                            <div class="row">
+                                                <div class="col-md-12 mb-4">
+                                                    <label class="form-label">@lang('Tiêu đề SEO')</label>
+                                                    <input type="text" name="meta_title" class="form-control"
+                                                        placeholder="@lang('Tiêu đề hiển thị trên Google')"
+                                                        value="{{ old('meta_title', @$product->meta_title) }}">
+                                                </div>
+                                                <div class="col-md-12 mb-4">
+                                                    <label class="form-label">@lang('Từ khóa SEO / Tags')</label>
+                                                    <div class="select2-parent">
+                                                        <select class="select2-auto-tokenize-seller form-control"
+                                                            name="meta_keywords[]" multiple="multiple">
+                                                            @php
+                                                                $metaKeywords = old('meta_keywords', @$product->meta_keywords);
+                                                            @endphp
+                                                            @if ($metaKeywords)
+                                                                @foreach ($metaKeywords as $option)
+                                                                    <option value="{{ $option }}" selected>{{ __($option) }}</option>
+                                                                @endforeach
+                                                            @endif
+                                                        </select>
+                                                    </div>
+                                                    <p style="font-size: 11px; color: var(--text-muted); margin-top: 5px;">
+                                                        @lang('Ấn phím Enter hoặc phẩy (,) để thêm từ khóa mới.')
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label class="form-label">@lang('Mô tả SEO')</label>
+                                                    <textarea name="meta_description" class="form-control" rows="3"
+                                                        placeholder="@lang('Mô tả ngắn hiển thị dưới link tìm kiếm')">{{ old('meta_description', @$product->meta_description) }}</textarea>
+                                                </div>
+                                            </div>
+
+                                            <!-- STICKY FOOTER -->
+                                            <div class="sticky-form-footer">
+                                                <button type="button" class="btn btn-light" onclick="history.back()"
+                                                    style="padding: 12px 30px; font-weight: 600;">@lang('HỦY BỎ')</button>
+                                                <button type="submit" class="btn btn-primary"
+                                                    style="background: var(--primary); border: none; padding: 12px 40px; font-weight: 700;">@lang('LƯU SẢN PHẨM')</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
-                            </aside>
-                        </div>
+                            </div>
+                        </main>
                     </div>
                 </div>
-            </div>
-    </main>
-</div>
+            </section>
 @endsection
 
-@push('breadcrumb-plugins')
-<x-back route="{{ route('seller.products.all') }}" />
-@endpush
-
 @push('script-lib')
-<script src="{{ asset('assets/global/js/select2.min.js') }}"></script>
-<script src="https://cdn.tiny.cloud/1/az09l5hhv4r2bolg5fnhgy1vju0dri2amq12cvtmovqeeb52/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/additional-methods.min.js"></script>
+    <script src="{{ asset('assets/global/js/select2.min.js') }}"></script>
+    <script src="https://cdn.tiny.cloud/1/az09l5hhv4r2bolg5fnhgy1vju0dri2amq12cvtmovqeeb52/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 @endpush
 
 @push('style-lib')
-<link rel="stylesheet" href="{{ asset('assets/global/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/global/css/select2.min.css') }}">
 @endpush
 
 @push('style')
-<style>
-    /* Select2 Styling */
-    .select2-container--default .select2-selection--multiple {
-        min-height: 48px;
-        border-color: #E6E6E6;
-        border-radius: 8px;
-        padding: 4px 12px;
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 6px;
-    }
+    <style>
+        .input-group-text {
+            border-radius: 0.25rem !important;
+        }
 
-    @media (min-width: 768px) {
+        /* Custom Select2 Styling Override - Ultra Premium Figma Look */
+        .select2-container {
+            width: 100% !important;
+        }
+
+        .select2-container--default .select2-selection--single,
         .select2-container--default .select2-selection--multiple {
-            min-height: 52px;
+            padding: 8px 16px !important;
+            border-radius: 12px !important;
+            border: 1px solid #e2e8f0 !important;
+            background-color: #f8fafc !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            min-height: 48px !important;
+            display: flex !important;
+            align-items: center !important;
+            outline: none !important;
         }
-    }
 
-    .select2-container--default.select2-container--focus .select2-selection--multiple,
-    .select2-container--default .select2-selection--multiple:focus {
-        border-color: #FF6F0F;
-        box-shadow: none;
-    }
-
-    .select2-selection__rendered {
-        display: flex !important;
-        flex-wrap: wrap;
-        gap: 6px;
-        width: 100%;
-        padding: 0 !important;
-    }
-
-    .select2-container--default .select2-selection--multiple .select2-selection__choice {
-        background-color: #FF6F0F !important;
-        border: none !important;
-        color: #fff !important;
-        padding: 0px 10px !important;
-        border-radius: 4px !important;
-        margin: 0 !important;
-        display: inline-flex !important;
-        align-items: center;
-        gap: 4px;
-        font-size: 12px !important;
-        font-weight: 500 !important;
-        line-height: 24px !important;
-        height: 26px !important;
-    }
-
-    .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
-        color: #fff !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        font-size: 14px !important;
-        font-weight: bold !important;
-        border: none !important;
-        background: transparent !important;
-        line-height: 1 !important;
-    }
-
-    .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
-        background: transparent !important;
-        opacity: 0.8;
-    }
-
-    .select2-container--default .select2-search--inline {
-        display: flex;
-        align-items: center;
-        margin: 0 !important;
-    }
-
-    .select2-container--default .select2-search--inline .select2-search__field {
-        margin: 0 !important;
-        height: 32px !important;
-        line-height: 32px !important;
-        font-family: inherit !important;
-        font-size: 15px !important;
-        color: #666 !important;
-    }
-
-    .select2-container--default .select2-selection--single {
-        height: 48px;
-        border-color: #E6E6E6;
-        border-radius: 8px;
-    }
-
-    @media (min-width: 768px) {
-        .select2-container--default .select2-selection--single {
-            height: 52px;
+        .select2-container--default.select2-container--focus .select2-selection--single,
+        .select2-container--default.select2-container--focus .select2-selection--multiple {
+            background-color: #ffffff !important;
+            border-color: var(--accent) !important;
+            box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1) !important;
         }
-    }
 
-    .select2-container--default .select2-selection--single .select2-selection__rendered {
-        line-height: 48px;
-        padding-left: 16px !important;
-        color: #666;
-        font-size: 16px;
-    }
-
-    @media (min-width: 768px) {
-        .select2-container--default .select2-selection--single .select2-selection__rendered {
-            line-height: 52px;
-        }
-    }
-
-    .select2-container--default .select2-selection--single .select2-selection__arrow {
-        height: 48px;
-        margin-right: 10px !important;
-    }
-
-    @media (min-width: 768px) {
+        /* Arrow style for single select */
         .select2-container--default .select2-selection--single .select2-selection__arrow {
-            height: 52px;
-        }
-    }
-
-    .select2-container--default.select2-container--focus .select2-selection--single,
-    .select2-container--default .select2-selection--single:focus {
-        border-color: #FF6F0F;
-    }
-
-    /* Input & Textarea Focus */
-    input:focus,
-    textarea:focus {
-        outline: none !important;
-        box-shadow: none !important;
-    }
-
-    .price-input-group:focus-within {
-        box-shadow: none !important;
-    }
-
-    /* Validation Error Styling */
-    .error-message {
-        color: #dc2626;
-        font-size: 0.875rem;
-        display: block;
-        animation: fadeIn 0.2s ease-out;
-    }
-
-    input.error,
-    select.error,
-    textarea.error {
-        border-color: #ffa9a9 !important;
-        background-color: #fef2f2 !important;
-    }
-
-    input.error:focus,
-    select.error:focus,
-    textarea.error:focus {
-        box-shadow: 0 0 0 1px #dc2626 !important;
-    }
-
-    .select2-container--default.error .select2-selection {
-        border-color: #dc2626 !important;
-        background-color: #fef2f2 !important;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(-4px);
+            height: 100% !important;
+            top: 0 !important;
+            right: 16px !important;
+            width: 20px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
         }
 
-        to {
-            opacity: 1;
-            transform: translateY(0);
+        .select2-container--default .select2-selection--single .select2-selection__arrow b {
+            border-color: #64748b transparent transparent transparent !important;
+            border-width: 6px 5px 0 5px !important;
+            margin-left: 0 !important;
+            margin-top: 0 !important;
+            position: relative !important;
+            top: auto !important;
+            left: auto !important;
         }
-    }
-</style>
+
+        .select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
+            border-color: transparent transparent var(--accent) transparent !important;
+            border-width: 0 5px 6px 5px !important;
+        }
+
+        /* Value positioning */
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: #1e293b !important;
+            padding-left: 0 !important;
+            padding-right: 24px !important;
+            font-size: 14px !important;
+            font-weight: 600 !important;
+            line-height: normal !important;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__placeholder {
+            color: #94a3b8 !important;
+        }
+
+        /* Multiple choice pills styling */
+        .select2-container--default .select2-selection--multiple .select2-selection__rendered {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            gap: 6px !important;
+            padding: 0 !important;
+            width: 100% !important;
+        }
+
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            background: #fff5f2 !important;
+            border: 1px solid #ffdcd3 !important;
+            color: var(--accent) !important;
+            border-radius: 8px !important;
+            padding: 6px 12px !important;
+            margin: 0 !important;
+            font-size: 12px !important;
+            font-weight: 700 !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            box-shadow: 0 2px 4px rgba(245, 158, 11, 0.05) !important;
+        }
+
+        .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+            color: #f43f5e !important;
+            border: none !important;
+            background: none !important;
+            font-weight: 900 !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            order: 2 !important;
+            /* Put close icon on right */
+            font-size: 14px !important;
+            transition: transform 0.2s ease !important;
+            position: relative !important;
+            right: 0 !important;
+            left: 0 !important;
+        }
+
+        .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
+            background: none !important;
+            color: #be123c !important;
+            transform: scale(1.2) !important;
+        }
+
+        /* Dropdown container customization */
+        .select2-dropdown {
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 16px !important;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08) !important;
+            overflow: hidden !important;
+            background: white !important;
+            z-index: 9999 !important;
+            margin-top: 4px !important;
+        }
+
+        .select2-container--default .select2-search--dropdown {
+            padding: 12px !important;
+            background: #f8fafc !important;
+            border-bottom: 1px solid #e2e8f0 !important;
+        }
+
+        .select2-container--default .select2-search--dropdown .select2-search__field {
+            border-radius: 10px !important;
+            border: 1px solid #e2e8f0 !important;
+            padding: 10px 14px !important;
+            font-size: 13.5px !important;
+            outline: none !important;
+            background: white !important;
+        }
+
+        .select2-container--default .select2-search--dropdown .select2-search__field:focus {
+            border-color: var(--accent) !important;
+        }
+
+        /* Dropdown options customization */
+        .select2-container--default .select2-results__options {
+            max-height: 240px !important;
+            padding: 6px !important;
+        }
+
+        .select2-container--default .select2-results__option {
+            padding: 10px 14px !important;
+            border-radius: 8px !important;
+            font-size: 13.5px !important;
+            font-weight: 600 !important;
+            color: #334155 !important;
+            transition: all 0.15s ease !important;
+        }
+
+        .select2-container--default .select2-results__option--highlighted[aria-selected],
+        .select2-container--default .select2-results__option[aria-selected="true"] {
+            background-color: #fff5f2 !important;
+            color: var(--accent) !important;
+        }
+
+        .select2-container--default .select2-results__option[aria-disabled="true"] {
+            color: #cbd5e1 !important;
+            background-color: transparent !important;
+        }
+
+        /* Style for standard HTML form-select dropdowns */
+        .form-select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+            background-repeat: no-repeat !important;
+            background-position: right 16px center !important;
+            background-size: 12px 12px !important;
+            padding-right: 40px !important;
+        }
+    </style>
 @endpush
 
 @push('script')
-<script>
-    'use strict';
-    (function($) {
-        $('.select2-auto-tokenize-seller').select2({
-            tags: true,
-            tokenSeparators: [',', ' '],
-            placeholder: '@lang("Type and press Enter...")',
-            dropdownParent: $('.select2-auto-tokenize-seller').parent('.select2-parent')
-        });
+    <script>
+        (function ($) {
+            'use strict';
 
-        // Categories Select2
-        var categories = @json(old('categories') ?? (isset($product) && $product->categories ? $product->categories->pluck('id') : []));
-
-        let categoriesSelect = $('.category-select2');
-        categoriesSelect.val(categories).select2({
-            dropdownParent: categoriesSelect.parent('.select2-parent')
-        });
-
-        // Main Image Upload
-        const mainImageBtn = document.getElementById('mainImageBtn');
-        const mainImageInput = document.getElementById('mainImageInput');
-        const mainImageBox = document.getElementById('mainImageBox');
-
-        function showMainImagePreview(file) {
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                const oldPreview = mainImageBox.querySelector('.group');
-                if (oldPreview) oldPreview.remove();
-
-                const previewWrapper = document.createElement('div');
-                previewWrapper.className = 'absolute inset-0 group';
-                previewWrapper.innerHTML = `
-                    <img id="mainImagePreview" src="${event.target.result}" class="w-full h-full object-cover rounded-xl">
-                    <button type="button" class="remove-btn absolute top-2 right-2 w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                    </button>
-                `;
-                mainImageBox.appendChild(previewWrapper);
-                mainImageBtn.classList.add('hidden');
-
-                // Update Preview Card
-                const previewImg = document.getElementById('previewImage');
-                if (previewImg) {
-                    previewImg.src = event.target.result;
-                    previewImg.classList.remove('opacity-20', 'grayscale');
-                }
-
-                previewWrapper.querySelector('.remove-btn').addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    removeMainImage();
+            // Select2
+            $('.category-select2').each(function () {
+                $(this).select2({
+                    dropdownParent: $(this).parent()
                 });
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function removeMainImage() {
-            const preview = mainImageBox.querySelector('.absolute.inset-0');
-            if (preview) preview.remove();
-            mainImageInput.value = '';
-            mainImageBtn.classList.remove('hidden');
-
-            // Reset Preview Card Image
-            const previewImg = document.getElementById('previewImage');
-            if (previewImg) {
-                previewImg.src = 'https://via.placeholder.com/400x400?text=No+Image';
-                previewImg.classList.add('opacity-20', 'grayscale');
-            }
-        }
-
-        if (mainImageBtn && mainImageInput) {
-            mainImageBtn.addEventListener('click', function() {
-                mainImageInput.click();
             });
 
-            mainImageInput.addEventListener('change', function(e) {
+            $('.select2-basic').each(function () {
+                $(this).select2({
+                    dropdownParent: $(this).parent()
+                });
+            });
+
+            $('.select2-auto-tokenize-seller').each(function () {
+                $(this).select2({
+                    tags: true,
+                    tokenSeparators: [',', ' '],
+                    placeholder: '@lang("Nhập tag và ấn Enter...")',
+                    dropdownParent: $(this).parent()
+                });
+            });
+
+            // Currency Switching & Exchange conversion
+            var cnyExchangeRate = {{ $productConfig->cny_exchange_rate }};
+
+            $('#currencySelector').on('change', function () {
+                if (this.value === '2') { // CNY
+                    $('.vnd-only').hide();
+                    $('.cny-only').show();
+                    $('#basePriceInput, #discountPriceInput').attr('readonly', true);
+                } else { // VND
+                    $('.vnd-only').show();
+                    $('.cny-only').hide();
+                    $('#basePriceInput, #discountPriceInput').attr('readonly', false);
+                }
+            }).change();
+
+            $('#cny_price').on('input', function () {
+                var cny = parseFloat($(this).val()) || 0;
+                var vnd = Math.round(cny * cnyExchangeRate);
+                $('#basePriceInput').val(vnd);
+                $('#cny_price_converted').val(vnd.toLocaleString('vi-VN'));
+            }).trigger('input');
+
+            $('#cny_discount_price').on('input', function () {
+                var cny = parseFloat($(this).val()) || 0;
+                if (cny > 0) {
+                    var vnd = Math.round(cny * cnyExchangeRate);
+                    $('#discountPriceInput').val(vnd);
+                    $('#cny_discount_converted').val(vnd.toLocaleString('vi-VN'));
+                } else {
+                    $('#discountPriceInput').val('');
+                    $('#cny_discount_converted').val('0');
+                }
+            }).trigger('input');
+
+            // Main Image Upload Callback
+            document.getElementById('mainImageInput').addEventListener('change', function (e) {
                 if (e.target.files && e.target.files[0]) {
-                    showMainImagePreview(e.target.files[0]);
-                    $(this).valid();
+                    const reader = new FileReader();
+                    reader.onload = function (event) {
+                        document.getElementById('mainImagePreview').innerHTML = `
+                                                                            <div class="preview-item">
+                                                                                <img src="${event.target.result}">
+                                                                            </div>
+                                                                        `;
+                    };
+                    reader.readAsDataURL(e.target.files[0]);
                 }
             });
-        }
 
-        mainImageBox.addEventListener('click', function(e) {
-            if (e.target.closest('.remove-btn')) {
-                e.stopPropagation();
-                removeMainImage();
-            }
-        });
+            // Additional images upload
+            let additionalFiles = [];
+            const additionalImagesInput = document.getElementById('additionalImagesInput');
 
-        // Additional Images Upload
-        let additionalFiles = [];
-        const maxImages = 6;
-        const additionalImagesInput = document.getElementById('additional-images-input');
-        const additionalImagesPreview = document.getElementById('additional-images-preview');
-        const additionalImagesBtn = document.getElementById('additional-images-btn');
-
-        if (additionalImagesBtn && additionalImagesInput) {
-            additionalImagesBtn.addEventListener('click', function() {
-                additionalImagesInput.click();
-            });
-
-            additionalImagesInput.addEventListener('change', function(e) {
-                handleAdditionalFiles(e.target.files);
+            additionalImagesInput.addEventListener('change', function (e) {
+                let files = e.target.files;
+                for (let i = 0; i < files.length; i++) {
+                    if (additionalFiles.length + $('.existing-image-item').length >= 6) break;
+                    if (!files[i].type.startsWith('image/')) continue;
+                    additionalFiles.push(files[i]);
+                }
+                renderAdditionalPreviews();
+                updateAdditionalHiddenInput();
                 e.target.value = '';
             });
-        }
 
-        function handleAdditionalFiles(files) {
-            for (let i = 0; i < files.length; i++) {
-                if (additionalFiles.length >= maxImages) break;
-                if (!files[i].type.startsWith('image/')) continue;
-                additionalFiles.push(files[i]);
+            function renderAdditionalPreviews() {
+                $('#additionalImagesPreview .new-preview-item').remove();
+                additionalFiles.forEach((file, index) => {
+                    const reader = new FileReader();
+                    reader.onload = function (event) {
+                        const div = document.createElement('div');
+                        div.className = 'preview-item new-preview-item';
+                        div.innerHTML = `
+                                                                            <img src="${event.target.result}">
+                                                                            <button type="button" class="remove-preview remove-new-btn" data-index="${index}">
+                                                                                <i class="fa-solid fa-xmark"></i>
+                                                                            </button>
+                                                                        `;
+                        document.getElementById('additionalImagesPreview').appendChild(div);
+                    };
+                    reader.readAsDataURL(file);
+                });
             }
-            renderAdditionalPreviews();
-            updateAdditionalHiddenInput();
-        }
 
-        function renderAdditionalPreviews() {
-            additionalImagesPreview.innerHTML = '';
-            additionalFiles.forEach((file, index) => {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    const div = document.createElement('div');
-                    div.className = 'inline-block relative group';
-                    div.innerHTML = `
-                        <img src="${event.target.result}" alt="" class="w-24 h-24 object-cover rounded-lg border">
-                        <button type="button" class="remove-btn absolute bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center cursor-pointer text-sm hover:bg-red-600 transition-colors shadow-sm z-10"
-                            style="top: 0px; right: 0px;"
-                            data-index="${index}">×</button>
-                    `;
-                    additionalImagesPreview.appendChild(div);
-                };
-                reader.readAsDataURL(file);
+            function updateAdditionalHiddenInput() {
+                const form = document.getElementById('addForm');
+                let photosInput = form.querySelector('input[name="photos[]"]');
+                if (photosInput) photosInput.remove();
+
+                const dataTransfer = new DataTransfer();
+                additionalFiles.forEach(file => dataTransfer.items.add(file));
+
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.name = 'photos[]';
+                input.multiple = true;
+                input.className = 'd-none';
+                input.files = dataTransfer.files;
+                form.appendChild(input);
+            }
+
+            $(document).on('click', '.remove-new-btn', function () {
+                const index = parseInt($(this).data('index'));
+                additionalFiles.splice(index, 1);
+                renderAdditionalPreviews();
+                updateAdditionalHiddenInput();
             });
 
-            if (additionalFiles.length >= maxImages) {
-                additionalImagesBtn.classList.add('hidden');
-            } else {
-                additionalImagesBtn.classList.remove('hidden');
-            }
-        }
-
-        function updateAdditionalHiddenInput() {
-            const form = document.getElementById('addForm');
-            let photosInput = form.querySelector('input[name="photos[]"]');
-            if (photosInput) photosInput.remove();
-
-            const dataTransfer = new DataTransfer();
-            additionalFiles.forEach(file => dataTransfer.items.add(file));
-
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.name = 'photos[]';
-            input.multiple = true;
-            input.className = 'hidden';
-            input.files = dataTransfer.files;
-            form.appendChild(input);
-        }
-
-        if (additionalImagesPreview) {
-            additionalImagesPreview.addEventListener('click', function(e) {
-                if (e.target.classList.contains('remove-btn')) {
-                    const index = parseInt(e.target.dataset.index);
-                    additionalFiles.splice(index, 1);
-                    renderAdditionalPreviews();
-                    updateAdditionalHiddenInput();
-                }
+            $(document).on('click', '.remove-existing-btn', function () {
+                $(this).closest('.existing-image-item').remove();
             });
-        }
 
-        $(document).on('click', '.remove-existing-btn', function() {
-            $(this).closest('.existing-image-item').remove();
-        });
+            // Initialize tinymce editor
+            tinymce.init({
+                selector: '#description',
+                plugins: 'link image lists table',
+                toolbar: 'bold italic underline | link image | bullist numlist | alignleft aligncenter alignright',
+                menubar: false,
+                height: 300,
+                statusbar: false
+            });
 
-        // TinyMCE
-        tinymce.init({
-            selector: '#description',
-            plugins: 'link image lists table',
-            toolbar: 'bold italic underline | link image | bullist numlist | alignleft aligncenter alignright',
-            menubar: false,
-            height: 300,
-            border_width: 1,
-            statusbar: false
-        });
-
-
-        // jQuery Validation
-        $('#addForm').validate({
-            ignore: [],
-            rules: {
-                name: {
-                    required: true,
-                    maxlength: 100
-                },
-                base_price: {
-                    required: true,
-                    number: true,
-                    min: 0
-                },
-                'categories[]': {
-                    required: true
-                },
-                sku: {
-                    maxlength: 50
-                },
-                main_image: {
-                    required: function() {
-                        return $('#mainImagePreview').length == 0;
-                    },
-                    extension: "jpg|jpeg|png"
+            // Tag Preview Logic
+            function updateTagPreviews() {
+                let container = $('#tag-previews');
+                container.empty();
+                $('#tag-select option:selected').each(function () {
+                    let name = $(this).text().trim();
+                    let type = $(this).data('type');
+                    container.append(`<span class="p-tag ${type}">${name}</span>`);
+                });
+                if (container.children().length == 0) {
+                    container.append('<span class="text-muted small italic" style="font-size: 11px;">Chưa chọn tag nào</span>');
                 }
-            },
-            messages: {
-                name: {
-                    required: "@lang('Please enter product name')",
-                    maxlength: "@lang('Product name cannot exceed 100 characters')"
+            }
+
+            $('#tag-select').on('change', updateTagPreviews);
+            updateTagPreviews();
+
+            // Flash Progress Preview Logic
+            function updateFlashPreview() {
+                let percent = $('#flash-percent').val() || 0;
+                let text = $('#flash-text-input').val() || `Đã bán ${percent}%`;
+                $('.flash-progress-bar').css('width', `${percent}%`);
+                $('.flash-progress-text').text(text);
+            }
+
+            $('#flash-percent, #flash-text-input').on('input', updateFlashPreview);
+
+            // Add form validation
+            $('#addForm').validate({
+                rules: {
+                    name: "required",
+                    base_price: "required"
                 },
-                base_price: {
-                    required: "@lang('Please enter product price')",
-                    number: "@lang('Please enter a valid number')",
-                    min: "@lang('Product price cannot be less than 0')"
+                messages: {
+                    name: "@lang('Vui lòng nhập tên sản phẩm')",
+                    base_price: "@lang('Vui lòng nhập đơn giá sản phẩm')"
                 },
-                'categories[]': {
-                    required: "@lang('Please select at least one category')"
-                },
-                sku: {
-                    maxlength: "@lang('SKU code cannot exceed 50 characters')"
-                },
-                main_image: {
-                    required: "@lang('Please select a cover image for the product')",
-                    extension: "@lang('Only image files (png, jpg, jpeg) are allowed')"
-                }
-            },
-            errorElement: 'span',
-            errorClass: 'error-message',
-            errorPlacement: function(error, element) {
-                if (element.hasClass('select2-hidden-accessible')) {
-                    error.insertAfter(element.closest('.select2-parent'));
-                } else if (element.attr('name') == 'main_image') {
-                    error.insertAfter(element.closest('#mainImageBox'));
-                } else if (element.attr('name') == 'base_price') {
-                    error.insertAfter(element.closest('.price-input-group'));
-                } else {
+                errorElement: 'label',
+                errorPlacement: function (error, element) {
                     error.insertAfter(element);
                 }
-            },
-            highlight: function(element, errorClass, validClass) {
-                $(element).addClass('error');
-                if ($(element).hasClass('select2-hidden-accessible')) {
-                    $(element).next('.select2-container').addClass('error');
-                }
-                if ($(element).attr('name') == 'main_image') {
-                    $('#mainImageBox').addClass('border-red-500 bg-red-50').removeClass('border-[#D4D4D4] bg-[rgba(0,0,0,0.08)]');
-                }
-                if ($(element).attr('name') == 'base_price') {
-                    $(element) .closest('.price-input-group').addClass('border-red-500 bg-red-50');
-                }
-            },
-            unhighlight: function(element, errorClass, validClass) {
-                $(element).removeClass('error');
-                if ($(element).hasClass('select2-hidden-accessible')) {
-                    $(element).next('.select2-container').removeClass('error');
-                }
-                if ($(element).attr('name') == 'main_image') {
-                    $('#mainImageBox').removeClass('border-red-500 bg-red-50').addClass('border-[#D4D4D4] bg-[rgba(0,0,0,0.08)]');
-                }
-                if ($(element).attr('name') == 'base_price') {
-                    $(element).closest('.price-input-group').removeClass('border-red-500 bg-red-50');
-                }
-            },
-            submitHandler: function(form) {
-                if (typeof tinymce !== 'undefined') {
-                    tinymce.triggerSave();
-                }
-                form.submit();
-            }
-        });
-
-        // Real-time Preview Sync
-        const curSym = "{{ gs('cur_sym') }}";
-
-        $('input[name=name]').on('input', function() {
-            const val = $(this).val();
-            $('#previewTitle').text(val.length > 0 ? val : '@lang("Product Name")');
-        });
-
-        $('input[name=base_price]').on('input', function() {
-            let val = $(this).val();
-            if (val) {
-                val = parseFloat(val).toLocaleString('en-US', {
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 2
-                });
-                $('#previewPrice').text(val + ' ' + curSym);
-            } else {
-                $('#previewPrice').text('0.00 ' + curSym);
-            }
-        });
-
-        var cnyExchangeRate = {{ $productConfig->cny_exchange_rate }};
-        
-        $('#currency_type').on('change', function() {
-            if($(this).val() == '2') {
-                $('.cny-price-wrapper').removeClass('hidden').addClass('flex');
-                $('.cny-discount-price-wrapper').removeClass('hidden').addClass('flex');
-                $('#base_price, #discount_price').attr('readonly', true).addClass('bg-gray-100');
-            } else {
-                $('.cny-price-wrapper').addClass('hidden').removeClass('flex');
-                $('.cny-discount-price-wrapper').addClass('hidden').removeClass('flex');
-                $('#base_price, #discount_price').attr('readonly', false).removeClass('bg-gray-100');
-            }
-        }).change();
-
-        $('#cny_price').on('input', function() {
-            var cny = parseFloat($(this).val()) || 0;
-            var vnd = Math.round(cny * cnyExchangeRate);
-            $('#base_price').val(vnd).trigger('input');
-        });
-
-        $('#cny_discount_price').on('input', function() {
-            var cny = parseFloat($(this).val()) || 0;
-            if(cny > 0) {
-                var vnd = Math.round(cny * cnyExchangeRate);
-                $('#discount_price').val(vnd);
-            } else {
-                $('#discount_price').val('');
-            }
-        });
-
-
-    })(jQuery);
-</script>
+            });
+        })(jQuery);
+    </script>
 @endpush

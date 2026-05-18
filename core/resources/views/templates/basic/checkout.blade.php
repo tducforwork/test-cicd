@@ -1,222 +1,382 @@
 @extends(activeTemplate() . 'layouts.frontend')
 @section('content')
-    <div class="checkout-page container pb-[100px]">
-        {{-- Breadcrumb --}}
-        <div class="checkout-page__breadcrumb flex items-center gap-[12px] py-[12px] text-[#606060] text-base">
-            <a href="{{ route('home') }}" class="checkout-page__breadcrumb-item cursor-pointer">@lang('Home')</a>
-            <img src="{{ asset('assets/images/frontend/kviet/detail-product/img.png') }}" class="w-2" alt="arrow" />
-            <p class="checkout-page__breadcrumb-item checkout-page__breadcrumb-item--active text-[#292929]">
-                @lang('CheckOut')</p>
-        </div>
-
-        <form action="{{ route('user.checkout-to-payment', 1) }}" method="post" class="checkout-form">
-            @csrf
-            <div class="checkout-page__layout grid grid-cols-12 gap-24 mt-3">
-                {{-- Left Column: Billing Details --}}
-                <div class="checkout-page__left col-span-12 lg:col-span-6">
-                    <h2 class="text-[20px] font-medium text-[#272343] mb-[16px] leading-normal">@lang('Billing Details')
-                    </h2>
-
-                    <div class="flex flex-col gap-8">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="form-group flex flex-col gap-2">
-                                <label class="text-base font-normal text-[#272343]">@lang('First Name')<span
-                                        class="text-red-500">*</span></label>
-                                <input type="text" name="firstname"
-                                    value="{{ auth()->user()->firstname ?? old('firstname') }}" required
-                                    class="w-full bg-[#F3F4F5] outline-none border-none rounded-[4px] h-[50px] px-4 font-medium" />
-                            </div>
-                            <div class="form-group flex flex-col gap-2">
-                                <label class="text-base font-normal text-[#272343]">@lang('Last Name')<span
-                                        class="text-red-500">*</span></label>
-                                <input type="text" name="lastname"
-                                    value="{{ auth()->user()->lastname ?? old('lastname') }}" required
-                                    class="w-full bg-[#F3F4F5] outline-none border-none rounded-[4px] h-[50px] px-4 font-medium" />
-                            </div>
-                        </div>
-
-                        <div class="form-group flex flex-col gap-2">
-                            <label class="text-base font-normal text-[#272343]">@lang('Phone Number')<span
-                                    class="text-red-500">*</span></label>
-                            <input type="text" name="mobile" value="{{ auth()->user()->mobile ?? old('mobile') }}"
-                                required
-                                class="w-full bg-[#F3F4F5] outline-none border-none rounded-[4px] h-[50px] px-4 font-medium" />
-                        </div>
-
-                        <div class="form-group flex flex-col gap-2">
-                            <label class="text-base font-normal text-[#272343]">@lang('Email')<span
-                                    class="text-red-500">*</span></label>
-                            <input type="email" name="email" value="{{ auth()->user()->email ?? old('email') }}"
-                                required
-                                class="w-full bg-[#F3F4F5] outline-none border-none rounded-[4px] h-[50px] px-4 font-medium" />
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="form-group flex flex-col gap-2">
-                                <label class="text-base font-normal text-[#272343]">@lang('Province')<span
-                                        class="text-red-500">*</span></label>
-                                <select name="province_id" required
-                                    class="w-full bg-[#F3F4F5] outline-none border-none rounded-[4px] h-[50px] px-4 font-medium appearance-none">
-                                    <option value="">@lang('Select Province')</option>
-                                    @foreach ($provinces as $province)
-                                        <option value="{{ $province->id }}"
-                                            {{ auth()->user() && auth()->user()->province_id == $province->id ? 'selected' : '' }}>
-                                            {{ __($province->full_name) }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group flex flex-col gap-2">
-                                <label class="text-base font-normal text-[#272343]">@lang('Ward')<span
-                                        class="text-red-500">*</span></label>
-                                <select name="ward_id" required
-                                    class="w-full bg-[#F3F4F5] outline-none border-none rounded-[4px] h-[50px] px-4 font-medium appearance-none">
-                                    <option value="">@lang('Select Ward')</option>
-                                    @if (auth()->user() && auth()->user()->province_id)
-                                        @foreach (\App\Models\Ward::where('province_id', auth()->user()->province_id)->orderBy('name')->get() as $ward)
-                                            <option value="{{ $ward->id }}"
-                                                {{ auth()->user()->ward_id == $ward->id ? 'selected' : '' }}>
-                                                {{ __($ward->full_name) }}</option>
-                                        @endforeach
-                                    @endif
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group flex flex-col gap-2">
-                            <label class="text-base font-normal text-[#272343]">@lang('Address')<span
-                                    class="text-red-500">*</span></label>
-                            <input type="text" name="address" value="{{ auth()->user()->address ?? old('address') }}"
-                                required
-                                class="w-full bg-[#F3F4F5] outline-none border-none rounded-[4px] h-[50px] px-4 font-medium" />
-                        </div>
-
-                        <div class="form-group flex flex-col gap-2">
-                            <label class="text-base font-normal text-[#272343]">@lang('Order Note')
-                                (@lang('Optional'))</label>
-                            <textarea name="note"
-                                class="w-full bg-[#F3F4F5] outline-none border-none rounded-[4px] min-h-[100px] px-4 py-2 font-medium"
-                                placeholder="@lang('Notes about your order, e.g. special notes for delivery.')"></textarea>
-                        </div>
-
-                        <div class="flex items-center gap-3 mt-2">
-                            <label class="relative flex items-center cursor-pointer group">
-                                <input type="checkbox" checked class="sr-only peer" />
-                                <div
-                                    class="w-6 h-6 bg-[#F3F4F5] border border-gray-300 rounded-[4px] peer-checked:bg-[#DE4944] peer-checked:border-[#DE4944] transition-all flex items-center justify-center overflow-hidden">
-                                    <span class="text-white text-[16px] font-extrabold leading-none mb-0.5">✓</span>
+    <form action="{{ route('user.checkout-to-payment', 1) }}" method="post" class="checkout-form">
+        @csrf
+        <div class="checkout-page py-lg-5 py-4">
+            <div class="container">
+                <div class="checkout-grid">
+                    <!-- Left Column -->
+                    <div class="checkout-left">
+                        <div class="checkout-card">
+                            <h2 class="checkout-title"><i class="fa-solid fa-location-dot"></i> @lang('Billing Details')</h2>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">@lang('Last Name') <span class="text-danger">*</span></label>
+                                    <input type="text" name="lastname" class="form-input" placeholder="Nhập họ"
+                                        value="{{ auth()->user()->lastname ?? old('lastname') }}" required>
                                 </div>
-                                <span class="ml-3 text-base text-[#272343]">@lang('Save this information for faster check-out next time')</span>
-                            </label>
+                                <div class="form-group">
+                                    <label class="form-label">@lang('First Name') <span class="text-danger">*</span></label>
+                                    <input type="text" name="firstname" class="form-input" placeholder="Nhập tên"
+                                        value="{{ auth()->user()->firstname ?? old('firstname') }}" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">@lang('Phone Number') <span class="text-danger">*</span></label>
+                                    <input type="text" name="mobile" class="form-input" placeholder="Số điện thoại liên hệ"
+                                        value="{{ auth()->user()->mobile ?? old('mobile') }}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">@lang('Email') <span class="text-danger">*</span></label>
+                                    <input type="email" name="email" class="form-input" placeholder="Địa chỉ email"
+                                        value="{{ auth()->user()->email ?? old('email') }}" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">@lang('Address') <span class="text-danger">*</span></label>
+                                <input type="text" name="address" class="form-input" placeholder="Số nhà, tên đường, phường/xã..."
+                                    value="{{ auth()->user()->address ?? old('address') }}" required>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">@lang('Province') <span class="text-danger">*</span></label>
+                                    <select name="province_id" class="form-input select-province" required>
+                                        <option value="">@lang('Select Province')</option>
+                                        @foreach ($provinces as $province)
+                                            <option value="{{ $province->id }}"
+                                                {{ (auth()->user() && auth()->user()->province_id == $province->id) ? 'selected' : '' }}>
+                                                {{ __($province->full_name) }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">@lang('Ward') <span class="text-danger">*</span></label>
+                                    <select name="ward_id" class="form-input select-ward" required>
+                                        <option value="">@lang('Select Ward')</option>
+                                        @if (auth()->user() && auth()->user()->province_id)
+                                            @foreach (\App\Models\Ward::where('province_id', auth()->user()->province_id)->orderBy('name')->get() as $ward)
+                                                <option value="{{ $ward->id }}"
+                                                    {{ auth()->user()->ward_id == $ward->id ? 'selected' : '' }}>
+                                                    {{ __($ward->full_name) }}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">@lang('Order Note') (@lang('Optional'))</label>
+                                <textarea name="note" class="form-input" style="height: 100px; resize: none;"
+                                    placeholder="Lưu ý cho người giao hàng..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="checkout-card">
+                            <h2 class="checkout-title"><i class="fa-solid fa-credit-card"></i> @lang('Payment Method')</h2>
+                            <div class="payment-methods">
+                                <label class="payment-method active">
+                                    <input type="radio" name="payment" value="2" checked>
+                                    <i class="fa-solid fa-truck-fast"></i>
+                                    <div>
+                                        <div style="font-weight: 700; margin-bottom: 2px;">@lang('COD')</div>
+                                        <div style="font-size: 12px; color: var(--text-muted);">Thanh toán khi nhận hàng, kiểm tra hàng trước khi trả tiền</div>
+                                    </div>
+                                </label>
+                                
+                                <!-- Tạm comment các phương thức thanh toán khác chờ tích hợp thêm -->
+                                <!--
+                                <label class="payment-method">
+                                    <input type="radio" name="payment" value="1">
+                                    <i class="fa-solid fa-money-bill-transfer"></i>
+                                    <div>
+                                        <div style="font-weight: 700; margin-bottom: 2px;">Chuyển khoản ngân hàng (QR Code)</div>
+                                        <div style="font-size: 12px; color: var(--text-muted);">Xử lý nhanh chóng, an toàn tuyệt đối</div>
+                                    </div>
+                                </label>
+                                <label class="payment-method">
+                                    <input type="radio" name="payment" value="3">
+                                    <i class="fa-solid fa-wallet"></i>
+                                    <div>
+                                        <div style="font-weight: 700; margin-bottom: 2px;">Ví điện tử (Momo / ZaloPay)</div>
+                                        <div style="font-size: 12px; color: var(--text-muted);">Ưu đãi hoàn tiền hấp dẫn</div>
+                                    </div>
+                                </label>
+                                -->
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                {{-- Right Column: Order Summary & Payment --}}
-                <div class="checkout-page__right col-span-12 lg:col-span-6 flex flex-col gap-10">
-                    {{-- Order Summary Card --}}
-                    <div
-                        class="order-summary bg-white shadow-[0_1px_13px_0_rgba(0,0,0,0.05)] rounded-2xl p-6 flex flex-col gap-8">
-                        <div class="checkout-items-list flex flex-col gap-6 max-h-[400px] overflow-y-auto pr-2">
-                            @foreach ($data as $item)
-                                <div class="checkout-item flex items-center justify-between gap-4">
-                                    <div class="flex items-center gap-3">
-                                        <div
-                                            class="w-[70px] h-[70px] bg-[#f8f9fa] rounded-[4px] shrink-0 overflow-hidden border border-gray-100">
+                    <!-- Right Column (Sidebar Summary) -->
+                    <div class="checkout-right">
+                        <div class="checkout-card" style="position: sticky; top: 20px;">
+                            <h2 class="checkout-title">@lang('Order Summary')</h2>
+                            <div class="order-items">
+                                @foreach ($data as $item)
+                                    <div class="order-summary-item">
+                                        <div class="order-summary-img">
                                             <img src="{{ getImage(getFilePath('product') . '/thumb_' . @$item->product->main_image, getFileSize('product')) }}"
-                                                class="w-full h-full object-contain" alt="product" />
+                                                alt="product" />
                                         </div>
-                                        <div class="flex flex-col">
-                                            <p class="text-sm font-medium text-[#272343] line-clamp-2 leading-relaxed">
-                                                {{ __($item->product->name) }}
-                                            </p>
-                                            <span class="text-xs text-gray-500">@lang('Qty'): {{ $item->quantity }}</span>
+                                        <div class="order-summary-info">
+                                            <div class="order-summary-name">{{ __($item->product->name) }}</div>
+                                            @php
+                                                $s_price = $item->product->discount_price > 0 ? $item->product->discount_price : $item->product->base_price;
+                                                if (!empty($item->attributes)) {
+                                                    $s_price = App\Models\AssignProductAttribute::priceAfterAttribute($item->product, $item->attributes);
+                                                }
+                                            @endphp
+                                            <div class="order-summary-price">
+                                                {{ showAmount($s_price) }} x {{ $item->quantity }}
+                                            </div>
                                         </div>
                                     </div>
-                                    @php
-                                        $s_price =
-                                            $item->product->discount_price > 0
-                                                ? $item->product->discount_price
-                                                : $item->product->base_price;
-                                        if (!empty($item->attributes)) {
-                                            $s_price = App\Models\AssignProductAttribute::priceAfterAttribute(
-                                                $item->product,
-                                                $item->attributes,
-                                            );
-                                        }
-                                    @endphp
-                                    <span
-                                        class="text-sm font-semibold text-[#272343]">{{ showAmount($s_price * $item->quantity) }}</span>
-                                </div>
-                            @endforeach
-                        </div>
-
-                        <div class="summary-details flex flex-col gap-3 pt-4 ">
-                            {{-- <div class="flex items-center justify-between">
-                                <span class="text-base text-[#7A7A7A]">@lang('Subtotal'):</span>
-                                <span class="text-base font-semibold text-[#272343]" id="cartSubtotal">0</span>
+                                @endforeach
                             </div>
-                            <div class="flex items-center justify-between">
-                                <span class="text-base text-[#7A7A7A]">@lang('Shipping Charge'):</span>
-                                <span class="text-base font-semibold text-red-500" id="shippingCharge">0</span>
-                            </div> --}}
-                            <div
-                                class="flex items-center justify-between mt-2 pt-4 border-t-2 border-dashed border-gray-200">
-                                <span class="text-[18px] font-semibold text-[#272343]">@lang('Total'):</span>
-                                <span class="text-[24px] font-bold text-[#DE4944]" id="cartTotal">0</span>
+
+                            <div style="margin-top: 25px;">
+                                <div class="summary-row">
+                                    <span>@lang('Subtotal')</span>
+                                    <span id="cartSubtotal">0</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>@lang('Shipping Charge')</span>
+                                    <span id="shippingCharge">0</span>
+                                </div>
+                                
+                                @if(session('coupon'))
+                                <div class="summary-row" style="color: #10b981;">
+                                    <span>Giảm giá Voucher ({{ session('coupon')['code'] }})</span>
+                                    <span id="couponAmountDisplay">-{{ showAmount(session('coupon')['amount']) }}</span>
+                                </div>
+                                @else
+                                <div class="summary-row" style="color: #10b981; display: none;" id="couponRow">
+                                    <span>Giảm giá Voucher</span>
+                                    <span id="couponAmountDisplay">0</span>
+                                </div>
+                                @endif
+
+                                <div class="summary-total">
+                                    <span>@lang('Total')</span>
+                                    <span style="color: var(--accent);" id="cartTotal">0</span>
+                                </div>
                             </div>
+
+                            <button type="submit" class="btn-confirm">@lang('Place Order')</button>
                         </div>
-                    </div>
-
-                    {{-- Payment Methods --}}
-                    <div class="payment-methods flex flex-col gap-[32px]">
-                        <h3 class="text-[20px] font-medium text-[#272343]">@lang('Payment Method')</h3>
-
-                        <div
-                            class="payment-options flex items-center justify-between bg-[#F8F9FA] p-4 rounded-xl border border-gray-100">
-                            <label class="flex items-center gap-3 cursor-pointer group">
-                                <input type="radio" name="payment" value="1" checked
-                                    class="sr-only custom-radio" />
-                                <div
-                                    class="radio-box w-6 h-6 border-2 border-gray-300 rounded-full flex items-center justify-center transition-all relative bg-white">
-                                    <div class="radio-dot w-3 h-3 bg-[#DE4944] rounded-full hidden"></div>
-                                </div>
-                                <img src="{{ asset('assets/images/frontend/kviet/otpay-card.png') }}" class="h-[36px]"
-                                    alt="payos" />
-                                <span class="text-[16px] text-[#272343] font-medium">PayOS (VietQR)</span>
-                            </label>
-
-                            <label class="flex items-center gap-3 cursor-pointer group">
-                                <input type="radio" name="payment" value="2" class="sr-only custom-radio" />
-                                <div
-                                    class="radio-box w-6 h-6 border-2 border-gray-300 rounded-full flex items-center justify-center transition-all relative bg-white">
-                                    <div class="radio-dot w-3 h-3 bg-[#DE4944] rounded-full hidden"></div>
-                                </div>
-                                <img src="{{ asset('assets/images/frontend/kviet/cod.png') }}" class="h-[36px]"
-                                    alt="cod" />
-                                <span class="text-[16px] text-[#272343] font-medium">@lang('COD')</span>
-                            </label>
-                        </div>
-
-                        <button type="submit"
-                            class="bg-[#FF6F0F] text-white w-full py-[16px] rounded-[4px] font-medium  leading-none transition-all shadow-lg active:scale-[0.98]">
-                            @lang('Place Order')
-                        </button>
                     </div>
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
+@endsection
 
+@push('style')
     <style>
-        .custom-radio:checked+.radio-box {
-            border-color: #DE4944 !important;
+        .checkout-page {
+            background: #f8fafc;
         }
 
-        .custom-radio:checked+.radio-box .radio-dot {
-            display: block !important;
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 30px;
+        }
+
+        .checkout-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            margin-bottom: 20px;
+        }
+
+        .checkout-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--primary);
+            border: none;
+            padding: 0;
+            background: none;
+        }
+
+        .checkout-title i {
+            color: var(--accent);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            transition: var(--transition);
+            background: #fff;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+        }
+
+        .payment-methods {
+            display: grid;
+            gap: 15px;
+        }
+
+        .payment-method {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .payment-method:hover {
+            border-color: var(--accent);
+            background: #fffbeb;
+        }
+
+        .payment-method.active {
+            border-color: var(--accent);
+            background: #fffbeb;
+            border-width: 2px;
+        }
+
+        .payment-method input {
+            accent-color: var(--accent);
+            width: 18px;
+            height: 18px;
+        }
+
+        .payment-method i {
+            font-size: 20px;
+            width: 30px;
+            text-align: center;
+            color: var(--primary);
+        }
+
+        .order-summary-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .order-summary-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .order-summary-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .order-summary-info {
+            flex: 1;
+        }
+
+        .order-summary-name {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--text-main);
+        }
+
+        .order-summary-price {
+            font-size: 14px;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .summary-total {
+            border-top: 1px solid var(--border);
+            padding-top: 15px;
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            font-weight: 800;
+            font-size: 18px;
+            color: var(--primary);
+        }
+
+        .btn-confirm {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 25px;
+        }
+
+        .btn-confirm:hover {
+            background: #1e293b;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(15, 23, 42, 0.1);
+        }
+
+        @media (max-width: 991px) {
+            .checkout-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
         }
     </style>
-@endsection
+@endpush
 
 @push('script')
     <script>
@@ -234,11 +394,21 @@
                     subTotal += {{ $calc_price * $item->quantity }};
                 @endforeach
 
-                var shippingCharge = 0; // Có thể lấy từ AJAX nếu có thay đổi dựa trên địa chỉ
+                var shippingCharge = 0; 
+                var couponAmount = {{ session('coupon')['amount'] ?? 0 }};
+                var total = subTotal + shippingCharge - couponAmount;
+                if (total < 0) {
+                    total = 0;
+                }
 
-                $('#cartSubtotal').text(`{{ gs('cur_sym') }}` + subTotal.toLocaleString());
-                $('#shippingCharge').text(`{{ gs('cur_sym') }}` + shippingCharge.toLocaleString());
-                $('#cartTotal').text( (subTotal + shippingCharge).toLocaleString() + `{{ gs('cur_sym') }}`);
+                $('#cartSubtotal').text(subTotal.toLocaleString() + `{{ gs('cur_sym') }}`);
+                $('#shippingCharge').text(shippingCharge.toLocaleString() + `{{ gs('cur_sym') }}`);
+                
+                if (couponAmount > 0) {
+                    $('#couponAmountDisplay').text(`-` + couponAmount.toLocaleString() + `{{ gs('cur_sym') }}`);
+                }
+                
+                $('#cartTotal').text(total.toLocaleString() + `{{ gs('cur_sym') }}`);
             }
 
             updateTotals();
@@ -256,6 +426,13 @@
                     });
                 }
             });
+
+            // Toggle payment method active class (Just in case other methods are uncommented later)
+            $('.payment-method').on('click', function() {
+                $('.payment-method').removeClass('active');
+                $(this).addClass('active');
+            });
+
         })(jQuery)
     </script>
 @endpush

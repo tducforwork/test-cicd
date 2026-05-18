@@ -3,7 +3,7 @@
 
     <div class="thumb">
         <a href="{{ route('seller.profile') }}">
-            <img src="{{ getAvatar(getFilePath('sellerProfile') . '/' . seller()->image) }}" alt="@lang('seller')">
+            <img src="{{ getAvatar(getFilePath('sellerProfile') . '/' . seller()->image, seller()->fullname ?? seller()->username) }}" alt="@lang('seller')">
         </a>
     </div>
     <div class="content">
