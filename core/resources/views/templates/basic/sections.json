@@ -50,10 +50,10 @@
         "content": {
             "images": {
                 "side_banner_1": {
-                    "size": "400x250"
+                    "size": ""
                 },
                 "side_banner_2": {
-                    "size": "400x250"
+                    "size": ""
                 }
             },
             "side_banner_1_link": "text",

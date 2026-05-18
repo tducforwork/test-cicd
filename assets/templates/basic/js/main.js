@@ -716,5 +716,110 @@ function initZoom(element) {
     //     $(this).fadeOut();
     //   }
     // });
+
+    // ============================================
+    // FIGMA MOBILE RESPONSIVE UI INTERACTIONS
+    // ============================================
+
+    // --- Mobile Drawer Menu ---
+    const $mobileDrawer = $('#mobileDrawer');
+    const $mobileOverlay = $('#mobileOverlay');
+
+    const toggleMobileMenu = (isOpen) => {
+        if (isOpen) {
+            $mobileDrawer.addClass('active');
+            $mobileOverlay.addClass('active');
+            $('body').css('overflow', 'hidden'); // Prevent scroll
+        } else {
+            $mobileDrawer.removeClass('active');
+            $mobileOverlay.removeClass('active');
+            $('body').css('overflow', '');
+        }
+    };
+
+    $('#openMobileMenu').on('click', () => toggleMobileMenu(true));
+    $('#closeMobileMenu, #mobileOverlay').on('click', () => toggleMobileMenu(false));
+
+    // --- Mobile Search Bar ---
+    const $mobileSearchBar = $('#mobileSearchBar');
+    const $mobileSearchInput = $('#mobileSearchInput');
+
+    $('.mobile-header .search-trigger').on('click', function() {
+        if ($mobileSearchBar.length) {
+            $mobileSearchBar.toggleClass('active');
+            if ($mobileSearchBar.hasClass('active')) {
+                $mobileSearchInput.trigger('focus');
+            }
+        }
+    });
+
+    // --- Mobile Submenus in Drawer ---
+    $('.menu-item.has-submenu').on('click', function(e) {
+        e.preventDefault();
+        const $this = $(this);
+        const targetId = $this.attr('data-target');
+        const $submenu = $('#' + targetId);
+        
+        if ($submenu.length) {
+            // Close all other submenus
+            $('.menu-item.has-submenu').not(this).each(function() {
+                const $other = $(this);
+                $other.removeClass('open');
+                $('#' + $other.attr('data-target')).removeClass('active');
+            });
+
+            // Toggle current
+            $this.toggleClass('open');
+            $submenu.toggleClass('active');
+        }
+    });
+
+    // --- Mobile Header Scroll Effect ---
+    const $mobileHeader = $('.mobile-header');
+    $(window).on('scroll', function() {
+        if ($(window).scrollTop() > 50) {
+            $mobileHeader.addClass('scrolled');
+        } else {
+            $mobileHeader.removeClass('scrolled');
+        }
+    });
+
+    // --- Bottom Nav Active Link State ---
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    $('.mobile-nav-item').each(function() {
+        const $item = $(this);
+        if ($item.attr('href') === currentPath) {
+            $('.mobile-nav-item').removeClass('active');
+            $item.addClass('active');
+        }
+    });
+
+    // --- Floating Action Button (FAB) ---
+    const $floatingActions = $('.floating-actions');
+    if ($floatingActions.length) {
+        // Create toggle button
+        const $toggleBtn = $('<button></button>')
+            .addClass('action-btn fab-toggle-btn')
+            .html('<i class="fa-solid fa-plus"></i>')
+            .attr('title', 'Mở liên hệ');
+        
+        // Append to container
+        $floatingActions.append($toggleBtn);
+
+        // Click event
+        $toggleBtn.on('click', function(e) {
+            e.preventDefault();
+            $floatingActions.toggleClass('active');
+            
+            const $icon = $toggleBtn.find('i');
+            if ($floatingActions.hasClass('active')) {
+                $icon.removeClass('fa-plus').addClass('fa-xmark');
+                $toggleBtn.css('background-color', '#64748b'); // Change color when open
+            } else {
+                $icon.removeClass('fa-xmark').addClass('fa-plus');
+                $toggleBtn.css('background-color', ''); // Reset
+            }
+        });
+    }
   });
 })(jQuery);

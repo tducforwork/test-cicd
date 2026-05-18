@@ -1321,7 +1321,7 @@
     font-size: 18px !important;
   }
 }
- 
+
 /* FIGMA UI MOBILE INTEGRATION */
 
 /* 
@@ -1932,7 +1932,7 @@
 
   /* --- HIDE PC COMPONENTS --- */
   .pc-only,
-  .top-bar,
+  .top-bar-inner,
   header,
   .shopee-cat-arrow,
   .slider-nav,
@@ -1964,9 +1964,11 @@
     margin-top: 0 !important;
     margin-bottom: 0 !important;
   }
-
+  .hero-slider-main .swiper-slide img {
+    height: auto !important;
+  }
   .hero-layout-wrapper {
-    flex-direction: column !important;
+    height: unset !important;
     gap: 0 !important;
     margin-bottom: 0 !important;
   }
@@ -2139,7 +2141,12 @@
   }
 
   .sub-banner-item::before {
-    background: linear-gradient(110deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.3) 60%, transparent 100%) !important;
+    background: linear-gradient(
+      110deg,
+      rgba(0, 0, 0, 0.8) 0%,
+      rgba(0, 0, 0, 0.3) 60%,
+      transparent 100%
+    ) !important;
   }
 
   .sub-banner-item h3 {
@@ -2629,7 +2636,6 @@
     text-decoration: none !important;
   }
 
-
   .section-title::after {
     content: "" !important;
     position: absolute !important;
@@ -2812,9 +2818,7 @@
     z-index: 1000 !important;
   }
 
-
   /* Hết phần nút cũ, thay thế bằng hệ thống Floating Actions mới ở bên dưới */
-
 
   /* If the original buttons are messy, we should consider hiding them and making a mobile version or strictly controlling them */
 
@@ -2998,7 +3002,6 @@
     display: block !important;
   }
 
-
   /* --- BOTTOM NAV --- */
   .mobile-bottom-nav {
     height: var(--mobile-nav-height) !important;
@@ -3054,7 +3057,7 @@
     pointer-events: none !important;
   }
 
-  .floating-actions>* {
+  .floating-actions > * {
     pointer-events: auto !important;
     position: static !important;
     /* Cực kỳ quan trọng để Flexbox có tác dụng */
@@ -3231,7 +3234,7 @@
   }
 
   /* Stats Container in Hero */
-  .about-hero-grid>div:first-child>div:last-child {
+  .about-hero-grid > div:first-child > div:last-child {
     display: grid !important;
     grid-template-columns: repeat(3, 1fr) !important;
     gap: 15px !important;
@@ -3446,7 +3449,6 @@
     justify-content: center !important;
     gap: 8px !important;
   }
-
 
   /* --- NEWS DETAIL PAGE --- */
   .news-detail-layout {
@@ -4282,14 +4284,11 @@
   }
 }
 
-
-
 /* ============================================
    PRODUCT DETAIL PAGE - MOBILE RESPONSIVE
    ============================================ */
 
 @media (max-width: 991px) {
-
   /* --- Layout: Stack columns vertically --- */
   .p-detail-layout {
     display: flex !important;
@@ -4418,7 +4417,7 @@
   }
 
   /* --- Review form: single column --- */
-  .review-form-wrapper form div[style*=display: flex] {
+  .review-form-wrapper form div[style*="display: flex"] {
     flex-direction: column !important;
   }
 
@@ -4428,15 +4427,14 @@
   }
 
   /* --- Similar products header: stack --- */
-  #similarTrack~*,
-  div[style*=margin-top: 80px]>div:first-child {
+  #similarTrack ~ *,
+  div[style*="margin-top: 80px"] > div:first-child {
     flex-wrap: wrap !important;
     gap: 10px !important;
   }
 }
 
 @media (max-width: 576px) {
-
   /* -- Gallery shorter on small phones --- */
   .gallery-scroll-track {
     height: 240px !important;
@@ -4471,8 +4469,6 @@
     font-size: 13px !important;
   }
 }
-
-
 
 /* ============================================
    MOBILE STICKY BOTTOM CTA BAR
@@ -4549,13 +4545,12 @@
    ============================================ */
 
 @media (max-width: 991px) {
-
   /* ---- GALLERY: Full-width, no gaps ---- */
   .p-detail-section {
     padding-top: 0 !important;
   }
 
-  .p-detail-section>.container {
+  .p-detail-section > .container {
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
@@ -4762,11 +4757,11 @@
     padding: 0 16px !important;
   }
 
-  div[style*=margin-top: 80px] {
+  div[style*="margin-top: 80px"] {
     margin-top: 20px !important;
   }
 
-  div[style*=margin-top: 80px]>div:first-child {
+  div[style*="margin-top: 80px"] > div:first-child {
     padding: 0 16px !important;
     margin-bottom: 14px !important;
   }
@@ -4784,7 +4779,6 @@
 }
 
 @media (max-width: 480px) {
-
   .gallery-scroll-track,
   .gallery-slide {
     height: 220px !important;
@@ -4816,7 +4810,6 @@
    ============================================ */
 
 @media (max-width: 991px) {
-
   /* FIX 1: Kho?ng tr?ng du?i ?nh - lo?i b? aspect-ratio */
   .gallery-slide {
     aspect-ratio: unset !important;
@@ -4841,7 +4834,7 @@
     box-shadow: none !important;
   }
 
-  /* FIX 2: Xo� v?t den m? m�p ph?i (gradient overlay) */
+  /* FIX 2: Xo� v?t den m? m�p ph?i (gradient overlay) */
   .main-img-box::after,
   .gallery-scroll-track::after,
   .p-gallery::after,
@@ -4855,7 +4848,7 @@
     overflow: hidden !important;
   }
 
-  /* FIX 3: Zalo button kh�ng b? ?n */
+  /* FIX 3: Zalo button kh�ng b? ?n */
   .shop-info-card {
     overflow: visible !important;
   }
@@ -4897,4 +4890,3 @@
     height: 220px !important;
   }
 }
-

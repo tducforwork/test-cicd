@@ -88,6 +88,83 @@
     @yield('panel')
     @stack('modal')
 
+    <!-- MOBILE DRAWER & OVERLAY -->
+    <div class="mobile-drawer-overlay" id="mobileOverlay"></div>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-user-header">
+            <div class="user-info">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100&auto=format&fit=crop"
+                    alt="User" />
+                <div class="text">
+                    <p class="name">Nam Nguyễn</p>
+                    <p class="level"><i class="fa-solid fa-crown"></i> Thành viên Vàng</p>
+                </div>
+            </div>
+            <div class="close-drawer" id="closeMobileMenu">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+
+        <div class="drawer-content">
+            <div class="drawer-menu">
+                <a href="index.html" class="menu-item"><i class="fa-solid fa-house" style="color: #64748b;"></i> Quảng
+                    Phát
+                    Mall</a>
+                <a href="about.html" class="menu-item active"><i class="fa-solid fa-truck-fast"
+                        style="color: #64748b;"></i>
+                    Quảng Phát Logistic</a>
+                <a href="news.html" class="menu-item"><i class="fa-solid fa-newspaper" style="color: #64748b;"></i> Tin
+                    tức mới
+                    nhất</a>
+                <a href="lien-he.html" class="menu-item"><i class="fa-solid fa-envelope" style="color: #f59e0b;"></i>
+                    Liên hệ hỗ
+                    trợ</a>
+            </div>
+
+            <div class="drawer-divider"></div>
+
+            <div class="drawer-menu">
+                <div class="menu-label">Tiện ích của tôi</div>
+                <a href="cart.html" class="menu-item"><i class="fa-solid fa-cart-shopping" style="color: #f97316;"></i>
+                    Giỏ
+                    hàng</a>
+                <a href="orders.html" class="menu-item"><i class="fa-solid fa-clipboard-list"
+                        style="color: #f97316;"></i> Đơn
+                    hàng của tôi</a>
+                <a href="#" class="menu-item"><i class="fa-solid fa-ticket" style="color: #f59e0b;"></i> Kho
+                    Voucher</a>
+                <a href="#" class="menu-item"><i class="fa-solid fa-coins" style="color: #f59e0b;"></i> QP Xu
+                    <span class="badge-mini">1.2k</span></a>
+                <a href="#" class="menu-item"><i class="fa-solid fa-heart" style="color: #f97316;"></i> Đã
+                    thích</a>
+            </div>
+
+            <div class="drawer-divider"></div>
+
+            <!-- Seller Only Section -->
+            <div class="seller-menu-section">
+                <div class="menu-label">Kênh người bán</div>
+                <a href="seller-dashboard.html" class="menu-item"><i class="fa-solid fa-chart-line"></i> Dashboard
+                    thống kê</a>
+                <a href="seller-products.html" class="menu-item"><i class="fa-solid fa-boxes-stacked"></i> Quản lý
+                    sản phẩm</a>
+                <a href="seller-orders.html" class="menu-item"><i class="fa-solid fa-clipboard-list"></i> Đơn hàng đã
+                    nhận</a>
+                <a href="seller-payments.html" class="menu-item"><i class="fa-solid fa-wallet"></i> Lịch sử thanh
+                    toán</a>
+                <a href="shop-config.html" class="menu-item"><i class="fa-solid fa-gear"></i> Cài đặt Shop</a>
+            </div>
+
+            <div class="drawer-divider"></div>
+
+            <div class="drawer-menu">
+                <a href="#" class="menu-item logout-item"><i class="fa-solid fa-right-from-bracket"
+                        style="color: #f97316;"></i>
+                    Đăng xuất</a>
+            </div>
+        </div>
+    </div>
+
     <script src="{{ asset('assets/global/js/jquery-3.7.1.min.js') }}"></script>
     <script src="{{ asset($activeTemplateTrue . 'js/modernizr-3.6.0.min.js') }}"></script>
     <script src="{{ asset($activeTemplateTrue . 'js/jquery-ui.min.js') }}"></script>
@@ -122,9 +199,9 @@
     <script>
         'use strict';
 
-        $('.policy').on('click', function () {
+        $('.policy').on('click', function() {
             $.get('{{ route('cookie.accept') }}',
-                function (response) {
+                function(response) {
                     $('.cookie__wrapper').removeClass('show');
                 });
         });
@@ -134,7 +211,7 @@
         }, 2000);
 
         let disableSubmission = false;
-        $('.disableSubmission').on('submit', function (e) {
+        $('.disableSubmission').on('submit', function(e) {
             if (disableSubmission) {
                 e.preventDefault()
             } else {

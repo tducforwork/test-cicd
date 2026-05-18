@@ -414,7 +414,6 @@ header {
   grid-template-columns: 2fr 1fr !important;
   gap: 8px !important; */
   height: 350px !important;
-  overflow: hidden !important;
 }
 
 /* .hero-slider-main {
@@ -959,27 +958,32 @@ header {
 
 .slider-dots {
   position: absolute;
-  bottom: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-  z-index: 10;
+  bottom: 12px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  display: flex !important;
+  gap: 10px !important;
+  justify-content: center !important;
+  z-index: 10 !important;
 }
 
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.4);
-  cursor: pointer;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+.slider-dots .swiper-pagination-bullet {
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.4) !important;
+  cursor: pointer !important;
+  opacity: 1 !important;
+  border: 1px solid rgba(0, 0, 0, 0.05) !important;
 }
-
-.dot.active {
-  background: #ffb800;
+.hero-slider-main .swiper-slide img {
+  border-radius: 10px !important;
+  height: 350px !important;
+}
+.slider-dots .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background: #ffb800 !important;
   /* Shopee Orange */
-  border-color: #ffb800;
+  border-color: #ffb800 !important;
 }
 
 @media (max-width: 991px) {
